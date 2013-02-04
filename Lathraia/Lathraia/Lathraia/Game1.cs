@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Lathraia
 {
+    /* Mike added this comment for testing purposes */
     /// <summary>
     /// This is the main type for your game
     /// </summary>
