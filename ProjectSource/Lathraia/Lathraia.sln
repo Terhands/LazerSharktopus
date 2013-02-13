@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lathraia", "Lathraia\Lathraia\Lathraia.csproj", "{F0C07F7E-D4EF-4038-BEDE-0C3BB633F267}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "LathraiaContent", "Lathraia\LathraiaContent\LathraiaContent.contentproj", "{86A6D73B-8E48-43A7-8B80-1CA9E0821D25}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Xbox 360 = Debug|Xbox 360
+		Release|Xbox 360 = Release|Xbox 360
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F0C07F7E-D4EF-4038-BEDE-0C3BB633F267}.Debug|Xbox 360.ActiveCfg = Debug|Xbox 360
+		{F0C07F7E-D4EF-4038-BEDE-0C3BB633F267}.Debug|Xbox 360.Build.0 = Debug|Xbox 360
+		{F0C07F7E-D4EF-4038-BEDE-0C3BB633F267}.Debug|Xbox 360.Deploy.0 = Debug|Xbox 360
+		{F0C07F7E-D4EF-4038-BEDE-0C3BB633F267}.Release|Xbox 360.ActiveCfg = Release|Xbox 360
+		{F0C07F7E-D4EF-4038-BEDE-0C3BB633F267}.Release|Xbox 360.Build.0 = Release|Xbox 360
+		{F0C07F7E-D4EF-4038-BEDE-0C3BB633F267}.Release|Xbox 360.Deploy.0 = Release|Xbox 360
+		{86A6D73B-8E48-43A7-8B80-1CA9E0821D25}.Debug|Xbox 360.ActiveCfg = Debug|Xbox 360
+		{86A6D73B-8E48-43A7-8B80-1CA9E0821D25}.Release|Xbox 360.ActiveCfg = Release|Xbox 360
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

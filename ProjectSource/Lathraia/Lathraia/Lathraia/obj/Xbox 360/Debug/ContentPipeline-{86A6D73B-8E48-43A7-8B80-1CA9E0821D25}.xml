@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
+  <Asset Type="Pipeline:BuildItemCollection">
+    <BuildSuccessful>true</BuildSuccessful>
+    <Settings>
+      <ContentProjectGUID>{86A6D73B-8E48-43A7-8B80-1CA9E0821D25}</ContentProjectGUID>
+      <TargetPlatform>Xbox360</TargetPlatform>
+      <TargetProfile>HiDef</TargetProfile>
+      <BuildConfiguration>Debug</BuildConfiguration>
+      <CompressContent>true</CompressContent>
+      <RootDirectory>C:\Users\Terhands\Desktop\306Project\LazerSharktopus\Lathraia\Lathraia\LathraiaContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Terhands\Desktop\306Project\LazerSharktopus\Lathraia\Lathraia\Lathraia\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Terhands\Desktop\306Project\LazerSharktopus\Lathraia\Lathraia\Lathraia\obj\Xbox 360\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Terhands\Desktop\306Project\LazerSharktopus\Lathraia\Lathraia\Lathraia\bin\Xbox 360\Debug\Content\</OutputDirectory>
+    </Settings>
+    <Assemblies>
+      <Assembly>
+        <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2013-01-27T17:25:56.061406-06:00</Value>
+      </Assembly>
+    </Assemblies>
+  </Asset>
+</XnaContent>
