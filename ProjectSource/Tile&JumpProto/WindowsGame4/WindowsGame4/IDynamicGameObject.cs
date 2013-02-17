@@ -6,6 +6,15 @@ using Microsoft.Xna.Framework;
 
 namespace WindowsGame4
 {
+    enum CollisionDirection
+    {
+        top,
+        bottom,
+        left,
+        right,
+        none
+    };
+
     interface IDynamicGameObject : IGameObject
     {
         /* procedure to handle two game objects that collide (primarily for object/tile collisions) */
