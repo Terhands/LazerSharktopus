@@ -31,7 +31,7 @@ namespace WindowsGame4
 
             if (!graphics.IsFullScreen)
             {
-                graphics.ToggleFullScreen();
+               // graphics.ToggleFullScreen();
             }
         }
 
@@ -108,7 +108,7 @@ namespace WindowsGame4
 
             if (currState.IsKeyDown(Keys.A))
             {
-                level.Update(Action.left, 0);
+                level.Update(Action.left, -2);
             }
 
             if (currState.IsKeyDown(Keys.S))
@@ -118,7 +118,7 @@ namespace WindowsGame4
 
             if (currState.IsKeyDown(Keys.D))
             {
-                level.Update(Action.right, 0);
+                level.Update(Action.right, 2);
             }
 
             if (currState.IsKeyDown(Keys.Space))

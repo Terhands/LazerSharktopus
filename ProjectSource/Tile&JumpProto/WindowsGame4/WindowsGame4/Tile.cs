@@ -68,7 +68,7 @@ namespace WindowsGame4
                     position.X -= velocity;
                     break;
                 case Action.left:
-                    position.X += velocity;
+                    position.X -= velocity;
                     break;
             }
         }

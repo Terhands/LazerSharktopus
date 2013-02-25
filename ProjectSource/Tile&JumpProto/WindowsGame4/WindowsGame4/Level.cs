@@ -33,8 +33,6 @@ namespace WindowsGame4
         /* procedure responsible for updating this level given an action (velocity should eventually be determined by player)*/
         public void Update(Action action, int velocity)
         {
-            velocity = 2;
-
             // would like to find a way to just call foreach i, i.Update(a, v) instead of having to explicitly deal with the map...
             if (shouldShiftScreen(action))
             {

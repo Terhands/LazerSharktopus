@@ -107,7 +107,7 @@ namespace WindowsGame4
             if (xMin < 0) { xMin = 0; }
 
             // get the right-most tile position that we will care about for collisions
-            int xMax = xIndex;
+            int xMax = xMin;
             while ((xMax < 100 - 1) && tiles[0, xMax].getPosition().Right < position.Right)
             {
                 xMax += 1;
@@ -119,7 +119,7 @@ namespace WindowsGame4
             if (yMin < 0) { yMin = 0; }
 
             // get the bottom-most tile position that we will case about for collisions
-            int yMax = yIndex;
+            int yMax = yMin;
             while (yMax < (rowsPerScreen - 1) && tiles[yMax, 0].getPosition().Bottom <= position.Bottom)
             {
                 yMax += 1;
@@ -149,13 +149,13 @@ namespace WindowsGame4
             switch (direction)
             {
                 case Action.left:
-                    if (pixelOffset - velocity > minPixelOffset)
+                    if (pixelOffset + velocity > minPixelOffset)
                     {
-                        pixelOffset -= velocity;
+                        pixelOffset += velocity;
                     }
                     else
                     {
-                        velocity = pixelOffset - minPixelOffset;
+                        velocity = minPixelOffset - pixelOffset;
                         pixelOffset = minPixelOffset;
                     }
                     break;
