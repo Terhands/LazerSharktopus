@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace WindowsGame4
 {
-    abstract class ADynamicGameObject : IDynamicGameObject
+    abstract class ADynamicGameObject : DrawableGameComponent, IDynamicGameObject
     {
         // dynamic objects current position
         protected Rectangle position;
@@ -15,6 +15,11 @@ namespace WindowsGame4
         // dynamic object's change in position
         protected int deltaY;
         protected int deltaX;
+
+        public ADynamicGameObject(Game game) : base(game)
+        {
+
+        }
 
         public abstract Rectangle GetPosition();
 

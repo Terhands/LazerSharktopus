@@ -18,13 +18,15 @@ namespace WindowsGame4
         protected bool isStopped;
 
         // may replace this with a jump meter object later on
-        protected float jumpPower;
-        protected const float maxInitialJumpPower = 7;
-        protected const float minInitialJumpPower = 3f;
+        protected JumpMeter jumpMeter;
+
+        // the speed that player starts falling
         protected const float startFalling = -0.25f;
 
-        public Player(Texture2D texture, int xStart, int yStart)
+        public Player(Game game, Texture2D texture, int xStart, int yStart) : base(game)
         {
+            this.jumpMeter = new JumpMeter(game, 30, 30);
+
             facingDirection = Action.right;
             source = new Rectangle(251, 142, 746 - 251, 805 - 142);
             position = new Rectangle(xStart, yStart, 36, 52);
@@ -34,8 +36,6 @@ namespace WindowsGame4
             isJumping = false;
             isStopped = true; // will we need to know this?? Maybe for a funny animation if you take too long...
 
-            jumpPower = 0;
-
             deltaX = 0;
             deltaY = 0;
         }
@@ -43,22 +43,22 @@ namespace WindowsGame4
         public void Jump()
         {
             // scale the jump so you can go high fast, but fall a bit slower - less sudden
-            if (jumpPower > 0.00001 || jumpPower < 0)
+            if (jumpMeter.JumpPower > 0.00001 || jumpMeter.JumpPower < 0)
             {
-                deltaY = (int)(5 / 3 * jumpPower);
-                if (jumpPower > 0)
+                deltaY = (int)(5 / 3 * jumpMeter.JumpPower);
+                if (jumpMeter.JumpPower > 0)
                 {
-                    jumpPower = jumpPower - 0.25f;
+                    jumpMeter.drainJumpPower(0.25f);
                 }
                 else
                 {
-                    jumpPower = jumpPower - 0.1f;
+                    jumpMeter.drainJumpPower(0.1f);
                 }
             }
             else
             {
                 deltaY = 0;
-                jumpPower = startFalling;
+                jumpMeter.JumpPower = startFalling;
             }
 
             // when jumping the player has no more control of their direction until they land
@@ -69,14 +69,9 @@ namespace WindowsGame4
 
         public void ChargeJumpPower()
         {
-            if (jumpPower < maxInitialJumpPower && !isJumping)
+            if (!isJumping)
             {
-                if (jumpPower < minInitialJumpPower)
-                {
-                    jumpPower = minInitialJumpPower;
-                }
-
-                jumpPower += 0.1f;
+                jumpMeter.chargeJumpPower();
             }
         }
 
@@ -111,24 +106,33 @@ namespace WindowsGame4
                         if (isJumping)
                         {
                             isJumping = false;
-                            jumpPower = 0;
+                            jumpMeter.reset();
                         }
 
                         break;
                     case CollisionDirection.top:
-                        position.Y = t.getPosition().Bottom;
-                        if (isJumping && startFalling < jumpPower)
+                        if (t.getCollisionBehaviour() == CollisionType.impassable)
                         {
-                            jumpPower = startFalling;
+                            position.Y = t.getPosition().Bottom;
+                            if (isJumping && startFalling < jumpMeter.JumpPower)
+                            {
+                                jumpMeter.JumpPower = startFalling;
+                            }
                         }
                         break;
                     case CollisionDirection.left:
-                        position.X = t.getPosition().Right + 2;
-                        deltaX = 0;
+                        if (t.getCollisionBehaviour() == CollisionType.impassable)
+                        {
+                            position.X = t.getPosition().Right + 2;
+                            deltaX = 0;
+                        }
                         break;
                     case CollisionDirection.right:
-                        position.X = t.getPosition().Left - position.Width;
-                        deltaX = 0;
+                        if (t.getCollisionBehaviour() == CollisionType.impassable)
+                        {
+                            position.X = t.getPosition().Left - position.Width - 2;
+                            deltaX = 0;
+                        }
                         break;
                 }
             }
@@ -138,7 +142,7 @@ namespace WindowsGame4
             if (!isJumping && !footCollision)
             {
                 isJumping = true;
-                jumpPower = startFalling;
+                jumpMeter.JumpPower = startFalling;
             }
  
         }
@@ -196,11 +200,14 @@ namespace WindowsGame4
                     }
                     break;
             }
+
+            jumpMeter.Update(Action.none, 0);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(sprite, position, source, Color.White);
+            jumpMeter.Draw(spriteBatch);
         }
     }
 }

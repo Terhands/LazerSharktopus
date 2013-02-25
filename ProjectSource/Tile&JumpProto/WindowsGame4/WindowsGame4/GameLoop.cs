@@ -19,7 +19,7 @@ namespace WindowsGame4
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        ArrayList tileTextures;
+        ArrayList textures;
         IGameObject level;
 
         KeyboardState prevState;
@@ -31,7 +31,7 @@ namespace WindowsGame4
 
             if (!graphics.IsFullScreen)
             {
-               // graphics.ToggleFullScreen();
+                // graphics.ToggleFullScreen();
             }
         }
 
@@ -44,15 +44,9 @@ namespace WindowsGame4
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
-            tileTextures = new ArrayList();
-            tileTextures.Insert(0, Content.Load<Texture2D>("Robro1.1"));
-            tileTextures.Insert(1, Content.Load<Texture2D>("Lazersharktopus"));
-            tileTextures.Insert(2, Content.Load<Texture2D>("blank"));
-
-            level = new Level(this, tileTextures);
-
             base.Initialize();
+
+            level = new Level(this, textures);
         }
 
         /// <summary>
@@ -63,6 +57,11 @@ namespace WindowsGame4
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            textures = new ArrayList();
+            textures.Insert(0, Content.Load<Texture2D>("Robro1.1"));
+            textures.Insert(1, Content.Load<Texture2D>("Lazersharktopus"));
+            textures.Insert(2, Content.Load<Texture2D>("blank"));
 
             // TODO: use this.Content to load your game content here
         }
@@ -130,8 +129,11 @@ namespace WindowsGame4
             {
                 level.Update(Action.jump, 0);
             }
+            else
+            {
+                level.Update(Action.none, 0);
+            }
 
-            level.Update(Action.none, 0);
             prevState = currState;
 
             base.Update(gameTime);

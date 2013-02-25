@@ -25,7 +25,7 @@ namespace WindowsGame4
             int screenHeight = Game.GraphicsDevice.Viewport.Height;
 
             levelMap = new Map(game, "test.txt", textures);
-            player = new Player((Texture2D)textures[playerIndex], 50, screenHeight - 52 - (screenHeight / 32));
+            player = new Player(game, (Texture2D)textures[playerIndex], 50, screenHeight - 52 - (screenHeight / 32));
 
             playerRange = new Rectangle((screenWidth * 2)/5, 0, screenWidth/5, screenHeight); 
         }
