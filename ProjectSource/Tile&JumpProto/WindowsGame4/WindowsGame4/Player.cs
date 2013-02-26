@@ -19,18 +19,22 @@ namespace WindowsGame4
 
         // may replace this with a jump meter object later on
         protected JumpMeter jumpMeter;
+        protected int playerPadding = 8;
 
         // the speed that player starts falling
         protected const float startFalling = -0.25f;
 
-        public Player(Game game, Texture2D texture, int xStart, int yStart) : base(game)
+        public Player(Game game, Texture2D texture, int xStart, int yStart)
+            : base(game)
         {
-            this.jumpMeter = new JumpMeter(game, 30, 30);
-
             facingDirection = Action.right;
             source = new Rectangle(251, 142, 746 - 251, 805 - 142);
             position = new Rectangle(xStart, yStart, 36, 52);
             sprite = texture;
+
+            int xCenter = xStart + (position.Width / 2);
+            int yCenter = yStart - playerPadding;
+            this.jumpMeter = new JumpMeter(game, xCenter, yCenter);
 
             isHidden = false;
             isJumping = false;
@@ -137,14 +141,14 @@ namespace WindowsGame4
                 }
             }
 
-            
+
             // if the player is not jumping and has no tiles under their feet, they start falling
             if (!isJumping && !footCollision)
             {
                 isJumping = true;
                 jumpMeter.JumpPower = startFalling;
             }
- 
+
         }
 
         public override Rectangle GetPosition()
@@ -196,11 +200,13 @@ namespace WindowsGame4
                     }
                     else
                     {
+                        // once the player has landed the user regains control of movement
                         deltaX = 0;
                     }
                     break;
             }
 
+            jumpMeter.setMeterPosition(position.X + (position.Width / 2), position.Y - playerPadding);
             jumpMeter.Update(Action.none, 0);
         }
 

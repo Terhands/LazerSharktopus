@@ -15,8 +15,10 @@ namespace WindowsGame4
         protected const float minJumpPower = 3.0f;
 
         // the dimensions of the jump charge meter
-        protected const int maxMeterWidth = 94;
-        protected const int meterHeight = 16;
+        protected const int outlineWidth = 50;
+        protected const int outlineHeight = 10;
+        protected const int maxMeterWidth = 45;
+        protected const int meterPadding = 2;
 
         // the actual meter that will be drawn to the screen
         protected Rectangle outline;
@@ -27,17 +29,21 @@ namespace WindowsGame4
 
         protected Texture2D rectangleTexture;
 
-        public JumpMeter(Game game, int x, int y) : base(game)
+        public JumpMeter(Game game, int xCenter, int yCenter)
+            : base(game)
         {
             jumpPower = 0;
 
-            outline = new Rectangle(x, y, 100, 20);
-            chargeBar = new Rectangle(x + 2, y + 2, 0, 16);
+            int x = xCenter - (outlineWidth / 2);
+            int y = yCenter - (outlineHeight / 2);
+
+            outline = new Rectangle(x, y, outlineWidth, outlineHeight);
+            chargeBar = new Rectangle(x + meterPadding, y + meterPadding, 0, outlineHeight - (2 * meterPadding));
 
             rectangleTexture = new Texture2D(game.GraphicsDevice, 1, 1);
             rectangleTexture.SetData(new Color[] { Color.White });
 
-            outlineColor = Color.MidnightBlue;
+            outlineColor = Color.Black;
             chargeColor = Color.Green;
         }
 
@@ -52,7 +58,7 @@ namespace WindowsGame4
             {
                 jumpPower = minJumpPower;
             }
-            else if(jumpPower < maxJumpPower)
+            else if (jumpPower < maxJumpPower)
             {
                 jumpPower += 0.1f;
             }
@@ -70,6 +76,15 @@ namespace WindowsGame4
             set { jumpPower = value; }
         }
 
+        public void setMeterPosition(int xCenter, int yCenter)
+        {
+            outline.X = xCenter - (outline.Width / 2);
+            chargeBar.X = xCenter - (chargeBar.Width / 2);
+
+            outline.Y = yCenter - (outline.Height / 2);
+            chargeBar.Y = yCenter - (chargeBar.Height / 2);
+        }
+
         public void Update(Action action, int velocity)
         {
             if (jumpPower <= minJumpPower)
@@ -84,8 +99,11 @@ namespace WindowsGame4
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(rectangleTexture, outline, outlineColor);
-            spriteBatch.Draw(rectangleTexture, chargeBar, chargeColor);
+            if (jumpPower > minJumpPower)
+            {
+                spriteBatch.Draw(rectangleTexture, outline, outlineColor);
+                spriteBatch.Draw(rectangleTexture, chargeBar, chargeColor);
+            }
         }
     }
 }
