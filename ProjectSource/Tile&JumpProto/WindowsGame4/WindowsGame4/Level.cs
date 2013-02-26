@@ -59,11 +59,7 @@ namespace WindowsGame4
 
             bool result = false;
 
-            if (!(Action.right == action) && !(Action.left == action))
-            {
-                result = false;
-            }
-            else if((Action.right == action && levelMap.atRightEdge()) || (Action.left == action && levelMap.atLeftEdge()))
+            if((Action.right == action && levelMap.atRightEdge()) || (Action.left == action && levelMap.atLeftEdge()))
             {
                 result = false;
             }

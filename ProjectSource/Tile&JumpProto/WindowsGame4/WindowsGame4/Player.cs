@@ -92,20 +92,48 @@ namespace WindowsGame4
         /* make sure player isn't falling through platforms/walking through walls */
         public override void HandleCollision(IList<ITile> tiles)
         {
+            // handle foot to floor collisions after intersection collisions have been resolved
+            IList<ITile> tilesBelowPlayer = new List<ITile>();
+            IList<ITile> tilesAtPlayerLevel = new List<ITile>();
 
-            IList<Rectangle> rectangles = new List<Rectangle>();
-            bool footCollision = false;
+            foreach (ITile t in tiles)
+            {
+                if (t.getPosition().Top < position.Bottom)
+                {
+                    tilesAtPlayerLevel.Add(t);
+                }
+            }
+
+            HandleIntersectionCollisions(tilesAtPlayerLevel);
+
+            foreach (ITile t in tiles)
+            {
+                if (t.getPosition().Top >= position.Bottom)
+                {
+                    tilesBelowPlayer.Add(t);
+                }
+            }
+
+            HandleFootCollisions(tilesBelowPlayer);
+        }
+
+        protected void HandleIntersectionCollisions(IList<ITile> tiles)
+        {
             // check that any intersections are only on passable tiles
             foreach (ITile t in tiles)
             {
+                // padding the tile with a pixel on either side so the player cannot climb the walls
+                Rectangle tilePos = t.getPosition();
 
-                CollisionDirection direction = determineCollisionType(t.getPosition());
+                tilePos.X -= 1;
+                tilePos.Width += 2;
+
+                CollisionDirection direction = determineCollisionType(tilePos);
 
                 switch (direction)
                 {
                     case CollisionDirection.bottom:
                         position.Y = t.getPosition().Top - position.Height;
-                        footCollision = true;
 
                         if (isJumping)
                         {
@@ -127,6 +155,7 @@ namespace WindowsGame4
                     case CollisionDirection.left:
                         if (t.getCollisionBehaviour() == CollisionType.impassable)
                         {
+                            // for some wierd reason with only 1 pixel of padding this breaks player's fall
                             position.X = t.getPosition().Right + 2;
                             deltaX = 0;
                         }
@@ -134,13 +163,33 @@ namespace WindowsGame4
                     case CollisionDirection.right:
                         if (t.getCollisionBehaviour() == CollisionType.impassable)
                         {
-                            position.X = t.getPosition().Left - position.Width - 2;
+                            position.X = t.getPosition().Left - position.Width - 1;
                             deltaX = 0;
                         }
                         break;
                 }
             }
+        }
 
+        protected void HandleFootCollisions(IList<ITile> tiles)
+        {
+            bool footCollision = false;
+
+            foreach (ITile t in tiles)
+            {
+                CollisionDirection direction = determineCollisionType(t.getPosition());
+
+                if (CollisionDirection.bottom == direction)
+                {
+                    footCollision = true;
+
+                    if (isJumping)
+                    {
+                        isJumping = false;
+                        jumpMeter.reset();
+                    }
+                }
+            }
 
             // if the player is not jumping and has no tiles under their feet, they start falling
             if (!isJumping && !footCollision)
@@ -148,7 +197,6 @@ namespace WindowsGame4
                 isJumping = true;
                 jumpMeter.JumpPower = startFalling;
             }
-
         }
 
         public override Rectangle GetPosition()
