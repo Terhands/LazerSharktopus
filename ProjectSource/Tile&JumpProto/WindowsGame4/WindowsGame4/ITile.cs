@@ -11,7 +11,8 @@ namespace WindowsGame4
     {
         impassable,
         passable,
-        platform
+        platform,
+        hideable
     };
 
     public enum Action

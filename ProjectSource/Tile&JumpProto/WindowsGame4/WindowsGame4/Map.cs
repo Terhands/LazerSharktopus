@@ -59,7 +59,11 @@ namespace WindowsGame4
                 {
                     CollisionType colType = CollisionType.platform;
 
-                    if (31 == i || (29 == i && 51 < j) || (30 == i && j > 50) || (i == 18 && j > 30 && j < 40) || (i == 23 && j > 42 && j < 50))
+                    if ((29 == i && 51 < j) || (30 == i && j > 50) || (i == 18 && j > 30 && j < 40) || (i == 23 && j > 42 && j < 50))
+                    {
+                        colType = CollisionType.hideable;
+                    }
+                    else if (31 == i)
                     {
                         colType = CollisionType.platform;
                     }
@@ -71,7 +75,7 @@ namespace WindowsGame4
                     {
                         colType = CollisionType.passable;
                     }
-                    tiles[i, j] = new Tile((Texture2D)tileTextures[2], colType, j, i, screenWidth, screenHeight);
+                    tiles[i, j] = new Tile(Game, (Texture2D)tileTextures[2], colType, j, i, screenWidth, screenHeight);
                 }
             }
         }

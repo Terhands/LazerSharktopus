@@ -61,7 +61,7 @@ namespace WindowsGame4
             textures = new ArrayList();
             textures.Insert(0, Content.Load<Texture2D>("Robro1.1"));
             textures.Insert(1, Content.Load<Texture2D>("Lazersharktopus"));
-            textures.Insert(2, Content.Load<Texture2D>("blank"));
+            textures.Insert(2, Content.Load<Texture2D>("groundSpriteFile"));
 
             // TODO: use this.Content to load your game content here
         }
@@ -145,7 +145,7 @@ namespace WindowsGame4
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            this.spriteBatch.Begin();
+            this.spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             level.Draw(spriteBatch);

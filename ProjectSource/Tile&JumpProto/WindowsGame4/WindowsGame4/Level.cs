@@ -27,7 +27,7 @@ namespace WindowsGame4
             levelMap = new Map(game, "test.txt", textures);
             player = new Player(game, (Texture2D)textures[playerIndex], 50, screenHeight - 52 - (screenHeight / 32));
 
-            playerRange = new Rectangle((screenWidth * 2)/5, 0, screenWidth/5, screenHeight); 
+            playerRange = new Rectangle((screenWidth * 2)/5, 0, screenWidth/5, screenHeight);
         }
 
         /* procedure responsible for updating this level given an action (velocity should eventually be determined by player)*/

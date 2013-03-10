@@ -7,15 +7,19 @@ using Microsoft.Xna.Framework;
 
 namespace WindowsGame4
 {
-    class Tile : ITile
+    class Tile : DrawableGameComponent, ITile
     {
+        protected int spriteWidth = 16;
+        protected int spriteOffset = 1;
+        protected float spriteDepth;
         protected CollisionType collisionBehaviour;
         protected Texture2D tileTexture;
         protected Rectangle position;
+        protected Rectangle source;
         protected Color color;
 
         /* set up the tile -> figure out it's position in the level, it's size relative to the screen & load the sprite+set the collision behaviour */
-        public Tile(Texture2D texture, CollisionType type, int xIndex, int yIndex, int screenWidth, int screenHeight)
+        public Tile(Game game, Texture2D texture, CollisionType type, int xIndex, int yIndex, int screenWidth, int screenHeight) : base(game)
         {
             LoadContent(texture, type);
             position = new Rectangle();
@@ -78,17 +82,31 @@ namespace WindowsGame4
         {
             tileTexture = texture;
             collisionBehaviour = cType;
+            color = Color.White;
+
+            Random rand = new Random();
+            int textureIndex = rand.Next(1, 4);
+            textureIndex = spriteOffset * textureIndex + spriteWidth * (textureIndex - 1);
 
             switch (collisionBehaviour)
             {
                 case CollisionType.impassable:
-                    color = Color.Silver;
+                    source = new Rectangle(textureIndex, spriteOffset, spriteWidth, spriteWidth);
+                    spriteDepth = 0.1f;
                     break;
                 case CollisionType.passable:
                     color = Color.Transparent;
+                    source = new Rectangle(0, 0, spriteWidth, spriteWidth);
+                    spriteDepth = 0;
                     break;
                 case CollisionType.platform:
-                    color = Color.SteelBlue;
+                    source = new Rectangle(textureIndex, spriteOffset * 2 + spriteWidth, spriteWidth, spriteWidth);
+                    spriteDepth = 0.1f;
+                    break;
+                case CollisionType.hideable:
+                    
+                    source = new Rectangle(textureIndex, spriteOffset * 3 + spriteWidth * 2, spriteWidth, spriteWidth);
+                    spriteDepth = 0.75f;
                     break;
             }
         }
@@ -96,7 +114,8 @@ namespace WindowsGame4
         /* draw this tile to screen with the current spriteBatch */
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(tileTexture, position, color);
+            //spriteBatch.Draw(tileTexture, position, color);
+            spriteBatch.Draw(tileTexture, position, source, color, 0, new Vector2(0, 0), SpriteEffects.None, spriteDepth);
         }
     }
 }

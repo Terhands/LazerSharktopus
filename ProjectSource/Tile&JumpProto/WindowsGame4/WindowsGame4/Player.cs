@@ -17,6 +17,8 @@ namespace WindowsGame4
         protected bool isJumping;
         protected bool isStopped;
 
+        protected const float spriteDepth = 0.5f;
+
         // may replace this with a jump meter object later on
         protected JumpMeter jumpMeter;
         protected int playerPadding = 8;
@@ -34,7 +36,7 @@ namespace WindowsGame4
 
             int xCenter = xStart + (position.Width / 2);
             int yCenter = yStart - playerPadding;
-            this.jumpMeter = new JumpMeter(game, xCenter, yCenter);
+            this.jumpMeter = new JumpMeter(game, xCenter, yCenter, spriteDepth);
 
             isHidden = false;
             isJumping = false;
@@ -65,7 +67,7 @@ namespace WindowsGame4
                 jumpMeter.JumpPower = startFalling;
             }
 
-            // when jumping the player has no more control of their direction until they land
+            // when jumping the player has less control of their direction until they land
             position.Y -= deltaY;
             position.X += deltaX;
             isJumping = true;
@@ -108,7 +110,7 @@ namespace WindowsGame4
 
             foreach (ITile t in tiles)
             {
-                if (t.getPosition().Top >= position.Bottom)
+                if (t.getPosition().Top >= position.Bottom && t.getCollisionBehaviour() != CollisionType.hideable)
                 {
                     tilesBelowPlayer.Add(t);
                 }
@@ -128,21 +130,23 @@ namespace WindowsGame4
                 tilePos.X -= 1;
                 tilePos.Width += 2;
 
-                CollisionDirection direction = determineCollisionType(tilePos);
+                Direction direction = determineCollisionType(tilePos);
 
                 switch (direction)
                 {
-                    case CollisionDirection.bottom:
-                        position.Y = t.getPosition().Top - position.Height;
-
-                        if (isJumping)
+                    case Direction.bottom:
+                        if(t.getCollisionBehaviour() != CollisionType.hideable)
                         {
-                            isJumping = false;
-                            jumpMeter.reset();
-                        }
+                            position.Y = t.getPosition().Top - position.Height;
 
+                            if (isJumping)
+                            {
+                                isJumping = false;
+                                jumpMeter.reset();
+                            }
+                        }
                         break;
-                    case CollisionDirection.top:
+                    case Direction.top:
                         if (t.getCollisionBehaviour() == CollisionType.impassable)
                         {
                             position.Y = t.getPosition().Bottom;
@@ -152,7 +156,7 @@ namespace WindowsGame4
                             }
                         }
                         break;
-                    case CollisionDirection.left:
+                    case Direction.left:
                         if (t.getCollisionBehaviour() == CollisionType.impassable)
                         {
                             // for some wierd reason with only 1 pixel of padding this breaks player's fall
@@ -160,7 +164,7 @@ namespace WindowsGame4
                             deltaX = 0;
                         }
                         break;
-                    case CollisionDirection.right:
+                    case Direction.right:
                         if (t.getCollisionBehaviour() == CollisionType.impassable)
                         {
                             position.X = t.getPosition().Left - position.Width - 1;
@@ -177,9 +181,9 @@ namespace WindowsGame4
 
             foreach (ITile t in tiles)
             {
-                CollisionDirection direction = determineCollisionType(t.getPosition());
+                Direction direction = determineCollisionType(t.getPosition());
 
-                if (CollisionDirection.bottom == direction)
+                if (Direction.bottom == direction)
                 {
                     footCollision = true;
 
@@ -217,6 +221,7 @@ namespace WindowsGame4
                         deltaX = velocity;
                         position.X += deltaX;
                     }
+
                     break;
                 case Action.left:
                     facingDirection = direction;
@@ -227,6 +232,7 @@ namespace WindowsGame4
                         position.X += deltaX;
                     }
                     break;
+
                 // have to decide if we will implement ladder mechanics or rely on jumps
                 case Action.up:
                     break;
@@ -260,7 +266,7 @@ namespace WindowsGame4
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(sprite, position, source, Color.White);
+            spriteBatch.Draw(sprite, position, source, Color.White, 0, new Vector2(0, 0), SpriteEffects.None, spriteDepth);
             jumpMeter.Draw(spriteBatch);
         }
     }
