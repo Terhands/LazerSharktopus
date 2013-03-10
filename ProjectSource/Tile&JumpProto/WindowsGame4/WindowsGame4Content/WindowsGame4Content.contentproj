@@ -58,9 +58,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="lathraia.config">
+    <Content Include="lathraia.config">
       <Name>lathraia</Name>
-    </None>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="SumoHit.wav">

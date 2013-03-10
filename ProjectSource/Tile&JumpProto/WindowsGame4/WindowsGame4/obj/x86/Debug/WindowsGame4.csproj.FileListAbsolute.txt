@@ -52,3 +52,4 @@ C:\Users\Terhands\Desktop\306Project\LazerSharktopus\ProjectSource\Tile&JumpProt
 \\csfiles\tch562\Desktop\Tile&JumpProto\Tile&JumpProto\WindowsGame4\WindowsGame4\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Terhands\Desktop\306Project\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\groundSpriteFile.xnb
 C:\Users\Terhands\Desktop\306Project\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\SumoHit.xnb
+C:\Users\Terhands\Desktop\306Project\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\lathraia.config

@@ -58,6 +58,8 @@ namespace WindowsGame4
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            GameLoader config = new GameLoader("Content\\lathraia.config");
+
             textures = new ArrayList();
             textures.Insert(0, Content.Load<Texture2D>("Robro1.1"));
             textures.Insert(1, Content.Load<Texture2D>("Lazersharktopus"));

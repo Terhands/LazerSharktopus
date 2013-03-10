@@ -59,11 +59,11 @@ namespace WindowsGame4
                 {
                     CollisionType colType = CollisionType.platform;
 
-                    if ((29 == i && 51 < j) || (30 == i && j > 50) || (i == 18 && j > 30 && j < 40) || (i == 23 && j > 42 && j < 50))
+                    if ((29 == i && 51 < j))
                     {
                         colType = CollisionType.hideable;
                     }
-                    else if (31 == i)
+                    else if (31 == i || (30 == i && j > 50) || (i == 18 && j > 30 && j < 40) || (i == 23 && j > 42 && j < 50))
                     {
                         colType = CollisionType.platform;
                     }
