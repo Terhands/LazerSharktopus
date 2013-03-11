@@ -64,49 +64,41 @@ namespace WindowsGame4
 
         /* procedure responsible for updating this level given an action (velocity should eventually be determined by player)*/
         public void Update(Action action, int velocity)
-        {   
-            gameTimer.Update();
-            // no need to perform update if the player died - get ready for some serious death-screen action
-            if (!player.IsDead)
+        {
+            // would like to find a way to just call foreach i, i.Update(a, v) instead of having to explicitly deal with the map...
+            if (shouldShiftScreen(action))
             {
-                // would like to find a way to just call foreach i, i.Update(a, v) instead of having to explicitly deal with the map...
-                if (shouldShiftScreen(action))
-                {
-                    // update the map position when the background screen needs to be updated
-                    levelMap.Update(action, velocity);
-                    velocity = 0;
-                }
+                // update the map position when the background screen needs to be updated
+                levelMap.Update(action, velocity);
+                velocity = 0;
+            }
 
-            	if (action == Action.throwBolt)
-            	{
-            	    player.ThrowBolt();
-            	    bolts.Add(new Bolt(Game, player.GetFacingDirection(), player.GetPosition().X, player.GetPosition().Y, boltTexture));
-            	}
-	
-	            // update the player position when the player needs to change position on screen
-	            player.Update(action, velocity);
-	            player.HandleCollision(levelMap.GetNearbyTiles(player.GetPosition()));
+            if (action == Action.throwBolt)
+            {
+                player.ThrowBolt();
+                bolts.Add(new Bolt(Game, player.GetFacingDirection(), player.GetPosition().X, player.GetPosition().Y, boltTexture));
+            }
 
-	            if (action == Action.boltUpdates)
-	            {
-    	            foreach (Bolt bolt in bolts)
-	                {
-    	                bolt.Update(action, velocity);
-                        bolt.HandleCollision(levelMap.GetNearbyTiles(bolt.GetPosition()));
-                        if (bolt.expiryTime <= 0)
-                        {
-                            bolts.Remove(bolt);
-                            break;
-                        }
-	                }
-	            }
-    	    	
-                if (player.DoneLevel)
+            // update the player position when the player needs to change position on screen
+            player.Update(action, velocity);
+            player.HandleCollision(levelMap.GetNearbyTiles(player.GetPosition()));
+            foreach (Bolt bolt in bolts)
+            {
+                bolt.Update(action, velocity);
+                bolt.HandleCollision(levelMap.GetNearbyTiles(bolt.GetPosition()));
+                if (bolt.expiryTime <= 0)
                 {
-                    // do some intermediate next level screen...
-                    currentLevel += 1;
-                    InitLevel();
+                    bolts.Remove(bolt);
+                    break;
                 }
+            }
+            gameTimer.Update();
+            
+            if (player.DoneLevel)
+            {
+                // do some intermediate next level screen...
+                currentLevel += 1;
+                InitLevel();
             }
         }
 
@@ -114,15 +106,14 @@ namespace WindowsGame4
         {
             if (deathCounter < maxDeathCounter)
             {
-		        
+		    foreach (Bolt bolt in bolts)            
+            	{
+            	    bolt.Draw(spriteBatch);
+            	}
             	 
                 levelMap.Draw(spriteBatch);
                 player.Draw(spriteBatch);
                 gameTimer.Draw(spriteBatch);
-                foreach (Bolt bolt in bolts)
-                {
-                    bolt.Draw(spriteBatch);
-                }
                 if (player.IsDead)
                 {
                     deathCounter += 1;

@@ -64,8 +64,7 @@ namespace WindowsGame4
 
         /* procedure responsible for updating this level given an action (velocity should eventually be determined by player)*/
         public void Update(Action action, int velocity)
-        {   
-            gameTimer.Update();
+        {
             // no need to perform update if the player died - get ready for some serious death-screen action
             if (!player.IsDead)
             {
@@ -80,33 +79,27 @@ namespace WindowsGame4
             	if (action == Action.throwBolt)
             	{
             	    player.ThrowBolt();
-            	    bolts.Add(new Bolt(Game, player.GetFacingDirection(), player.GetPosition().X, player.GetPosition().Y, boltTexture));
+            	    bolts.Add(new Bolt(Game, Direction.right, player.GetPosition().X, player.GetPosition().Y, boltTexture));
             	}
 	
-	            // update the player position when the player needs to change position on screen
-	            player.Update(action, velocity);
-	            player.HandleCollision(levelMap.GetNearbyTiles(player.GetPosition()));
-
-	            if (action == Action.boltUpdates)
+	        // update the player position when the player needs to change position on screen
+	        player.Update(action, velocity);
+	        player.HandleCollision(levelMap.GetNearbyTiles(player.GetPosition()));
+	
+	        if (action == Action.boltUpdates)
+	        {
+	            foreach (Bolt bolt in bolts)
 	            {
-    	            foreach (Bolt bolt in bolts)
-	                {
-    	                bolt.Update(action, velocity);
-                        bolt.HandleCollision(levelMap.GetNearbyTiles(bolt.GetPosition()));
-                        if (bolt.expiryTime <= 0)
-                        {
-                            bolts.Remove(bolt);
-                            break;
-                        }
-	                }
+	                bolt.Update(action, velocity);
 	            }
-    	    	
-                if (player.DoneLevel)
-                {
-                    // do some intermediate next level screen...
-                    currentLevel += 1;
-                    InitLevel();
-                }
+	        }
+	    	
+            	if (player.DoneLevel)
+            	{
+            	    // do some intermediate next level screen...
+            	    currentLevel += 1;
+            	    InitLevel();
+            	}
             }
         }
 
@@ -114,15 +107,14 @@ namespace WindowsGame4
         {
             if (deathCounter < maxDeathCounter)
             {
-		        
+		    foreach (Bolt bolt in bolts)            
+            	{
+            	    bolt.Draw(spriteBatch);
+            	}
             	 
                 levelMap.Draw(spriteBatch);
                 player.Draw(spriteBatch);
                 gameTimer.Draw(spriteBatch);
-                foreach (Bolt bolt in bolts)
-                {
-                    bolt.Draw(spriteBatch);
-                }
                 if (player.IsDead)
                 {
                     deathCounter += 1;

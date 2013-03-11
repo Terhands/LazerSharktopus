@@ -20,13 +20,9 @@ namespace WindowsGame4
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-<<<<<<< HEAD
-        ArrayList textures;
         ArrayList fonts;
-=======
         ArrayList textures;
         ArrayList sounds;
->>>>>>> 154f9e36a71c70401042ec434d50d118fac2e877
 
         GameLoader config;
         IGameObject level;
@@ -64,11 +60,7 @@ namespace WindowsGame4
             // TODO: Add your initialization logic here
             base.Initialize();
 
-<<<<<<< HEAD
-            level = new Level(this, textures, fonts, new LevelLoader(config.LevelFiles));
-=======
-            level = new Level(this, textures, sounds, new LevelLoader(config.LevelFiles));
->>>>>>> 154f9e36a71c70401042ec434d50d118fac2e877
+            level = new Level(this, textures, fonts, sounds, new LevelLoader(config.LevelFiles));
         }
 
         /// <summary>
@@ -82,37 +74,23 @@ namespace WindowsGame4
 
             config = new GameLoader("Content\\lathraia.config");
 
-<<<<<<< HEAD
             textures = new ArrayList();
-            fonts = new ArrayList();
             for (int i = 0; i < config.NumTextures; i++)
             {
                 textures.Insert(i, Content.Load<Texture2D>(config.getTextureFile(i)));
             }
 
+            fonts = new ArrayList();
             for (int i = 0; i < config.NumFonts; i++)
             {
                 fonts.Insert(i, Content.Load<SpriteFont>(config.getFontFile(i)));
             }
 
-=======
-            textures = new ArrayList();
-
-            // load up the textures specified in the config file
-            for (int i = 0; i < config.NumTextures; i++)
-            {
-                textures.Insert(i, Content.Load<Texture2D>(config.getTextureFile(i)));
-            }
-
             sounds = new ArrayList();
-
             for (int i = 0; i < config.NumSoundEffects; i++)
             {
                 sounds.Insert(i, Content.Load<SoundEffect>(config.getSoundFile(i)));
             }
-
-            // need to load up the sound effect files specified in the config file
->>>>>>> 154f9e36a71c70401042ec434d50d118fac2e877
         }
 
         /// <summary>
@@ -181,13 +159,8 @@ namespace WindowsGame4
             else
             {
                 level.Update(Action.none, 0);
-<<<<<<< HEAD
-            }
-            
-=======
             }
             level.Update(Action.boltUpdates, 0);
->>>>>>> 154f9e36a71c70401042ec434d50d118fac2e877
             prevState = currState;
 
             base.Update(gameTime);
@@ -199,20 +172,12 @@ namespace WindowsGame4
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-<<<<<<< HEAD
             this.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             level.Draw(spriteBatch);
-=======
-            this.spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-
-            level.Draw(spriteBatch);
 
             this.spriteBatch.End();
->>>>>>> 154f9e36a71c70401042ec434d50d118fac2e877
 
             base.Draw(gameTime);
         }
