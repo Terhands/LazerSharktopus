@@ -26,6 +26,7 @@ namespace WindowsGame4
 
         ArrayList textures;
         ArrayList sounds;
+        ArrayList fonts;
 	    Texture2D boltTexture;
 
         protected List<Bolt> bolts;
@@ -40,6 +41,7 @@ namespace WindowsGame4
             levelLoader = loader;
             textures = _textures;
             sounds = _sounds;
+            fonts = _fonts;
 
             currentLevel = 0;
             deathCounter = 0;
@@ -47,7 +49,6 @@ namespace WindowsGame4
             screenWidth = Game.GraphicsDevice.Viewport.Width;
             screenHeight = Game.GraphicsDevice.Viewport.Height;
 
-            gameTimer = new GameTimer(360, (SpriteFont)_fonts[0]);
             InitLevel();
         }
 
@@ -60,12 +61,14 @@ namespace WindowsGame4
             int screenHeight = Game.GraphicsDevice.Viewport.Height;
             player = new Player(Game, (Texture2D)textures[playerIndex], sounds, 50, screenHeight - 52 - (screenHeight / 32));
             boltTexture = (Texture2D)textures[4];
+            gameTimer = new GameTimer(200, (SpriteFont)fonts[0]);
         }
 
         /* procedure responsible for updating this level given an action (velocity should eventually be determined by player)*/
         public void Update(Action action, int velocity)
         {   
             gameTimer.Update();
+            if (gameTimer.isFinished()) player.IsDead = true;
             // no need to perform update if the player died - get ready for some serious death-screen action
             if (!player.IsDead)
             {

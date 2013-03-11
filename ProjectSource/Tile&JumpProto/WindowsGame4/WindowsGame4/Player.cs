@@ -63,6 +63,7 @@ namespace WindowsGame4
         public bool IsDead
         {
             get { return isDead; }
+            set { isDead = value; }
         }
 
         public void Jump()
@@ -242,6 +243,11 @@ namespace WindowsGame4
         public Action GetFacingDirection()
         {
             return facingDirection;
+        }
+
+        public void Kill()
+        {
+            isDead = true;
         }
 
         public override void Update(Action direction, int velocity)

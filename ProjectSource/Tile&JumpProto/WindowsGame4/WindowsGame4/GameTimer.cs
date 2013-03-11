@@ -35,5 +35,13 @@ namespace WindowsGame4
                 beatCounter = 30;
             }
         }
+
+        public bool isFinished()
+        {
+            if (levelTime <= 0)
+                return true;
+            else
+                return false;
+        }
     }
 }
