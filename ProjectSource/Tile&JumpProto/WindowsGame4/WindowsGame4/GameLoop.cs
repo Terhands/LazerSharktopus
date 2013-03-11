@@ -20,6 +20,7 @@ namespace WindowsGame4
         SpriteBatch spriteBatch;
 
         ArrayList textures;
+        ArrayList sounds;
 
         GameLoader config;
         IGameObject level;
@@ -57,7 +58,7 @@ namespace WindowsGame4
             // TODO: Add your initialization logic here
             base.Initialize();
 
-            level = new Level(this, textures, new LevelLoader(config.LevelFiles));
+            level = new Level(this, textures, sounds, new LevelLoader(config.LevelFiles));
         }
 
         /// <summary>
@@ -73,9 +74,20 @@ namespace WindowsGame4
 
             textures = new ArrayList();
 
+            // load up the textures specified in the config file
             for (int i = 0; i < config.NumTextures; i++)
             {
                 textures.Insert(i, Content.Load<Texture2D>(config.getTextureFile(i)));
+            }
+
+            sounds = new ArrayList();
+
+            for (int i = 0; i < config.NumSoundEffects; i++)
+            {
+                sounds.Insert(i, Content.Load<SoundEffect>(config.getSoundFile(i)));
+            }
+
+            // need to load up the sound effect files specified in the config file
             }
 
             // TODO: use this.Content to load your game content here

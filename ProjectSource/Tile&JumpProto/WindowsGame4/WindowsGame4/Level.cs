@@ -20,12 +20,16 @@ namespace WindowsGame4
         protected const int playerIndex = 0;
         protected Rectangle playerRange;
 
+        int deathCounter = 0;
+        int maxDeathCounter = 100;
+
         ArrayList textures;
-        Texture2D boltTexture;
+        ArrayList sounds;
+	Texture2D boltTexture;
 
         protected List<Bolt> bolts;
 
-        public Level(GameLoop game, ArrayList _textures, LevelLoader loader) : base(game)
+        public Level(GameLoop game, ArrayList _textures, ArrayList _sounds, LevelLoader loader) : base(game)
         {
             int screenWidth = Game.GraphicsDevice.Viewport.Width;
             int screenHeight = Game.GraphicsDevice.Viewport.Height;
@@ -34,7 +38,13 @@ namespace WindowsGame4
 
             levelLoader = loader;
             textures = _textures;
+            sounds = _sounds;
+
             currentLevel = 0;
+            deathCounter = 0;
+
+            screenWidth = Game.GraphicsDevice.Viewport.Width;
+            screenHeight = Game.GraphicsDevice.Viewport.Height;
 
             InitLevel();
         }
@@ -46,56 +56,71 @@ namespace WindowsGame4
 
             int screenWidth = Game.GraphicsDevice.Viewport.Width;
             int screenHeight = Game.GraphicsDevice.Viewport.Height;
-            player = new Player(Game, (Texture2D)textures[playerIndex], 50, screenHeight - 52 - (screenHeight / 32));
-            boltTexture = (Texture2D)textures[3];
+            player = new Player(Game, (Texture2D)textures[playerIndex], sounds, 50, screenHeight - 52 - (screenHeight / 32));
+            boltTexture = (Texture2D)textures[4];
         }
 
         /* procedure responsible for updating this level given an action (velocity should eventually be determined by player)*/
         public void Update(Action action, int velocity)
         {
-            // would like to find a way to just call foreach i, i.Update(a, v) instead of having to explicitly deal with the map...
-            if (shouldShiftScreen(action))
+            // no need to perform update if the player died - get ready for some serious death-screen action
+            if (!player.IsDead)
             {
-                // update the map position when the background screen needs to be updated
-                levelMap.Update(action, velocity);
-                velocity = 0;
-            }
-
-            if (action == Action.throwBolt)
-            {
-                player.ThrowBolt();
-                bolts.Add(new Bolt(Game, Direction.right, player.GetPosition().X, player.GetPosition().Y, boltTexture));
-            }
-
-            // update the player position when the player needs to change position on screen
-            player.Update(action, velocity);
-            player.HandleCollision(levelMap.GetNearbyTiles(player.GetPosition()));
-
-            if (action == Action.boltUpdates)
-            {
-                foreach (Bolt bolt in bolts)
+                // would like to find a way to just call foreach i, i.Update(a, v) instead of having to explicitly deal with the map...
+                if (shouldShiftScreen(action))
                 {
-                    bolt.Update(action, velocity);
+                    // update the map position when the background screen needs to be updated
+                    levelMap.Update(action, velocity);
+                    velocity = 0;
                 }
-            }
 
-            if (player.DoneLevel)
-            {
-                // do some intermediate next level screen...
-                currentLevel += 1;
-                InitLevel();
+            	if (action == Action.throwBolt)
+            	{
+            	    player.ThrowBolt();
+            	    bolts.Add(new Bolt(Game, Direction.right, player.GetPosition().X, player.GetPosition().Y, boltTexture));
+            	}
+	
+	        // update the player position when the player needs to change position on screen
+	        player.Update(action, velocity);
+	        player.HandleCollision(levelMap.GetNearbyTiles(player.GetPosition()));
+	
+	        if (action == Action.boltUpdates)
+	        {
+	            foreach (Bolt bolt in bolts)
+	            {
+	                bolt.Update(action, velocity);
+	            }
+	        }
+	    	
+            	if (player.DoneLevel)
+            	{
+            	    // do some intermediate next level screen...
+            	    currentLevel += 1;
+            	    InitLevel();
+            	}
             }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            foreach (Bolt bolt in bolts)
+            if (deathCounter < maxDeathCounter)
             {
-                bolt.Draw(spriteBatch);
-            } 
-            levelMap.Draw(spriteBatch);
-            player.Draw(spriteBatch);
-            
+		foreach (Bolt bolt in bolts)            
+            	{
+            	    bolt.Draw(spriteBatch);
+            	}
+            	 
+                levelMap.Draw(spriteBatch);
+                player.Draw(spriteBatch);
+                if (player.IsDead)
+                {
+                    deathCounter += 1;
+                }
+            }
+            else
+            {
+                spriteBatch.Draw((Texture2D)textures[3], new Rectangle(0, 0, Game.GraphicsDevice.Viewport.Width, Game.GraphicsDevice.Viewport.Height), Color.White);
+            }
         }
 
         /* figure out if the screen needs to shift to reflect the given action */
