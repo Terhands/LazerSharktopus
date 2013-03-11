@@ -18,5 +18,7 @@ namespace WindowsGame4
 
         /* the player hides in the environment to avoid detection */
         void Hide();
+
+        bool DoneLevel { get; }
     }
 }

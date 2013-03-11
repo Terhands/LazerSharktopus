@@ -20,6 +20,8 @@ namespace WindowsGame4
         SpriteBatch spriteBatch;
 
         ArrayList textures;
+
+        GameLoader config;
         IGameObject level;
 
         KeyboardState prevState;
@@ -31,7 +33,7 @@ namespace WindowsGame4
 
             if (!graphics.IsFullScreen)
             {
-                // graphics.ToggleFullScreen();
+                 graphics.ToggleFullScreen();
             }
         }
 
@@ -46,7 +48,7 @@ namespace WindowsGame4
             // TODO: Add your initialization logic here
             base.Initialize();
 
-            level = new Level(this, textures);
+            level = new Level(this, textures, new LevelLoader(config.LevelFiles));
         }
 
         /// <summary>
@@ -58,12 +60,15 @@ namespace WindowsGame4
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            GameLoader config = new GameLoader("Content\\lathraia.config");
+            config = new GameLoader("Content\\lathraia.config");
 
             textures = new ArrayList();
-            textures.Insert(0, Content.Load<Texture2D>("Robro1.1"));
-            textures.Insert(1, Content.Load<Texture2D>("Lazersharktopus"));
-            textures.Insert(2, Content.Load<Texture2D>("groundSpriteFile"));
+
+            for (int i = 0; i < config.NumTextures; i++)
+            {
+                textures.Insert(i, Content.Load<Texture2D>(config.getTextureFile(i)));
+            }
+
 
             // TODO: use this.Content to load your game content here
         }

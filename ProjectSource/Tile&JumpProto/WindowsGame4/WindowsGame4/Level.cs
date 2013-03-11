@@ -14,20 +14,37 @@ namespace WindowsGame4
         protected IPlayer player;
         protected IMap levelMap;
 
+        LevelLoader levelLoader;
+        int currentLevel;
+
         protected const int playerIndex = 0;
         protected Rectangle playerRange;
 
+        ArrayList textures;
 
-        public Level(GameLoop game, ArrayList textures) : base(game)
+
+        public Level(GameLoop game, ArrayList _textures, LevelLoader loader) : base(game)
         {
-
             int screenWidth = Game.GraphicsDevice.Viewport.Width;
             int screenHeight = Game.GraphicsDevice.Viewport.Height;
 
-            levelMap = new Map(game, "test.txt", textures);
-            player = new Player(game, (Texture2D)textures[playerIndex], 50, screenHeight - 52 - (screenHeight / 32));
-
             playerRange = new Rectangle((screenWidth * 2)/5, 0, screenWidth/5, screenHeight);
+
+            levelLoader = loader;
+            textures = _textures;
+            currentLevel = 0;
+
+            InitLevel();
+        }
+
+        public void InitLevel()
+        {
+            levelLoader.LoadLevel(currentLevel);
+            levelMap = new Map(Game, levelLoader.Map, textures);
+
+            int screenWidth = Game.GraphicsDevice.Viewport.Width;
+            int screenHeight = Game.GraphicsDevice.Viewport.Height;
+            player = new Player(Game, (Texture2D)textures[playerIndex], 50, screenHeight - 52 - (screenHeight / 32));
         }
 
         /* procedure responsible for updating this level given an action (velocity should eventually be determined by player)*/
@@ -44,6 +61,13 @@ namespace WindowsGame4
             // update the player position when the player needs to change position on screen
             player.Update(action, velocity);
             player.HandleCollision(levelMap.GetNearbyTiles(player.GetPosition()));
+
+            if (player.DoneLevel)
+            {
+                // do some intermediate next level screen...
+                currentLevel += 1;
+                InitLevel();
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)

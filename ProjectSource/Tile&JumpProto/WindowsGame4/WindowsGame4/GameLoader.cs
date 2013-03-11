@@ -20,10 +20,36 @@ namespace WindowsGame4
             Load(fileName);
         }
 
-        public string getLevelFile(int i)
+        public int NumTextures
         {
-            Debug.Assert(i < levelFiles.Length);
-            return levelFiles[i];
+            get { return textureFiles.Length; }
+        }
+
+        public int NumLevels
+        {
+            get { return levelFiles.Length; }
+        }
+
+        public int NumSoundEffects
+        {
+            get { return soundFiles.Length; }
+        }
+
+        public string[] LevelFiles
+        {
+            get { return levelFiles; }
+        }
+
+        public string getTextureFile(int i)
+        {
+            Debug.Assert(i < textureFiles.Length);
+            return textureFiles[i];
+        }
+
+        public string getSoundFile(int i)
+        {
+            Debug.Assert(i < soundFiles.Length);
+            return soundFiles[i];
         }
 
         public void Load(string fileName)

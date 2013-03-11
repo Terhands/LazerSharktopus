@@ -9,10 +9,12 @@ namespace WindowsGame4
 {
     public enum CollisionType
     {
-        impassable,
         passable,
         platform,
-        hideable
+        impassable,
+        hideable,
+        goal,
+        spike
     };
 
     public enum Action

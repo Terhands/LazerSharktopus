@@ -16,6 +16,7 @@ namespace WindowsGame4
         protected bool isHidden;
         protected bool isJumping;
         protected bool isStopped;
+        protected bool hasReachedGoal;
 
         protected const float spriteDepth = 0.5f;
 
@@ -41,9 +42,15 @@ namespace WindowsGame4
             isHidden = false;
             isJumping = false;
             isStopped = true; // will we need to know this?? Maybe for a funny animation if you take too long...
+            hasReachedGoal = false;
 
             deltaX = 0;
             deltaY = 0;
+        }
+
+        public bool DoneLevel
+        {
+            get { return hasReachedGoal; }
         }
 
         public void Jump()
@@ -131,6 +138,11 @@ namespace WindowsGame4
                 tilePos.Width += 2;
 
                 Direction direction = determineCollisionType(tilePos);
+
+                if (direction != Direction.none && t.getCollisionBehaviour() == CollisionType.goal)
+                {
+                    hasReachedGoal = true;
+                }
 
                 switch (direction)
                 {
