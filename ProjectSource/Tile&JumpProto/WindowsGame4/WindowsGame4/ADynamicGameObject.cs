@@ -29,10 +29,11 @@ namespace WindowsGame4
 
         public abstract void HandleCollision(IList<ITile> obj);
 
-        protected CollisionDirection determineCollisionType(Rectangle r)
+        // procedure to detect which direction a collision is taking place with a rectangular object relative to a rectangular game object
+        protected Direction determineCollisionType(Rectangle r)
         {
             // default to a bottom collision - this will get overwritten if there is a collision
-            CollisionDirection direction = CollisionDirection.none;
+            Direction direction = Direction.none;
 
             // players top left corner is in collision with r's bottom right corner
             if ((r.Bottom > position.Top && position.Top > r.Top) && (r.Right > position.Left && r.Left < position.Left))
@@ -47,11 +48,11 @@ namespace WindowsGame4
                 // if there was a collision with the player's top left corner path and the tile's bottom
                 if (intersectionPoint.X != -1 && intersectionPoint.Y != -1)
                 {
-                    direction = CollisionDirection.top;
+                    direction = Direction.top;
                 }
                 else
                 {
-                    direction = CollisionDirection.left;
+                    direction = Direction.left;
                 }
             }
             // player's top right is in collision with r's bottom left corner
@@ -65,11 +66,11 @@ namespace WindowsGame4
                 // if there was a collision with the player's top right corner path and the tile's bottom
                 if (intersectionPoint.X != -1 && intersectionPoint.Y != -1)
                 {
-                    direction = CollisionDirection.top;
+                    direction = Direction.top;
                 }
                 else
                 {
-                    direction = CollisionDirection.right;
+                    direction = Direction.right;
                 }
             }
             // player's bottom left is in collision with r's top right corner
@@ -82,11 +83,11 @@ namespace WindowsGame4
 
                 if (intersectionPoint.X != -1 && intersectionPoint.Y != -1)
                 {
-                    direction = CollisionDirection.bottom;
+                    direction = Direction.bottom;
                 }
                 else
                 {
-                    direction = CollisionDirection.left;
+                    direction = Direction.left;
                 }
             }
             // player's bottom right is in collision with r's top left corner
@@ -99,18 +100,18 @@ namespace WindowsGame4
 
                 if (intersectionPoint.X != -1 && intersectionPoint.Y != -1)
                 {
-                    direction = CollisionDirection.bottom;
+                    direction = Direction.bottom;
                 }
                 else
                 {
-                    direction = CollisionDirection.right;
+                    direction = Direction.right;
                 }
             }
             // if player's feet are touching the ground - this handles pure bottom collisions
             else if ((r.Top <= position.Bottom && r.Top > position.Bottom + deltaY) && ((r.Right >= position.Right && r.Left <= position.Right) || (r.Right >= position.Left && r.Left <= position.Left)))
             {
                 // this is wrong and doesn't handle all of the possilbe cases! yay!
-                direction = CollisionDirection.bottom;
+                direction = Direction.bottom;
             }
             // inner body collision - will ony get here if none of the corner collision cases have ocurred 
             else if (r.Intersects(position))
@@ -118,17 +119,17 @@ namespace WindowsGame4
                 // pure top collision
                 if (position.Top > r.Top && position.Top < r.Bottom)
                 {
-                    direction = CollisionDirection.top;
+                    direction = Direction.top;
                 }
                 // pure left collision
                 else if (position.Left < r.Right && position.Left > r.Left)
                 {
-                    direction = CollisionDirection.left;
+                    direction = Direction.left;
                 }
                 // pure right collision
                 else if (position.Right < r.Right && position.Right > r.Left)
                 {
-                    direction = CollisionDirection.right;
+                    direction = Direction.right;
                 }
             }
 

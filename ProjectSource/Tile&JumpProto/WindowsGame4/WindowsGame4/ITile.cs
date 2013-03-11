@@ -9,9 +9,12 @@ namespace WindowsGame4
 {
     public enum CollisionType
     {
-        impassable,
         passable,
-        platform
+        platform,
+        impassable,
+        hideable,
+        goal,
+        spike
     };
 
     public enum Action
@@ -24,7 +27,9 @@ namespace WindowsGame4
         jump,
         chargeJump,
         hide,
-        distract
+        distract,
+        throwBolt,
+        boltUpdates
     }
 
     interface ITile : IGameObject

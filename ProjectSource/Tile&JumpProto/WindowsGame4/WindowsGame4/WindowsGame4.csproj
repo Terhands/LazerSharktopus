@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectGuid>{A34AEDC8-AFC9-4B0F-9BE8-404C86A34C68}</ProjectGuid>
@@ -18,6 +18,7 @@
     <XnaOutputType>Game</XnaOutputType>
     <ApplicationIcon>Game.ico</ApplicationIcon>
     <Thumbnail>GameThumbnail.png</Thumbnail>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -30,7 +31,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -73,12 +73,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ADynamicGameObject.cs" />
+    <Compile Include="Bolt.cs" />
+    <Compile Include="GameLoader.cs" />
+    <Compile Include="GameTimer.cs" />
     <Compile Include="Guard.cs" />
     <Compile Include="IDynamicGameObject.cs" />
     <Compile Include="IGameObject.cs" />
     <Compile Include="JumpMeter.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="IPlayer.cs" />
+    <Compile Include="LevelLoader.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="ITile.cs" />
     <Compile Include="IMap.cs" />

@@ -1,0 +1,41 @@
+<levels>
+  level2.txt
+  level1.txt
+</levels>
+
+<textures>
+robro1.1
+groundSpriteFile
+LazerSharktopus
+<<<<<<< HEAD
+gameOver
+=======
+bolt
+>>>>>>> b228a8098e7a6779c37caffec953c5c739efa1b3
+</textures>
+
+<soundEffects>
+scream
+</soundEffects>
+
+<startScreen>
+4
+</startScreen>
+
+<gameOverScreen>
+3
+</gameOverScreen>
+
+<derp>
+playerTextureIndex=0
+playerTextureWidthOffset=
+playerTextureHeightOffset=
+playerTextureStartX=
+playerTextureStartY=
+tileTextureIndex=1
+tileTextureWidthOffset=
+tileTextureHeightOffset=
+tileTextureStartX=
+tileTextureStartY=
+guardTextureIndex=2
+</derp>

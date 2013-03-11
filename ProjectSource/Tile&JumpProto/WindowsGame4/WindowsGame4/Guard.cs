@@ -104,9 +104,9 @@ namespace WindowsGame4
 
         }
 
-        protected CollisionDirection determineRadialCollision(Rectangle r, float radius)
+        protected Direction determineRadialCollision(Rectangle r, float radius)
         {
-            CollisionDirection direction = CollisionDirection.none;
+            Direction direction = Direction.none;
 
             // hopefully close enough & easier than having to handle circle/rectangle collisions
             // let recRadius be half the average of the width & height of the rectangle
@@ -127,19 +127,19 @@ namespace WindowsGame4
                 // may have to tweak the angle values it depends on how xna stores angles againsts world coords
                 if ((angle <= 45 && angle >= 0) || (angle >= 315))
                 {
-                    direction = CollisionDirection.right;
+                    direction = Direction.right;
                 }
                 else if (angle >= 45 && angle <= 135)
                 {
-                    direction = CollisionDirection.top;
+                    direction = Direction.top;
                 }
                 else if (angle >= 135 && angle <= 225)
                 {
-                    direction = CollisionDirection.left;
+                    direction = Direction.left;
                 }
                 else
                 {
-                    direction = CollisionDirection.bottom;
+                    direction = Direction.bottom;
                 }
             }
 
@@ -159,6 +159,7 @@ namespace WindowsGame4
 
         public override void Draw(SpriteBatch spriteBatch){
             spriteBatch.Draw(sprite, position, source, Color.Cyan);
+        }
         }
 
 

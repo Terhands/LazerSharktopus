@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace WindowsGame4
 {
-    enum CollisionDirection
+    enum Direction
     {
         top,
         bottom,

@@ -14,6 +14,8 @@ namespace WindowsGame4
         protected const float maxJumpPower = 7.0f;
         protected const float minJumpPower = 3.0f;
 
+        protected float spriteDepth;
+
         // the dimensions of the jump charge meter
         protected const int outlineWidth = 50;
         protected const int outlineHeight = 10;
@@ -29,10 +31,11 @@ namespace WindowsGame4
 
         protected Texture2D rectangleTexture;
 
-        public JumpMeter(Game game, int xCenter, int yCenter)
+        public JumpMeter(Game game, int xCenter, int yCenter, float layer)
             : base(game)
         {
             jumpPower = 0;
+            spriteDepth = layer;
 
             int x = xCenter - (outlineWidth / 2);
             int y = yCenter - (outlineHeight / 2);
@@ -101,8 +104,8 @@ namespace WindowsGame4
         {
             if (jumpPower > minJumpPower)
             {
-                spriteBatch.Draw(rectangleTexture, outline, outlineColor);
-                spriteBatch.Draw(rectangleTexture, chargeBar, chargeColor);
+                spriteBatch.Draw(rectangleTexture, outline, new Rectangle(0, 0, 0, 0), outlineColor, 0, new Vector2(0, 0), SpriteEffects.None, spriteDepth);
+                spriteBatch.Draw(rectangleTexture, chargeBar, new Rectangle(0, 0, 0, 0), chargeColor, 0, new Vector2(0, 0), SpriteEffects.None, spriteDepth + 0.1f);
             }
         }
     }

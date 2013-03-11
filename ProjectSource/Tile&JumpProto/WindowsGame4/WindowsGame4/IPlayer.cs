@@ -18,5 +18,10 @@ namespace WindowsGame4
 
         /* the player hides in the environment to avoid detection */
         void Hide();
+
+        Action GetFacingDirection();
+        bool DoneLevel { get; }
+
+        bool IsDead { get; set; }
     }
 }

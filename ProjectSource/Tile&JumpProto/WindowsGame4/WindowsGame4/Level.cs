@@ -14,46 +14,131 @@ namespace WindowsGame4
         protected IPlayer player;
         protected IMap levelMap;
         protected Guard guard;
+        protected GameTimer gameTimer;
+
+        LevelLoader levelLoader;
+        int currentLevel;
 
         protected const int playerIndex = 0;
         protected const int guardIndex = 3;
         protected Rectangle playerRange;
 
+        int deathCounter = 0;
+        int maxDeathCounter = 100;
 
-        public Level(GameLoop game, ArrayList textures) : base(game)
+        ArrayList textures;
+        ArrayList sounds;
+        ArrayList fonts;
+	    Texture2D boltTexture;
+
+        protected List<Bolt> bolts;
+
+        public Level(GameLoop game, ArrayList _textures, ArrayList _fonts, ArrayList _sounds, LevelLoader loader) : base(game)
         {
+            int screenWidth = Game.GraphicsDevice.Viewport.Width;
+            int screenHeight = Game.GraphicsDevice.Viewport.Height;
+            bolts = new List<Bolt>();
+            playerRange = new Rectangle((screenWidth * 2)/5, 0, screenWidth/5, screenHeight);
+
+            levelLoader = loader;
+            textures = _textures;
+            guard = new Guard(game, (Texture2D)textures[guardIndex], 80, screenHeight - 52 - (screenHeight / 32), Action.right, 100);
+            sounds = _sounds;
+            fonts = _fonts;
+            currentLevel = 0;
+            deathCounter = 0;
+
+            screenWidth = Game.GraphicsDevice.Viewport.Width;
+            screenHeight = Game.GraphicsDevice.Viewport.Height;
+
+            InitLevel();
+        }
+
+        public void InitLevel()
+        {
+            levelLoader.LoadLevel(currentLevel);
+            levelMap = new Map(Game, levelLoader.Map, textures);
 
             int screenWidth = Game.GraphicsDevice.Viewport.Width;
             int screenHeight = Game.GraphicsDevice.Viewport.Height;
-
-            levelMap = new Map(game, "test.txt", textures);
-            player = new Player(game, (Texture2D)textures[playerIndex], 50, screenHeight - 52 - (screenHeight / 32));
-            guard = new Guard(game, (Texture2D)textures[guardIndex], 80, screenHeight - 52 - (screenHeight / 32), Action.right, 100);
-            playerRange = new Rectangle((screenWidth * 2)/5, 0, screenWidth/5, screenHeight); 
+            player = new Player(Game, (Texture2D)textures[playerIndex], sounds, 50, screenHeight - 52 - (screenHeight / 32));
+            boltTexture = (Texture2D)textures[4];
+            gameTimer = new GameTimer(200, (SpriteFont)fonts[0]);
         }
 
         /* procedure responsible for updating this level given an action (velocity should eventually be determined by player)*/
         public void Update(Action action, int velocity)
-        {
-            // would like to find a way to just call foreach i, i.Update(a, v) instead of having to explicitly deal with the map...
-            if (shouldShiftScreen(action))
+        {   
+            gameTimer.Update();
+            if (gameTimer.isFinished()) player.IsDead = true;
+            // no need to perform update if the player died - get ready for some serious death-screen action
+            if (!player.IsDead)
             {
-                // update the map position when the background screen needs to be updated
-                levelMap.Update(action, velocity);
-                velocity = 0;
-            }
+                // would like to find a way to just call foreach i, i.Update(a, v) instead of having to explicitly deal with the map...
+                if (shouldShiftScreen(action))
+                {
+                    // update the map position when the background screen needs to be updated
+                    levelMap.Update(action, velocity);
+                    velocity = 0;
+                }
 
-            // update the player position when the player needs to change position on screen
-            player.Update(action, velocity);
-            player.HandleCollision(levelMap.GetNearbyTiles(player.GetPosition()));
+            	if (action == Action.throwBolt)
+            	{
+            	    player.ThrowBolt();
+            	    bolts.Add(new Bolt(Game, player.GetFacingDirection(), player.GetPosition().X, player.GetPosition().Y, boltTexture));
+            	}
+	
+	            // update the player position when the player needs to change position on screen
+	            player.Update(action, velocity);
+	            player.HandleCollision(levelMap.GetNearbyTiles(player.GetPosition()));
+
             guard.Update(action, -velocity);
+	            if (action == Action.boltUpdates)
+	            {
+    	            foreach (Bolt bolt in bolts)
+	                {
+    	                bolt.Update(action, velocity);
+                        bolt.HandleCollision(levelMap.GetNearbyTiles(bolt.GetPosition()));
+                        if (bolt.expiryTime <= 0)
+                        {
+                            bolts.Remove(bolt);
+                            break;
+                        }
+	                }
+	            }
+    	    	
+                if (player.DoneLevel)
+                {
+                    // do some intermediate next level screen...
+                    currentLevel += 1;
+                    InitLevel();
+                }
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            levelMap.Draw(spriteBatch);
-            player.Draw(spriteBatch);
+            if (deathCounter < maxDeathCounter)
+            {
+		        
+            	 
+                levelMap.Draw(spriteBatch);
+                player.Draw(spriteBatch);
             guard.Draw(spriteBatch);
+                gameTimer.Draw(spriteBatch);
+                foreach (Bolt bolt in bolts)
+                {
+                    bolt.Draw(spriteBatch);
+                }
+                if (player.IsDead)
+                {
+                    deathCounter += 1;
+                }
+            }
+            else
+            {
+                spriteBatch.Draw((Texture2D)textures[3], new Rectangle(0, 0, Game.GraphicsDevice.Viewport.Width, Game.GraphicsDevice.Viewport.Height), Color.White);
+            }
         }
 
         /* figure out if the screen needs to shift to reflect the given action */

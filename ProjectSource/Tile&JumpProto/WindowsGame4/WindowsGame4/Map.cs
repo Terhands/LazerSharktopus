@@ -25,32 +25,41 @@ namespace WindowsGame4
         protected const int colsPerScreen = 64;
 
         // our test map has 100 columns
-        protected int mapCols = 100;
+        //protected int mapCols = 100;
 
-        public Map(Game game, string filename, ArrayList tileTextures) : base(game)
+        public Map(Game game, int[,] mapLayout, ArrayList tileTextures) : base(game)
         {
-            Initialize(filename, tileTextures);
+            Initialize(mapLayout, tileTextures);
         }
 
         /* load the level map from file - for now just load a dummy level with random tile types */
-        protected void Initialize(string filename, ArrayList tileTextures)
+        protected void Initialize(int[,] mapLayout, ArrayList tileTextures)
         {
-            tiles = new Tile[32, 100];
+            tiles = new Tile[mapLayout.GetLength(0), mapLayout.GetLength(1)];
 
             screenWidth = Game.GraphicsDevice.Viewport.Width;
             screenHeight = Game.GraphicsDevice.Viewport.Height;
 
             // hardcoded for now until we set up the file read
-            background = (Texture2D)tileTextures[1];
+            background = (Texture2D)tileTextures[2];
             bgPosition.X = 0;
             bgPosition.Y = 0;
             bgPosition.Width = screenWidth;
             bgPosition.Height = screenHeight;
 
             pixelOffset = 0;
-            maxPixelOffset = (100 * (screenWidth / colsPerScreen)) - screenWidth;
+            maxPixelOffset = (mapLayout.GetLength(1) * (screenWidth / colsPerScreen)) - screenWidth;
             minPixelOffset = 0;
 
+            for (int i = 0; i < mapLayout.GetLength(0); i++)
+            {
+                for (int j = 0; j < mapLayout.GetLength(1); j++)
+                {
+                    tiles[i, j] = new Tile(Game, (Texture2D)tileTextures[1], (CollisionType)mapLayout[i,j], j, i, screenWidth, screenHeight);
+                }
+            }
+
+            /*
             Random rand = new Random();
 
             for (int i = 0; i < 32; i++)
@@ -59,7 +68,11 @@ namespace WindowsGame4
                 {
                     CollisionType colType = CollisionType.platform;
 
-                    if (31 == i || (29 == i && 51 < j) || (30 == i && j > 50) || (i == 18 && j > 30 && j < 40) || (i == 23 && j > 42 && j < 50))
+                    if ((29 == i && 51 < j))
+                    {
+                        colType = CollisionType.hideable;
+                    }
+                    else if (31 == i || (30 == i && j > 50) || (i == 18 && j > 30 && j < 40) || (i == 23 && j > 42 && j < 50))
                     {
                         colType = CollisionType.platform;
                     }
@@ -71,9 +84,10 @@ namespace WindowsGame4
                     {
                         colType = CollisionType.passable;
                     }
-                    tiles[i, j] = new Tile((Texture2D)tileTextures[2], colType, j, i, screenWidth, screenHeight);
+                    tiles[i, j] = new Tile(Game, (Texture2D)tileTextures[1], colType, j, i, screenWidth, screenHeight);
                 }
             }
+            */ 
         }
 
         /* reset the level offset */
@@ -128,7 +142,7 @@ namespace WindowsGame4
             IList<ITile> nearbyTiles = new List<ITile>();
 
             // add all of the relevant tiles for potential collision handling
-            for (int i = xMin; i <= xMax && i < mapCols; i++)
+            for (int i = xMin; i <= xMax && i < tiles.GetLength(1); i++)
             {
                 for (int j = yMin; j <= yMax && j < rowsPerScreen; j++)
                 {
