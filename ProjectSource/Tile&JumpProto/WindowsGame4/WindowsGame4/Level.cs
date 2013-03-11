@@ -65,10 +65,12 @@ namespace WindowsGame4
         }
 
         /* procedure responsible for updating this level given an action (velocity should eventually be determined by player)*/
-        public void Update(Action action, int velocity)
+        public void Update(GameTime gameTime)
         {   
             gameTimer.Update();
             if (gameTimer.isFinished()) player.IsDead = true;
+
+
             // no need to perform update if the player died - get ready for some serious death-screen action
             if (!player.IsDead)
             {
@@ -80,15 +82,19 @@ namespace WindowsGame4
                     velocity = 0;
                 }
 
-            	if (action == Action.throwBolt)
-            	{
-            	    player.ThrowBolt();
-            	    bolts.Add(new Bolt(Game, player.GetFacingDirection(), player.GetPosition().X, player.GetPosition().Y, boltTexture));
-            	}
+
 	
 	            // update the player position when the player needs to change position on screen
 	            player.Update(action, velocity);
 	            player.HandleCollision(levelMap.GetNearbyTiles(player.GetPosition()));
+
+
+                /* Below this are Bolt actions */
+                if (action == Action.throwBolt)
+                {
+                    player.ThrowBolt();
+                    bolts.Add(new Bolt(Game, player.GetFacingDirection(), player.GetPosition().X, player.GetPosition().Y, boltTexture));
+                }
 
 	            if (action == Action.boltUpdates)
 	            {

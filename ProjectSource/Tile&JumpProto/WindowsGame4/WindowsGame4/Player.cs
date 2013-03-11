@@ -22,7 +22,7 @@ namespace WindowsGame4
         protected bool isDead;
         protected bool hasReachedGoal;
 
-        protected const float spriteDepth = 0.5f;
+        protected const float spriteDepth = 0.25f;
 
         // may replace this with a jump meter object later on
         protected JumpMeter jumpMeter;

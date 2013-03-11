@@ -28,6 +28,8 @@ namespace WindowsGame4
         IGameObject level;
 
         enum States { title, level, gameOver };
+        States gameState;
+
         /* Keyboard controls */
         protected const Keys keyRight = Keys.D;
         protected const Keys keyLeft = Keys.A;
@@ -60,8 +62,10 @@ namespace WindowsGame4
         {
             // TODO: Add your initialization logic here
             base.Initialize();
+            gameState = States.level;
 
             level = new Level(this, textures, fonts, sounds, new LevelLoader(config.LevelFiles));
+
         }
 
         /// <summary>
@@ -111,6 +115,18 @@ namespace WindowsGame4
         protected override void Update(GameTime gameTime)
         {
             KeyboardState currState = Keyboard.GetState();
+            if (gameState == States.level)
+            {
+                level.Update(GameTime gameTime);
+            } 
+            else if (gameState == States.gameOver)
+            {
+                // Game over Screen
+            }
+            else if (gameState == States.title)
+            {
+                // Title Screen Updates
+            }
 
             if (prevState == null)
             {
@@ -173,7 +189,7 @@ namespace WindowsGame4
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            this.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
+            this.spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             level.Draw(spriteBatch);

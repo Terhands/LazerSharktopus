@@ -123,7 +123,7 @@ namespace WindowsGame4
 
         public override void  Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(boltTexture, new Rectangle((int)position.X, (int)position.Y, 15, 15), new Rectangle(), Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, spriteDepth);
+            spriteBatch.Draw(boltTexture, position, position, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, spriteDepth);
         }
 
     }

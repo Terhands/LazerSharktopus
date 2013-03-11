@@ -110,11 +110,11 @@ namespace WindowsGame4
                 case CollisionType.goal:
                     color = Color.Gold;
                     source = new Rectangle(spriteOffset, spriteOffset * 4 + spriteWidth * 3, spriteWidth, spriteWidth);
-                    spriteDepth = 0;
+                    spriteDepth = 0.1f;
                     break;
                 case CollisionType.spike:
                     source = new Rectangle(spriteOffset, spriteOffset * 5 + spriteWidth * 4, spriteWidth, spriteWidth);
-                    spriteDepth = 0;
+                    spriteDepth = 0.1f;
                     break;
             }
         }
