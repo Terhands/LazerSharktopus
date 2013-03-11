@@ -2,6 +2,5 @@
 C:\Users\Terhands\Desktop\TileSpikeProject\WindowsGame4\WindowsGame4\WindowsGame4Content\obj\x86\Debug\WindowsGame4Content.contentprojResolveAssemblyReference.cache
 \\csfiles\tch562\Desktop\Tile&JumpProto\WindowsGame4\WindowsGame4\WindowsGame4Content\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Users\Terhands\Desktop\Tile&JumpProto\WindowsGame4\WindowsGame4\WindowsGame4Content\obj\x86\Debug\WindowsGame4Content.contentprojResolveAssemblyReference.cache
-C:\Users\Terhands\Desktop\306Project\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4Content\obj\x86\Debug\WindowsGame4Content.contentprojResolveAssemblyReference.cache
 \\csfiles\tch562\Desktop\Tile&JumpProto\Tile&JumpProto\WindowsGame4\WindowsGame4Content\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Users\mf\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4Content\obj\x86\Debug\WindowsGame4Content.contentprojResolveAssemblyReference.cache

@@ -25,7 +25,7 @@ namespace WindowsGame4
 
         ArrayList textures;
         ArrayList sounds;
-	Texture2D boltTexture;
+	    Texture2D boltTexture;
 
         protected List<Bolt> bolts;
 

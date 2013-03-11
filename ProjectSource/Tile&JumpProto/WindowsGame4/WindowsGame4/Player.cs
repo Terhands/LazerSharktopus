@@ -4,18 +4,22 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections;
+using Microsoft.Xna.Framework.Audio;
 
 namespace WindowsGame4
 {
     class Player : ADynamicGameObject, IPlayer
     {
         protected Texture2D sprite;
+        protected ArrayList sounds;
         protected Rectangle source;
         protected Action facingDirection;
 
         protected bool isHidden;
         protected bool isJumping;
         protected bool isStopped;
+        protected bool isDead;
         protected bool hasReachedGoal;
 
         protected const float spriteDepth = 0.5f;
@@ -27,7 +31,7 @@ namespace WindowsGame4
         // the speed that player starts falling
         protected const float startFalling = -0.25f;
 
-        public Player(Game game, Texture2D texture, int xStart, int yStart)
+        public Player(Game game, Texture2D texture, ArrayList _sounds, int xStart, int yStart)
             : base(game)
         {
             facingDirection = Action.right;
@@ -42,7 +46,10 @@ namespace WindowsGame4
             isHidden = false;
             isJumping = false;
             isStopped = true; // will we need to know this?? Maybe for a funny animation if you take too long...
+            isDead = false;
             hasReachedGoal = false;
+
+            sounds = _sounds;
 
             deltaX = 0;
             deltaY = 0;
@@ -51,6 +58,11 @@ namespace WindowsGame4
         public bool DoneLevel
         {
             get { return hasReachedGoal; }
+        }
+
+        public bool IsDead
+        {
+            get { return isDead; }
         }
 
         public void Jump()
@@ -142,6 +154,12 @@ namespace WindowsGame4
                 if (direction != Direction.none && t.getCollisionBehaviour() == CollisionType.goal)
                 {
                     hasReachedGoal = true;
+                }
+
+                if (direction != Direction.none && t.getCollisionBehaviour() == CollisionType.spike)
+                {
+                    isDead = true;
+                    ((SoundEffect)sounds[0]).Play();
                 }
 
                 switch (direction)
@@ -278,8 +296,15 @@ namespace WindowsGame4
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(sprite, position, source, Color.White, 0, new Vector2(0, 0), SpriteEffects.None, spriteDepth);
-            jumpMeter.Draw(spriteBatch);
+            if (isDead)
+            {
+                spriteBatch.Draw(sprite, position, source, Color.Crimson, 0, new Vector2(0, 0), SpriteEffects.None, spriteDepth);
+            }
+            else
+            {
+                spriteBatch.Draw(sprite, position, source, Color.White, 0, new Vector2(0, 0), SpriteEffects.None, spriteDepth);
+                jumpMeter.Draw(spriteBatch);
+            }
         }
     }
 }

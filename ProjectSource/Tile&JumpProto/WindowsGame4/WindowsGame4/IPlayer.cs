@@ -20,5 +20,7 @@ namespace WindowsGame4
         void Hide();
 
         bool DoneLevel { get; }
+
+        bool IsDead { get; }
     }
 }
