@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using System.Text;
 
 namespace WindowsGame4
 {
@@ -20,6 +21,7 @@ namespace WindowsGame4
         SpriteBatch spriteBatch;
 
         ArrayList textures;
+        ArrayList fonts;
 
         GameLoader config;
         IGameObject level;
@@ -57,7 +59,7 @@ namespace WindowsGame4
             // TODO: Add your initialization logic here
             base.Initialize();
 
-            level = new Level(this, textures, new LevelLoader(config.LevelFiles));
+            level = new Level(this, textures, fonts, new LevelLoader(config.LevelFiles));
         }
 
         /// <summary>
@@ -72,13 +74,17 @@ namespace WindowsGame4
             config = new GameLoader("Content\\lathraia.config");
 
             textures = new ArrayList();
-
+            fonts = new ArrayList();
             for (int i = 0; i < config.NumTextures; i++)
             {
                 textures.Insert(i, Content.Load<Texture2D>(config.getTextureFile(i)));
             }
 
-            // TODO: use this.Content to load your game content here
+            for (int i = 0; i < config.NumFonts; i++)
+            {
+                fonts.Insert(i, Content.Load<SpriteFont>(config.getFontFile(i)));
+            }
+
         }
 
         /// <summary>
@@ -143,11 +149,12 @@ namespace WindowsGame4
             {
                 level.Update(Action.jump, 0);
             }
+
             else
             {
                 level.Update(Action.none, 0);
             }
-            level.Update(Action.boltUpdates, 0);
+            
             prevState = currState;
 
             base.Update(gameTime);
@@ -159,9 +166,8 @@ namespace WindowsGame4
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            this.spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
+            this.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
 
             level.Draw(spriteBatch);
 

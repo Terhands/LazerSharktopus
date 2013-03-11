@@ -13,6 +13,7 @@ namespace WindowsGame4
     {
         protected IPlayer player;
         protected IMap levelMap;
+        protected GameTimer gameTimer;
 
         LevelLoader levelLoader;
         int currentLevel;
@@ -25,7 +26,7 @@ namespace WindowsGame4
 
         protected List<Bolt> bolts;
 
-        public Level(GameLoop game, ArrayList _textures, LevelLoader loader) : base(game)
+        public Level(GameLoop game, ArrayList _textures, ArrayList _fonts, LevelLoader loader) : base(game)
         {
             int screenWidth = Game.GraphicsDevice.Viewport.Width;
             int screenHeight = Game.GraphicsDevice.Viewport.Height;
@@ -36,6 +37,7 @@ namespace WindowsGame4
             textures = _textures;
             currentLevel = 0;
 
+            gameTimer = new GameTimer(360, (SpriteFont)_fonts[0]);
             InitLevel();
         }
 
@@ -64,21 +66,24 @@ namespace WindowsGame4
             if (action == Action.throwBolt)
             {
                 player.ThrowBolt();
-                bolts.Add(new Bolt(Game, Direction.right, player.GetPosition().X, player.GetPosition().Y, boltTexture));
+                bolts.Add(new Bolt(Game, player.GetFacingDirection(), player.GetPosition().X, player.GetPosition().Y, boltTexture));
             }
 
             // update the player position when the player needs to change position on screen
             player.Update(action, velocity);
             player.HandleCollision(levelMap.GetNearbyTiles(player.GetPosition()));
-
-            if (action == Action.boltUpdates)
+            foreach (Bolt bolt in bolts)
             {
-                foreach (Bolt bolt in bolts)
+                bolt.Update(action, velocity);
+                bolt.HandleCollision(levelMap.GetNearbyTiles(bolt.GetPosition()));
+                if (bolt.expiryTime <= 0)
                 {
-                    bolt.Update(action, velocity);
+                    bolts.Remove(bolt);
+                    break;
                 }
             }
-
+            gameTimer.Update();
+            
             if (player.DoneLevel)
             {
                 // do some intermediate next level screen...
@@ -89,13 +94,15 @@ namespace WindowsGame4
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            levelMap.Draw(spriteBatch);
+            player.Draw(spriteBatch);
+        
             foreach (Bolt bolt in bolts)
             {
                 bolt.Draw(spriteBatch);
-            } 
-            levelMap.Draw(spriteBatch);
-            player.Draw(spriteBatch);
-            
+            }
+            gameTimer.Draw(spriteBatch);
+
         }
 
         /* figure out if the screen needs to shift to reflect the given action */

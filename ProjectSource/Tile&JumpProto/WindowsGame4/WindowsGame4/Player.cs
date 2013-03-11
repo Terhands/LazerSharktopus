@@ -221,6 +221,11 @@ namespace WindowsGame4
             return new Rectangle(position.X, position.Y, position.Width, position.Height);
         }
 
+        public Action GetFacingDirection()
+        {
+            return facingDirection;
+        }
+
         public override void Update(Action direction, int velocity)
         {
             switch (direction)
