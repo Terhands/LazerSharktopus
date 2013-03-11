@@ -27,6 +27,7 @@ namespace WindowsGame4
         GameLoader config;
         IGameObject level;
 
+        enum States { title, level, gameOver };
         /* Keyboard controls */
         protected const Keys keyRight = Keys.D;
         protected const Keys keyLeft = Keys.A;

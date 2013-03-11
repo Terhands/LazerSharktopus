@@ -214,7 +214,7 @@ namespace WindowsGame4
             {
                 Direction direction = determineCollisionType(t.getPosition());
 
-                if (Direction.bottom == direction)
+                if (Direction.bottom == direction && t.getCollisionBehaviour() != CollisionType.spike)
                 {
                     footCollision = true;
 

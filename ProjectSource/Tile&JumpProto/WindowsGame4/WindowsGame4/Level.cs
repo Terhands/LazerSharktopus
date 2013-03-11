@@ -61,7 +61,7 @@ namespace WindowsGame4
             int screenHeight = Game.GraphicsDevice.Viewport.Height;
             player = new Player(Game, (Texture2D)textures[playerIndex], sounds, 50, screenHeight - 52 - (screenHeight / 32));
             boltTexture = (Texture2D)textures[4];
-            gameTimer = new GameTimer(200, (SpriteFont)fonts[0]);
+            gameTimer = new GameTimer(levelLoader.TimeLimit, (SpriteFont)fonts[0]);
         }
 
         /* procedure responsible for updating this level given an action (velocity should eventually be determined by player)*/

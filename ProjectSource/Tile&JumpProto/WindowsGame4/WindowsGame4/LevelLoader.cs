@@ -15,6 +15,7 @@ namespace WindowsGame4
 
         int currentLevel;
         int dataPos;
+        int timeLimit;
 
         int[,] mapLayout;
 
@@ -23,6 +24,11 @@ namespace WindowsGame4
             levelFiles = _levelFiles;
 
             currentLevel = 0;
+        }
+
+        public int TimeLimit
+        {
+            get { return timeLimit; }
         }
 
         public void LoadLevel(int levelIndex)
@@ -44,6 +50,7 @@ namespace WindowsGame4
 
             int numMapRows = NextInt(tokenizedData);
             int numMapCols = NextInt(tokenizedData);
+            timeLimit = NextInt(tokenizedData);
 
             if (numMapRows * numMapCols > tokenizedData.Length)
             {

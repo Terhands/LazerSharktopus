@@ -17,6 +17,7 @@ namespace WindowsGame4
         float k_looks_gravity = 0.15f;
         public bool hasCollided = false;
         public int expiryTime;
+        float spriteDepth;
 
         public Bolt(Game game, Action direction, int xStart, int yStart, Texture2D texture) : base(game)
         {
@@ -26,6 +27,7 @@ namespace WindowsGame4
             if (direction == Action.left)
                 deltaX = deltaX * -1;
             expiryTime = 30;
+            spriteDepth = 0f;
         }
         
         /* Determine if a bolt has hit something */
@@ -116,13 +118,12 @@ namespace WindowsGame4
                 position.Y += (int)deltaY;
 
                 deltaY += k_looks_gravity;
-                Console.WriteLine("Updating a bolt to {0}, {1}", position.X, position.Y);
             }
         }
 
         public override void  Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(boltTexture, new Rectangle((int)position.X, (int)position.Y, 15, 15), Color.White);
+            spriteBatch.Draw(boltTexture, new Rectangle((int)position.X, (int)position.Y, 15, 15), new Rectangle(), Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, spriteDepth);
         }
 
     }
