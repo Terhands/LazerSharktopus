@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ADynamicGameObject.cs" />
+    <Compile Include="Guard.cs" />
     <Compile Include="IDynamicGameObject.cs" />
     <Compile Include="IGameObject.cs" />
     <Compile Include="JumpMeter.cs" />

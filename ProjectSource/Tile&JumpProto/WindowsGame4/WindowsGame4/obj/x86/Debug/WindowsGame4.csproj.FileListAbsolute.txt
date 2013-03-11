@@ -40,3 +40,13 @@ C:\Users\Terhands\Desktop\306Project\LazerSharktopus\ProjectSource\Tile&JumpProt
 C:\Users\Terhands\Desktop\306Project\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Terhands\Desktop\306Project\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\obj\x86\Debug\WindowsGame4.exe
 C:\Users\Terhands\Desktop\306Project\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\obj\x86\Debug\WindowsGame4.pdb
+C:\Users\Alexa\Documents\GitHub\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Alexa\Documents\GitHub\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Alexa\Documents\GitHub\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\obj\x86\Debug\WindowsGame4.exe
+C:\Users\Alexa\Documents\GitHub\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\obj\x86\Debug\WindowsGame4.pdb
+C:\Users\Alexa\Documents\GitHub\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\blank.xnb
+C:\Users\Alexa\Documents\GitHub\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\Robro1.1.xnb
+C:\Users\Alexa\Documents\GitHub\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\Lazersharktopus.xnb
+C:\Users\Alexa\Documents\GitHub\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\tempGuard.xnb
+C:\Users\Alexa\Documents\GitHub\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\WindowsGame4.exe
+C:\Users\Alexa\Documents\GitHub\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\WindowsGame4.pdb

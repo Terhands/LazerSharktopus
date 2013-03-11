@@ -13,8 +13,10 @@ namespace WindowsGame4
     {
         protected IPlayer player;
         protected IMap levelMap;
+        protected Guard guard;
 
         protected const int playerIndex = 0;
+        protected const int guardIndex = 3;
         protected Rectangle playerRange;
 
 
@@ -26,7 +28,7 @@ namespace WindowsGame4
 
             levelMap = new Map(game, "test.txt", textures);
             player = new Player(game, (Texture2D)textures[playerIndex], 50, screenHeight - 52 - (screenHeight / 32));
-
+            guard = new Guard(game, (Texture2D)textures[guardIndex], 80, screenHeight - 52 - (screenHeight / 32), Action.right, 100);
             playerRange = new Rectangle((screenWidth * 2)/5, 0, screenWidth/5, screenHeight); 
         }
 
@@ -44,12 +46,14 @@ namespace WindowsGame4
             // update the player position when the player needs to change position on screen
             player.Update(action, velocity);
             player.HandleCollision(levelMap.GetNearbyTiles(player.GetPosition()));
+            guard.Update(action, -velocity);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             levelMap.Draw(spriteBatch);
             player.Draw(spriteBatch);
+            guard.Draw(spriteBatch);
         }
 
         /* figure out if the screen needs to shift to reflect the given action */

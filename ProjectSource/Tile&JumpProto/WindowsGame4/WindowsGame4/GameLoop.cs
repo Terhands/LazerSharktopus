@@ -62,6 +62,7 @@ namespace WindowsGame4
             textures.Insert(0, Content.Load<Texture2D>("Robro1.1"));
             textures.Insert(1, Content.Load<Texture2D>("Lazersharktopus"));
             textures.Insert(2, Content.Load<Texture2D>("blank"));
+            textures.Insert(3, Content.Load<Texture2D>("tempGuard"));
 
             // TODO: use this.Content to load your game content here
         }

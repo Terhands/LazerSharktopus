@@ -155,7 +155,7 @@ namespace WindowsGame4
                     case CollisionDirection.left:
                         if (t.getCollisionBehaviour() == CollisionType.impassable)
                         {
-                            // for some wierd reason with only 1 pixel of padding this breaks player's fall
+                            // for some weird reason with only 1 pixel of padding this breaks player's fall
                             position.X = t.getPosition().Right + 2;
                             deltaX = 0;
                         }
