@@ -21,5 +21,7 @@ namespace WindowsGame4
 
         Action GetFacingDirection();
         bool DoneLevel { get; }
+
+        bool IsDead { get; }
     }
 }

@@ -7,17 +7,24 @@
 robro1.1
 groundSpriteFile
 LazerSharktopus
+<<<<<<< HEAD
 gameOver
+=======
 bolt
+>>>>>>> b228a8098e7a6779c37caffec953c5c739efa1b3
 </textures>
 
 <soundEffects>
-SumoHit
+scream
 </soundEffects>
 
-<fonts>
-  timerFont
-</fonts>
+<startScreen>
+4
+</startScreen>
+
+<gameOverScreen>
+3
+</gameOverScreen>
 
 <derp>
 playerTextureIndex=0
