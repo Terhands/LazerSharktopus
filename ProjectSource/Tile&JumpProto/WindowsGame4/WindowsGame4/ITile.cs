@@ -27,7 +27,9 @@ namespace WindowsGame4
         jump,
         chargeJump,
         hide,
-        distract
+        distract,
+        throwBolt,
+        boltUpdates
     }
 
     interface ITile : IGameObject

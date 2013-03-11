@@ -16,12 +16,11 @@ namespace WindowsGame4
         float deltaY = 1;
         float k_looks_gravity = -0.15f;
 
-        public Bolt(Game game, Direction direction, int xStart, int yStart) : base(game)
+        public Bolt(Game game, Direction direction, int xStart, int yStart, Texture2D texture) : base(game)
         {
-            position = new Rectangle(xStart, yStart, 3, 3);
+            position = new Rectangle(xStart, yStart, 15, 15);
 
-            boltTexture = new Texture2D(game.GraphicsDevice, 1, 1);
-            boltTexture.SetData(new Color[] { Color.White });
+            boltTexture = texture;
         }
 
         public override void HandleCollision(IList<ITile> obj)
@@ -40,11 +39,12 @@ namespace WindowsGame4
             position.Y += (int)deltaY;
 
             deltaY -= k_looks_gravity;
+            Console.WriteLine("Bolt is at {0}, {1}", position.X, position.Y);
         }
 
         public override void  Draw(SpriteBatch spriteBatch)
         {
-            //spriteBatch.Draw(
+            spriteBatch.Draw(boltTexture, new Rectangle((int)position.X, (int)position.Y, 15, 15), Color.White);
         }
 
     }

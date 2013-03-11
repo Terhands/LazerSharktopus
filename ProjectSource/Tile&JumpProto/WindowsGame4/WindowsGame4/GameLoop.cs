@@ -24,6 +24,15 @@ namespace WindowsGame4
         GameLoader config;
         IGameObject level;
 
+        /* Keyboard controls */
+        protected const Keys keyRight = Keys.D;
+        protected const Keys keyLeft = Keys.A;
+        protected const Keys keyUp = Keys.W;
+        protected const Keys keyDown = Keys.S;
+        protected const Keys keyJump = Keys.Space;
+        protected const Keys keyBolt = Keys.E;
+        protected const Keys keyQuit = Keys.Escape;
+
         KeyboardState prevState;
 
         public GameLoop()
@@ -33,7 +42,7 @@ namespace WindowsGame4
 
             if (!graphics.IsFullScreen)
             {
-                 graphics.ToggleFullScreen();
+                 //graphics.ToggleFullScreen();
             }
         }
 
@@ -69,7 +78,6 @@ namespace WindowsGame4
                 textures.Insert(i, Content.Load<Texture2D>(config.getTextureFile(i)));
             }
 
-
             // TODO: use this.Content to load your game content here
         }
 
@@ -89,12 +97,6 @@ namespace WindowsGame4
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-            {
-                this.Exit();
-            }
-
             KeyboardState currState = Keyboard.GetState();
 
             if (prevState == null)
@@ -102,37 +104,42 @@ namespace WindowsGame4
                 prevState = currState;
             }
 
-            if (currState.IsKeyDown(Keys.Escape))
+            if (currState.IsKeyDown(keyQuit))
             {
                 this.Exit();
             }
 
-            if (currState.IsKeyDown(Keys.W))
+            if (currState.IsKeyDown(keyUp))
             {
                 level.Update(Action.down, 0);
             }
 
-            if (currState.IsKeyDown(Keys.A))
+            if (currState.IsKeyDown(keyLeft))
             {
                 level.Update(Action.left, -2);
             }
 
-            if (currState.IsKeyDown(Keys.S))
+            if (currState.IsKeyDown(keyDown))
             {
                 level.Update(Action.up, 0);
             }
 
-            if (currState.IsKeyDown(Keys.D))
+            if (currState.IsKeyDown(keyRight))
             {
                 level.Update(Action.right, 2);
             }
 
-            if (currState.IsKeyDown(Keys.Space))
+            if (currState.IsKeyDown(keyJump))
             {
                 level.Update(Action.chargeJump, 0);
             }
 
-            if (currState.IsKeyUp(Keys.Space) && prevState.IsKeyDown(Keys.Space))
+            if (currState.IsKeyDown(keyBolt) && prevState.IsKeyUp(keyBolt))
+            {
+                level.Update(Action.throwBolt, 0);
+            }
+
+            if (currState.IsKeyUp(keyJump) && prevState.IsKeyDown(keyJump))
             {
                 level.Update(Action.jump, 0);
             }
@@ -140,7 +147,7 @@ namespace WindowsGame4
             {
                 level.Update(Action.none, 0);
             }
-
+            level.Update(Action.boltUpdates, 0);
             prevState = currState;
 
             base.Update(gameTime);
@@ -155,10 +162,11 @@ namespace WindowsGame4
             this.spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+
             level.Draw(spriteBatch);
 
-            // TODO: Add your drawing code here
             this.spriteBatch.End();
+
             base.Draw(gameTime);
         }
     }

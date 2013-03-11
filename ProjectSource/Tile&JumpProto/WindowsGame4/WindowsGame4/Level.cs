@@ -21,13 +21,15 @@ namespace WindowsGame4
         protected Rectangle playerRange;
 
         ArrayList textures;
+        Texture2D boltTexture;
 
+        protected List<Bolt> bolts;
 
         public Level(GameLoop game, ArrayList _textures, LevelLoader loader) : base(game)
         {
             int screenWidth = Game.GraphicsDevice.Viewport.Width;
             int screenHeight = Game.GraphicsDevice.Viewport.Height;
-
+            bolts = new List<Bolt>();
             playerRange = new Rectangle((screenWidth * 2)/5, 0, screenWidth/5, screenHeight);
 
             levelLoader = loader;
@@ -45,6 +47,7 @@ namespace WindowsGame4
             int screenWidth = Game.GraphicsDevice.Viewport.Width;
             int screenHeight = Game.GraphicsDevice.Viewport.Height;
             player = new Player(Game, (Texture2D)textures[playerIndex], 50, screenHeight - 52 - (screenHeight / 32));
+            boltTexture = (Texture2D)textures[3];
         }
 
         /* procedure responsible for updating this level given an action (velocity should eventually be determined by player)*/
@@ -58,9 +61,23 @@ namespace WindowsGame4
                 velocity = 0;
             }
 
+            if (action == Action.throwBolt)
+            {
+                player.ThrowBolt();
+                bolts.Add(new Bolt(Game, Direction.right, player.GetPosition().X, player.GetPosition().Y, boltTexture));
+            }
+
             // update the player position when the player needs to change position on screen
             player.Update(action, velocity);
             player.HandleCollision(levelMap.GetNearbyTiles(player.GetPosition()));
+
+            if (action == Action.boltUpdates)
+            {
+                foreach (Bolt bolt in bolts)
+                {
+                    bolt.Update(action, velocity);
+                }
+            }
 
             if (player.DoneLevel)
             {
@@ -72,8 +89,13 @@ namespace WindowsGame4
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            foreach (Bolt bolt in bolts)
+            {
+                bolt.Draw(spriteBatch);
+            } 
             levelMap.Draw(spriteBatch);
             player.Draw(spriteBatch);
+            
         }
 
         /* figure out if the screen needs to shift to reflect the given action */
