@@ -21,14 +21,15 @@ namespace WindowsGame4
         protected int LOSRadius;
         protected int hearingRadius;
         protected int velocity = 1;
-
-        //took this from the player class, may need a different value
-        protected const float spriteDepth = 0.5f;
         
 
         Vector2 eyePos;
 
+<<<<<<< HEAD
         public Guard(Game game, Texture2D texture, int xStart, int yStart, Action FacingDirectionStart, int patrolLength) : base(game)
+=======
+        public Guard(Game game, Texture2D texture, int xStart, int yStart) : base(game)
+>>>>>>> c851491fee6b83d3bf05564074b380242ce1722f
         {
             facingDirection = FacingDirectionStart;
             this.patrolLength = patrolLength;
@@ -44,7 +45,7 @@ namespace WindowsGame4
                 patrolBoundaryRight = xStart + patrolLength;
             }
 
-            source = new Rectangle(0, 0, 83, 108);
+            source = new Rectangle(10, 13, 84, 109);
             position = new Rectangle(xStart, yStart, 36, 52);
             sprite = texture;
 
@@ -57,6 +58,7 @@ namespace WindowsGame4
             return new Rectangle(position.X, position.Y, position.Width, position.Height);
         }
 
+<<<<<<< HEAD
         public override void Update(Action direction, int velocity)
         {
             int extraVelocity = 0;
@@ -102,6 +104,8 @@ namespace WindowsGame4
 
         }
 
+=======
+>>>>>>> c851491fee6b83d3bf05564074b380242ce1722f
         public override void HandleCollision(IList<ITile> obj)
         {
 
@@ -160,12 +164,20 @@ namespace WindowsGame4
             return new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle));
         }
 
+<<<<<<< HEAD
         public override void Draw(SpriteBatch spriteBatch){
-            spriteBatch.Draw(sprite, position, source, Color.White, 0, new Vector2(0, 0), SpriteEffects.None, spriteDepth);
-            
-        }
-        
+            spriteBatch.Draw(sprite, position, source, Color.Cyan);
+=======
+        public override void Update(Action action, int velocity)
+        {
 
+>>>>>>> c851491fee6b83d3bf05564074b380242ce1722f
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+
+        }
 
     }
 }

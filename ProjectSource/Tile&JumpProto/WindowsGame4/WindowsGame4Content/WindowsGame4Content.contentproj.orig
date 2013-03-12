@@ -51,6 +51,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="tempGuard.png">
+      <Name>tempGuard</Name>
     <Compile Include="groundSpriteFile.png">
       <Name>groundSpriteFile</Name>
       <Importer>TextureImporter</Importer>
@@ -97,13 +99,6 @@
   <ItemGroup>
     <Compile Include="gameOver.png">
       <Name>gameOver</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="tempGuard.png">
-      <Name>tempGuard</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

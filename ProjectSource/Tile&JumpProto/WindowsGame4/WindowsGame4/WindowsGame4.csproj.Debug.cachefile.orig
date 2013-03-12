@@ -1,23 +1,18 @@
-<<<<<<< origin/master
+<<<<<<< HEAD
 Content\blank.xnb
 Content\Robro1.1.xnb
 Content\Lazersharktopus.xnb
-Content\groundSpriteFile.xnb
-Content\SumoHit.xnb
-Content\bolt.xnb
-Content\lathraia.config
-Content\Level1.txt
-Content\Level2.txt
+Content\tempGuard.xnb
 =======
 Content\blank.xnb
 Content\Robro1.1.xnb
 Content\Lazersharktopus.xnb
 Content\groundSpriteFile.xnb
-Content\bolt.xnb
-Content\gameOver.xnb
 Content\SumoHit.xnb
-Content\scream.xnb
+Content\bolt.xnb
+Content\timerFont.xnb
+Content\gameOver.xnb
 Content\lathraia.config
 Content\Level1.txt
 Content\Level2.txt
->>>>>>> local
+>>>>>>> c851491fee6b83d3bf05564074b380242ce1722f
