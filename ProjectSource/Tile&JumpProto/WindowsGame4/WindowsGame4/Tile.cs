@@ -92,7 +92,7 @@ namespace WindowsGame4
             {
                 case CollisionType.impassable:
                     source = new Rectangle(textureIndex, spriteOffset, spriteWidth, spriteWidth);
-                    spriteDepth = 0.1f;
+                    spriteDepth = 0.2f;
                     break;
                 case CollisionType.passable:
                     color = Color.Transparent;
@@ -101,7 +101,7 @@ namespace WindowsGame4
                     break;
                 case CollisionType.platform:
                     source = new Rectangle(textureIndex, spriteOffset * 2 + spriteWidth, spriteWidth, spriteWidth);
-                    spriteDepth = 0.1f;
+                    spriteDepth = 0.2f;
                     break;
                 case CollisionType.hideable:
                     source = new Rectangle(textureIndex, spriteOffset * 3 + spriteWidth * 2, spriteWidth, spriteWidth);
@@ -110,11 +110,11 @@ namespace WindowsGame4
                 case CollisionType.goal:
                     color = Color.Gold;
                     source = new Rectangle(spriteOffset, spriteOffset * 4 + spriteWidth * 3, spriteWidth, spriteWidth);
-                    spriteDepth = 0.1f;
+                    spriteDepth = 0.2f;
                     break;
                 case CollisionType.spike:
                     source = new Rectangle(spriteOffset, spriteOffset * 5 + spriteWidth * 4, spriteWidth, spriteWidth);
-                    spriteDepth = 0.1f;
+                    spriteDepth = 0.2f;
                     break;
             }
         }

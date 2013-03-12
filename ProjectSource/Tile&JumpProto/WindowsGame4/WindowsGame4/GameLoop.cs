@@ -23,6 +23,7 @@ namespace WindowsGame4
         ArrayList fonts;
         ArrayList textures;
         ArrayList sounds;
+        ArrayList songs;
 
         GameLoader config;
         Level level;
@@ -64,7 +65,7 @@ namespace WindowsGame4
             base.Initialize();
             gameState = States.level;
 
-            level = new Level(this, textures, fonts, sounds, new LevelLoader(config.LevelFiles));
+            level = new Level(this, textures, fonts, sounds, songs, new LevelLoader(config.LevelFiles));
 
         }
 
@@ -95,6 +96,12 @@ namespace WindowsGame4
             for (int i = 0; i < config.NumSoundEffects; i++)
             {
                 sounds.Insert(i, Content.Load<SoundEffect>(config.getSoundFile(i)));
+            }
+
+            songs = new ArrayList();
+            for (int i = 0; i < config.NumSongs; i++)
+            {
+                songs.Insert(i, Content.Load<Song>(config.getSongFile(i)));
             }
         }
 

@@ -16,13 +16,14 @@ namespace WindowsGame4
         protected Rectangle source;
         protected Action facingDirection;
 
-        protected bool isHidden;
+        // hidden goes from 0->1 1 being totallly hidden, 0 being standing yelling & flailing in the middle of a well lit room
+        protected float hidden;
         protected bool isJumping;
         protected bool isStopped;
         protected bool isDead;
         protected bool hasReachedGoal;
 
-        protected const float spriteDepth = 0.25f;
+        protected float spriteDepth = 0.8f;
 
         // may replace this with a jump meter object later on
         protected JumpMeter jumpMeter;
@@ -43,7 +44,7 @@ namespace WindowsGame4
             int yCenter = yStart - playerPadding;
             this.jumpMeter = new JumpMeter(game, xCenter, yCenter, spriteDepth);
 
-            isHidden = false;
+            hidden = 0;
             isJumping = false;
             isStopped = true; // will we need to know this?? Maybe for a funny animation if you take too long...
             isDead = false;
@@ -64,6 +65,11 @@ namespace WindowsGame4
         {
             get { return isDead; }
             set { isDead = value; }
+        }
+
+        public float Hidden
+        {
+            get { return hidden; }
         }
 
         public void Jump()
@@ -97,9 +103,30 @@ namespace WindowsGame4
             }
         }
 
-        public void Hide()
+        public void Hide(IList<ITile> tiles)
         {
+            // attempting to hide in the middle of a well lit room...
+            hidden = 0.01f;
 
+            foreach (ITile t in tiles)
+            {
+                if (t.getCollisionBehaviour() == CollisionType.hideable)
+                {
+                    if (t.isInCollision(this))
+                    {
+                        hidden = 1.0f;
+                        spriteDepth = 0.25f;
+                        // will also need to swap the texture source rectangle to the crouched sprite
+                    }
+                }
+            }
+        }
+
+        public void StopHiding()
+        {
+            hidden = 0.0f;
+            spriteDepth = 0.8f;
+            // will also need to swap the texture source rectangle to the standing sprite
         }
 
         /* make sure player isn't falling through platforms/walking through walls */
@@ -263,7 +290,14 @@ namespace WindowsGame4
                     }
                     else if (!isJumping)
                     {
-                        deltaX = velocity;
+                        if (hidden <= 0)
+                        {
+                            deltaX = velocity;
+                        }
+                        else
+                        {
+                            deltaX = velocity / 2;
+                        }
                     }
 
                     break;
@@ -276,7 +310,14 @@ namespace WindowsGame4
                     }
                     else if (!isJumping)
                     {
-                        deltaX = velocity;
+                        if (hidden <= 0)
+                        {
+                            deltaX = velocity;
+                        }
+                        else
+                        {
+                            deltaX = velocity / 2;
+                        }
                     }
                     break;
 
@@ -284,9 +325,7 @@ namespace WindowsGame4
                 case Action.up:
                     break;
 
-                /* crouch to try and avoid detection */
                 case Action.down:
-                    Hide();
                     break;
 
                 case Action.none:

@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Collections;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Media;
 
 namespace WindowsGame4
 {
@@ -27,24 +28,34 @@ namespace WindowsGame4
         ArrayList textures;
         ArrayList sounds;
         ArrayList fonts;
+        ArrayList songFiles;
+
+        MusicManager musicPlayer;
+
 	    Texture2D boltTexture;
         GameLoop game;
         KeyboardState keyState;
         KeyboardState prevKeyState;
 
         protected List<Bolt> bolts;
+        protected List<Torch> torches;
 
-        public Level(GameLoop game, ArrayList _textures, ArrayList _fonts, ArrayList _sounds, LevelLoader loader) : base(game)
+        public Level(GameLoop game, ArrayList _textures, ArrayList _fonts, ArrayList _sounds, ArrayList _songs, LevelLoader loader) : base(game)
         {
             int screenWidth = Game.GraphicsDevice.Viewport.Width;
             int screenHeight = Game.GraphicsDevice.Viewport.Height;
+
             bolts = new List<Bolt>();
+            torches = new List<Torch>();
+
             playerRange = new Rectangle((screenWidth * 2)/5, 0, screenWidth/5, screenHeight);
             
             levelLoader = loader;
             textures = _textures;
             sounds = _sounds;
             fonts = _fonts;
+
+            musicPlayer = new MusicManager(_songs);
 
             currentLevel = 0;
             deathCounter = 0;
@@ -63,9 +74,22 @@ namespace WindowsGame4
 
             int screenWidth = Game.GraphicsDevice.Viewport.Width;
             int screenHeight = Game.GraphicsDevice.Viewport.Height;
+
             player = new Player(Game, (Texture2D)textures[playerIndex], sounds, 50, screenHeight - 52 - (screenHeight / 32));
             boltTexture = (Texture2D)textures[4];
+
+            // load torches from the level files
+            foreach (Vector2 v in levelLoader.Torches)
+            {
+                int x = ((int)v.X) * (screenWidth / 64) - (15/2);
+                int y = (((int)v.Y) * (screenHeight / 32)) - 25;
+                torches.Add(new Torch(Game, (Texture2D)textures[5], x, y));
+            }
+
             gameTimer = new GameTimer(levelLoader.TimeLimit, (SpriteFont)fonts[0]);
+
+            musicPlayer.Play(levelLoader.LevelMusic);
+
             keyState = Keyboard.GetState();
             prevKeyState = keyState;
         }
@@ -92,6 +116,16 @@ namespace WindowsGame4
                     player.Jump();
                 }
 
+                /* Control hiding state of player */
+                if (keyState.IsKeyDown(Keys.S))
+                {
+                    player.Hide(levelMap.GetNearbyTiles(player.GetPosition()));
+                }
+                if (keyState.IsKeyUp(Keys.S) && prevKeyState.IsKeyDown(Keys.S))
+                {
+                    player.StopHiding();
+                }
+
                 Action playerAction = Action.none;
                 int velocity = 0;
 
@@ -111,9 +145,6 @@ namespace WindowsGame4
                 player.Update(playerAction, velocity);
                 player.HandleCollision(levelMap.GetNearbyTiles(player.GetPosition()));
 
-
-
-
                 // would like to find a way to just call foreach i, i.Update(a, v) instead of having to explicitly deal with the map...
                 if (shouldShiftScreen(playerAction))
                 {
@@ -121,6 +152,12 @@ namespace WindowsGame4
                     int deltaX = player.DeltaX;
                     levelMap.Update(playerAction, deltaX);
                     player.reposition();
+
+                    foreach (Torch t in torches)
+                    {
+                        t.Update(playerAction, deltaX);
+                    }
+
                     foreach (Bolt bolt in bolts)
                     {
                         bolt.reposition(deltaX);
@@ -137,6 +174,10 @@ namespace WindowsGame4
                     }
                 }
 
+                foreach (Torch t in torches)
+                {
+                    t.Update(gameTime);
+                }
 
                 foreach (Bolt bolt in bolts)
                 {
@@ -154,6 +195,7 @@ namespace WindowsGame4
                     // do some intermediate next level screen...
                     currentLevel += 1;
                     bolts.Clear();
+                    torches.Clear();
                     InitLevel();
                 }
             }
@@ -176,6 +218,10 @@ namespace WindowsGame4
             foreach (Bolt bolt in bolts)
             {
                 bolt.Draw(spriteBatch);
+            }
+            foreach (Torch t in torches)
+            {
+                t.Draw(spriteBatch);
             }
         }
 
