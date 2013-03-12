@@ -336,7 +336,6 @@ namespace WindowsGame4
             if (isJumping)
             {
                 Jump();
-                Console.WriteLine("jumping");
             }
 
             position.X += deltaX;

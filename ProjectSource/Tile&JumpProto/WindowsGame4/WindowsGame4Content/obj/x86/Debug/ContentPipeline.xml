@@ -53,7 +53,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\bolt.xnb</Output>
-      <Time>2013-03-10T21:55:06.0975376-06:00</Time>
+      <Time>2013-03-12T16:23:56.429666-06:00</Time>
     </Item>
     <Item>
       <Source>timerFont.spritefont</Source>
@@ -72,6 +72,44 @@
       <Options>None</Options>
       <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\gameOver.xnb</Output>
       <Time>2013-03-11T04:41:26.4965246-06:00</Time>
+    </Item>
+    <Item>
+      <Source>torchSprites.png</Source>
+      <Name>torchSprites</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\torchSprites.xnb</Output>
+      <Time>2013-03-12T14:27:11.9967726-06:00</Time>
+    </Item>
+    <Item>
+      <Source>scream.wav</Source>
+      <Name>scream</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\scream.xnb</Output>
+      <Time>2013-03-12T14:27:11.9957725-06:00</Time>
+    </Item>
+    <Item>
+      <Source>DST-Aronara.mp3</Source>
+      <Name>DST-Aronara</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Aronara.xnb</Output>
+      <Extra>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Aronara.wma</Extra>
+      <Time>2013-03-12T14:27:11.9787715-06:00</Time>
+    </Item>
+    <Item>
+      <Source>DST-AngryRobotIII.mp3</Source>
+      <Name>DST-AngryRobotIII</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-AngryRobotIII.xnb</Output>
+      <Extra>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-AngryRobotIII.wma</Extra>
+      <Time>2013-03-12T14:27:11.95277-06:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

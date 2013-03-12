@@ -19,15 +19,21 @@ namespace WindowsGame4
         public int expiryTime;
         float spriteDepth;
 
+        private Rectangle boltArea = new Rectangle(0, 0, 64, 64);
+        private Vector2 spriteOrigin = new Vector2(32, 32);
+        private float rotation;
+
         public Bolt(Game game, Action direction, int xStart, int yStart, Texture2D texture) : base(game)
         {
-            position = new Rectangle(xStart, yStart, 15, 15);
-
+            position = new Rectangle(xStart, yStart, 25, 25);
+            if (direction == Action.right)
+                position.X += 35;
             boltTexture = texture;
             if (direction == Action.left)
                 deltaX = deltaX * -1;
             expiryTime = 30;
             spriteDepth = 0.5f;
+            rotation = 0;
         }
         
         /* Determine if a bolt has hit something */
@@ -123,11 +129,14 @@ namespace WindowsGame4
 
                 deltaY += k_looks_gravity;
             }
+
+            if (!hasCollided)
+                rotation += 0.2f;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(boltTexture, position, position, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, spriteDepth);
+            spriteBatch.Draw(boltTexture, position, boltArea, Color.White, rotation, spriteOrigin, SpriteEffects.None, spriteDepth);
         }
 
     }
