@@ -14,12 +14,14 @@ namespace WindowsGame4
     {
         protected IPlayer player;
         protected IMap levelMap;
+        protected Guard guard;
         protected GameTimer gameTimer;
 
         LevelLoader levelLoader;
         int currentLevel;
 
         protected const int playerIndex = 0;
+        protected const int guardIndex = 5;
         protected Rectangle playerRange;
 
         int deathCounter = 0;
@@ -70,12 +72,20 @@ namespace WindowsGame4
         public void InitLevel()
         {
             levelLoader.LoadLevel(currentLevel);
+            if (levelLoader.Map == null)
+            {
+                // If there's no level, then we've passed the last level and the player has won the game
+                game.State = GameLoop.States.victory;
+                return;
+            }
             levelMap = new Map(Game, levelLoader.Map, textures);
 
             int screenWidth = Game.GraphicsDevice.Viewport.Width;
             int screenHeight = Game.GraphicsDevice.Viewport.Height;
 
             player = new Player(Game, (Texture2D)textures[playerIndex], sounds, 50, screenHeight - 52 - (screenHeight / 32));
+            guard = new Guard(Game, (Texture2D)textures[guardIndex], 80, screenHeight - 52 - (screenHeight / 32), Direction.right, 100);
+            
             boltTexture = (Texture2D)textures[4];
 
             // load torches from the level files
@@ -83,7 +93,7 @@ namespace WindowsGame4
             {
                 int x = ((int)v.X) * (screenWidth / 64) - (15/2);
                 int y = (((int)v.Y) * (screenHeight / 32)) - 25;
-                torches.Add(new Torch(Game, (Texture2D)textures[5], x, y));
+                torches.Add(new Torch(Game, (Texture2D)textures[6], x, y));
             }
 
             gameTimer = new GameTimer(levelLoader.TimeLimit, (SpriteFont)fonts[0]);
@@ -214,6 +224,7 @@ namespace WindowsGame4
         {
             levelMap.Draw(spriteBatch);
             player.Draw(spriteBatch);
+            guard.Draw(spriteBatch);
             gameTimer.Draw(spriteBatch);
             foreach (Bolt bolt in bolts)
             {

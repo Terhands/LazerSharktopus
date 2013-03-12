@@ -28,7 +28,7 @@ namespace WindowsGame4
         GameLoader config;
         Level level;
 
-        public enum States { title, level, gameOver };
+        public enum States { title, level, gameOver, victory };
         States gameState;
 
         /* Keyboard controls */
@@ -125,7 +125,7 @@ namespace WindowsGame4
             if (gameState == States.level)
             {
                 level.Update(gameTime);
-            } 
+            }
             else if (gameState == States.gameOver)
             {
                 // Game Over Screen Updates
@@ -133,6 +133,10 @@ namespace WindowsGame4
             else if (gameState == States.title)
             {
                 // Title Screen Updates
+            }
+            else if (gameState == States.victory)
+            {
+                this.Exit();
             }
 
             if (prevState == null)
@@ -169,6 +173,10 @@ namespace WindowsGame4
             else if (gameState == States.title)
             {
                 // Title Screen Updates
+            }
+            else if (gameState == States.victory)
+            {
+                // Victory Screen Updates
             }
 
 

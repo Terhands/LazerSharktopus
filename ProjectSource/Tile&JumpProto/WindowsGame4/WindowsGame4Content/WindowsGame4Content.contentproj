@@ -88,13 +88,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="bolt.bmp">
-      <Name>bolt</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="gameOver.png">
       <Name>gameOver</Name>
       <Importer>TextureImporter</Importer>
@@ -102,6 +95,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="tempGuard.png">
+      <Name>tempGuard</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Compile Include="scream.wav">
       <Name>scream</Name>
       <Importer>WavImporter</Importer>
@@ -125,6 +123,13 @@
   <ItemGroup>
     <Compile Include="torchSprites.png">
       <Name>torchSprites</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="bolt.png">
+      <Name>bolt</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

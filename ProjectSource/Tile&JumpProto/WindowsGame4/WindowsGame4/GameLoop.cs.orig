@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 using System;
 using System.Collections;
 using System.Linq;
@@ -8,6 +9,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using System.Text;
 
 namespace WindowsGame4
 {
@@ -19,11 +21,14 @@ namespace WindowsGame4
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        ArrayList fonts;
         ArrayList textures;
+        ArrayList sounds;
 
         GameLoader config;
         IGameObject level;
 
+        enum States { title, level, gameOver };
         /* Keyboard controls */
         protected const Keys keyRight = Keys.D;
         protected const Keys keyLeft = Keys.A;
@@ -57,7 +62,7 @@ namespace WindowsGame4
             // TODO: Add your initialization logic here
             base.Initialize();
 
-            level = new Level(this, textures, new LevelLoader(config.LevelFiles));
+            level = new Level(this, textures, fonts, sounds, new LevelLoader(config.LevelFiles));
         }
 
         /// <summary>
@@ -72,26 +77,22 @@ namespace WindowsGame4
             config = new GameLoader("Content\\lathraia.config");
 
             textures = new ArrayList();
-
             for (int i = 0; i < config.NumTextures; i++)
             {
                 textures.Insert(i, Content.Load<Texture2D>(config.getTextureFile(i)));
-<<<<<<< origin/master
             }
 
-            // TODO: use this.Content to load your game content here
-=======
+            fonts = new ArrayList();
+            for (int i = 0; i < config.NumFonts; i++)
+            {
+                fonts.Insert(i, Content.Load<SpriteFont>(config.getFontFile(i)));
             }
 
             sounds = new ArrayList();
-
             for (int i = 0; i < config.NumSoundEffects; i++)
             {
                 sounds.Insert(i, Content.Load<SoundEffect>(config.getSoundFile(i)));
             }
-
-            // need to load up the sound effect files specified in the config file
->>>>>>> local
         }
 
         /// <summary>
@@ -156,6 +157,7 @@ namespace WindowsGame4
             {
                 level.Update(Action.jump, 0);
             }
+
             else
             {
                 level.Update(Action.none, 0);
@@ -172,9 +174,8 @@ namespace WindowsGame4
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            this.spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
+            this.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
 
             level.Draw(spriteBatch);
 
@@ -183,4 +184,190 @@ namespace WindowsGame4
             base.Draw(gameTime);
         }
     }
+=======
+using System;
+using System.Collections;
+using System.Linq;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.GamerServices;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
+using System.Text;
+
+namespace WindowsGame4
+{
+    /// <summary>
+    /// This is the main type for your game
+    /// </summary>
+    public class GameLoop : Microsoft.Xna.Framework.Game
+    {
+        GraphicsDeviceManager graphics;
+        SpriteBatch spriteBatch;
+
+        ArrayList fonts;
+        ArrayList textures;
+        ArrayList sounds;
+        ArrayList songs;
+
+        GameLoader config;
+        Level level;
+
+        public enum States { title, level, gameOver };
+        States gameState;
+
+        /* Keyboard controls */
+        protected const Keys keyRight = Keys.D;
+        protected const Keys keyLeft = Keys.A;
+        protected const Keys keyUp = Keys.W;
+        protected const Keys keyDown = Keys.S;
+        protected const Keys keyJump = Keys.Space;
+        protected const Keys keyBolt = Keys.E;
+        protected const Keys keyQuit = Keys.Escape;
+
+        KeyboardState prevState;
+
+        public GameLoop()
+        {
+            graphics = new GraphicsDeviceManager(this);
+            Content.RootDirectory = "Content";
+
+            if (!graphics.IsFullScreen)
+            {
+                 //graphics.ToggleFullScreen();
+            }
+        }
+
+        /// <summary>
+        /// Allows the game to perform any initialization it needs to before starting to run.
+        /// This is where it can query for any required services and load any non-graphic
+        /// related content.  Calling base.Initialize will enumerate through any components
+        /// and initialize them as well.
+        /// </summary>
+        protected override void Initialize()
+        {
+            // TODO: Add your initialization logic here
+            base.Initialize();
+            gameState = States.level;
+
+            level = new Level(this, textures, fonts, sounds, songs, new LevelLoader(config.LevelFiles));
+
+        }
+
+        /// <summary>
+        /// LoadContent will be called once per game and is the place to load
+        /// all of your content.
+        /// </summary>
+        protected override void LoadContent()
+        {
+            // Create a new SpriteBatch, which can be used to draw textures.
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            config = new GameLoader("Content\\lathraia.config");
+
+            textures = new ArrayList();
+            for (int i = 0; i < config.NumTextures; i++)
+            {
+                textures.Insert(i, Content.Load<Texture2D>(config.getTextureFile(i)));
+            }
+
+            fonts = new ArrayList();
+            for (int i = 0; i < config.NumFonts; i++)
+            {
+                fonts.Insert(i, Content.Load<SpriteFont>(config.getFontFile(i)));
+            }
+
+            sounds = new ArrayList();
+            for (int i = 0; i < config.NumSoundEffects; i++)
+            {
+                sounds.Insert(i, Content.Load<SoundEffect>(config.getSoundFile(i)));
+            }
+
+            songs = new ArrayList();
+            for (int i = 0; i < config.NumSongs; i++)
+            {
+                songs.Insert(i, Content.Load<Song>(config.getSongFile(i)));
+            }
+        }
+
+        /// <summary>
+        /// UnloadContent will be called once per game and is the place to unload
+        /// all content.
+        /// </summary>
+        protected override void UnloadContent()
+        {
+            // TODO: Unload any non ContentManager content here
+        }
+
+        /// <summary>
+        /// Allows the game to run logic such as updating the world,
+        /// checking for collisions, gathering input, and playing audio.
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        protected override void Update(GameTime gameTime)
+        {
+            KeyboardState currState = Keyboard.GetState();
+            if (gameState == States.level)
+            {
+                level.Update(gameTime);
+            } 
+            else if (gameState == States.gameOver)
+            {
+                // Game Over Screen Updates
+            }
+            else if (gameState == States.title)
+            {
+                // Title Screen Updates
+            }
+
+            if (prevState == null)
+            {
+                prevState = currState;
+            }
+
+            if (currState.IsKeyDown(keyQuit))
+            {
+                this.Exit();
+            }
+
+            prevState = currState;
+
+            base.Update(gameTime);
+        }
+
+        /// <summary>
+        /// This is called when the game should draw itself.
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        protected override void Draw(GameTime gameTime)
+        {
+            this.spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
+
+            if (gameState == States.level)
+            {
+                level.Draw(spriteBatch);
+            }
+            else if (gameState == States.gameOver)
+            {
+                spriteBatch.Draw((Texture2D)textures[3], new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
+            }
+            else if (gameState == States.title)
+            {
+                // Title Screen Updates
+            }
+
+
+            this.spriteBatch.End();
+
+            base.Draw(gameTime);
+        }
+
+        public States State
+        {
+            set { gameState = value; }
+        }
+    }
+>>>>>>> 2a2cd9b22cfb616664ffe04f8f8be312ba57ece7
 }
