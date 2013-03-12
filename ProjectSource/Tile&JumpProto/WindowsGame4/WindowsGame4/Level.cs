@@ -78,7 +78,7 @@ namespace WindowsGame4
             int screenHeight = Game.GraphicsDevice.Viewport.Height;
 
             player = new Player(Game, (Texture2D)textures[playerIndex], sounds, 50, screenHeight - 52 - (screenHeight / 32));
-            guard = new Guard(Game, (Texture2D)textures[guardIndex], 80, screenHeight - 52 - (screenHeight / 32), Action.right, 100);
+            guard = new Guard(Game, (Texture2D)textures[guardIndex], 80, screenHeight - 52 - (screenHeight / 32), Direction.right, 100);
             
             boltTexture = (Texture2D)textures[4];
 
@@ -87,7 +87,7 @@ namespace WindowsGame4
             {
                 int x = ((int)v.X) * (screenWidth / 64) - (15/2);
                 int y = (((int)v.Y) * (screenHeight / 32)) - 25;
-                torches.Add(new Torch(Game, (Texture2D)textures[5], x, y));
+                torches.Add(new Torch(Game, (Texture2D)textures[6], x, y));
             }
 
             gameTimer = new GameTimer(levelLoader.TimeLimit, (SpriteFont)fonts[0]);

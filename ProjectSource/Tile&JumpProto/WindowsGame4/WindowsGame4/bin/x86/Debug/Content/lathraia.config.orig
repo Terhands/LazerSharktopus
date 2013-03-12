@@ -1,22 +1,35 @@
+
 <levels>
-level1.txt
-level2.txt
+  level2.txt
+  level2.txt
+  level1.txt
 </levels>
 
 <textures>
 robro1.1
 groundSpriteFile
 LazerSharktopus
-<<<<<<< origin/master
-=======
 gameOver
->>>>>>> local
 bolt
+<<<<<<< HEAD
+tempGuard
+=======
+torchSprites
+>>>>>>> 2a2cd9b22cfb616664ffe04f8f8be312ba57ece7
 </textures>
 
 <soundEffects>
-SumoHit
+  scream
 </soundEffects>
+
+<songs>
+  DST-Aronara
+  DST-AngryRobotIII
+</songs>
+
+<fonts>
+  timerFont
+</fonts>
 
 <derp>
 playerTextureIndex=0

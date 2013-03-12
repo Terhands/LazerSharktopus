@@ -16,7 +16,7 @@ namespace WindowsGame4
 
         protected Texture2D sprite;
         protected Rectangle source;
-        protected Action facingDirection;
+        protected Direction facingDirection;
 
         protected int LOSRadius;
         protected int hearingRadius;
@@ -28,17 +28,17 @@ namespace WindowsGame4
 
         Vector2 eyePos;
 
-        public Guard(Game game, Texture2D texture, int xStart, int yStart, Action FacingDirectionStart, int patrolLength) : base(game)
+        public Guard(Game game, Texture2D texture, int xStart, int yStart, Direction FacingDirectionStart, int patrolLength) : base(game)
         {
             facingDirection = FacingDirectionStart;
             this.patrolLength = patrolLength;
-            if (facingDirection == Action.left)
+            if (facingDirection == Direction.left)
             {
                 patrolBoundaryRight = xStart;
                 patrolBoundaryLeft = xStart - patrolLength;
 
             }
-            else if (facingDirection == Action.right)
+            else if (facingDirection == Direction.right)
             {
                 patrolBoundaryLeft = xStart;
                 patrolBoundaryRight = xStart + patrolLength;
@@ -59,7 +59,7 @@ namespace WindowsGame4
 
         public override void Update(Action direction, int velocity)
         {
-            int extraVelocity = 0;
+           /* int extraVelocity = 0;
             switch (direction)
             {
                 case Action.right:
@@ -69,34 +69,35 @@ namespace WindowsGame4
                     extraVelocity -= velocity;
                     break;
             }
+            * */
 
 
-            if (facingDirection == Action.right)
+            if (facingDirection == Direction.right)
             {
                 if (position.X < patrolBoundaryRight)
                 {
                     position.X += this.velocity;
-                    position.X += extraVelocity;
+                   // position.X += extraVelocity;
                 }
                 else if (position.X == patrolBoundaryRight)
                 {
-                    facingDirection = Action.left;
-                    position.X += extraVelocity;
+                    facingDirection = Direction.left;
+                   // position.X += extraVelocity;
 
                 }
 
             }
-            else if (facingDirection == Action.left)
+            else if (facingDirection == Direction.left)
             {
                 if (patrolBoundaryLeft < position.X)
                 {
                     position.X -= this.velocity;
-                    position.X += extraVelocity;
+                   // position.X += extraVelocity;
                 }
                 else if (patrolBoundaryLeft == position.X)
                 {
-                    facingDirection = Action.right;
-                    position.X += extraVelocity;
+                    facingDirection = Direction.right;
+                   // position.X += extraVelocity;
                 }
             }
 

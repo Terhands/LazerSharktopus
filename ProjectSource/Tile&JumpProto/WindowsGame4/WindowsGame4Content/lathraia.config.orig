@@ -1,4 +1,6 @@
+
 <levels>
+  level2.txt
   level2.txt
   level1.txt
 </levels>
@@ -7,24 +9,27 @@
 robro1.1
 groundSpriteFile
 LazerSharktopus
-<<<<<<< HEAD
 gameOver
-=======
 bolt
->>>>>>> b228a8098e7a6779c37caffec953c5c739efa1b3
+<<<<<<< HEAD
+tempGuard
+=======
+torchSprites
+>>>>>>> 2a2cd9b22cfb616664ffe04f8f8be312ba57ece7
 </textures>
 
 <soundEffects>
-scream
+  scream
 </soundEffects>
 
-<startScreen>
-4
-</startScreen>
+<songs>
+  DST-Aronara
+  DST-AngryRobotIII
+</songs>
 
-<gameOverScreen>
-3
-</gameOverScreen>
+<fonts>
+  timerFont
+</fonts>
 
 <derp>
 playerTextureIndex=0

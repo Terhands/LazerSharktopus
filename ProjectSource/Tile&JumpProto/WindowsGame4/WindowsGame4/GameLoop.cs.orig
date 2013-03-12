@@ -28,6 +28,7 @@ namespace WindowsGame4
         GameLoader config;
         IGameObject level;
 
+        enum States { title, level, gameOver };
         /* Keyboard controls */
         protected const Keys keyRight = Keys.D;
         protected const Keys keyLeft = Keys.A;
@@ -209,11 +210,14 @@ namespace WindowsGame4
         ArrayList fonts;
         ArrayList textures;
         ArrayList sounds;
+        ArrayList songs;
 
         GameLoader config;
-        IGameObject level;
+        Level level;
 
-        enum States { title, level, gameOver };
+        public enum States { title, level, gameOver };
+        States gameState;
+
         /* Keyboard controls */
         protected const Keys keyRight = Keys.D;
         protected const Keys keyLeft = Keys.A;
@@ -246,8 +250,10 @@ namespace WindowsGame4
         {
             // TODO: Add your initialization logic here
             base.Initialize();
+            gameState = States.level;
 
-            level = new Level(this, textures, fonts, sounds, new LevelLoader(config.LevelFiles));
+            level = new Level(this, textures, fonts, sounds, songs, new LevelLoader(config.LevelFiles));
+
         }
 
         /// <summary>
@@ -278,6 +284,12 @@ namespace WindowsGame4
             {
                 sounds.Insert(i, Content.Load<SoundEffect>(config.getSoundFile(i)));
             }
+
+            songs = new ArrayList();
+            for (int i = 0; i < config.NumSongs; i++)
+            {
+                songs.Insert(i, Content.Load<Song>(config.getSongFile(i)));
+            }
         }
 
         /// <summary>
@@ -297,6 +309,18 @@ namespace WindowsGame4
         protected override void Update(GameTime gameTime)
         {
             KeyboardState currState = Keyboard.GetState();
+            if (gameState == States.level)
+            {
+                level.Update(gameTime);
+            } 
+            else if (gameState == States.gameOver)
+            {
+                // Game Over Screen Updates
+            }
+            else if (gameState == States.title)
+            {
+                // Title Screen Updates
+            }
 
             if (prevState == null)
             {
@@ -308,46 +332,6 @@ namespace WindowsGame4
                 this.Exit();
             }
 
-            if (currState.IsKeyDown(keyUp))
-            {
-                level.Update(Action.down, 0);
-            }
-
-            if (currState.IsKeyDown(keyLeft))
-            {
-                level.Update(Action.left, -2);
-            }
-
-            if (currState.IsKeyDown(keyDown))
-            {
-                level.Update(Action.up, 0);
-            }
-
-            if (currState.IsKeyDown(keyRight))
-            {
-                level.Update(Action.right, 2);
-            }
-
-            if (currState.IsKeyDown(keyJump))
-            {
-                level.Update(Action.chargeJump, 0);
-            }
-
-            if (currState.IsKeyDown(keyBolt) && prevState.IsKeyUp(keyBolt))
-            {
-                level.Update(Action.throwBolt, 0);
-            }
-
-            if (currState.IsKeyUp(keyJump) && prevState.IsKeyDown(keyJump))
-            {
-                level.Update(Action.jump, 0);
-            }
-
-            else
-            {
-                level.Update(Action.none, 0);
-            }
-            level.Update(Action.boltUpdates, 0);
             prevState = currState;
 
             base.Update(gameTime);
@@ -359,15 +343,31 @@ namespace WindowsGame4
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            this.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            this.spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
 
-            level.Draw(spriteBatch);
+            if (gameState == States.level)
+            {
+                level.Draw(spriteBatch);
+            }
+            else if (gameState == States.gameOver)
+            {
+                spriteBatch.Draw((Texture2D)textures[3], new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
+            }
+            else if (gameState == States.title)
+            {
+                // Title Screen Updates
+            }
+
 
             this.spriteBatch.End();
 
             base.Draw(gameTime);
         }
+
+        public States State
+        {
+            set { gameState = value; }
+        }
     }
->>>>>>> 8c189be3da4f97e589ea4123a086a7f3d4d9098b
+>>>>>>> 2a2cd9b22cfb616664ffe04f8f8be312ba57ece7
 }
