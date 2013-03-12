@@ -92,6 +92,16 @@ namespace WindowsGame4
                     player.Jump();
                 }
 
+                /* Control hiding state of player */
+                if (keyState.IsKeyDown(Keys.S))
+                {
+                    player.Hide(levelMap.GetNearbyTiles(player.GetPosition()));
+                }
+                if (keyState.IsKeyUp(Keys.S) && prevKeyState.IsKeyDown(Keys.S))
+                {
+                    player.StopHiding();
+                }
+
                 Action playerAction = Action.none;
                 int velocity = 0;
 

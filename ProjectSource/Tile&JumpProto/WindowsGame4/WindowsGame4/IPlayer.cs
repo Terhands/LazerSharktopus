@@ -14,13 +14,20 @@ namespace WindowsGame4
         void ChargeJumpPower();
 
         /* the player hides in the environment to avoid detection */
-        void Hide();
+        void Hide(IList<ITile> tiles);
+
+        /* the player stops trying to hide to avoid detection */
+        void StopHiding();
 
         Action GetFacingDirection();
         bool DoneLevel { get; }
 
+        /* getters & setters for player state */
         bool IsDead { get; set; }
+        float Hidden { get; }
         int DeltaX { get; }
+        
+        /* move the player back deltaX (for use when the screen shifts) */
         void reposition();
     }
 }
