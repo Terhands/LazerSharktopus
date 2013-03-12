@@ -78,8 +78,13 @@ namespace WindowsGame4
             player = new Player(Game, (Texture2D)textures[playerIndex], sounds, 50, screenHeight - 52 - (screenHeight / 32));
             boltTexture = (Texture2D)textures[4];
 
-            // for tomorrow load torches from the level files
-            torches.Add(new Torch(Game, (Texture2D)textures[5], 100, screenHeight - (screenHeight / 32) - 32));
+            // load torches from the level files
+            foreach (Vector2 v in levelLoader.Torches)
+            {
+                int x = ((int)v.X) * (screenWidth / 64) - (15/2);
+                int y = (((int)v.Y) * (screenHeight / 32)) - 25;
+                torches.Add(new Torch(Game, (Texture2D)textures[5], x, y));
+            }
 
             gameTimer = new GameTimer(levelLoader.TimeLimit, (SpriteFont)fonts[0]);
 
@@ -190,6 +195,7 @@ namespace WindowsGame4
                     // do some intermediate next level screen...
                     currentLevel += 1;
                     bolts.Clear();
+                    torches.Clear();
                     InitLevel();
                 }
             }

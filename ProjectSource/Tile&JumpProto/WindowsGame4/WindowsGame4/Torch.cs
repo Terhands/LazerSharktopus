@@ -35,8 +35,8 @@ namespace WindowsGame4
             currSprite = minSprite;
 
             flameTexture = texture;
-            position = new Rectangle(xStart, yStart, 15, 32);
-            source = new Rectangle(currSprite + 1, 1, spriteWidth, spriteHeight);
+            position = new Rectangle(xStart, yStart, 15, 25);
+            source = new Rectangle(xPosition[currSprite], 1, spriteWidth, spriteHeight);
         }
 
         public void Update(Action action, int velocity)
@@ -75,7 +75,7 @@ namespace WindowsGame4
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(flameTexture, position, source, Color.White, 0, new Vector2(0,0), SpriteEffects.None, 0.01f);
+            spriteBatch.Draw(flameTexture, position, source, Color.White, 0, new Vector2(0,0), SpriteEffects.None, 0.9f);
         }
 
     }
