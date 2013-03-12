@@ -11,6 +11,7 @@ Content\DST-Aronara.xnb
 Content\DST-Aronara.wma
 Content\DST-AngryRobotIII.xnb
 Content\DST-AngryRobotIII.wma
+Content\torchSprites.xnb
 Content\lathraia.config
 Content\Level1.txt
 Content\Level2.txt

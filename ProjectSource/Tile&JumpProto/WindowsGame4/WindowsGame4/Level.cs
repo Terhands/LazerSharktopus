@@ -38,12 +38,16 @@ namespace WindowsGame4
         KeyboardState prevKeyState;
 
         protected List<Bolt> bolts;
+        protected List<Torch> torches;
 
         public Level(GameLoop game, ArrayList _textures, ArrayList _fonts, ArrayList _sounds, ArrayList _songs, LevelLoader loader) : base(game)
         {
             int screenWidth = Game.GraphicsDevice.Viewport.Width;
             int screenHeight = Game.GraphicsDevice.Viewport.Height;
+
             bolts = new List<Bolt>();
+            torches = new List<Torch>();
+
             playerRange = new Rectangle((screenWidth * 2)/5, 0, screenWidth/5, screenHeight);
             
             levelLoader = loader;
@@ -70,8 +74,12 @@ namespace WindowsGame4
 
             int screenWidth = Game.GraphicsDevice.Viewport.Width;
             int screenHeight = Game.GraphicsDevice.Viewport.Height;
+
             player = new Player(Game, (Texture2D)textures[playerIndex], sounds, 50, screenHeight - 52 - (screenHeight / 32));
             boltTexture = (Texture2D)textures[4];
+
+            // for tomorrow load torches from the level files
+            torches.Add(new Torch(Game, (Texture2D)textures[5], 100, screenHeight - (screenHeight / 32) - 32));
 
             gameTimer = new GameTimer(levelLoader.TimeLimit, (SpriteFont)fonts[0]);
 
@@ -139,6 +147,12 @@ namespace WindowsGame4
                     int deltaX = player.DeltaX;
                     levelMap.Update(playerAction, deltaX);
                     player.reposition();
+
+                    foreach (Torch t in torches)
+                    {
+                        t.Update(playerAction, deltaX);
+                    }
+
                     foreach (Bolt bolt in bolts)
                     {
                         bolt.reposition(deltaX);
@@ -155,6 +169,10 @@ namespace WindowsGame4
                     }
                 }
 
+                foreach (Torch t in torches)
+                {
+                    t.Update(gameTime);
+                }
 
                 foreach (Bolt bolt in bolts)
                 {
@@ -194,6 +212,10 @@ namespace WindowsGame4
             foreach (Bolt bolt in bolts)
             {
                 bolt.Draw(spriteBatch);
+            }
+            foreach (Torch t in torches)
+            {
+                t.Draw(spriteBatch);
             }
         }
 
