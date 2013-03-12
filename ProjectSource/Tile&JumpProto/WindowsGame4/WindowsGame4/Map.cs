@@ -22,7 +22,7 @@ namespace WindowsGame4
         protected int screenHeight;
 
         protected const int rowsPerScreen = 32;
-        protected const int colsPerScreen = 64;
+        protected const int colsPerScreen = 50;
 
         // our test map has 100 columns
         //protected int mapCols = 100;

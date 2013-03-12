@@ -23,5 +23,7 @@ namespace WindowsGame4
         bool DoneLevel { get; }
 
         bool IsDead { get; set; }
+        int DeltaX { get; }
+        void reposition();
     }
 }

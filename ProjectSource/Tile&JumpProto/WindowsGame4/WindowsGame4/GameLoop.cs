@@ -25,7 +25,7 @@ namespace WindowsGame4
         ArrayList sounds;
 
         GameLoader config;
-        IGameObject level;
+        Level level;
 
         enum States { title, level, gameOver };
         States gameState;
@@ -117,7 +117,7 @@ namespace WindowsGame4
             KeyboardState currState = Keyboard.GetState();
             if (gameState == States.level)
             {
-                level.Update(GameTime gameTime);
+                level.Update(gameTime);
             } 
             else if (gameState == States.gameOver)
             {
@@ -138,46 +138,6 @@ namespace WindowsGame4
                 this.Exit();
             }
 
-            if (currState.IsKeyDown(keyUp))
-            {
-                level.Update(Action.down, 0);
-            }
-
-            if (currState.IsKeyDown(keyLeft))
-            {
-                level.Update(Action.left, -2);
-            }
-
-            if (currState.IsKeyDown(keyDown))
-            {
-                level.Update(Action.up, 0);
-            }
-
-            if (currState.IsKeyDown(keyRight))
-            {
-                level.Update(Action.right, 2);
-            }
-
-            if (currState.IsKeyDown(keyJump))
-            {
-                level.Update(Action.chargeJump, 0);
-            }
-
-            if (currState.IsKeyDown(keyBolt) && prevState.IsKeyUp(keyBolt))
-            {
-                level.Update(Action.throwBolt, 0);
-            }
-
-            if (currState.IsKeyUp(keyJump) && prevState.IsKeyDown(keyJump))
-            {
-                level.Update(Action.jump, 0);
-            }
-
-            else
-            {
-                level.Update(Action.none, 0);
-            }
-            level.Update(Action.boltUpdates, 0);
             prevState = currState;
 
             base.Update(gameTime);

@@ -86,10 +86,6 @@ namespace WindowsGame4
                 deltaY = 0;
                 jumpMeter.JumpPower = startFalling;
             }
-
-            // when jumping the player has less control of their direction until they land
-            position.Y -= deltaY;
-            position.X += deltaX;
             isJumping = true;
         }
 
@@ -250,27 +246,42 @@ namespace WindowsGame4
             isDead = true;
         }
 
+        public int DeltaX
+        {
+            get { return deltaX; }
+        }
+
+        public void reposition()
+        {
+            position.X -= deltaX;
+        }
+
         public override void Update(Action direction, int velocity)
         {
             switch (direction)
             {
                 case Action.right:
                     facingDirection = direction;
-
-                    if (!isJumping)
+                    if (isJumping && deltaX <= 0)
+                    {
+                        deltaX = velocity / 2;
+                    }
+                    else if (!isJumping)
                     {
                         deltaX = velocity;
-                        position.X += deltaX;
                     }
 
                     break;
                 case Action.left:
                     facingDirection = direction;
 
-                    if (!isJumping)
+                    if (isJumping && deltaX >= 0)
+                    {
+                        deltaX = velocity / 2;
+                    }
+                    else if (!isJumping)
                     {
                         deltaX = velocity;
-                        position.X += deltaX;
                     }
                     break;
 
@@ -282,24 +293,20 @@ namespace WindowsGame4
                 case Action.down:
                     Hide();
                     break;
-                case Action.jump:
-                    Jump();
-                    break;
-                case Action.chargeJump:
-                    ChargeJumpPower();
-                    break;
+
                 case Action.none:
-                    if (isJumping)
-                    {
-                        Jump();
-                    }
-                    else
-                    {
-                        // once the player has landed the user regains control of movement
-                        deltaX = 0;
-                    }
+                    deltaX = 0;
                     break;
             }
+
+            if (isJumping)
+            {
+                Jump();
+                Console.WriteLine("jumping");
+            }
+
+            position.X += deltaX;
+            position.Y -= deltaY;
 
             jumpMeter.setMeterPosition(position.X + (position.Width / 2), position.Y - playerPadding);
             jumpMeter.Update(Action.none, 0);

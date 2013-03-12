@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework;
 
 namespace WindowsGame4
 {
-    class Level : Microsoft.Xna.Framework.GameComponent, IGameObject
+    class Level : Microsoft.Xna.Framework.GameComponent
     {
         protected IPlayer player;
         protected IMap levelMap;
@@ -28,6 +28,9 @@ namespace WindowsGame4
         ArrayList sounds;
         ArrayList fonts;
 	    Texture2D boltTexture;
+
+        KeyboardState keyState;
+        KeyboardState prevKeyState;
 
         protected List<Bolt> bolts;
 
@@ -62,11 +65,14 @@ namespace WindowsGame4
             player = new Player(Game, (Texture2D)textures[playerIndex], sounds, 50, screenHeight - 52 - (screenHeight / 32));
             boltTexture = (Texture2D)textures[4];
             gameTimer = new GameTimer(levelLoader.TimeLimit, (SpriteFont)fonts[0]);
+            keyState = Keyboard.GetState();
+            prevKeyState = keyState;
         }
 
         /* procedure responsible for updating this level given an action (velocity should eventually be determined by player)*/
         public void Update(GameTime gameTime)
         {   
+            /* Timer update logic */
             gameTimer.Update();
             if (gameTimer.isFinished()) player.IsDead = true;
 
@@ -74,42 +80,75 @@ namespace WindowsGame4
             // no need to perform update if the player died - get ready for some serious death-screen action
             if (!player.IsDead)
             {
-                // would like to find a way to just call foreach i, i.Update(a, v) instead of having to explicitly deal with the map...
-                if (shouldShiftScreen(action))
+                keyState = Keyboard.GetState();
+                /* Control jumping state of player */
+                if (keyState.IsKeyDown(Keys.Space))
                 {
-                    // update the map position when the background screen needs to be updated
-                    levelMap.Update(action, velocity);
-                    velocity = 0;
+                    player.ChargeJumpPower();
+                }
+                if (keyState.IsKeyUp(Keys.Space) && prevKeyState.IsKeyDown(Keys.Space))
+                {
+                    player.Jump();
                 }
 
+                Action playerAction = Action.none;
+                int velocity = 0;
 
-	
-	            // update the player position when the player needs to change position on screen
-	            player.Update(action, velocity);
-	            player.HandleCollision(levelMap.GetNearbyTiles(player.GetPosition()));
+
+                if (keyState.IsKeyDown(Keys.D))
+                {
+                    playerAction = Action.right;
+                    velocity = 2;
+                }
+                else if (keyState.IsKeyDown(Keys.A))
+                {
+                    playerAction = Action.left;
+                    velocity = -2;
+                }
+
+                // update the player position when the player needs to change position on screen
+                player.Update(playerAction, velocity);
+                player.HandleCollision(levelMap.GetNearbyTiles(player.GetPosition()));
+
+
+
+
+                // would like to find a way to just call foreach i, i.Update(a, v) instead of having to explicitly deal with the map...
+                if (shouldShiftScreen(playerAction))
+                {
+                    // update the map position when the background screen needs to be updated
+                    int deltaX = player.DeltaX;
+                    levelMap.Update(playerAction, deltaX);
+                    player.reposition();
+                    foreach (Bolt bolt in bolts)
+                    {
+                        bolt.reposition(deltaX);
+                    }
+                }
 
 
                 /* Below this are Bolt actions */
-                if (action == Action.throwBolt)
+                if (keyState.IsKeyDown(Keys.E) && prevKeyState.IsKeyUp(Keys.E))
                 {
-                    player.ThrowBolt();
-                    bolts.Add(new Bolt(Game, player.GetFacingDirection(), player.GetPosition().X, player.GetPosition().Y, boltTexture));
+                    if (bolts.Count < 5)
+                    {
+                        player.ThrowBolt();
+                        bolts.Add(new Bolt(Game, player.GetFacingDirection(), player.GetPosition().X, player.GetPosition().Y, boltTexture));
+                    }
                 }
 
-	            if (action == Action.boltUpdates)
-	            {
-    	            foreach (Bolt bolt in bolts)
-	                {
-    	                bolt.Update(action, velocity);
-                        bolt.HandleCollision(levelMap.GetNearbyTiles(bolt.GetPosition()));
-                        if (bolt.expiryTime <= 0)
-                        {
-                            bolts.Remove(bolt);
-                            break;
-                        }
-	                }
-	            }
-    	    	
+
+                foreach (Bolt bolt in bolts)
+                {
+                    bolt.Update(Action.none, 0);
+                    bolt.HandleCollision(levelMap.GetNearbyTiles(bolt.GetPosition()));
+                    if (bolt.expiryTime <= 0)
+                    {
+                        bolts.Remove(bolt);
+                        break;
+                    }
+                }
+
                 if (player.DoneLevel)
                 {
                     // do some intermediate next level screen...
@@ -117,14 +156,17 @@ namespace WindowsGame4
                     InitLevel();
                 }
             }
+            else
+            {
+                // Do player death actions here
+            }
+            prevKeyState = keyState;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             if (deathCounter < maxDeathCounter)
-            {
-		        
-            	 
+            {	 
                 levelMap.Draw(spriteBatch);
                 player.Draw(spriteBatch);
                 gameTimer.Draw(spriteBatch);
