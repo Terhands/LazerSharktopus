@@ -168,6 +168,8 @@ namespace WindowsGame4
                         t.Update(playerAction, deltaX);
                     }
 
+                    guard.Update(playerAction, deltaX);
+
                     foreach (Bolt bolt in bolts)
                     {
                         bolt.reposition(deltaX);
@@ -188,6 +190,8 @@ namespace WindowsGame4
                 {
                     t.Update(gameTime);
                 }
+
+                guard.Update(gameTime);
 
                 foreach (Bolt bolt in bolts)
                 {
