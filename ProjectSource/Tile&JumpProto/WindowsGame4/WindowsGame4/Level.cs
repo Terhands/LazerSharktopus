@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Collections;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Media;
 
 namespace WindowsGame4
 {
@@ -27,6 +28,10 @@ namespace WindowsGame4
         ArrayList textures;
         ArrayList sounds;
         ArrayList fonts;
+        ArrayList songFiles;
+
+        MusicManager musicPlayer;
+
 	    Texture2D boltTexture;
         GameLoop game;
         KeyboardState keyState;
@@ -34,7 +39,7 @@ namespace WindowsGame4
 
         protected List<Bolt> bolts;
 
-        public Level(GameLoop game, ArrayList _textures, ArrayList _fonts, ArrayList _sounds, LevelLoader loader) : base(game)
+        public Level(GameLoop game, ArrayList _textures, ArrayList _fonts, ArrayList _sounds, ArrayList _songs, LevelLoader loader) : base(game)
         {
             int screenWidth = Game.GraphicsDevice.Viewport.Width;
             int screenHeight = Game.GraphicsDevice.Viewport.Height;
@@ -45,6 +50,8 @@ namespace WindowsGame4
             textures = _textures;
             sounds = _sounds;
             fonts = _fonts;
+
+            musicPlayer = new MusicManager(_songs);
 
             currentLevel = 0;
             deathCounter = 0;
@@ -65,7 +72,11 @@ namespace WindowsGame4
             int screenHeight = Game.GraphicsDevice.Viewport.Height;
             player = new Player(Game, (Texture2D)textures[playerIndex], sounds, 50, screenHeight - 52 - (screenHeight / 32));
             boltTexture = (Texture2D)textures[4];
+
             gameTimer = new GameTimer(levelLoader.TimeLimit, (SpriteFont)fonts[0]);
+
+            musicPlayer.Play(levelLoader.LevelMusic);
+
             keyState = Keyboard.GetState();
             prevKeyState = keyState;
         }
@@ -120,9 +131,6 @@ namespace WindowsGame4
                 // update the player position when the player needs to change position on screen
                 player.Update(playerAction, velocity);
                 player.HandleCollision(levelMap.GetNearbyTiles(player.GetPosition()));
-
-
-
 
                 // would like to find a way to just call foreach i, i.Update(a, v) instead of having to explicitly deal with the map...
                 if (shouldShiftScreen(playerAction))

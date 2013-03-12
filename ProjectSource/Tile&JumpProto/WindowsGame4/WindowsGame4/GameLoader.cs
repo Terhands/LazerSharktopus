@@ -14,6 +14,7 @@ namespace WindowsGame4
         protected string[] levelFiles;
         protected string[] textureFiles;
         protected string[] soundFiles;
+        protected string[] songFiles;
         protected string[] fontFiles;
 
         public GameLoader(string fileName)
@@ -34,6 +35,11 @@ namespace WindowsGame4
         public int NumSoundEffects
         {
             get { return soundFiles.Length; }
+        }
+
+        public int NumSongs
+        {
+            get { return songFiles.Length; }
         }
 
         public string[] LevelFiles
@@ -69,6 +75,12 @@ namespace WindowsGame4
             return fontFiles[i];
         }
 
+        public string getSongFile(int i)
+        {
+            Debug.Assert(i < songFiles.Length);
+            return songFiles[i];
+        }
+
         public void Load(string fileName)
         {
             string configFile = System.IO.File.ReadAllText(fileName);
@@ -76,6 +88,7 @@ namespace WindowsGame4
             levelFiles = LoadTag(configFile, @"<levels>([.\s\w\d-]*)</levels>");
             textureFiles = LoadTag(configFile, @"<.*textures.*>([.\s\w\d-]*)</textures>");
             soundFiles = LoadTag(configFile, @"<.*soundEffects.*>([.\s\w\d-]*)</soundEffects>");
+            songFiles = LoadTag(configFile, @"<.*songs.*>([.\s\w\d-]*)</songs>");
             fontFiles = LoadTag(configFile, @"<fonts>([.\s\w\d-]*)</fonts>");
         }
 
