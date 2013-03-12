@@ -19,13 +19,13 @@ namespace WindowsGame4
         protected Color color;
 
         /* set up the tile -> figure out it's position in the level, it's size relative to the screen & load the sprite+set the collision behaviour */
-        public Tile(Game game, Texture2D texture, CollisionType type, int xIndex, int yIndex, int screenWidth, int screenHeight) : base(game)
+        public Tile(Game game, Texture2D texture, CollisionType type, int xIndex, int yIndex, int screenWidth, int screenHeight, int rowsPerScreen, int colsPerScreen) : base(game)
         {
             LoadContent(texture, type);
             position = new Rectangle();
 
-            position.Width = screenWidth/64;
-            position.Height = screenHeight/32;
+            position.Width = screenWidth/colsPerScreen;
+            position.Height = screenHeight/rowsPerScreen;
 
             position.X = xIndex * position.Width;
             position.Y = yIndex * position.Height;
@@ -92,7 +92,7 @@ namespace WindowsGame4
             {
                 case CollisionType.impassable:
                     source = new Rectangle(textureIndex, spriteOffset, spriteWidth, spriteWidth);
-                    spriteDepth = 0.1f;
+                    spriteDepth = 0.2f;
                     break;
                 case CollisionType.passable:
                     color = Color.Transparent;
@@ -101,7 +101,7 @@ namespace WindowsGame4
                     break;
                 case CollisionType.platform:
                     source = new Rectangle(textureIndex, spriteOffset * 2 + spriteWidth, spriteWidth, spriteWidth);
-                    spriteDepth = 0.1f;
+                    spriteDepth = 0.2f;
                     break;
                 case CollisionType.hideable:
                     source = new Rectangle(textureIndex, spriteOffset * 3 + spriteWidth * 2, spriteWidth, spriteWidth);
@@ -110,11 +110,11 @@ namespace WindowsGame4
                 case CollisionType.goal:
                     color = Color.Gold;
                     source = new Rectangle(spriteOffset, spriteOffset * 4 + spriteWidth * 3, spriteWidth, spriteWidth);
-                    spriteDepth = 0;
+                    spriteDepth = 0.2f;
                     break;
                 case CollisionType.spike:
                     source = new Rectangle(spriteOffset, spriteOffset * 5 + spriteWidth * 4, spriteWidth, spriteWidth);
-                    spriteDepth = 0;
+                    spriteDepth = 0.2f;
                     break;
             }
         }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using Microsoft.Xna.Framework;
 
 namespace WindowsGame4
 {
@@ -16,8 +17,11 @@ namespace WindowsGame4
         int currentLevel;
         int dataPos;
         int timeLimit;
+        int musicIndex;
 
         int[,] mapLayout;
+
+        Vector2[] torchLayout;
 
         public LevelLoader(string[] _levelFiles)
         {
@@ -29,6 +33,11 @@ namespace WindowsGame4
         public int TimeLimit
         {
             get { return timeLimit; }
+        }
+
+        public int LevelMusic
+        {
+            get { return musicIndex; }
         }
 
         public void LoadLevel(int levelIndex)
@@ -51,6 +60,7 @@ namespace WindowsGame4
             int numMapRows = NextInt(tokenizedData);
             int numMapCols = NextInt(tokenizedData);
             timeLimit = NextInt(tokenizedData);
+            musicIndex = NextInt(tokenizedData);
 
             if (numMapRows * numMapCols > tokenizedData.Length)
             {
@@ -68,6 +78,16 @@ namespace WindowsGame4
                     mapLayout[i, j] = NextInt(tokenizedData);
                 }
             }
+
+            int numTorches = NextInt(tokenizedData);
+            torchLayout = new Vector2[numTorches];
+
+            // load the row/column indices for torch placement
+            for (int i = 0; i < numTorches; i++)
+            {
+                torchLayout[i].X = NextInt(tokenizedData);
+                torchLayout[i].Y = NextInt(tokenizedData);
+            }
         }
 
         // read the next integer from data
@@ -80,6 +100,11 @@ namespace WindowsGame4
         public int[,] Map
         {
             get { return mapLayout; }
+        }
+
+        public Vector2[] Torches
+        {
+            get { return torchLayout; }
         }
 
     }

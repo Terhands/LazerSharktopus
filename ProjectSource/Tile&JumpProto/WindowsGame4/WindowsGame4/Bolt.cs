@@ -27,7 +27,7 @@ namespace WindowsGame4
             if (direction == Action.left)
                 deltaX = deltaX * -1;
             expiryTime = 30;
-            spriteDepth = 0f;
+            spriteDepth = 0.5f;
         }
         
         /* Determine if a bolt has hit something */
@@ -105,6 +105,11 @@ namespace WindowsGame4
             return position;
         }
 
+        public void reposition(int deltaX)
+        {
+            position.X -= deltaX;
+        }
+
         public override void Update(Action action, int velocity)
         {
             if (hasCollided)
@@ -113,7 +118,6 @@ namespace WindowsGame4
             }
             else
             {
-
                 position.X += (int)deltaX;
                 position.Y += (int)deltaY;
 
@@ -121,9 +125,9 @@ namespace WindowsGame4
             }
         }
 
-        public override void  Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(boltTexture, new Rectangle((int)position.X, (int)position.Y, 15, 15), new Rectangle(), Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, spriteDepth);
+            spriteBatch.Draw(boltTexture, position, position, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, spriteDepth);
         }
 
     }

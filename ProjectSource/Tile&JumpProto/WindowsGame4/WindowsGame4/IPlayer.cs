@@ -13,15 +13,21 @@ namespace WindowsGame4
         /* the player charges up their jump meter for a higher jump */
         void ChargeJumpPower();
 
-        /* the player throws a bolt object until it either hits the ground, or an impassable tile */
-        void ThrowBolt();
-
         /* the player hides in the environment to avoid detection */
-        void Hide();
+        void Hide(IList<ITile> tiles);
+
+        /* the player stops trying to hide to avoid detection */
+        void StopHiding();
 
         Action GetFacingDirection();
         bool DoneLevel { get; }
 
+        /* getters & setters for player state */
         bool IsDead { get; set; }
+        float Hidden { get; }
+        int DeltaX { get; }
+        
+        /* move the player back deltaX (for use when the screen shifts) */
+        void reposition();
     }
 }

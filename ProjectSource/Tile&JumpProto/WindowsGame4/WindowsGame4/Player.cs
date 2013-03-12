@@ -16,13 +16,14 @@ namespace WindowsGame4
         protected Rectangle source;
         protected Action facingDirection;
 
-        protected bool isHidden;
+        // hidden goes from 0->1 1 being totallly hidden, 0 being standing yelling & flailing in the middle of a well lit room
+        protected float hidden;
         protected bool isJumping;
         protected bool isStopped;
         protected bool isDead;
         protected bool hasReachedGoal;
 
-        protected const float spriteDepth = 0.5f;
+        protected float spriteDepth = 0.8f;
 
         // may replace this with a jump meter object later on
         protected JumpMeter jumpMeter;
@@ -43,7 +44,7 @@ namespace WindowsGame4
             int yCenter = yStart - playerPadding;
             this.jumpMeter = new JumpMeter(game, xCenter, yCenter, spriteDepth);
 
-            isHidden = false;
+            hidden = 0;
             isJumping = false;
             isStopped = true; // will we need to know this?? Maybe for a funny animation if you take too long...
             isDead = false;
@@ -66,6 +67,11 @@ namespace WindowsGame4
             set { isDead = value; }
         }
 
+        public float Hidden
+        {
+            get { return hidden; }
+        }
+
         public void Jump()
         {
             // scale the jump so you can go high fast, but fall a bit slower - less sudden
@@ -86,10 +92,6 @@ namespace WindowsGame4
                 deltaY = 0;
                 jumpMeter.JumpPower = startFalling;
             }
-
-            // when jumping the player has less control of their direction until they land
-            position.Y -= deltaY;
-            position.X += deltaX;
             isJumping = true;
         }
 
@@ -101,14 +103,30 @@ namespace WindowsGame4
             }
         }
 
-        public void ThrowBolt()
+        public void Hide(IList<ITile> tiles)
         {
+            // attempting to hide in the middle of a well lit room...
+            hidden = 0.01f;
 
+            foreach (ITile t in tiles)
+            {
+                if (t.getCollisionBehaviour() == CollisionType.hideable)
+                {
+                    if (t.isInCollision(this))
+                    {
+                        hidden = 1.0f;
+                        spriteDepth = 0.25f;
+                        // will also need to swap the texture source rectangle to the crouched sprite
+                    }
+                }
+            }
         }
 
-        public void Hide()
+        public void StopHiding()
         {
-
+            hidden = 0.0f;
+            spriteDepth = 0.8f;
+            // will also need to swap the texture source rectangle to the standing sprite
         }
 
         /* make sure player isn't falling through platforms/walking through walls */
@@ -250,27 +268,56 @@ namespace WindowsGame4
             isDead = true;
         }
 
+        public int DeltaX
+        {
+            get { return deltaX; }
+        }
+
+        public void reposition()
+        {
+            position.X -= deltaX;
+        }
+
         public override void Update(Action direction, int velocity)
         {
             switch (direction)
             {
                 case Action.right:
                     facingDirection = direction;
-
-                    if (!isJumping)
+                    if (isJumping && deltaX <= 0)
                     {
-                        deltaX = velocity;
-                        position.X += deltaX;
+                        deltaX = velocity / 2;
+                    }
+                    else if (!isJumping)
+                    {
+                        if (hidden <= 0)
+                        {
+                            deltaX = velocity;
+                        }
+                        else
+                        {
+                            deltaX = velocity / 2;
+                        }
                     }
 
                     break;
                 case Action.left:
                     facingDirection = direction;
 
-                    if (!isJumping)
+                    if (isJumping && deltaX >= 0)
                     {
-                        deltaX = velocity;
-                        position.X += deltaX;
+                        deltaX = velocity / 2;
+                    }
+                    else if (!isJumping)
+                    {
+                        if (hidden <= 0)
+                        {
+                            deltaX = velocity;
+                        }
+                        else
+                        {
+                            deltaX = velocity / 2;
+                        }
                     }
                     break;
 
@@ -278,28 +325,22 @@ namespace WindowsGame4
                 case Action.up:
                     break;
 
-                /* crouch to try and avoid detection */
                 case Action.down:
-                    Hide();
                     break;
-                case Action.jump:
-                    Jump();
-                    break;
-                case Action.chargeJump:
-                    ChargeJumpPower();
-                    break;
+
                 case Action.none:
-                    if (isJumping)
-                    {
-                        Jump();
-                    }
-                    else
-                    {
-                        // once the player has landed the user regains control of movement
-                        deltaX = 0;
-                    }
+                    deltaX = 0;
                     break;
             }
+
+            if (isJumping)
+            {
+                Jump();
+                Console.WriteLine("jumping");
+            }
+
+            position.X += deltaX;
+            position.Y -= deltaY;
 
             jumpMeter.setMeterPosition(position.X + (position.Width / 2), position.Y - playerPadding);
             jumpMeter.Update(Action.none, 0);
