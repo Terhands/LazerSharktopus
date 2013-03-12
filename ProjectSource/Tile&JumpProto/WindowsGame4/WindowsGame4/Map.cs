@@ -22,7 +22,7 @@ namespace WindowsGame4
         protected int screenHeight;
 
         protected const int rowsPerScreen = 32;
-        protected const int colsPerScreen = 50;
+        protected const int colsPerScreen = 64;
 
         // our test map has 100 columns
         //protected int mapCols = 100;
@@ -55,7 +55,7 @@ namespace WindowsGame4
             {
                 for (int j = 0; j < mapLayout.GetLength(1); j++)
                 {
-                    tiles[i, j] = new Tile(Game, (Texture2D)tileTextures[1], (CollisionType)mapLayout[i,j], j, i, screenWidth, screenHeight);
+                    tiles[i, j] = new Tile(Game, (Texture2D)tileTextures[1], (CollisionType)mapLayout[i,j], j, i, screenWidth, screenHeight, rowsPerScreen, colsPerScreen);
                 }
             }
 

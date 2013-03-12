@@ -19,13 +19,13 @@ namespace WindowsGame4
         protected Color color;
 
         /* set up the tile -> figure out it's position in the level, it's size relative to the screen & load the sprite+set the collision behaviour */
-        public Tile(Game game, Texture2D texture, CollisionType type, int xIndex, int yIndex, int screenWidth, int screenHeight) : base(game)
+        public Tile(Game game, Texture2D texture, CollisionType type, int xIndex, int yIndex, int screenWidth, int screenHeight, int rowsPerScreen, int colsPerScreen) : base(game)
         {
             LoadContent(texture, type);
             position = new Rectangle();
 
-            position.Width = screenWidth/64;
-            position.Height = screenHeight/32;
+            position.Width = screenWidth/colsPerScreen;
+            position.Height = screenHeight/rowsPerScreen;
 
             position.X = xIndex * position.Width;
             position.Y = yIndex * position.Height;

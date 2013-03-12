@@ -27,7 +27,7 @@ namespace WindowsGame4
         GameLoader config;
         Level level;
 
-        enum States { title, level, gameOver };
+        public enum States { title, level, gameOver };
         States gameState;
 
         /* Keyboard controls */
@@ -121,7 +121,7 @@ namespace WindowsGame4
             } 
             else if (gameState == States.gameOver)
             {
-                // Game over Screen
+                // Game Over Screen Updates
             }
             else if (gameState == States.title)
             {
@@ -150,13 +150,29 @@ namespace WindowsGame4
         protected override void Draw(GameTime gameTime)
         {
             this.spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
-            GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            level.Draw(spriteBatch);
+            if (gameState == States.level)
+            {
+                level.Draw(spriteBatch);
+            }
+            else if (gameState == States.gameOver)
+            {
+                spriteBatch.Draw((Texture2D)textures[3], new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
+            }
+            else if (gameState == States.title)
+            {
+                // Title Screen Updates
+            }
+
 
             this.spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        public States State
+        {
+            set { gameState = value; }
         }
     }
 }

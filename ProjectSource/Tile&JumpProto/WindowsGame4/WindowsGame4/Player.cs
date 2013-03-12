@@ -97,11 +97,6 @@ namespace WindowsGame4
             }
         }
 
-        public void ThrowBolt()
-        {
-
-        }
-
         public void Hide()
         {
 

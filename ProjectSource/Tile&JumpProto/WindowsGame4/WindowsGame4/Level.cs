@@ -28,7 +28,7 @@ namespace WindowsGame4
         ArrayList sounds;
         ArrayList fonts;
 	    Texture2D boltTexture;
-
+        GameLoop game;
         KeyboardState keyState;
         KeyboardState prevKeyState;
 
@@ -40,7 +40,7 @@ namespace WindowsGame4
             int screenHeight = Game.GraphicsDevice.Viewport.Height;
             bolts = new List<Bolt>();
             playerRange = new Rectangle((screenWidth * 2)/5, 0, screenWidth/5, screenHeight);
-
+            
             levelLoader = loader;
             textures = _textures;
             sounds = _sounds;
@@ -52,6 +52,7 @@ namespace WindowsGame4
             screenWidth = Game.GraphicsDevice.Viewport.Width;
             screenHeight = Game.GraphicsDevice.Viewport.Height;
 
+            this.game = game;
             InitLevel();
         }
 
@@ -132,7 +133,6 @@ namespace WindowsGame4
                 {
                     if (bolts.Count < 5)
                     {
-                        player.ThrowBolt();
                         bolts.Add(new Bolt(Game, player.GetFacingDirection(), player.GetPosition().X, player.GetPosition().Y, boltTexture));
                     }
                 }
@@ -153,35 +153,29 @@ namespace WindowsGame4
                 {
                     // do some intermediate next level screen...
                     currentLevel += 1;
+                    bolts.Clear();
                     InitLevel();
                 }
             }
             else
             {
-                // Do player death actions here
+                deathCounter += 1;
+                if (deathCounter > maxDeathCounter)
+                {
+                    game.State = GameLoop.States.gameOver;
+                }
             }
             prevKeyState = keyState;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (deathCounter < maxDeathCounter)
-            {	 
-                levelMap.Draw(spriteBatch);
-                player.Draw(spriteBatch);
-                gameTimer.Draw(spriteBatch);
-                foreach (Bolt bolt in bolts)
-                {
-                    bolt.Draw(spriteBatch);
-                }
-                if (player.IsDead)
-                {
-                    deathCounter += 1;
-                }
-            }
-            else
+            levelMap.Draw(spriteBatch);
+            player.Draw(spriteBatch);
+            gameTimer.Draw(spriteBatch);
+            foreach (Bolt bolt in bolts)
             {
-                spriteBatch.Draw((Texture2D)textures[3], new Rectangle(0, 0, Game.GraphicsDevice.Viewport.Width, Game.GraphicsDevice.Viewport.Height), Color.White);
+                bolt.Draw(spriteBatch);
             }
         }
 

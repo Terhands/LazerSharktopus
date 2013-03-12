@@ -13,9 +13,6 @@ namespace WindowsGame4
         /* the player charges up their jump meter for a higher jump */
         void ChargeJumpPower();
 
-        /* the player throws a bolt object until it either hits the ground, or an impassable tile */
-        void ThrowBolt();
-
         /* the player hides in the environment to avoid detection */
         void Hide();
 
