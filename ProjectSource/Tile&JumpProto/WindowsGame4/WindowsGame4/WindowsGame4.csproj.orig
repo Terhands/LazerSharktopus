@@ -1,5 +1,5 @@
 <<<<<<< HEAD
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectGuid>{A34AEDC8-AFC9-4B0F-9BE8-404C86A34C68}</ProjectGuid>
@@ -76,6 +76,7 @@
     <Compile Include="ADynamicGameObject.cs" />
     <Compile Include="Bolt.cs" />
     <Compile Include="GameLoader.cs" />
+    <Compile Include="GameOver.cs" />
     <Compile Include="GameTimer.cs" />
     <Compile Include="Guard.cs" />
     <Compile Include="IDynamicGameObject.cs" />
@@ -87,11 +88,13 @@
     <Compile Include="Map.cs" />
     <Compile Include="ITile.cs" />
     <Compile Include="IMap.cs" />
+    <Compile Include="MusicManager.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="GameLoop.cs" />
     <Compile Include="Tile.cs" />
+    <Compile Include="Torch.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
@@ -212,6 +215,7 @@
     <Compile Include="ADynamicGameObject.cs" />
     <Compile Include="Bolt.cs" />
     <Compile Include="GameLoader.cs" />
+    <Compile Include="GameOver.cs" />
     <Compile Include="GameTimer.cs" />
     <Compile Include="Guard.cs" />
     <Compile Include="IDynamicGameObject.cs" />
@@ -272,7 +276,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
->>>>>>> 2a2cd9b22cfb616664ffe04f8f8be312ba57ece7
+>>>>>>> 3aa2ea3b9665da7ab62f3e473f4d2e71768ac18d
   <!--
       To modify your build process, add your task inside one of the targets below and uncomment it. 
       Other similar extension points exist, see Microsoft.Common.targets.
