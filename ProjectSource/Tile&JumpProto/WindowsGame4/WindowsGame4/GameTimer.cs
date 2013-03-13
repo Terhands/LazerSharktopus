@@ -25,8 +25,7 @@ namespace WindowsGame4
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(timerFont, levelTime.ToString(), new Vector2(10, 10), Color.Black, 0f, new Vector2(0, 0), 1.0f, SpriteEffects.None, spriteDepth); 
-            //spriteBatch.DrawString(timerFont, levelTime.ToString(), new Vector2(10, 10), Color.Black);
+            spriteBatch.DrawString(timerFont, levelTime.ToString(), new Vector2(10, 10), Color.Black, 0f, new Vector2(0, 0), 1.0f, SpriteEffects.None, spriteDepth);
         }
 
         public void Update()

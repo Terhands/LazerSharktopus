@@ -67,7 +67,7 @@ namespace WindowsGame4
             gameState = States.level;
 
             level = new Level(this, textures, fonts, sounds, songs, new LevelLoader(config.LevelFiles));
-            gameOver = new GameOver(this, (Texture2D)textures[3]);
+            gameOver = new GameOver(this, (Texture2D)textures[3], (SpriteFont)fonts[0]);
         }
 
         /// <summary>
