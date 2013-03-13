@@ -31,6 +31,7 @@ namespace WindowsGame4
         States gameState;
         GameOver gameOver;
         TitleMenu titleMenu;
+        TitleScreen titleScreen;
 
         Level level;
 
@@ -66,11 +67,12 @@ namespace WindowsGame4
         {
             // TODO: Add your initialization logic here
             base.Initialize();
-            gameState = States.titleMenu;
+            gameState = States.titleScreen;
 
             level = new Level(this, textures, fonts, sounds, songs, new LevelLoader(config.LevelFiles));
             gameOver = new GameOver(this, (Texture2D)textures[3], (SpriteFont)fonts[1]);
             titleMenu = new TitleMenu(this, (Texture2D)textures[3], (SpriteFont)fonts[1]);
+            titleScreen = new TitleScreen(this, (Texture2D)textures[3], (SpriteFont)fonts[1]);
         }
 
         /// <summary>
@@ -142,6 +144,10 @@ namespace WindowsGame4
             {
                 this.Exit();
             }
+            else if (gameState == States.titleScreen)
+            {
+                titleScreen.Update();
+            }
 
             if (prevState == null)
             {
@@ -182,6 +188,11 @@ namespace WindowsGame4
             {
                 // Victory Screen Updates
             }
+            else if (gameState == States.titleScreen)
+            {
+                titleScreen.Draw(spriteBatch);
+            }
+
 
 
             this.spriteBatch.End();
