@@ -26,10 +26,11 @@ namespace WindowsGame4
         ArrayList songs;
 
         GameLoader config;
-        Level level;
-
-        public enum States { title, level, gameOver };
+        
+        public enum States { title, level, gameOver, victory };
         States gameState;
+        GameOver gameOver;
+        Level level;
 
         /* Keyboard controls */
         protected const Keys keyRight = Keys.D;
@@ -66,7 +67,7 @@ namespace WindowsGame4
             gameState = States.level;
 
             level = new Level(this, textures, fonts, sounds, songs, new LevelLoader(config.LevelFiles));
-
+            gameOver = new GameOver(this, (Texture2D)textures[3], (SpriteFont)fonts[0]);
         }
 
         /// <summary>
@@ -125,14 +126,18 @@ namespace WindowsGame4
             if (gameState == States.level)
             {
                 level.Update(gameTime);
-            } 
+            }
             else if (gameState == States.gameOver)
             {
-                // Game Over Screen Updates
+                gameOver.Update();
             }
             else if (gameState == States.title)
             {
                 // Title Screen Updates
+            }
+            else if (gameState == States.victory)
+            {
+                this.Exit();
             }
 
             if (prevState == null)
@@ -164,11 +169,15 @@ namespace WindowsGame4
             }
             else if (gameState == States.gameOver)
             {
-                spriteBatch.Draw((Texture2D)textures[3], new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
+                gameOver.Draw(spriteBatch);
             }
             else if (gameState == States.title)
             {
                 // Title Screen Updates
+            }
+            else if (gameState == States.victory)
+            {
+                // Victory Screen Updates
             }
 
 

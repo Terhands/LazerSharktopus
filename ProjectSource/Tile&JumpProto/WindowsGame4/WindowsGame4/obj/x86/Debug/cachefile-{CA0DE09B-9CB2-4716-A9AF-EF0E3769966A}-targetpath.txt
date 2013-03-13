@@ -2,7 +2,6 @@ Content\blank.xnb
 Content\Robro1.1.xnb
 Content\Lazersharktopus.xnb
 Content\groundSpriteFile.xnb
-Content\bolt.xnb
 Content\gameOver.xnb
 Content\tempGuard.xnb
 Content\torchSprites.xnb
@@ -14,6 +13,9 @@ Content\DST-Aronara.wma
 Content\DST-AngryRobotIII.xnb
 Content\DST-AngryRobotIII.wma
 Content\RoBro.xnb
+Content\bolt.xnb
+Content\clunk.xnb
+Content\tink.xnb
 Content\lathraia.config
 Content\Level1.txt
 Content\Level2.txt

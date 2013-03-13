@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections;
+using Microsoft.Xna.Framework.Audio;
 
 namespace WindowsGame4
 {
@@ -19,21 +21,28 @@ namespace WindowsGame4
         public int expiryTime;
         float spriteDepth;
 
-        public Bolt(Game game, Action direction, int xStart, int yStart, Texture2D texture) : base(game)
-        {
-            position = new Rectangle(xStart, yStart, 15, 15);
+        private Rectangle boltArea = new Rectangle(0, 0, 64, 64);
+        private Vector2 spriteOrigin = new Vector2(32, 32);
+        private float rotation;
+        protected ArrayList sounds;
 
+        public Bolt(Game game, Action direction, int xStart, int yStart, Texture2D texture, ArrayList _sounds) : base(game)
+        {
+            position = new Rectangle(xStart, yStart, 25, 25);
+            if (direction == Action.right)
+                position.X += 35;
             boltTexture = texture;
             if (direction == Action.left)
                 deltaX = deltaX * -1;
             expiryTime = 30;
             spriteDepth = 0.5f;
+            rotation = 0;
+            sounds = _sounds;
         }
         
         /* Determine if a bolt has hit something */
         public override void HandleCollision(IList<ITile> tiles)
         {
-            if (position.Y > 440) hasCollided = true;
             // handle foot to floor collisions after intersection collisions have been resolved
             IList<ITile> tilesBelowBolt = new List<ITile>();
             IList<ITile> tilesAboveBolt = new List<ITile>();
@@ -67,6 +76,7 @@ namespace WindowsGame4
                 Direction direction = determineCollisionType(tilePos);
                 if (direction == Direction.none)
                 {
+                    ((SoundEffect)sounds[0]).Play();
                     this.hasCollided = true;
                 }
             }
@@ -120,14 +130,14 @@ namespace WindowsGame4
             {
                 position.X += (int)deltaX;
                 position.Y += (int)deltaY;
-
+                rotation += 0.2f;
                 deltaY += k_looks_gravity;
             }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(boltTexture, position, position, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, spriteDepth);
+            spriteBatch.Draw(boltTexture, position, boltArea, Color.White * 1, rotation, spriteOrigin, SpriteEffects.None, spriteDepth);
         }
 
     }

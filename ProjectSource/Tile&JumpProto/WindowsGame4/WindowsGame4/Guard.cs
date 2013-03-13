@@ -59,30 +59,22 @@ namespace WindowsGame4
 
         public override void Update(Action direction, int velocity)
         {
-           /* int extraVelocity = 0;
-            switch (direction)
-            {
-                case Action.right:
-                    extraVelocity += velocity;
-                    break;
-                case Action.left:
-                    extraVelocity -= velocity;
-                    break;
-            }
-            * */
+            position.X -= velocity;
+            patrolBoundaryLeft -= velocity;
+            patrolBoundaryRight -= velocity;
+        }
 
-
+        public void Update(GameTime gameTime)
+        {
             if (facingDirection == Direction.right)
             {
                 if (position.X < patrolBoundaryRight)
                 {
                     position.X += this.velocity;
-                   // position.X += extraVelocity;
                 }
                 else if (position.X == patrolBoundaryRight)
                 {
                     facingDirection = Direction.left;
-                   // position.X += extraVelocity;
 
                 }
 
@@ -92,16 +84,16 @@ namespace WindowsGame4
                 if (patrolBoundaryLeft < position.X)
                 {
                     position.X -= this.velocity;
-                   // position.X += extraVelocity;
+             
                 }
                 else if (patrolBoundaryLeft == position.X)
                 {
                     facingDirection = Direction.right;
-                   // position.X += extraVelocity;
+                   
                 }
             }
-
         }
+
 
         public override void HandleCollision(IList<ITile> obj)
         {

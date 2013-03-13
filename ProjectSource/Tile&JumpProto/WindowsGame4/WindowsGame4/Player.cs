@@ -362,7 +362,6 @@ namespace WindowsGame4
             {
                 this.frameCountCol = 3;
                 Jump();
-                Console.WriteLine("jumping");
                 
             }
 
@@ -389,7 +388,7 @@ namespace WindowsGame4
             }
             else
             {
-                spriteBatch.Draw(sprite, position, source, Color.White, 0, new Vector2(0, 0), SpriteEffects.None, spriteDepth);
+                spriteBatch.Draw(sprite, position, source, Color.White * 1f, 0, new Vector2(0, 0), SpriteEffects.None, spriteDepth);
                 jumpMeter.Draw(spriteBatch);
             }
         }
