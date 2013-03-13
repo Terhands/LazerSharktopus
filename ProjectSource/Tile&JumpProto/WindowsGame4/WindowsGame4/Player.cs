@@ -32,11 +32,25 @@ namespace WindowsGame4
         // the speed that player starts falling
         protected const float startFalling = -0.25f;
 
+        int frameCountCol = 1; // Which frame we are.  Values = {0, 1, 2, 3, 4} this 4 = crouch only in row 0 
+        int frameCountRow = 0; //Value = {0,1} 1 = left direction , 0 = right directions
+        int frameSkipX = 75; // How much to move the frame in X when we increment a frame--X distance between top left corners.
+        int frameSkipY = 127; // how much to move the frame in y when we change directions 
+        int frameStartX = 1; // X of top left corner of frame 0. 
+        int frameStartY = 1; // Y of top left corner of frame 0.
+        int frameWidth = 75; // X of right minus X of left. 
+        int frameHeight = 126; // Y of bottom minus Y of top.
+
+        // Keep a counter, to count the number of ticks since the last change of animation frame.
+        int animationCount; // How many ticks since the last frame change.
+        int animationMax = 8; // How many ticks to change frame after. 
+        bool landed = false; //So the update doesnt keep reseting robro to standard land position this bool is used
+
         public Player(Game game, Texture2D texture, ArrayList _sounds, int xStart, int yStart)
             : base(game)
         {
             facingDirection = Action.right;
-            source = new Rectangle(251, 142, 746 - 251, 805 - 142);
+            source = new Rectangle(this.frameStartX + this.frameSkipX * this.frameCountCol, this.frameStartY + this.frameSkipY * this.frameCountRow, this.frameWidth, this.frameHeight);
             position = new Rectangle(xStart, yStart, 36, 52);
             sprite = texture;
 
@@ -117,8 +131,11 @@ namespace WindowsGame4
                         hidden = 1.0f;
                         spriteDepth = 0.25f;
                         // will also need to swap the texture source rectangle to the crouched sprite
+                        
                     }
                 }
+                this.frameCountCol = 4;
+                this.source.X = this.frameStartX + this.frameSkipX * this.frameCountCol;
             }
         }
 
@@ -127,6 +144,8 @@ namespace WindowsGame4
             hidden = 0.0f;
             spriteDepth = 0.8f;
             // will also need to swap the texture source rectangle to the standing sprite
+            this.frameCountCol = 1;
+            this.source.X = this.frameStartX + this.frameSkipX * this.frameCountCol;
         }
 
         /* make sure player isn't falling through platforms/walking through walls */
@@ -191,6 +210,7 @@ namespace WindowsGame4
                             if (isJumping)
                             {
                                 isJumping = false;
+                                landed = true;
                                 jumpMeter.reset();
                             }
                         }
@@ -239,6 +259,7 @@ namespace WindowsGame4
                     if (isJumping)
                     {
                         isJumping = false;
+                        landed = true;
                         jumpMeter.reset();
                     }
                 }
@@ -299,6 +320,8 @@ namespace WindowsGame4
                             deltaX = velocity / 2;
                         }
                     }
+                    this.frameCountRow = 0;
+                    this.animationCount += 1;
 
                     break;
                 case Action.left:
@@ -319,6 +342,8 @@ namespace WindowsGame4
                             deltaX = velocity / 2;
                         }
                     }
+                    this.frameCountRow = 1;
+                    this.animationCount += 1;
                     break;
 
                 // have to decide if we will implement ladder mechanics or rely on jumps
@@ -335,8 +360,15 @@ namespace WindowsGame4
 
             if (isJumping)
             {
+                this.frameCountCol = 3;
                 Jump();
-                Console.WriteLine("jumping");
+                
+            }
+
+            if (landed)
+            {
+                landed = false;
+                this.frameCountCol = 1;
             }
 
             position.X += deltaX;
@@ -344,6 +376,8 @@ namespace WindowsGame4
 
             jumpMeter.setMeterPosition(position.X + (position.Width / 2), position.Y - playerPadding);
             jumpMeter.Update(Action.none, 0);
+
+            this.UpdateAnimation();
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -354,9 +388,31 @@ namespace WindowsGame4
             }
             else
             {
-                spriteBatch.Draw(sprite, position, source, Color.White, 0, new Vector2(0, 0), SpriteEffects.None, spriteDepth);
+                spriteBatch.Draw(sprite, position, source, Color.White * 1f, 0, new Vector2(0, 0), SpriteEffects.None, spriteDepth);
                 jumpMeter.Draw(spriteBatch);
             }
+        }
+
+        public void UpdateAnimation()
+        {
+            if (this.animationCount > this.animationMax)
+            {
+                this.animationCount = 0;
+                if (hidden > 0 || isJumping)
+                { }
+                else
+                    this.frameCountCol += 1;
+            }
+
+            if (isJumping)
+                this.frameCountCol = 3;
+            else if (this.frameCountCol == 3)
+            {
+                this.frameCountCol = 0;
+            }
+            else { }
+            this.source.X = this.frameStartX + this.frameSkipX * this.frameCountCol;
+            this.source.Y = this.frameStartY + this.frameSkipY * this.frameCountRow;
         }
     }
 }

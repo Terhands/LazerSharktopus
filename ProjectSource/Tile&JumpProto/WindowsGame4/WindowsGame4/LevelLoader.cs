@@ -42,7 +42,12 @@ namespace WindowsGame4
 
         public void LoadLevel(int levelIndex)
         {
-            Debug.Assert(levelIndex < levelFiles.Length);
+            if (levelIndex >= levelFiles.Length)
+            {
+                // If we're beyond the last level of the game, send a signal upwards
+                mapLayout = null;
+                return;
+            }
 
             // read in the entire level configuration file
             string levelFile = System.IO.File.ReadAllText("Content\\" + levelFiles[levelIndex]);
