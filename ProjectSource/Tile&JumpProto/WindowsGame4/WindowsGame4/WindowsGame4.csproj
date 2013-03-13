@@ -74,8 +74,6 @@
   <ItemGroup>
     <Compile Include="ADynamicGameObject.cs" />
     <Compile Include="Bolt.cs" />
-    <Compile Include="LevelIntroScreen.cs" />
-    <Compile Include="TitleScreen.cs" />
     <Compile Include="GameLoader.cs" />
     <Compile Include="GameOver.cs" />
     <Compile Include="GameTimer.cs" />
@@ -85,6 +83,7 @@
     <Compile Include="JumpMeter.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="IPlayer.cs" />
+    <Compile Include="LevelIntroScreen.cs" />
     <Compile Include="LevelLoader.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="ITile.cs" />
@@ -96,6 +95,7 @@
     <Compile Include="GameLoop.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="TitleMenu.cs" />
+    <Compile Include="TitleScreen.cs" />
     <Compile Include="Torch.cs" />
   </ItemGroup>
   <ItemGroup>

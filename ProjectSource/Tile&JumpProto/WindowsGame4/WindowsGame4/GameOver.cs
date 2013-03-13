@@ -42,7 +42,7 @@ namespace WindowsGame4
             if (selectedIndex < 0) selectedIndex = 1;
             if (selectedIndex > 1) selectedIndex = 0;
 
-            if (keyState.IsKeyDown(Keys.Enter) && prevKeyState.IsKeyUp(Keys.Enter))
+            if (keyState.IsKeyDown(Keys.Enter))
             {
                 if (selectedIndex == 0)
                     gameLoop.State = GameLoop.GameState.level;
