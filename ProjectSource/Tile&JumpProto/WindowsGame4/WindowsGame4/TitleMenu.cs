@@ -27,12 +27,15 @@ namespace WindowsGame4
             menuFont = _menuFont;
             selectedIndex = 0;
             keyState = Keyboard.GetState();
-            prevKeyState = keyState;
+            prevKeyState = Keyboard.GetState();
         }
 
         public void Update()
         {
             keyState = Keyboard.GetState();
+            if (prevKeyState == null)
+                prevKeyState = keyState;
+
 
             if (keyState.IsKeyDown(Keys.S) && prevKeyState.IsKeyUp(Keys.S))
                 selectedIndex++;
@@ -60,9 +63,9 @@ namespace WindowsGame4
 
             spriteBatch.Draw(background, new Rectangle(0, 0, Game.GraphicsDevice.Viewport.Width, Game.GraphicsDevice.Viewport.Height), Color.White);
             if (selectedIndex == 0)
-                spriteBatch.DrawString(menuFont, "New Game", new Vector2(Game.GraphicsDevice.Viewport.Width / 2, Game.GraphicsDevice.Viewport.Height / 3), Color.Yellow, 0f, item0size / 2, 1.0f, SpriteEffects.None, 1.0f);
+                spriteBatch.DrawString(menuFont, "New Game", new Vector2(Game.GraphicsDevice.Viewport.Width / 2, Game.GraphicsDevice.Viewport.Height / 2), Color.Yellow, 0f, item0size / 2, 1.0f, SpriteEffects.None, 1.0f);
             else
-                spriteBatch.DrawString(menuFont, "New Game", new Vector2(Game.GraphicsDevice.Viewport.Width / 2, Game.GraphicsDevice.Viewport.Height / 3), Color.White, 0f, item0size / 2, 1.0f, SpriteEffects.None, 1.0f);
+                spriteBatch.DrawString(menuFont, "New Game", new Vector2(Game.GraphicsDevice.Viewport.Width / 2, Game.GraphicsDevice.Viewport.Height / 2), Color.White, 0f, item0size / 2, 1.0f, SpriteEffects.None, 1.0f);
 
             if (selectedIndex == 1)
                 spriteBatch.DrawString(menuFont, "Quit", new Vector2(Game.GraphicsDevice.Viewport.Width / 2, Game.GraphicsDevice.Viewport.Height * 2 / 3), Color.Yellow, 0f, item1size / 2, 1.0f, SpriteEffects.None, 1.0f);

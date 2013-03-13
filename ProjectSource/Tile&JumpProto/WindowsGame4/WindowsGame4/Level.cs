@@ -265,6 +265,12 @@ namespace WindowsGame4
             get { return levelLoader.LevelName; }
         }
 
+        public int CurrentLevel
+        {
+            get { return currentLevel; }
+            set { currentLevel = value; }
+        }
+
         /* figure out if the screen needs to shift to reflect the given action */
         protected bool shouldShiftScreen(Action action)
         {

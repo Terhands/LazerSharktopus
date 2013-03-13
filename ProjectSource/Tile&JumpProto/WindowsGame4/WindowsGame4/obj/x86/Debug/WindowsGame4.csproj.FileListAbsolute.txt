@@ -157,3 +157,4 @@ C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopus\ProjectSource\Tile&JumpProto\
 C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\RoBro.xnb
 C:\Users\mf\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\RoBro.xnb
 C:\Users\mf\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\levelNameFont.xnb
+C:\Users\mf\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\TitleScreen.xnb

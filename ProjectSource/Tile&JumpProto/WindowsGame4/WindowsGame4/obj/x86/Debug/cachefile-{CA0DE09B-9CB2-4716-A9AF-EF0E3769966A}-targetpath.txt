@@ -17,6 +17,7 @@ Content\clunk.xnb
 Content\tink.xnb
 Content\RoBro.xnb
 Content\levelNameFont.xnb
+Content\TitleScreen.xnb
 Content\lathraia.config
 Content\Level1.txt
 Content\Level2.txt

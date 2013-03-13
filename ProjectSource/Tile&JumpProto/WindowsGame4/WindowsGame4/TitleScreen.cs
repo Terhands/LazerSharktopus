@@ -16,6 +16,9 @@ namespace WindowsGame4
         GameLoop gameLoop;
 
         KeyboardState keyState;
+        KeyboardState prevKeyState;
+
+        int blinkCount;
 
         public TitleScreen(GameLoop game, Texture2D _background, SpriteFont _menuFont) : base(game)
         {
@@ -23,23 +26,30 @@ namespace WindowsGame4
             gameLoop = game;
             menuFont = _menuFont;
             keyState = Keyboard.GetState();
+            prevKeyState = keyState;
+            blinkCount = 0;
         }
 
         public void Update()
         {
             keyState = Keyboard.GetState();
 
-            if (keyState.IsKeyDown(Keys.Enter))
+            if (keyState.IsKeyDown(Keys.Space) && prevKeyState.IsKeyUp(Keys.Space))
                 gameLoop.State = GameLoop.GameState.titleMenu;
+            prevKeyState = keyState;
+
+            blinkCount++;
+            if (blinkCount > 60) blinkCount = 0;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            Vector2 item0size = menuFont.MeasureString("Press Enter to Start");
+            Vector2 item0size = menuFont.MeasureString("Press Space to Start");
 
             spriteBatch.Draw(background, new Rectangle(0, 0, Game.GraphicsDevice.Viewport.Width, Game.GraphicsDevice.Viewport.Height), Color.White);
 
-            spriteBatch.DrawString(menuFont, "Press Enter to Start", new Vector2(Game.GraphicsDevice.Viewport.Width / 2, Game.GraphicsDevice.Viewport.Height / 2), Color.White, 0f, item0size / 2, 1.0f, SpriteEffects.None, 1.0f);
+            if (blinkCount < 30)
+                spriteBatch.DrawString(menuFont, "Press Space to Start", new Vector2(Game.GraphicsDevice.Viewport.Width / 2, Game.GraphicsDevice.Viewport.Height / 2), Color.White, 0f, item0size / 2, 1.0f, SpriteEffects.None, 1.0f);
         }
     }
 }
