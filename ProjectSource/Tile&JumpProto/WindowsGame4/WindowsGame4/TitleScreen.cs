@@ -30,7 +30,7 @@ namespace WindowsGame4
             keyState = Keyboard.GetState();
 
             if (keyState.IsKeyDown(Keys.Enter))
-                gameLoop.State = GameLoop.States.titleMenu;
+                gameLoop.State = GameLoop.GameState.titleMenu;
         }
 
         public void Draw(SpriteBatch spriteBatch)

@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="ADynamicGameObject.cs" />
     <Compile Include="Bolt.cs" />
+    <Compile Include="LevelIntroScreen.cs" />
     <Compile Include="TitleScreen.cs" />
     <Compile Include="GameLoader.cs" />
     <Compile Include="GameOver.cs" />

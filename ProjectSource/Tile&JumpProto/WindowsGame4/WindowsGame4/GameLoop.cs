@@ -18,6 +18,7 @@ namespace WindowsGame4
     public class GameLoop : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
+        MusicManager musicPlayer;
         SpriteBatch spriteBatch;
 
         ArrayList fonts;
@@ -27,11 +28,12 @@ namespace WindowsGame4
 
         GameLoader config;
         
-        public enum States { titleMenu, titleScreen, level, gameOver, victory };
-        States gameState;
+        public enum GameState { titleMenu, titleScreen, level, gameOver, victory, levelIntro };
+        GameState gameState;
         GameOver gameOver;
         TitleMenu titleMenu;
         TitleScreen titleScreen;
+        LevelIntroScreen levelIntroScreen;
 
         Level level;
 
@@ -67,12 +69,14 @@ namespace WindowsGame4
         {
             // TODO: Add your initialization logic here
             base.Initialize();
-            gameState = States.titleScreen;
+            gameState = GameState.titleScreen;
 
-            level = new Level(this, textures, fonts, sounds, songs, new LevelLoader(config.LevelFiles));
-            gameOver = new GameOver(this, (Texture2D)textures[3], (SpriteFont)fonts[1]);
-            titleMenu = new TitleMenu(this, (Texture2D)textures[3], (SpriteFont)fonts[1]);
-            titleScreen = new TitleScreen(this, (Texture2D)textures[3], (SpriteFont)fonts[1]);
+            level = new Level(this, textures, fonts, sounds, musicPlayer, new LevelLoader(config.LevelFiles));
+            gameOver = new GameOver(this, (Texture2D)textures[3], (SpriteFont)fonts[2]);
+            titleMenu = new TitleMenu(this, (Texture2D)textures[3], (SpriteFont)fonts[2]);
+            titleScreen = new TitleScreen(this, (Texture2D)textures[3], (SpriteFont)fonts[2]);
+            levelIntroScreen = new LevelIntroScreen(this, (SpriteFont)fonts[1]);
+            levelIntroScreen.InitLevelScreen(level.LevelName);
         }
 
         /// <summary>
@@ -84,7 +88,7 @@ namespace WindowsGame4
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            config = new GameLoader("Content\\lathraia.config");
+            config = new GameLoader(@"Content\lathraia.config");
 
             textures = new ArrayList();
             for (int i = 0; i < config.NumTextures; i++)
@@ -109,6 +113,8 @@ namespace WindowsGame4
             {
                 songs.Insert(i, Content.Load<Song>(config.getSongFile(i)));
             }
+
+            musicPlayer = new MusicManager(songs);
         }
 
         /// <summary>
@@ -128,23 +134,27 @@ namespace WindowsGame4
         protected override void Update(GameTime gameTime)
         {
             KeyboardState currState = Keyboard.GetState();
-            if (gameState == States.level)
+            if (gameState == GameState.level)
             {
                 level.Update(gameTime);
             }
-            else if (gameState == States.gameOver)
+            else if (gameState == GameState.levelIntro)
+            {
+                levelIntroScreen.Update();
+            }
+            else if (gameState == GameState.gameOver)
             {
                 gameOver.Update();
             }
-            else if (gameState == States.titleMenu)
+            else if (gameState == GameState.titleMenu)
             {
                 titleMenu.Update();
             }
-            else if (gameState == States.victory)
+            else if (gameState == GameState.victory)
             {
                 this.Exit();
             }
-            else if (gameState == States.titleScreen)
+            else if (gameState == GameState.titleScreen)
             {
                 titleScreen.Update();
             }
@@ -172,23 +182,27 @@ namespace WindowsGame4
         {
             this.spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
 
-            if (gameState == States.level)
+            if (gameState == GameState.level)
             {
                 level.Draw(spriteBatch);
             }
-            else if (gameState == States.gameOver)
+            else if (gameState == GameState.levelIntro)
+            {
+                levelIntroScreen.Draw(spriteBatch);
+            }
+            else if (gameState == GameState.gameOver)
             {
                 gameOver.Draw(spriteBatch);
             }
-            else if (gameState == States.titleMenu)
+            else if (gameState == GameState.titleMenu)
             {
                 titleMenu.Draw(spriteBatch);
             }
-            else if (gameState == States.victory)
+            else if (gameState == GameState.victory)
             {
                 // Victory Screen Updates
             }
-            else if (gameState == States.titleScreen)
+            else if (gameState == GameState.titleScreen)
             {
                 titleScreen.Draw(spriteBatch);
             }
@@ -200,9 +214,23 @@ namespace WindowsGame4
             base.Draw(gameTime);
         }
 
-        public States State
+        public GameState State
         {
             set { gameState = value; }
+        }
+
+        // when level state is set the new map needs to be built
+        public void SetGameState(GameState _gameState)
+        {
+            gameState = _gameState;
+            if (GameState.level == gameState)
+            {
+                level.InitLevel();
+            }
+            else if (GameState.levelIntro == gameState)
+            {
+                levelIntroScreen.InitLevelScreen(level.LevelName);
+            }
         }
     }
 }
