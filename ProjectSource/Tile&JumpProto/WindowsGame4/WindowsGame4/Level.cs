@@ -115,7 +115,10 @@ namespace WindowsGame4
         {   
             /* Timer update logic */
             gameTimer.Update();
-            if (gameTimer.isFinished()) player.IsDead = true;
+            if (gameTimer.isFinished() && !player.IsDead)
+            {
+                player.Kill();
+            }
 
 
             // no need to perform update if the player died - get ready for some serious death-screen action
@@ -233,6 +236,7 @@ namespace WindowsGame4
                     currentLevel += 1;
                     bolts.Clear();
                     torches.Clear();
+                    guards.Clear();
 
                     if (levelLoader.NumLevels > currentLevel)
                     {
@@ -252,6 +256,7 @@ namespace WindowsGame4
                 {
                     torches.Clear();
                     bolts.Clear();
+                    guards.Clear();
                     game.State = GameLoop.GameState.gameOver;
                 }
             }

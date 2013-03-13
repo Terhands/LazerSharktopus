@@ -55,7 +55,7 @@ namespace WindowsGame4
 
             if (!graphics.IsFullScreen)
             {
-                 //graphics.ToggleFullScreen();
+              //  graphics.ToggleFullScreen();
             }
         }
 

@@ -27,7 +27,7 @@ namespace WindowsGame4
         protected Color debugColor;
 
         //took this from the player class, may need a different value
-        protected const float spriteDepth = 0.5f;
+        protected const float spriteDepth = 0.95f;
 
 
         Vector2 eyePos = new Vector2(46.0f, 18.0f);

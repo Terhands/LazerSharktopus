@@ -163,3 +163,5 @@ C:\Users\Alexa\Documents\GitHub\LazerSharktopus\ProjectSource\Tile&JumpProto\Win
 C:\Users\Alexa\Documents\GitHub\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\levelNameFont.xnb
 C:\Users\Alexa\Documents\GitHub\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\clunk.xnb
 C:\Users\Alexa\Documents\GitHub\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\tink.xnb
+C:\Users\mf\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\menuFont.xnb
+C:\Users\mf\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\Level3.txt

@@ -196,8 +196,7 @@ namespace WindowsGame4
 
                 if (direction != Direction.none && t.getCollisionBehaviour() == CollisionType.spike)
                 {
-                    isDead = true;
-                    ((SoundEffect)sounds[0]).Play();
+                    this.Kill();
                 }
 
                 switch (direction)
@@ -287,6 +286,7 @@ namespace WindowsGame4
         public void Kill()
         {
             isDead = true;
+            ((SoundEffect)sounds[0]).Play();
         }
 
         public int DeltaX

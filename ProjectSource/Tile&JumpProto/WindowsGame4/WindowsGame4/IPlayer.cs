@@ -29,5 +29,7 @@ namespace WindowsGame4
         
         /* move the player back deltaX (for use when the screen shifts) */
         void reposition();
+
+        void Kill();
     }
 }
