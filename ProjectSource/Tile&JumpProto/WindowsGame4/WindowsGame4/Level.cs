@@ -14,7 +14,6 @@ namespace WindowsGame4
     {
         protected IPlayer player;
         protected IMap levelMap;
-        protected Guard guard;
         protected GameTimer gameTimer;
 
         LevelLoader levelLoader;
@@ -40,6 +39,7 @@ namespace WindowsGame4
 
         protected List<Bolt> bolts;
         protected List<Torch> torches;
+        protected List<Guard> guards;
 
         public Level(GameLoop game, ArrayList _textures, ArrayList _fonts, ArrayList _sounds, MusicManager _musicPlayer, LevelLoader loader) : base(game)
         {
@@ -48,6 +48,7 @@ namespace WindowsGame4
 
             bolts = new List<Bolt>();
             torches = new List<Torch>();
+            guards = new List<Guard>();
 
             playerRange = new Rectangle((screenWidth * 2)/5, 0, screenWidth/5, screenHeight);
             
@@ -83,7 +84,6 @@ namespace WindowsGame4
             int screenHeight = Game.GraphicsDevice.Viewport.Height;
 
             player = new Player(Game, (Texture2D)textures[playerIndex], sounds, 50, screenHeight - 52 - (screenHeight / 32));
-            guard = new Guard(Game, (Texture2D)textures[guardIndex], 700, screenHeight - 52 - (screenHeight / 32), Direction.right, 100);
             
             boltTexture = (Texture2D)textures[4];
 
@@ -95,6 +95,13 @@ namespace WindowsGame4
                 torches.Add(new Torch(Game, (Texture2D)textures[6], x, y));
             }
 
+            foreach (Vector2 v in levelLoader.Guards)
+            {
+                int x = ((int)v.X) * (screenWidth / 64) - (36/2);
+                int y = ((int)v.Y) * (screenHeight / 32) - 52;
+                guards.Add(new Guard(Game, (Texture2D)textures[guardIndex], x, y, Direction.right, 100));
+            }
+                
             gameTimer = new GameTimer(levelLoader.TimeLimit, (SpriteFont)fonts[0]);
 
             musicPlayer.Play(levelLoader.LevelMusic);
@@ -170,8 +177,10 @@ namespace WindowsGame4
                     }
 
                     //update guards
-                    guard.Update(playerAction, deltaX);
-                   
+                    foreach (Guard guard in guards)
+                    {
+                        guard.Update(playerAction, deltaX);
+                    }
 
                     foreach (Bolt bolt in bolts)
                     {
@@ -197,8 +206,11 @@ namespace WindowsGame4
                     t.Update(gameTime);
                 }
 
-                guard.Update(gameTime);
-                guard.HandleCollision(player);
+                foreach (Guard guard in guards)
+                {
+                    guard.Update(gameTime);
+                    guard.HandleVision((Player)player);
+                }
 
                 foreach (Bolt bolt in bolts)
                 {
@@ -250,8 +262,12 @@ namespace WindowsGame4
         {
             levelMap.Draw(spriteBatch);
             player.Draw(spriteBatch);
-            guard.Draw(spriteBatch);
             gameTimer.Draw(spriteBatch);
+
+            foreach (Guard guard in guards)
+            {
+                guard.Draw(spriteBatch);
+            }
             foreach (Bolt bolt in bolts)
             {
                 bolt.Draw(spriteBatch);

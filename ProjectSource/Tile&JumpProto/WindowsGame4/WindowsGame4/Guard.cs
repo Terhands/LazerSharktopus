@@ -9,7 +9,8 @@ namespace WindowsGame4
 {
     class Guard : ADynamicGameObject, IDynamicGameObject
     {
-        
+        protected int distractedTime;
+        protected int maxDistractedTime;
         protected int patrolLength;
         protected int patrolBoundaryLeft;
         protected int patrolBoundaryRight;
@@ -109,37 +110,40 @@ namespace WindowsGame4
           //  determineRadialCollision(
         }
 
-        public void HandleCollision(IList<Bolt> bolt)
+        public void HandleHearing(IList<Bolt> bolts)
         {
+            Direction hearingDirection;
+            Bolt distractingBolt = null;
+            foreach (Bolt bolt in bolts)
+            {
+               hearingDirection = determineRadialCollision(bolt.GetPosition(), 200);
+               if (hearingDirection != Direction.none)
+               {
+                   distractingBolt = bolt;
+                   debugColor = Color.Red;
+                   break;
+               }
+            }
+
+            int GoalDestination = distractingBolt.GetPosition().X;
+
+
             
+
         }
 
-        public void HandleCollision(IPlayer player)
+        //if he sees the player, the player should die.
+        public void HandleVision(Player player)
         {
 
             Direction sightDirection = determineRadialCollision(player.GetPosition(), 100.0f);
-
-            
-            if (sightDirection == Direction.left)
+          
+            if (sightDirection == facingDirection)
             {
-                debugColor = Color.Cyan;
+                player.Kill();
             }
 
-            if (sightDirection == Direction.right)
-            {
-
-                debugColor = Color.DarkGoldenrod;
-            }
-
-            if (sightDirection == Direction.top)
-            {
-                debugColor = Color.Crimson;
-            }
-
-            if (sightDirection == Direction.bottom)
-            {
-                debugColor = Color.ForestGreen;
-            }
+  
         }
 
 
@@ -156,7 +160,7 @@ namespace WindowsGame4
 
             //distance between the x and y position of the guards eyes and the middle of the player
             float deltaX = mapEyePos.X - (r.X + (r.Width / 2));
-            float deltaY = mapEyePos.Y - (r.X + (r.Height / 2));
+            float deltaY = mapEyePos.Y - (r.Y + (r.Height / 2));
             float distance = (float)Math.Sqrt(Math.Pow(deltaX, 2) + Math.Pow(deltaY, 2));
 
             // if the distance is less than the two radii, then the rectange is in collision with this Guard's collision radius
