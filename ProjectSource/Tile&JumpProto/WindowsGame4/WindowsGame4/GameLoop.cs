@@ -179,6 +179,10 @@ namespace WindowsGame4
             {
                 // Victory Screen Updates
             }
+            else if (gameState == States.victory)
+            {
+                // Victory Screen Updates
+            }
 
 
             this.spriteBatch.End();
