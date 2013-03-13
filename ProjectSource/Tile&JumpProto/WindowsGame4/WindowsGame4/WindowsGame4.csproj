@@ -83,6 +83,7 @@
     <Compile Include="JumpMeter.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="IPlayer.cs" />
+    <Compile Include="LevelIntroScreen.cs" />
     <Compile Include="LevelLoader.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="ITile.cs" />
@@ -93,6 +94,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="GameLoop.cs" />
     <Compile Include="Tile.cs" />
+    <Compile Include="TitleMenu.cs" />
+    <Compile Include="TitleScreen.cs" />
     <Compile Include="Torch.cs" />
   </ItemGroup>
   <ItemGroup>

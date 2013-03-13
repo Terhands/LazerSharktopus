@@ -14,6 +14,7 @@ namespace WindowsGame4
 
         string[] levelFiles;
 
+        string levelName;
         int currentLevel;
         int dataPos;
         int timeLimit;
@@ -43,21 +44,19 @@ namespace WindowsGame4
 
         public void LoadLevel(int levelIndex)
         {
-            if (levelIndex >= levelFiles.Length)
-            {
-                // If we're beyond the last level of the game, send a signal upwards
-                mapLayout = null;
-                return;
-            }
+            Debug.Assert(levelIndex < levelFiles.Length);
 
             // read in the entire level configuration file
-            string levelFile = System.IO.File.ReadAllText("Content\\" + levelFiles[levelIndex]);
+            string levelFile = System.IO.File.ReadAllText(@"Content\" + levelFiles[levelIndex]);
 
             // grab the entire file
-            Match dataMatch = Regex.Match(levelFile, @"[(.\s\w\d-)]*");
+            Match dataMatch = Regex.Match(levelFile, @"[~(.\s\w\d-)]*");
             string rawData = dataMatch.Groups[0].Value.Trim(); // trim all whitespace
+            levelName = rawData.Split('~')[0];
+            rawData = Regex.Replace(rawData, levelName + "~", " ");
             rawData = Regex.Replace(rawData, @"\n", " "); // remove newlines
             rawData = Regex.Replace(rawData, @"[\s\t]{1,}", " "); // only have one space between elements
+            rawData = rawData.Trim(); // trim the start
             string[] tokenizedData = rawData.Split(' '); // split up the file elements by spaces
 
             // reset the data position in the file tokens to the first element
@@ -71,7 +70,7 @@ namespace WindowsGame4
             if (numMapRows * numMapCols > tokenizedData.Length)
             {
                 Console.WriteLine("Error: Invalid Map Parameters");
-                throw(new System.IO.IOException());
+                throw (new System.IO.IOException());
             }
 
             mapLayout = new int[numMapRows, numMapCols];
@@ -109,7 +108,7 @@ namespace WindowsGame4
         public int NextInt(string[] data)
         {
             dataPos += 1;
-            return Convert.ToInt32(data[dataPos-1]);
+            return Convert.ToInt32(data[dataPos - 1]);
         }
 
         public int[,] Map
@@ -125,6 +124,22 @@ namespace WindowsGame4
         public Vector2[] Guards
         {
             get { return guardLayout; }
+        }
+        
+        public int NumLevels
+        {
+            get { return levelFiles.Length; }
+        }
+
+       
+
+
+        
+        
+
+        public string LevelName
+        {
+            get { return levelName; }
         }
 
     }

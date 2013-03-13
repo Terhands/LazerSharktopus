@@ -155,6 +155,6 @@ C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopus\ProjectSource\Tile&JumpProto\
 C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\obj\x86\Debug\WindowsGame4.exe
 C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\obj\x86\Debug\WindowsGame4.pdb
 C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\RoBro.xnb
-C:\Users\Alexa\Documents\GitHub\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\RoBro.xnb
-C:\Users\Alexa\Documents\GitHub\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\clunk.xnb
-C:\Users\Alexa\Documents\GitHub\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\tink.xnb
+C:\Users\mf\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\RoBro.xnb
+C:\Users\mf\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\levelNameFont.xnb
+C:\Users\mf\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\TitleScreen.xnb

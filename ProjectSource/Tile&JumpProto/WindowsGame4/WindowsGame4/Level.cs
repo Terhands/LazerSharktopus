@@ -29,7 +29,6 @@ namespace WindowsGame4
         ArrayList textures;
         ArrayList sounds;
         ArrayList fonts;
-        ArrayList songFiles;
 
         MusicManager musicPlayer;
 
@@ -42,7 +41,7 @@ namespace WindowsGame4
         protected List<Torch> torches;
         protected List<Guard> guards;
 
-        public Level(GameLoop game, ArrayList _textures, ArrayList _fonts, ArrayList _sounds, ArrayList _songs, LevelLoader loader) : base(game)
+        public Level(GameLoop game, ArrayList _textures, ArrayList _fonts, ArrayList _sounds, MusicManager _musicPlayer, LevelLoader loader) : base(game)
         {
             int screenWidth = Game.GraphicsDevice.Viewport.Width;
             int screenHeight = Game.GraphicsDevice.Viewport.Height;
@@ -58,7 +57,7 @@ namespace WindowsGame4
             sounds = _sounds;
             fonts = _fonts;
 
-            musicPlayer = new MusicManager(_songs);
+            musicPlayer = _musicPlayer;
 
             currentLevel = 0;
             deathCounter = 0;
@@ -67,7 +66,7 @@ namespace WindowsGame4
             screenHeight = Game.GraphicsDevice.Viewport.Height;
 
             this.game = game;
-            InitLevel();
+            levelLoader.LoadLevel(currentLevel);
         }
 
         public void InitLevel()
@@ -76,7 +75,7 @@ namespace WindowsGame4
             if (levelLoader.Map == null)
             {
                 // If there's no level, then we've passed the last level and the player has won the game
-                game.State = GameLoop.States.victory;
+                game.State = GameLoop.GameState.victory;
                 return;
             }
             levelMap = new Map(Game, levelLoader.Map, textures);
@@ -234,7 +233,16 @@ namespace WindowsGame4
                     currentLevel += 1;
                     bolts.Clear();
                     torches.Clear();
-                    InitLevel();
+
+                    if (levelLoader.NumLevels > currentLevel)
+                    {
+                        levelLoader.LoadLevel(currentLevel);
+                        game.SetGameState(GameLoop.GameState.levelIntro);
+                    }
+                    else
+                    {
+                        game.SetGameState(GameLoop.GameState.victory);
+                    }
                 }
             }
             else
@@ -242,7 +250,7 @@ namespace WindowsGame4
                 deathCounter += 1;
                 if (deathCounter > maxDeathCounter)
                 {
-                    game.State = GameLoop.States.gameOver;
+                    game.State = GameLoop.GameState.gameOver;
                 }
             }
             prevKeyState = keyState;
@@ -266,6 +274,17 @@ namespace WindowsGame4
             {
                 t.Draw(spriteBatch);
             }
+        }
+
+        public string LevelName
+        {
+            get { return levelLoader.LevelName; }
+        }
+
+        public int CurrentLevel
+        {
+            get { return currentLevel; }
+            set { currentLevel = value; }
         }
 
         /* figure out if the screen needs to shift to reflect the given action */
