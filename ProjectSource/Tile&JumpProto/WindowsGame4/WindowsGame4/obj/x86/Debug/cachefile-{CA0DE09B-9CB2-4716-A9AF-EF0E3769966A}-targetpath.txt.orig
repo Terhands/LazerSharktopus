@@ -5,9 +5,16 @@ Content\Lazersharktopus.xnb
 Content\groundSpriteFile.xnb
 Content\bolt.xnb
 Content\gameOver.xnb
+Content\tempGuard.xnb
+Content\torchSprites.xnb
 Content\timerFont.xnb
 Content\SumoHit.xnb
-Content\tempGuard.xnb
+Content\scream.xnb
+Content\DST-Aronara.xnb
+Content\DST-Aronara.wma
+Content\DST-AngryRobotIII.xnb
+Content\DST-AngryRobotIII.wma
+Content\RoBro.xnb
 Content\lathraia.config
 Content\Level1.txt
 Content\Level2.txt
@@ -16,8 +23,9 @@ Content\blank.xnb
 Content\Robro1.1.xnb
 Content\Lazersharktopus.xnb
 Content\groundSpriteFile.xnb
-Content\bolt.xnb
 Content\gameOver.xnb
+Content\tempGuard.xnb
+Content\torchSprites.xnb
 Content\timerFont.xnb
 Content\SumoHit.xnb
 Content\scream.xnb
@@ -25,8 +33,10 @@ Content\DST-Aronara.xnb
 Content\DST-Aronara.wma
 Content\DST-AngryRobotIII.xnb
 Content\DST-AngryRobotIII.wma
-Content\torchSprites.xnb
+Content\bolt.xnb
+Content\clunk.xnb
+Content\tink.xnb
 Content\lathraia.config
 Content\Level1.txt
 Content\Level2.txt
->>>>>>> 2a2cd9b22cfb616664ffe04f8f8be312ba57ece7
+>>>>>>> 27f7d2eb3079c8d1194885943b142b77904efd73

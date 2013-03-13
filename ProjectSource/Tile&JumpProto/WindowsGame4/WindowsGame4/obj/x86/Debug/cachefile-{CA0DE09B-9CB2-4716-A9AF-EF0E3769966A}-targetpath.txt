@@ -12,11 +12,10 @@ Content\DST-Aronara.xnb
 Content\DST-Aronara.wma
 Content\DST-AngryRobotIII.xnb
 Content\DST-AngryRobotIII.wma
+Content\RoBro.xnb
 Content\bolt.xnb
 Content\clunk.xnb
 Content\tink.xnb
-Content\menuFont.xnb
-Content\orbitron.xnb
 Content\lathraia.config
 Content\Level1.txt
 Content\Level2.txt
