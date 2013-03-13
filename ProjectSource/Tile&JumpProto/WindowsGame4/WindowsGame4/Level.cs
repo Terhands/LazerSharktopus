@@ -238,6 +238,8 @@ namespace WindowsGame4
                 deathCounter += 1;
                 if (deathCounter > maxDeathCounter)
                 {
+                    torches.Clear();
+                    bolts.Clear();
                     game.State = GameLoop.GameState.gameOver;
                 }
             }
@@ -270,6 +272,7 @@ namespace WindowsGame4
             get { return currentLevel; }
             set { currentLevel = value; }
         }
+
 
         /* figure out if the screen needs to shift to reflect the given action */
         protected bool shouldShiftScreen(Action action)
