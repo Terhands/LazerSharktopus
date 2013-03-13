@@ -78,7 +78,7 @@ namespace WindowsGame4
             int screenHeight = Game.GraphicsDevice.Viewport.Height;
 
             player = new Player(Game, (Texture2D)textures[playerIndex], sounds, 50, screenHeight - 52 - (screenHeight / 32));
-            guard = new Guard(Game, (Texture2D)textures[guardIndex], 80, screenHeight - 52 - (screenHeight / 32), Direction.right, 100);
+            guard = new Guard(Game, (Texture2D)textures[guardIndex], 700, screenHeight - 52 - (screenHeight / 32), Direction.right, 100);
             
             boltTexture = (Texture2D)textures[4];
 
@@ -149,6 +149,8 @@ namespace WindowsGame4
                 player.Update(playerAction, velocity);
                 player.HandleCollision(levelMap.GetNearbyTiles(player.GetPosition()));
 
+
+
                 // would like to find a way to just call foreach i, i.Update(a, v) instead of having to explicitly deal with the map...
                 if (shouldShiftScreen(playerAction))
                 {
@@ -162,7 +164,9 @@ namespace WindowsGame4
                         t.Update(playerAction, deltaX);
                     }
 
+                    //update guards
                     guard.Update(playerAction, deltaX);
+                   
 
                     foreach (Bolt bolt in bolts)
                     {
@@ -186,6 +190,7 @@ namespace WindowsGame4
                 }
 
                 guard.Update(gameTime);
+                guard.HandleCollision(player);
 
                 foreach (Bolt bolt in bolts)
                 {
