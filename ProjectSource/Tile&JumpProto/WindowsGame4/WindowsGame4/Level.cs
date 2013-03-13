@@ -182,7 +182,10 @@ namespace WindowsGame4
                 {
                     if (bolts.Count < 5)
                     {
-                        bolts.Add(new Bolt(Game, player.GetFacingDirection(), player.GetPosition().X, player.GetPosition().Y, boltTexture));
+                        ArrayList boltSounds = new ArrayList();
+                        boltSounds.Add(sounds[1]);
+                        boltSounds.Add(sounds[2]);
+                        bolts.Add(new Bolt(Game, player.GetFacingDirection(), player.GetPosition().X, player.GetPosition().Y, boltTexture, boltSounds));
                     }
                 }
 
@@ -196,7 +199,11 @@ namespace WindowsGame4
                 foreach (Bolt bolt in bolts)
                 {
                     bolt.Update(Action.none, 0);
-                    bolt.HandleCollision(levelMap.GetNearbyTiles(bolt.GetPosition()));
+                    if (!bolt.hasCollided)
+                    {
+                        bolt.HandleCollision(levelMap.GetNearbyTiles(bolt.GetPosition()));
+                    }
+
                     if (bolt.expiryTime <= 0)
                     {
                         bolts.Remove(bolt);
