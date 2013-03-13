@@ -15,6 +15,8 @@ Content\DST-AngryRobotIII.wma
 Content\bolt.xnb
 Content\clunk.xnb
 Content\tink.xnb
+Content\menuFont.xnb
+Content\orbitron.xnb
 Content\lathraia.config
 Content\Level1.txt
 Content\Level2.txt

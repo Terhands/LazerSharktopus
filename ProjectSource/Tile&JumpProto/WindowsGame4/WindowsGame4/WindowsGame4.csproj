@@ -93,6 +93,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="GameLoop.cs" />
     <Compile Include="Tile.cs" />
+    <Compile Include="TitleMenu.cs" />
     <Compile Include="Torch.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -27,9 +27,11 @@ namespace WindowsGame4
 
         GameLoader config;
         
-        public enum States { title, level, gameOver, victory };
+        public enum States { titleMenu, titleScreen, level, gameOver, victory };
         States gameState;
         GameOver gameOver;
+        TitleMenu titleMenu;
+
         Level level;
 
         /* Keyboard controls */
@@ -64,10 +66,11 @@ namespace WindowsGame4
         {
             // TODO: Add your initialization logic here
             base.Initialize();
-            gameState = States.level;
+            gameState = States.titleMenu;
 
             level = new Level(this, textures, fonts, sounds, songs, new LevelLoader(config.LevelFiles));
-            gameOver = new GameOver(this, (Texture2D)textures[3], (SpriteFont)fonts[0]);
+            gameOver = new GameOver(this, (Texture2D)textures[3], (SpriteFont)fonts[1]);
+            titleMenu = new TitleMenu(this, (Texture2D)textures[3], (SpriteFont)fonts[1]);
         }
 
         /// <summary>
@@ -131,9 +134,9 @@ namespace WindowsGame4
             {
                 gameOver.Update();
             }
-            else if (gameState == States.title)
+            else if (gameState == States.titleMenu)
             {
-                // Title Screen Updates
+                titleMenu.Update();
             }
             else if (gameState == States.victory)
             {
@@ -171,9 +174,9 @@ namespace WindowsGame4
             {
                 gameOver.Draw(spriteBatch);
             }
-            else if (gameState == States.title)
+            else if (gameState == States.titleMenu)
             {
-                // Title Screen Updates
+                titleMenu.Draw(spriteBatch);
             }
             else if (gameState == States.victory)
             {
