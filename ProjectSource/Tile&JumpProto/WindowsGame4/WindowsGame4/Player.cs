@@ -63,7 +63,7 @@ namespace WindowsGame4
             int yCenter = yStart - playerPadding;
             this.jumpMeter = new JumpMeter(game, xCenter, yCenter, spriteDepth);
 
-            hidden = 0;
+            hidden = 0.0f;
             isJumping = false;
             isStopped = true; // will we need to know this?? Maybe for a funny animation if you take too long...
             isDead = false;
@@ -84,11 +84,6 @@ namespace WindowsGame4
         {
             get { return isDead; }
             set { isDead = value; }
-        }
-
-        public float Hidden
-        {
-            get { return hidden; }
         }
 
         public void Jump()
@@ -299,6 +294,11 @@ namespace WindowsGame4
         public int DeltaX
         {
             get { return deltaX; }
+        }
+
+        public float HiddenPercent
+        {
+            get { return hidden; }
         }
 
         public void reposition()

@@ -25,8 +25,9 @@ namespace WindowsGame4
         protected Rectangle source;
         protected Direction facingDirection;
 
-        protected const int LOSRadius = 50;
+        protected const int LOSRadius = 200;
         protected const int hearingRadius = 150;
+        protected const float detectionThreshold = 0.01f;
 
         protected bool isFalling;
         protected int velocity = 2;
@@ -227,6 +228,7 @@ namespace WindowsGame4
             else
             {
                 currentBehaviour = Behaviour.distracted;
+                guardCounter = 70;
             }
         }
 
@@ -310,14 +312,27 @@ namespace WindowsGame4
         //if he sees the player, the player should die.
         public void HandleVision(Player player)
         {
+            Vector2  mapEyePos = new Vector2(this.position.X + eyePos.X, this.position.Y + eyePos.Y);
 
-            Direction sightDirection = determineRadialCollision(player.GetPosition(), LOSRadius);
-          
-            if (sightDirection == facingDirection)
+            //distance between the x and y position of the guards eyes and the middle of the player
+            float dX = mapEyePos.X - (player.GetPosition().X + (player.GetPosition().Width / 2));
+            float dY = mapEyePos.Y - (player.GetPosition().Y + (player.GetPosition().Height / 2));
+            float distance = (float)Math.Sqrt(Math.Pow(dX, 2) + Math.Pow(dY, 2));
+
+            float visibility = (1 - player.HiddenPercent) * (LOSRadius / distance) * 100;
+            if (visibility >= 0.5 * LOSRadius)
             {
-                //player.Kill();
-            }
+                Direction sightDirection = determineRadialCollision(player.GetPosition(), LOSRadius);
 
+                if (sightDirection == facingDirection)
+                {
+                    //player.Kill();
+                }
+            }
+            else
+            {
+                debugColor = Color.White;
+            }
   
         }
 
@@ -334,9 +349,9 @@ namespace WindowsGame4
             float recRadius = 0.25f * ((float)(r.Width + r.Height));
 
             //distance between the x and y position of the guards eyes and the middle of the player
-            float deltaX = mapEyePos.X - (r.X + (r.Width / 2));
-            float deltaY = mapEyePos.Y - (r.Y + (r.Height / 2));
-            float distance = (float)Math.Sqrt(Math.Pow(deltaX, 2) + Math.Pow(deltaY, 2));
+            float dX = mapEyePos.X - (r.X + (r.Width / 2));
+            float dY = mapEyePos.Y - (r.Y + (r.Height / 2));
+            float distance = (float)Math.Sqrt(Math.Pow(dX, 2) + Math.Pow(dY, 2));
 
             debugColor = Color.White;
 
@@ -345,7 +360,7 @@ namespace WindowsGame4
             {
                 // now to get the collision direction l\u/r u=up, b=bottom, r=right, l=left
                 //                                    l/b\r
-                Vector2 destination = new Vector2(deltaX, deltaY);
+                Vector2 destination = new Vector2(dX, dY);
                 Vector2 vecDir = destination;// -mapEyePos;
                 vecDir.Normalize();
                 float angle = VectorToAngle(vecDir);
@@ -357,20 +372,20 @@ namespace WindowsGame4
                 
 
                 // may have to tweak the angle values it depends on how xna stores angles against world coords
-                if (angle >= 45 && angle <= 135)
+                if (angle >= 15 && angle <= 165)
                 {
                     direction = Direction.top;
                     debugColor = Color.Beige;
                     System.Console.WriteLine("top");
                 }
-                else if (angle >= 135 && angle <= 225)
+                else if (angle >= 165 && angle <= 195)
                 {
                     direction = Direction.right;
                     debugColor = Color.Crimson;
                     System.Console.WriteLine("right");
                  
                 }
-                else if (angle >= 225 && angle <= 315)
+                else if (angle >= 195 && angle <= 345)
                 {
                     direction = Direction.bottom;
                     debugColor = Color.Black;

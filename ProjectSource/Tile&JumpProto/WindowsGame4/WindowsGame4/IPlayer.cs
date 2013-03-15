@@ -24,8 +24,8 @@ namespace WindowsGame4
 
         /* getters & setters for player state */
         bool IsDead { get; set; }
-        float Hidden { get; }
         int DeltaX { get; }
+        float HiddenPercent { get; }
         
         /* move the player back deltaX (for use when the screen shifts) */
         void reposition();
