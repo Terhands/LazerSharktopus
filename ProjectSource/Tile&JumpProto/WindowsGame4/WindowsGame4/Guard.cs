@@ -13,6 +13,9 @@ namespace WindowsGame4
         protected int distractedTime;
         protected int maxDistractedTime;
 
+        protected int guardCounter;
+        protected int guardStartCount = 20;
+
         protected int patrolLength;
         protected int patrolBoundaryLeft;
         protected int patrolBoundaryRight;
@@ -25,7 +28,7 @@ namespace WindowsGame4
         protected int hearingRadius;
 
         protected bool isFalling;
-        protected int velocity = 1;
+        protected int velocity = 2;
         protected const int minFallingSpeed = -1;
 
         protected enum Behaviour { patrol, guard, distracted, goCheckThatShitOut, gotoPatrol };
@@ -68,9 +71,10 @@ namespace WindowsGame4
 
             currentBehaviour = Behaviour.patrol;
             isFalling = false;
+            guardCounter = -1;
 
-            //deltaX = 0;
-            //deltaY = 0;
+            deltaX = 0;
+            deltaY = 0;
         }
 
         public override Rectangle GetPosition()
@@ -95,6 +99,7 @@ namespace WindowsGame4
             else if (currentBehaviour == Behaviour.guard)
             {
                 // chill out for a few and guard some shit
+                StandWatch();
             }
             else if (currentBehaviour == Behaviour.goCheckThatShitOut)
             {
@@ -144,7 +149,7 @@ namespace WindowsGame4
                 }
                 else if (position.X == patrolBoundaryRight)
                 {
-                    facingDirection = Direction.left;
+                    currentBehaviour = Behaviour.guard;
                 }
             }
             //move left until you reach your patrol, then turn around
@@ -155,6 +160,32 @@ namespace WindowsGame4
                     deltaX = -1 * velocity;
                 }
                 else if (patrolBoundaryLeft == position.X)
+                {
+                    currentBehaviour = Behaviour.guard;
+                }
+            }
+        }
+
+        protected void StandWatch()
+        {
+            deltaX = 0;
+            if (guardCounter < 0)
+            {
+                guardCounter = guardStartCount;
+            }
+            else if (guardCounter > 0)
+            {
+                guardCounter -= 1;
+            }
+            else
+            {
+                guardCounter = -1;
+                currentBehaviour = Behaviour.patrol;
+                if (facingDirection == Direction.right)
+                {
+                    facingDirection = Direction.left;
+                }
+                else
                 {
                     facingDirection = Direction.right;
                 }
