@@ -16,7 +16,6 @@ namespace WindowsGame4
         protected Rectangle source;
 
         protected Rectangle leftRightCollisionRectangle;
-        protected Rectangle footCollisionRectangle;
 
         protected Action facingDirection;
 
@@ -192,6 +191,7 @@ namespace WindowsGame4
 
                 tilePos.X -= 1;
                 tilePos.Y += 1;
+                tilePos.Height -= 1;
                 tilePos.Width += 2;
 
                 Direction direction = determineCollisionType(tilePos);

@@ -9,8 +9,10 @@ namespace WindowsGame4
 {
     class Guard : ADynamicGameObject, IDynamicGameObject
     {
+
         protected int distractedTime;
         protected int maxDistractedTime;
+
         protected int patrolLength;
         protected int patrolBoundaryLeft;
         protected int patrolBoundaryRight;
@@ -21,7 +23,12 @@ namespace WindowsGame4
 
         protected int LOSRadius;
         protected int hearingRadius;
+
         protected int velocity = 1;
+
+        protected enum Behaviour { patrol, guard, distracted, goCheckThatShitOut, gotoPatrol };
+
+        protected Behaviour currentBehaviour;
 
 
         protected Color debugColor;
@@ -30,14 +37,16 @@ namespace WindowsGame4
         protected const float spriteDepth = 0.95f;
 
 
-        Vector2 eyePos = new Vector2(46.0f, 18.0f);
+        Vector2 eyePos;
         
 
         public Guard(Game game, Texture2D texture, int xStart, int yStart, Direction FacingDirectionStart, int patrolLength) : base(game)
         {
             debugColor = Color.White;
+
             facingDirection = FacingDirectionStart;
             this.patrolLength = patrolLength;
+
             if (facingDirection == Direction.left)
             {
                 patrolBoundaryRight = xStart;
@@ -52,7 +61,10 @@ namespace WindowsGame4
 
             source = new Rectangle(0, 0, 83, 108);
             position = new Rectangle(xStart, yStart, 36, 52);
+            eyePos = new Vector2(position.Width/2, position.Height/4);
             sprite = texture;
+
+            currentBehaviour = Behaviour.patrol;
 
             //deltaX = 0;
             //deltaY = 0;
@@ -73,6 +85,30 @@ namespace WindowsGame4
 
         public override void Update(GameTime gameTime)
         {
+            if (currentBehaviour == Behaviour.patrol)
+            {
+                Patrol();
+            }
+            else if (currentBehaviour == Behaviour.guard)
+            {
+                // chill out for a few and guard some shit
+            }
+            else if (currentBehaviour == Behaviour.goCheckThatShitOut)
+            {
+                // WTF WAS THAT?!?!?
+            }
+            else if (currentBehaviour == Behaviour.distracted)
+            {
+                // hmmm.... maybe I'm just going insane... and hearing things... like bolts
+            }
+            else if (currentBehaviour == Behaviour.gotoPatrol)
+            {
+                // use the ultimate power of the goto to get back to your starting route!
+            }
+        }
+
+        protected void Patrol()
+        {
             //move right until you reach your patrol, then turn around
             if (facingDirection == Direction.right)
             {
@@ -83,26 +119,21 @@ namespace WindowsGame4
                 else if (position.X == patrolBoundaryRight)
                 {
                     facingDirection = Direction.left;
-
                 }
-
             }
-                //move left until you reach your patrol, then turn around
+            //move left until you reach your patrol, then turn around
             else if (facingDirection == Direction.left)
             {
                 if (patrolBoundaryLeft < position.X)
                 {
                     position.X -= this.velocity;
-
                 }
                 else if (patrolBoundaryLeft == position.X)
                 {
                     facingDirection = Direction.right;
-
                 }
             }
         }
-
        
 
         public override void HandleCollision(IList<ITile> tile)
@@ -140,7 +171,7 @@ namespace WindowsGame4
           
             if (sightDirection == facingDirection)
             {
-                player.Kill();
+                //player.Kill();
             }
 
   
@@ -152,7 +183,7 @@ namespace WindowsGame4
         {
             Direction direction = Direction.none;
 
-           Vector2  mapEyePos = new Vector2(this.position.X + eyePos.X, this.position.Y + eyePos.Y);
+            Vector2  mapEyePos = new Vector2(this.position.X + eyePos.X, this.position.Y + eyePos.Y);
 
             // hopefully close enough & easier than having to handle circle/rectangle collisions
             // let recRadius be half the average of the width & height of the rectangle
@@ -169,34 +200,42 @@ namespace WindowsGame4
                 // now to get the collision direction l\u/r u=up, b=bottom, r=right, l=left
                 //                                    l/b\r
                 Vector2 destination = new Vector2(deltaX, deltaY);
-                Vector2 vecDir = destination - eyePos;
+                Vector2 vecDir = destination;// -mapEyePos;
                 vecDir.Normalize();
                 float angle = VectorToAngle(vecDir);
+
+                while (angle < 0)
+                    angle += 360;
+
+                System.Console.WriteLine(angle);
                 
 
-                // may have to tweak the angle values it depends on how xna stores angles againsts world coords
-                if ((angle <= 45 && angle >= 0) || (angle >= 315))
+                // may have to tweak the angle values it depends on how xna stores angles against world coords
+                if (angle >= 45 && angle <= 135)
                 {
                     direction = Direction.top;
-                   
-                }
-                else if (angle >= 45 && angle <= 135)
-                {
-                    direction = Direction.right;
-                 
+                    debugColor = Color.Beige;
+                    System.Console.WriteLine("top");
                 }
                 else if (angle >= 135 && angle <= 225)
                 {
+                    direction = Direction.right;
+                    debugColor = Color.Crimson;
+                    System.Console.WriteLine("right");
+                 
+                }
+                else if (angle >= 225 && angle <= 315)
+                {
                     direction = Direction.bottom;
-                    System.Console.WriteLine("dir = right");
+                    debugColor = Color.Black;
+                    System.Console.WriteLine("bottom");
                 }
                 else
                 {
-                    System.Console.WriteLine("dir = bottom");
+                    System.Console.WriteLine("left");
                     direction = Direction.left;
+                    debugColor = Color.DarkMagenta;
                 }
-
-                
             }
 
             return direction;
@@ -204,10 +243,10 @@ namespace WindowsGame4
 
         protected float VectorToAngle(Vector2 v)
         {
-            return (float)Math.Atan2(v.Y, v.X);
+            return (float)(Math.Atan2(v.Y, v.X) * (180 / Math.PI));
         }
 
-        // get the normalized vector from the given angle
+        // get the normalized vector from the given angle - NOTE angle is probably required to be in radians /cry
         protected Vector2 AngleToVector(float angle)
         {
             return new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle));
