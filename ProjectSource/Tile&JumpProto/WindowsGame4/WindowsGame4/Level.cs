@@ -213,6 +213,7 @@ namespace WindowsGame4
                 {
                     guard.Update(gameTime);
                     guard.HandleVision((Player)player);
+                    guard.HandleCollision(levelMap.GetNearbyTiles(guard.GetPosition()));
                 }
 
                 foreach (Bolt bolt in bolts)

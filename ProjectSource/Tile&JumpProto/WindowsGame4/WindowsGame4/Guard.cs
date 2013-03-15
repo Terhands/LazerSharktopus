@@ -24,7 +24,9 @@ namespace WindowsGame4
         protected int LOSRadius;
         protected int hearingRadius;
 
+        protected bool isFalling;
         protected int velocity = 1;
+        protected const int minFallingSpeed = -1;
 
         protected enum Behaviour { patrol, guard, distracted, goCheckThatShitOut, gotoPatrol };
 
@@ -65,6 +67,7 @@ namespace WindowsGame4
             sprite = texture;
 
             currentBehaviour = Behaviour.patrol;
+            isFalling = false;
 
             //deltaX = 0;
             //deltaY = 0;
@@ -105,6 +108,29 @@ namespace WindowsGame4
             {
                 // use the ultimate power of the goto to get back to your starting route!
             }
+
+            // guards fall straight down
+            if (!isFalling)
+            {
+                position.X += deltaX;
+            }
+            else
+            {
+                Fall();
+                position.Y -= deltaY;
+            }
+        }
+
+        protected void Fall()
+        {
+            if (deltaY >= minFallingSpeed)
+            {
+                deltaY = minFallingSpeed;
+            }
+            else
+            {
+                deltaY -= deltaY * 5 / 3;
+            }
         }
 
         protected void Patrol()
@@ -114,7 +140,7 @@ namespace WindowsGame4
             {
                 if (position.X < patrolBoundaryRight)
                 {
-                    position.X += this.velocity;
+                    deltaX = velocity;
                 }
                 else if (position.X == patrolBoundaryRight)
                 {
@@ -126,7 +152,7 @@ namespace WindowsGame4
             {
                 if (patrolBoundaryLeft < position.X)
                 {
-                    position.X -= this.velocity;
+                    deltaX = -1 * velocity;
                 }
                 else if (patrolBoundaryLeft == position.X)
                 {
@@ -136,9 +162,59 @@ namespace WindowsGame4
         }
        
 
-        public override void HandleCollision(IList<ITile> tile)
+        public override void HandleCollision(IList<ITile> tiles)
         {
-          //  determineRadialCollision(
+            bool footCollision = false;
+
+            // check that any intersections are only on passable tiles
+            foreach (ITile t in tiles)
+            {
+                // padding the tile with a pixel on either side so the player cannot climb the walls
+                Rectangle tilePos = t.getPosition();
+
+                tilePos.X -= 1;
+                tilePos.Y += 1;
+                tilePos.Height -= 1;
+                tilePos.Width += 2;
+
+                Direction direction = determineCollisionType(tilePos);
+
+                switch (direction)
+                {
+                    case Direction.bottom:
+                        position.Y = t.getPosition().Top - position.Height;
+                        footCollision = true;
+                        break;
+                    case Direction.top:
+                        // this should never happen, our guards don't jump... yet.
+                        break;
+                    case Direction.left:
+                        if (t.getCollisionBehaviour() == CollisionType.impassable)
+                        {
+                            // for some wierd reason with only 1 pixel of padding this breaks player's fall
+                            position.X = t.getPosition().Right + 2;
+                            deltaX = 0;
+                        }
+                        break;
+                    case Direction.right:
+                        if (t.getCollisionBehaviour() == CollisionType.impassable)
+                        {
+                            position.X = t.getPosition().Left - position.Width - 1;
+                            deltaX = 0;
+                        }
+                        break;
+                }
+            }
+
+            if (!footCollision)
+            {
+                isFalling = true;
+                Fall();
+            }
+            else
+            {
+                isFalling = false;
+            }
         }
 
         public void HandleHearing(IList<Bolt> bolts)
@@ -157,9 +233,6 @@ namespace WindowsGame4
             }
 
             int GoalDestination = distractingBolt.GetPosition().X;
-
-
-            
 
         }
 
@@ -193,6 +266,8 @@ namespace WindowsGame4
             float deltaX = mapEyePos.X - (r.X + (r.Width / 2));
             float deltaY = mapEyePos.Y - (r.Y + (r.Height / 2));
             float distance = (float)Math.Sqrt(Math.Pow(deltaX, 2) + Math.Pow(deltaY, 2));
+
+            debugColor = Color.White;
 
             // if the distance is less than the two radii, then the rectange is in collision with this Guard's collision radius
             if (distance <= recRadius + radius)
