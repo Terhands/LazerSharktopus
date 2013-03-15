@@ -19,13 +19,14 @@ namespace WindowsGame4
         protected int patrolLength;
         protected int patrolBoundaryLeft;
         protected int patrolBoundaryRight;
+        protected int distractionX;
 
         protected Texture2D sprite;
         protected Rectangle source;
         protected Direction facingDirection;
 
-        protected int LOSRadius;
-        protected int hearingRadius;
+        protected const int LOSRadius = 50;
+        protected const int hearingRadius = 150;
 
         protected bool isFalling;
         protected int velocity = 2;
@@ -104,10 +105,12 @@ namespace WindowsGame4
             else if (currentBehaviour == Behaviour.goCheckThatShitOut)
             {
                 // WTF WAS THAT?!?!?
+                GoCheckThatShitOut();
             }
             else if (currentBehaviour == Behaviour.distracted)
             {
                 // hmmm.... maybe I'm just going insane... and hearing things... like bolts
+                StandWatch();
             }
             else if (currentBehaviour == Behaviour.gotoPatrol)
             {
@@ -147,6 +150,12 @@ namespace WindowsGame4
                 {
                     deltaX = velocity;
                 }
+                // GTF BACK TO YOUR POST SOLDIER!!!
+                else if (position.X > patrolBoundaryRight)
+                {
+                    facingDirection = Direction.left;
+                    deltaX = -1 * velocity;
+                }
                 else if (position.X == patrolBoundaryRight)
                 {
                     currentBehaviour = Behaviour.guard;
@@ -158,6 +167,11 @@ namespace WindowsGame4
                 if (patrolBoundaryLeft < position.X)
                 {
                     deltaX = -1 * velocity;
+                }
+                else if (patrolBoundaryLeft > position.X)
+                {
+                    facingDirection = Direction.right;
+                    deltaX = velocity;
                 }
                 else if (patrolBoundaryLeft == position.X)
                 {
@@ -191,7 +205,30 @@ namespace WindowsGame4
                 }
             }
         }
-       
+
+
+        protected void GoCheckThatShitOut()
+        {
+            if (Math.Abs(position.X + (position.Width / 2) - distractionX) > 38)
+            {
+                // I dare say there is a distraction to your posterior good sir!
+                if (facingDirection == Direction.right && distractionX < position.X)
+                {
+                    facingDirection = Direction.left;
+                    deltaX = -1 * velocity;
+                }
+                // the bolt is behind you I say!
+                else if (facingDirection == Direction.left && distractionX > position.X)
+                {
+                    facingDirection = Direction.right;
+                    deltaX = velocity;
+                }
+            }
+            else
+            {
+                currentBehaviour = Behaviour.distracted;
+            }
+        }
 
         public override void HandleCollision(IList<ITile> tiles)
         {
@@ -254,7 +291,7 @@ namespace WindowsGame4
             Bolt distractingBolt = null;
             foreach (Bolt bolt in bolts)
             {
-               hearingDirection = determineRadialCollision(bolt.GetPosition(), 200);
+               hearingDirection = determineRadialCollision(bolt.GetPosition(), hearingRadius);
                if (hearingDirection != Direction.none)
                {
                    distractingBolt = bolt;
@@ -263,15 +300,18 @@ namespace WindowsGame4
                }
             }
 
-            int GoalDestination = distractingBolt.GetPosition().X;
-
+            if (distractingBolt != null)
+            {
+                distractionX = distractingBolt.GetPosition().X;
+                currentBehaviour = Behaviour.goCheckThatShitOut;
+            }
         }
 
         //if he sees the player, the player should die.
         public void HandleVision(Player player)
         {
 
-            Direction sightDirection = determineRadialCollision(player.GetPosition(), 100.0f);
+            Direction sightDirection = determineRadialCollision(player.GetPosition(), LOSRadius);
           
             if (sightDirection == facingDirection)
             {

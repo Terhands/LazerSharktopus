@@ -209,12 +209,7 @@ namespace WindowsGame4
                     t.Update(gameTime);
                 }
 
-                foreach (Guard guard in guards)
-                {
-                    guard.Update(gameTime);
-                    guard.HandleVision((Player)player);
-                    guard.HandleCollision(levelMap.GetNearbyTiles(guard.GetPosition()));
-                }
+                IList<Bolt> collidedBolts = new List<Bolt>();
 
                 foreach (Bolt bolt in bolts)
                 {
@@ -223,12 +218,25 @@ namespace WindowsGame4
                     {
                         bolt.HandleCollision(levelMap.GetNearbyTiles(bolt.GetPosition()));
                     }
+                    else
+                    {
+                        collidedBolts.Add(bolt);
+                    }
 
                     if (bolt.expiryTime <= 0)
                     {
                         bolts.Remove(bolt);
                         break;
                     }
+                }
+
+                foreach (Guard guard in guards)
+                {
+                    guard.Update(gameTime);
+                    guard.HandleCollision(levelMap.GetNearbyTiles(guard.GetPosition()));
+                    guard.HandleVision((Player)player);
+                    // need a way to get back all bolts that have collided - have to actually hear it, not see it with my 360 degree camera strapped to the inside of the guard's visor
+                    guard.HandleHearing(collidedBolts);
                 }
 
                 if (player.DoneLevel)
