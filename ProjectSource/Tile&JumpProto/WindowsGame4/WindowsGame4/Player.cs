@@ -14,6 +14,10 @@ namespace WindowsGame4
         protected Texture2D sprite;
         protected ArrayList sounds;
         protected Rectangle source;
+
+        protected Rectangle leftRightCollisionRectangle;
+        protected Rectangle footCollisionRectangle;
+
         protected Action facingDirection;
 
         // hidden goes from 0->1 1 being totallly hidden, 0 being standing yelling & flailing in the middle of a well lit room
@@ -52,6 +56,8 @@ namespace WindowsGame4
             facingDirection = Action.right;
             source = new Rectangle(this.frameStartX + this.frameSkipX * this.frameCountCol, this.frameStartY + this.frameSkipY * this.frameCountRow, this.frameWidth, this.frameHeight);
             position = new Rectangle(xStart, yStart, 36, 52);
+            leftRightCollisionRectangle = new Rectangle(position.X, position.Y, position.Width, position.Height - 2);
+
             sprite = texture;
 
             int xCenter = xStart + (position.Width / 2);
@@ -91,7 +97,7 @@ namespace WindowsGame4
             // scale the jump so you can go high fast, but fall a bit slower - less sudden
             if (jumpMeter.JumpPower > 0.00001 || jumpMeter.JumpPower < 0)
             {
-                deltaY = (int)(5 / 3 * jumpMeter.JumpPower);
+                deltaY = (int)(.9 * jumpMeter.JumpPower);
                 if (jumpMeter.JumpPower > 0)
                 {
                     jumpMeter.drainJumpPower(0.25f);
@@ -185,6 +191,7 @@ namespace WindowsGame4
                 Rectangle tilePos = t.getPosition();
 
                 tilePos.X -= 1;
+                tilePos.Y += 1;
                 tilePos.Width += 2;
 
                 Direction direction = determineCollisionType(tilePos);

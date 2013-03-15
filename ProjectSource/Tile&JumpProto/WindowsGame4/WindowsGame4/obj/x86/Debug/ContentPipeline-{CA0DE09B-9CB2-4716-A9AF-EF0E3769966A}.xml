@@ -38,15 +38,6 @@
       <Time>2013-03-11T21:25:55.6577767-06:00</Time>
     </Item>
     <Item>
-      <Source>bolt.bmp</Source>
-      <Name>bolt</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\bolt.xnb</Output>
-      <Time>2013-03-11T21:25:55.6357755-06:00</Time>
-    </Item>
-    <Item>
       <Source>gameOver.png</Source>
       <Name>gameOver</Name>
       <Importer>TextureImporter</Importer>
@@ -110,6 +101,78 @@
       <Options>None</Options>
       <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\torchSprites.xnb</Output>
       <Time>2013-03-12T01:06:42.6587839-06:00</Time>
+    </Item>
+    <Item>
+      <Source>tempGuard.png</Source>
+      <Name>tempGuard</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\tempGuard.xnb</Output>
+      <Time>2013-03-13T10:04:20.9850031-06:00</Time>
+    </Item>
+    <Item>
+      <Source>RoBro.png</Source>
+      <Name>RoBro</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\RoBro.xnb</Output>
+      <Time>2013-03-13T10:04:20.9450009-06:00</Time>
+    </Item>
+    <Item>
+      <Source>bolt.png</Source>
+      <Name>bolt</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\bolt.xnb</Output>
+      <Time>2013-03-13T10:04:20.9490011-06:00</Time>
+    </Item>
+    <Item>
+      <Source>TitleScreen.png</Source>
+      <Name>TitleScreen</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\TitleScreen.xnb</Output>
+      <Time>2013-03-13T10:04:20.9460009-06:00</Time>
+    </Item>
+    <Item>
+      <Source>levelNameFont.spritefont</Source>
+      <Name>levelNameFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\levelNameFont.xnb</Output>
+      <Time>2013-03-13T10:04:20.9710023-06:00</Time>
+    </Item>
+    <Item>
+      <Source>menuFont.spritefont</Source>
+      <Name>menuFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\menuFont.xnb</Output>
+      <Time>2013-03-14T22:38:20.0303259-06:00</Time>
+    </Item>
+    <Item>
+      <Source>clunk.wav</Source>
+      <Name>clunk</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\clunk.xnb</Output>
+      <Time>2013-03-13T10:04:20.9500011-06:00</Time>
+    </Item>
+    <Item>
+      <Source>tink.wav</Source>
+      <Name>tink</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\tink.xnb</Output>
+      <Time>2013-03-13T10:04:20.9870033-06:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
