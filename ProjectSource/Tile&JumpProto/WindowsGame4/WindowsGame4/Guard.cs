@@ -371,7 +371,10 @@ namespace WindowsGame4
                 // if the tile is completely behind the player relative to the guard's perspective we don't care about it
                 if (!((facingDirection == Direction.right && t.getPosition().Left > r.Right) || (facingDirection == Direction.left && t.getPosition().Right < r.Left)))
                 {
-                    cleanedTiles.Add(t);
+                    if (t.getCollisionBehaviour() == CollisionType.impassable || (t.getCollisionBehaviour() == CollisionType.platform && r.Bottom <= t.getPosition().Top))
+                    {
+                        cleanedTiles.Add(t);
+                    }
                 }
             }
 
