@@ -12,7 +12,7 @@ namespace WindowsGame4
     {
         protected float jumpPower;
         protected const float maxJumpPower = 7.5f;
-        protected const float minJumpPower = 3.0f;
+        protected const float minJumpPower = 3.5f;
 
         protected float spriteDepth;
 
