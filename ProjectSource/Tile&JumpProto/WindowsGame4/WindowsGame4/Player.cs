@@ -101,7 +101,7 @@ namespace WindowsGame4
                 }
                 else
                 {
-                    jumpMeter.drainJumpPower(0.1f);
+                    jumpMeter.drainJumpPower(0.2f);
                 }
             }
             else

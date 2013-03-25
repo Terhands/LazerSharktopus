@@ -297,7 +297,7 @@ namespace WindowsGame4
                if (hearingDirection != Direction.none)
                {
                    distractingBolt = bolt;
-                   debugColor = Color.Red;
+                   debugColor = Color.Blue;
                    break;
                }
             }
@@ -324,16 +324,10 @@ namespace WindowsGame4
             debugColor = Color.White;
 
             // is the player visible enough/close enough for the guard to be able to see
-            if (visibility <= 0)
+            if (visibility <= 0 && isVisible(player.GetPosition(), surroundingTiles))
             {
-                //Direction sightDirection = determineRadialCollision(player.GetPosition(), LOSRadius);
-
-                //if (sightDirection == facingDirection && isVisible(player.GetPosition(), surroundingTiles))
-                if (isVisible(player.GetPosition(), surroundingTiles))
-                {
-                    debugColor = Color.Red;
-                    //player.Kill();
-                }
+                debugColor = Color.Red;
+                //player.Kill();
             }
             else
             {
@@ -341,6 +335,7 @@ namespace WindowsGame4
             }
   
         }
+
 
         protected bool isVisible(Rectangle r, IList<ITile> tiles)
         {

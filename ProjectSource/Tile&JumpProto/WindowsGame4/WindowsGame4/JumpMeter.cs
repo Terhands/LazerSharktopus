@@ -11,7 +11,7 @@ namespace WindowsGame4
     class JumpMeter : DrawableGameComponent, IGameObject
     {
         protected float jumpPower;
-        protected const float maxJumpPower = 7.0f;
+        protected const float maxJumpPower = 7.5f;
         protected const float minJumpPower = 3.0f;
 
         protected float spriteDepth;
@@ -63,7 +63,7 @@ namespace WindowsGame4
             }
             else if (jumpPower < maxJumpPower)
             {
-                jumpPower += 0.1f;
+                jumpPower += 0.15f;
             }
         }
 
