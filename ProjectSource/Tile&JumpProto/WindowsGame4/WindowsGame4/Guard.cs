@@ -9,35 +9,51 @@ namespace WindowsGame4
 {
     class Guard : ADynamicGameObject, IDynamicGameObject
     {
+
         protected int distractedTime;
         protected int maxDistractedTime;
+
+        protected int guardCounter;
+        protected int guardStartCount = 20;
+
         protected int patrolLength;
         protected int patrolBoundaryLeft;
         protected int patrolBoundaryRight;
+        protected int distractionX;
 
         protected Texture2D sprite;
         protected Rectangle source;
         protected Direction facingDirection;
 
-        protected int LOSRadius;
-        protected int hearingRadius;
-        protected int velocity = 1;
+        protected const int LOSRadius = 200;
+        protected const int hearingRadius = 150;
+        protected const float detectionThreshold = 0.01f;
+
+        protected bool isFalling;
+        protected int velocity = 2;
+        protected const int minFallingSpeed = -1;
+
+        protected enum Behaviour { patrol, guard, distracted, goCheckThatShitOut, gotoPatrol };
+
+        protected Behaviour currentBehaviour;
 
 
         protected Color debugColor;
 
         //took this from the player class, may need a different value
-        protected const float spriteDepth = 0.5f;
+        protected const float spriteDepth = 0.95f;
 
 
-        Vector2 eyePos = new Vector2(46.0f, 18.0f);
+        Vector2 eyePos;
         
 
         public Guard(Game game, Texture2D texture, int xStart, int yStart, Direction FacingDirectionStart, int patrolLength) : base(game)
         {
             debugColor = Color.White;
+
             facingDirection = FacingDirectionStart;
             this.patrolLength = patrolLength;
+
             if (facingDirection == Direction.left)
             {
                 patrolBoundaryRight = xStart;
@@ -52,10 +68,15 @@ namespace WindowsGame4
 
             source = new Rectangle(0, 0, 83, 108);
             position = new Rectangle(xStart, yStart, 36, 52);
+            eyePos = new Vector2(position.Width/2, position.Height/4);
             sprite = texture;
 
-            //deltaX = 0;
-            //deltaY = 0;
+            currentBehaviour = Behaviour.patrol;
+            isFalling = false;
+            guardCounter = -1;
+
+            deltaX = 0;
+            deltaY = 0;
         }
 
         public override Rectangle GetPosition()
@@ -73,41 +94,197 @@ namespace WindowsGame4
 
         public override void Update(GameTime gameTime)
         {
+            if (currentBehaviour == Behaviour.patrol)
+            {
+                Patrol();
+            }
+            else if (currentBehaviour == Behaviour.guard)
+            {
+                // chill out for a few and guard some shit
+                StandWatch();
+            }
+            else if (currentBehaviour == Behaviour.goCheckThatShitOut)
+            {
+                // WTF WAS THAT?!?!?
+                GoCheckThatShitOut();
+            }
+            else if (currentBehaviour == Behaviour.distracted)
+            {
+                // hmmm.... maybe I'm just going insane... and hearing things... like bolts
+                StandWatch();
+            }
+            else if (currentBehaviour == Behaviour.gotoPatrol)
+            {
+                // use the ultimate power of the goto to get back to your starting route!
+            }
+
+            // guards fall straight down
+            if (!isFalling)
+            {
+                position.X += deltaX;
+            }
+            else
+            {
+                Fall();
+                position.Y -= deltaY;
+            }
+        }
+
+        protected void Fall()
+        {
+            if (deltaY >= minFallingSpeed)
+            {
+                deltaY = minFallingSpeed;
+            }
+            else
+            {
+                deltaY -= deltaY * 5 / 3;
+            }
+        }
+
+        protected void Patrol()
+        {
             //move right until you reach your patrol, then turn around
             if (facingDirection == Direction.right)
             {
                 if (position.X < patrolBoundaryRight)
                 {
-                    position.X += this.velocity;
+                    deltaX = velocity;
+                }
+                // GTF BACK TO YOUR POST SOLDIER!!!
+                else if (position.X > patrolBoundaryRight)
+                {
+                    facingDirection = Direction.left;
+                    deltaX = -1 * velocity;
                 }
                 else if (position.X == patrolBoundaryRight)
                 {
-                    facingDirection = Direction.left;
-
+                    currentBehaviour = Behaviour.guard;
                 }
-
             }
-                //move left until you reach your patrol, then turn around
+            //move left until you reach your patrol, then turn around
             else if (facingDirection == Direction.left)
             {
                 if (patrolBoundaryLeft < position.X)
                 {
-                    position.X -= this.velocity;
-
+                    deltaX = -1 * velocity;
+                }
+                else if (patrolBoundaryLeft > position.X)
+                {
+                    facingDirection = Direction.right;
+                    deltaX = velocity;
                 }
                 else if (patrolBoundaryLeft == position.X)
                 {
-                    facingDirection = Direction.right;
-
+                    currentBehaviour = Behaviour.guard;
                 }
             }
         }
 
-       
-
-        public override void HandleCollision(IList<ITile> tile)
+        protected void StandWatch()
         {
-          //  determineRadialCollision(
+            deltaX = 0;
+            if (guardCounter < 0)
+            {
+                guardCounter = guardStartCount;
+            }
+            else if (guardCounter > 0)
+            {
+                guardCounter -= 1;
+            }
+            else
+            {
+                guardCounter = -1;
+                currentBehaviour = Behaviour.patrol;
+                if (facingDirection == Direction.right)
+                {
+                    facingDirection = Direction.left;
+                }
+                else
+                {
+                    facingDirection = Direction.right;
+                }
+            }
+        }
+
+
+        protected void GoCheckThatShitOut()
+        {
+            if (Math.Abs(position.X + (position.Width / 2) - distractionX) > 38)
+            {
+                // I dare say there is a distraction to your posterior good sir!
+                if (facingDirection == Direction.right && distractionX < position.X)
+                {
+                    facingDirection = Direction.left;
+                    deltaX = -1 * velocity;
+                }
+                // the bolt is behind you I say!
+                else if (facingDirection == Direction.left && distractionX > position.X)
+                {
+                    facingDirection = Direction.right;
+                    deltaX = velocity;
+                }
+            }
+            else
+            {
+                currentBehaviour = Behaviour.distracted;
+                guardCounter = 70;
+            }
+        }
+
+        public override void HandleCollision(IList<ITile> tiles)
+        {
+            bool footCollision = false;
+
+            // check that any intersections are only on passable tiles
+            foreach (ITile t in tiles)
+            {
+                // padding the tile with a pixel on either side so the player cannot climb the walls
+                Rectangle tilePos = t.getPosition();
+
+                tilePos.X -= 1;
+                tilePos.Y += 1;
+                tilePos.Height -= 1;
+                tilePos.Width += 2;
+
+                Direction direction = determineCollisionType(tilePos);
+
+                switch (direction)
+                {
+                    case Direction.bottom:
+                        position.Y = t.getPosition().Top - position.Height;
+                        footCollision = true;
+                        break;
+                    case Direction.top:
+                        // this should never happen, our guards don't jump... yet.
+                        break;
+                    case Direction.left:
+                        if (t.getCollisionBehaviour() == CollisionType.impassable)
+                        {
+                            // for some wierd reason with only 1 pixel of padding this breaks player's fall
+                            position.X = t.getPosition().Right + 2;
+                            deltaX = 0;
+                        }
+                        break;
+                    case Direction.right:
+                        if (t.getCollisionBehaviour() == CollisionType.impassable)
+                        {
+                            position.X = t.getPosition().Left - position.Width - 1;
+                            deltaX = 0;
+                        }
+                        break;
+                }
+            }
+
+            if (!footCollision)
+            {
+                isFalling = true;
+                Fall();
+            }
+            else
+            {
+                isFalling = false;
+            }
         }
 
         public void HandleHearing(IList<Bolt> bolts)
@@ -116,7 +293,7 @@ namespace WindowsGame4
             Bolt distractingBolt = null;
             foreach (Bolt bolt in bolts)
             {
-               hearingDirection = determineRadialCollision(bolt.GetPosition(), 200);
+               hearingDirection = determineRadialCollision(bolt.GetPosition(), hearingRadius);
                if (hearingDirection != Direction.none)
                {
                    distractingBolt = bolt;
@@ -125,24 +302,37 @@ namespace WindowsGame4
                }
             }
 
-            int GoalDestination = distractingBolt.GetPosition().X;
-
-
-            
-
+            if (distractingBolt != null)
+            {
+                distractionX = distractingBolt.GetPosition().X;
+                currentBehaviour = Behaviour.goCheckThatShitOut;
+            }
         }
 
         //if he sees the player, the player should die.
         public void HandleVision(Player player)
         {
+            Vector2  mapEyePos = new Vector2(this.position.X + eyePos.X, this.position.Y + eyePos.Y);
 
-            Direction sightDirection = determineRadialCollision(player.GetPosition(), 100.0f);
-          
-            if (sightDirection == facingDirection)
+            //distance between the x and y position of the guards eyes and the middle of the player
+            float dX = mapEyePos.X - (player.GetPosition().X + (player.GetPosition().Width / 2));
+            float dY = mapEyePos.Y - (player.GetPosition().Y + (player.GetPosition().Height / 2));
+            float distance = (float)Math.Sqrt(Math.Pow(dX, 2) + Math.Pow(dY, 2));
+
+            float visibility = (1 - player.HiddenPercent) * (LOSRadius / distance) * 100;
+            if (visibility >= 0.5 * LOSRadius)
             {
-                player.Kill();
-            }
+                Direction sightDirection = determineRadialCollision(player.GetPosition(), LOSRadius);
 
+                if (sightDirection == facingDirection)
+                {
+                    //player.Kill();
+                }
+            }
+            else
+            {
+                debugColor = Color.White;
+            }
   
         }
 
@@ -152,51 +342,61 @@ namespace WindowsGame4
         {
             Direction direction = Direction.none;
 
-           Vector2  mapEyePos = new Vector2(this.position.X + eyePos.X, this.position.Y + eyePos.Y);
+            Vector2  mapEyePos = new Vector2(this.position.X + eyePos.X, this.position.Y + eyePos.Y);
 
             // hopefully close enough & easier than having to handle circle/rectangle collisions
             // let recRadius be half the average of the width & height of the rectangle
             float recRadius = 0.25f * ((float)(r.Width + r.Height));
 
             //distance between the x and y position of the guards eyes and the middle of the player
-            float deltaX = mapEyePos.X - (r.X + (r.Width / 2));
-            float deltaY = mapEyePos.Y - (r.Y + (r.Height / 2));
-            float distance = (float)Math.Sqrt(Math.Pow(deltaX, 2) + Math.Pow(deltaY, 2));
+            float dX = mapEyePos.X - (r.X + (r.Width / 2));
+            float dY = mapEyePos.Y - (r.Y + (r.Height / 2));
+            float distance = (float)Math.Sqrt(Math.Pow(dX, 2) + Math.Pow(dY, 2));
+
+            debugColor = Color.White;
 
             // if the distance is less than the two radii, then the rectange is in collision with this Guard's collision radius
             if (distance <= recRadius + radius)
             {
                 // now to get the collision direction l\u/r u=up, b=bottom, r=right, l=left
                 //                                    l/b\r
-                Vector2 destination = new Vector2(deltaX, deltaY);
-                Vector2 vecDir = destination - eyePos;
+                Vector2 destination = new Vector2(dX, dY);
+                Vector2 vecDir = destination;// -mapEyePos;
                 vecDir.Normalize();
                 float angle = VectorToAngle(vecDir);
+
+                while (angle < 0)
+                    angle += 360;
+
+                System.Console.WriteLine(angle);
                 
 
-                // may have to tweak the angle values it depends on how xna stores angles againsts world coords
-                if ((angle <= 45 && angle >= 0) || (angle >= 315))
+                // may have to tweak the angle values it depends on how xna stores angles against world coords
+                if (angle >= 15 && angle <= 165)
                 {
                     direction = Direction.top;
-                   
+                    debugColor = Color.Beige;
+                    System.Console.WriteLine("top");
                 }
-                else if (angle >= 45 && angle <= 135)
+                else if (angle >= 165 && angle <= 195)
                 {
                     direction = Direction.right;
+                    debugColor = Color.Crimson;
+                    System.Console.WriteLine("right");
                  
                 }
-                else if (angle >= 135 && angle <= 225)
+                else if (angle >= 195 && angle <= 345)
                 {
                     direction = Direction.bottom;
-                    System.Console.WriteLine("dir = right");
+                    debugColor = Color.Black;
+                    System.Console.WriteLine("bottom");
                 }
                 else
                 {
-                    System.Console.WriteLine("dir = bottom");
+                    System.Console.WriteLine("left");
                     direction = Direction.left;
+                    debugColor = Color.DarkMagenta;
                 }
-
-                
             }
 
             return direction;
@@ -204,10 +404,10 @@ namespace WindowsGame4
 
         protected float VectorToAngle(Vector2 v)
         {
-            return (float)Math.Atan2(v.Y, v.X);
+            return (float)(Math.Atan2(v.Y, v.X) * (180 / Math.PI));
         }
 
-        // get the normalized vector from the given angle
+        // get the normalized vector from the given angle - NOTE angle is probably required to be in radians /cry
         protected Vector2 AngleToVector(float angle)
         {
             return new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle));

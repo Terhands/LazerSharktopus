@@ -115,7 +115,10 @@ namespace WindowsGame4
         {   
             /* Timer update logic */
             gameTimer.Update();
-            if (gameTimer.isFinished()) player.IsDead = true;
+            if (gameTimer.isFinished() && !player.IsDead)
+            {
+                player.Kill();
+            }
 
 
             // no need to perform update if the player died - get ready for some serious death-screen action
@@ -206,11 +209,7 @@ namespace WindowsGame4
                     t.Update(gameTime);
                 }
 
-                foreach (Guard guard in guards)
-                {
-                    guard.Update(gameTime);
-                    guard.HandleVision((Player)player);
-                }
+                IList<Bolt> collidedBolts = new List<Bolt>();
 
                 foreach (Bolt bolt in bolts)
                 {
@@ -218,6 +217,10 @@ namespace WindowsGame4
                     if (!bolt.hasCollided)
                     {
                         bolt.HandleCollision(levelMap.GetNearbyTiles(bolt.GetPosition()));
+                    }
+                    else
+                    {
+                        collidedBolts.Add(bolt);
                     }
 
                     if (bolt.expiryTime <= 0)
@@ -227,12 +230,22 @@ namespace WindowsGame4
                     }
                 }
 
+                foreach (Guard guard in guards)
+                {
+                    guard.Update(gameTime);
+                    guard.HandleCollision(levelMap.GetNearbyTiles(guard.GetPosition()));
+                    guard.HandleVision((Player)player);
+                    // need a way to get back all bolts that have collided - have to actually hear it, not see it with my 360 degree camera strapped to the inside of the guard's visor
+                    guard.HandleHearing(collidedBolts);
+                }
+
                 if (player.DoneLevel)
                 {
                     // do some intermediate next level screen...
                     currentLevel += 1;
                     bolts.Clear();
                     torches.Clear();
+                    guards.Clear();
 
                     if (levelLoader.NumLevels > currentLevel)
                     {
@@ -250,6 +263,9 @@ namespace WindowsGame4
                 deathCounter += 1;
                 if (deathCounter > maxDeathCounter)
                 {
+                    torches.Clear();
+                    bolts.Clear();
+                    guards.Clear();
                     game.State = GameLoop.GameState.gameOver;
                 }
             }
@@ -286,6 +302,7 @@ namespace WindowsGame4
             get { return currentLevel; }
             set { currentLevel = value; }
         }
+
 
         /* figure out if the screen needs to shift to reflect the given action */
         protected bool shouldShiftScreen(Action action)

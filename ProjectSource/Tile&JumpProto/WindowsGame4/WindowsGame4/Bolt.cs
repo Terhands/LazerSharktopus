@@ -28,7 +28,7 @@ namespace WindowsGame4
 
         public Bolt(Game game, Action direction, int xStart, int yStart, Texture2D texture, ArrayList _sounds) : base(game)
         {
-            position = new Rectangle(xStart, yStart, 25, 25);
+            position = new Rectangle(xStart, yStart, 15, 15);
             if (direction == Action.right)
                 position.X += 35;
             boltTexture = texture;
@@ -43,71 +43,30 @@ namespace WindowsGame4
         /* Determine if a bolt has hit something */
         public override void HandleCollision(IList<ITile> tiles)
         {
-            // handle foot to floor collisions after intersection collisions have been resolved
-            IList<ITile> tilesBelowBolt = new List<ITile>();
-            IList<ITile> tilesAboveBolt = new List<ITile>();
-
             foreach (ITile t in tiles)
             {
-                if (t.getPosition().Top < position.Bottom)
+                switch (t.getCollisionBehaviour())
                 {
-                    tilesBelowBolt.Add(t);
-                }
-                else if (t.getPosition().Top >= position.Bottom && t.getCollisionBehaviour() != CollisionType.hideable)
-                {
-                    tilesAboveBolt.Add(t);
-                }
-                HandleIntersectionCollisions(tiles);
+                    //These three types of blocks should never collide with bolts
+                    case CollisionType.hideable:
+                    case CollisionType.passable:
+                    case CollisionType.goal:
+                        break;
+
+                    case CollisionType.spike:
+                    case CollisionType.impassable:
+                    case CollisionType.platform:
+                        Rectangle tilePos = t.getPosition();
+                        Direction direction = determineCollisionType(tilePos);
+                        if (direction == Direction.none)
+                        {
+                            ((SoundEffect)sounds[0]).Play();
+                            this.hasCollided = true;
+                        }
+
+                        break;
+               }
             }
-
-            
-
-           // HandleFootCollisions(tilesAboveBolt);
-        }
-
-        protected void HandleIntersectionCollisions(IList<ITile> tiles)
-        {
-            // check that any intersections are only on passable tiles
-            foreach (ITile t in tiles)
-            {
-                // padding the tile with a pixel on either side so the player cannot climb the walls
-                Rectangle tilePos = t.getPosition();
-
-                Direction direction = determineCollisionType(tilePos);
-                if (direction == Direction.none)
-                {
-                    ((SoundEffect)sounds[0]).Play();
-                    this.hasCollided = true;
-                }
-            }
-        }
-
-        protected void HandleFootCollisions(IList<ITile> tiles)
-        {
-            bool footCollision = false;
-
-            foreach (ITile t in tiles)
-            {
-                Direction direction = determineCollisionType(t.getPosition());
-
-                if (Direction.bottom == direction)
-                {
-                    footCollision = true;
-                    /*
-                    if (isJumping)
-                    {
-                        isJumping = false;
-                        jumpMeter.reset();
-                    }*/
-                }
-            }
-            /*
-            // if the player is not jumping and has no tiles under their feet, they start falling
-            if (!isJumping && !footCollision)
-            {
-                isJumping = true;
-                jumpMeter.JumpPower = startFalling;
-            }*/
         }
         
         public override Rectangle GetPosition()

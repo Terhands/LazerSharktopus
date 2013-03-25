@@ -108,7 +108,7 @@ namespace WindowsGame4
                     spriteDepth = 0.75f;
                     break;
                 case CollisionType.goal:
-                    color = Color.Gold;
+                    color = Color.White;
                     source = new Rectangle(spriteOffset, spriteOffset * 4 + spriteWidth * 3, spriteWidth, spriteWidth);
                     spriteDepth = 0.2f;
                     break;
