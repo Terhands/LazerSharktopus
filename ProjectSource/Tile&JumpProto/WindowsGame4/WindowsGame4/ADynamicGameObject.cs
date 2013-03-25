@@ -140,6 +140,7 @@ namespace WindowsGame4
             return direction;
         }
 
+        // returns the (x,y) position of the collision, or (-1,-1) is there is no intersection
         protected Point getLineCollisionLocation(Point p1, Point p2, Point q1, Point q2)
         {
             /*

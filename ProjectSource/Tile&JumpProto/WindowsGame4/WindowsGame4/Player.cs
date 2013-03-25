@@ -35,6 +35,9 @@ namespace WindowsGame4
         // the speed that player starts falling
         protected const float startFalling = -0.25f;
 
+        // robro's change in height from crouching to standing up straight
+        protected const int crouchDiff = 30;
+
         int frameCountCol = 1; // Which frame we are.  Values = {0, 1, 2, 3, 4} this 4 = crouch only in row 0 
         int frameCountRow = 0; //Value = {0,1} 1 = left direction , 0 = right directions
         int frameSkipX = 75; // How much to move the frame in X when we increment a frame--X distance between top left corners.
@@ -277,7 +280,15 @@ namespace WindowsGame4
         public override Rectangle GetPosition()
         {
             /* do not want to give this player's rectangle to another class that might change it... */
-            return new Rectangle(position.X, position.Y, position.Width, position.Height);
+            if (hidden > 0.0f)
+            {
+                // robro is shorter when he is crouching
+                return new Rectangle(position.X, position.Y + crouchDiff, position.Width, position.Height - crouchDiff);
+            }
+            else
+            {
+                return new Rectangle(position.X, position.Y, position.Width, position.Height);
+            }
         }
 
         public Action GetFacingDirection()
