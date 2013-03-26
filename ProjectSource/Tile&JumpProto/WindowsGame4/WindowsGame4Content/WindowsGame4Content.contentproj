@@ -186,6 +186,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="lever.png">
+      <Name>lever</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+    <ItemGroup>
     <Compile Include="torchNimbus.png">
       <Name>torchNimbus</Name>
       <Importer>TextureImporter</Importer>
