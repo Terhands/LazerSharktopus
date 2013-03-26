@@ -21,6 +21,7 @@ namespace WindowsGame4
 
         protected const int playerIndex = 0;
         protected const int guardIndex = 5;
+        protected const int leverIndex = 8;
         protected Rectangle playerRange;
 
         int deathCounter = 0;
@@ -40,6 +41,7 @@ namespace WindowsGame4
         protected List<Bolt> bolts;
         protected List<Torch> torches;
         protected List<Guard> guards;
+        protected List<Lever> levers;
 
         public Level(GameLoop game, ArrayList _textures, ArrayList _fonts, ArrayList _sounds, MusicManager _musicPlayer, LevelLoader loader) : base(game)
         {
@@ -49,6 +51,7 @@ namespace WindowsGame4
             bolts = new List<Bolt>();
             torches = new List<Torch>();
             guards = new List<Guard>();
+            levers = new List<Lever>();
 
             playerRange = new Rectangle((screenWidth * 2)/5, 0, screenWidth/5, screenHeight);
             
@@ -100,6 +103,13 @@ namespace WindowsGame4
                 int x = ((int)v.X) * (screenWidth / 64) - (36/2);
                 int y = ((int)v.Y) * (screenHeight / 32) - 52;
                 guards.Add(new Guard(Game, (Texture2D)textures[guardIndex], x, y, Direction.right, 100));
+            }
+
+            foreach (Vector2 v in levelLoader.Levers)
+            {
+                int x = ((int)v.X) * (screenWidth / 64) - (24 / 2);
+                int y = ((int)v.Y) * (screenHeight / 32) - 22;
+                levers.Add(new Lever(Game, x, y, (int)v.X, (int)v.Y, Lever.LeverType.switcher, (Texture2D)textures[leverIndex]));
             }
                 
             gameTimer = new GameTimer(levelLoader.TimeLimit, (SpriteFont)fonts[0]);
@@ -160,6 +170,14 @@ namespace WindowsGame4
                     velocity = -2;
                 }
 
+                if (keyState.IsKeyDown(Keys.F) && prevKeyState.IsKeyUp(Keys.F))
+                {
+                    foreach (Lever lever in levers)
+                    {
+                        lever.HandleCollision(levelMap.GetNearbyTiles(player.GetPosition()));
+                    }
+                }
+
                 // update the player position when the player needs to change position on screen
                 player.Update(playerAction, velocity);
                 player.HandleCollision(levelMap.GetNearbyTiles(player.GetPosition()));
@@ -188,6 +206,11 @@ namespace WindowsGame4
                     foreach (Bolt bolt in bolts)
                     {
                         bolt.reposition(deltaX);
+                    }
+
+                    foreach (Lever lever in levers)
+                    {
+                        lever.reposition(deltaX);
                     }
                 }
 
@@ -239,6 +262,7 @@ namespace WindowsGame4
                     guard.HandleHearing(collidedBolts);
                 }
 
+
                 if (player.DoneLevel)
                 {
                     // do some intermediate next level screen...
@@ -289,6 +313,10 @@ namespace WindowsGame4
             foreach (Torch t in torches)
             {
                 t.Draw(spriteBatch);
+            }
+            foreach (Lever lever in levers)
+            {
+                lever.Draw(spriteBatch);
             }
         }
 

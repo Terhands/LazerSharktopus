@@ -24,6 +24,7 @@ namespace WindowsGame4
 
         Vector2[] guardLayout;
         Vector2[] torchLayout;
+        Vector2[] leverLayout;
 
         public LevelLoader(string[] _levelFiles)
         {
@@ -102,6 +103,17 @@ namespace WindowsGame4
                 guardLayout[i].X = NextInt(tokenizedData);
                 guardLayout[i].Y = NextInt(tokenizedData);
             }
+
+            int numLevers = NextInt(tokenizedData);
+            leverLayout = new Vector2[numLevers];
+            for (int i = 0; i < numLevers; i++)
+            {
+                leverLayout[i].X = NextInt(tokenizedData);
+                leverLayout[i].Y = NextInt(tokenizedData);
+                int numGates = NextInt(tokenizedData);
+
+            }
+
         }
 
         // read the next integer from data
@@ -125,17 +137,16 @@ namespace WindowsGame4
         {
             get { return guardLayout; }
         }
+
+        public Vector2[] Levers
+        {
+            get { return leverLayout; }
+        }
         
         public int NumLevels
         {
             get { return levelFiles.Length; }
         }
-
-       
-
-
-        
-        
 
         public string LevelName
         {

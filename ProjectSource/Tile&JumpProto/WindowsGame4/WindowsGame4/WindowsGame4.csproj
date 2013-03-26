@@ -85,6 +85,7 @@
     <Compile Include="IPlayer.cs" />
     <Compile Include="LevelIntroScreen.cs" />
     <Compile Include="LevelLoader.cs" />
+    <Compile Include="Lever.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="ITile.cs" />
     <Compile Include="IMap.cs" />
