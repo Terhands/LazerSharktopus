@@ -123,7 +123,7 @@ namespace WindowsGame4
         public void Hide(IList<ITile> tiles)
         {
             // attempting to hide in the middle of a well lit room...
-            hidden = 0.01f;
+            hidden = 0.25f;
 
             foreach (ITile t in tiles)
             {
@@ -310,6 +310,7 @@ namespace WindowsGame4
         public float HiddenPercent
         {
             get { return hidden; }
+            set { hidden = value; }
         }
 
         public void reposition()

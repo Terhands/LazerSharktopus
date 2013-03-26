@@ -87,12 +87,16 @@ namespace WindowsGame4
             
             boltTexture = (Texture2D)textures[4];
 
+            Texture2D[] torchTextures = new Texture2D[2];
+            torchTextures[0] = (Texture2D)textures[6];
+            torchTextures[1] = (Texture2D)textures[8];
+
             // load torches from the level files
             foreach (Vector2 v in levelLoader.Torches)
             {
                 int x = ((int)v.X) * (screenWidth / 64) - (15/2);
                 int y = (((int)v.Y) * (screenHeight / 32)) - 25;
-                torches.Add(new Torch(Game, (Texture2D)textures[6], x, y));
+                torches.Add(new Torch(Game, torchTextures, x, y));
             }
 
             foreach (Vector2 v in levelLoader.Guards)
@@ -207,6 +211,7 @@ namespace WindowsGame4
                 foreach (Torch t in torches)
                 {
                     t.Update(gameTime);
+                    t.HandleCollision(player);
                 }
 
                 IList<Bolt> collidedBolts = new List<Bolt>();

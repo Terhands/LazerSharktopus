@@ -68,7 +68,7 @@ namespace WindowsGame4
 
             source = new Rectangle(0, 0, 83, 108);
             position = new Rectangle(xStart, yStart, 36, 52);
-            eyePos = new Vector2(position.Width/2, position.Height/4);
+            eyePos = new Vector2(position.Width/2, position.Height/2);
             sprite = texture;
 
             currentBehaviour = Behaviour.patrol;
@@ -323,6 +323,7 @@ namespace WindowsGame4
 
             debugColor = Color.White;
 
+            // if the player is behind the guard we don't care
             if ((facingDirection == Direction.left && player.GetPosition().X <= mapEyePos.X) || (facingDirection == Direction.right && player.GetPosition().Right >= mapEyePos.X))
             {
                 // is the player visible enough/close enough for the guard to be able to see
