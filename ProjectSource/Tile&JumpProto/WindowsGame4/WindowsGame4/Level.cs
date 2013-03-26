@@ -21,7 +21,7 @@ namespace WindowsGame4
 
         protected const int playerIndex = 0;
         protected const int guardIndex = 5;
-        protected const int leverIndex = 8;
+        protected const int leverIndex = 9;
         protected Rectangle playerRange;
 
         int deathCounter = 0;
