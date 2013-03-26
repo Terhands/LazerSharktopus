@@ -323,17 +323,19 @@ namespace WindowsGame4
 
             debugColor = Color.White;
 
-            // is the player visible enough/close enough for the guard to be able to see
-            if (visibility <= 0 && isVisible(player.GetPosition(), surroundingTiles))
+            if ((facingDirection == Direction.left && player.GetPosition().X <= mapEyePos.X) || (facingDirection == Direction.right && player.GetPosition().Right >= mapEyePos.X))
             {
-                debugColor = Color.Red;
-                //player.Kill();
+                // is the player visible enough/close enough for the guard to be able to see
+                if (visibility <= 0 && isVisible(player.GetPosition(), surroundingTiles))
+                {
+                    debugColor = Color.Red;
+                    //player.Kill();
+                }
+                else
+                {
+                    debugColor = Color.White;
+                }
             }
-            else
-            {
-                debugColor = Color.White;
-            }
-  
         }
 
 
@@ -528,35 +530,24 @@ namespace WindowsGame4
 
                 while (angle < 0)
                     angle += 360;
-
-                System.Console.WriteLine(angle);
                 
 
                 // may have to tweak the angle values it depends on how xna stores angles against world coords
                 if (angle >= 15 && angle <= 165)
                 {
                     direction = Direction.top;
-                    debugColor = Color.Beige;
-                    System.Console.WriteLine("top");
                 }
                 else if (angle >= 165 && angle <= 195)
                 {
                     direction = Direction.right;
-                    debugColor = Color.Crimson;
-                    System.Console.WriteLine("right");
-                 
                 }
                 else if (angle >= 195 && angle <= 345)
                 {
                     direction = Direction.bottom;
-                    debugColor = Color.Black;
-                    System.Console.WriteLine("bottom");
                 }
                 else
                 {
-                    System.Console.WriteLine("left");
                     direction = Direction.left;
-                    debugColor = Color.DarkMagenta;
                 }
             }
 
@@ -576,7 +567,14 @@ namespace WindowsGame4
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(sprite, position, source, debugColor, 0, new Vector2(0, 0), SpriteEffects.None, spriteDepth);
+            if (facingDirection == Direction.right)
+            {
+                spriteBatch.Draw(sprite, position, source, debugColor, 0, new Vector2(0, 0), SpriteEffects.None, spriteDepth);
+            }
+            else
+            {
+                spriteBatch.Draw(sprite, position, source, debugColor, 0, new Vector2(0, 0), SpriteEffects.FlipHorizontally, spriteDepth);
+            }
         }
         
 
