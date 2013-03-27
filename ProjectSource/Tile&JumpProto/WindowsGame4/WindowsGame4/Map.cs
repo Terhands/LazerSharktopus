@@ -27,13 +27,13 @@ namespace WindowsGame4
         // our test map has 100 columns
         //protected int mapCols = 100;
 
-        public Map(Game game, int[,] mapLayout, ArrayList tileTextures) : base(game)
+        public Map(Game game, int[,] mapLayout, ArrayList tileTextures, int bgIndex) : base(game)
         {
-            Initialize(mapLayout, tileTextures);
+            Initialize(mapLayout, tileTextures, bgIndex);
         }
 
         /* load the level map from file - for now just load a dummy level with random tile types */
-        protected void Initialize(int[,] mapLayout, ArrayList tileTextures)
+        protected void Initialize(int[,] mapLayout, ArrayList tileTextures, int bgIndex)
         {
             tiles = new Tile[mapLayout.GetLength(0), mapLayout.GetLength(1)];
 
@@ -41,7 +41,7 @@ namespace WindowsGame4
             screenHeight = Game.GraphicsDevice.Viewport.Height;
 
             // hardcoded for now until we set up the file read
-            background = (Texture2D)tileTextures[2];
+            background = (Texture2D)tileTextures[bgIndex];
             bgPosition.X = 0;
             bgPosition.Y = 0;
             bgPosition.Width = screenWidth;
@@ -58,36 +58,6 @@ namespace WindowsGame4
                     tiles[i, j] = new Tile(Game, (Texture2D)tileTextures[1], (CollisionType)mapLayout[i,j], j, i, screenWidth, screenHeight, rowsPerScreen, colsPerScreen);
                 }
             }
-
-            /*
-            Random rand = new Random();
-
-            for (int i = 0; i < 32; i++)
-            {
-                for (int j = 0; j < 100; j++)
-                {
-                    CollisionType colType = CollisionType.platform;
-
-                    if ((29 == i && 51 < j))
-                    {
-                        colType = CollisionType.hideable;
-                    }
-                    else if (31 == i || (30 == i && j > 50) || (i == 18 && j > 30 && j < 40) || (i == 23 && j > 42 && j < 50))
-                    {
-                        colType = CollisionType.platform;
-                    }
-                    else if (99 == j || 0 == j)
-                    {
-                        colType = CollisionType.impassable;
-                    }
-                    else
-                    {
-                        colType = CollisionType.passable;
-                    }
-                    tiles[i, j] = new Tile(Game, (Texture2D)tileTextures[1], colType, j, i, screenWidth, screenHeight);
-                }
-            }
-            */ 
         }
 
         /* reset the level offset */

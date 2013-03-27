@@ -19,6 +19,7 @@ namespace WindowsGame4
         int dataPos;
         int timeLimit;
         int musicIndex;
+        int bgroundIndex;
 
         int[,] mapLayout;
 
@@ -46,6 +47,11 @@ namespace WindowsGame4
             get { return musicIndex; }
         }
 
+        public int LevelBackground
+        {
+            get { return bgroundIndex; }
+        }
+
         public void LoadLevel(int levelIndex)
         {
             Debug.Assert(levelIndex < levelFiles.Length);
@@ -70,6 +76,7 @@ namespace WindowsGame4
             int numMapCols = NextInt(tokenizedData);
             timeLimit = NextInt(tokenizedData);
             musicIndex = NextInt(tokenizedData);
+            bgroundIndex = NextInt(tokenizedData);
 
             if (numMapRows * numMapCols > tokenizedData.Length)
             {
