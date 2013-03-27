@@ -192,9 +192,16 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
-    <ItemGroup>
+  <ItemGroup>
     <Compile Include="torchNimbus.png">
       <Name>torchNimbus</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="gate.png">
+      <Name>gate</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
