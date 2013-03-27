@@ -27,7 +27,7 @@ namespace WindowsGame4
         protected const int flamesSwitchTime = 15;
         protected int flamesAnimation;
 
-        protected const int nimbusRadius = 60;
+        protected const int nimbusRadius = 30;
         protected const int flameOffset = 10;
 
         protected int maxSprite = 4;
@@ -47,7 +47,7 @@ namespace WindowsGame4
             positionBase = new Rectangle(xStart, yStart, torchWidth, torchHeight);
             sourceBase = new Rectangle(xPosition[currSprite], 1, spriteWidth, spriteHeight);
 
-            positionNimbus = new Rectangle(xStart + (torchWidth / 2) - (nimbusRadius / 2), yStart + flameOffset - nimbusRadius / 2, nimbusRadius, nimbusRadius); 
+            positionNimbus = new Rectangle(xStart + (torchWidth / 2) - (nimbusRadius), yStart + flameOffset - nimbusRadius, nimbusRadius * 2, nimbusRadius * 2); 
             sourceNimbus = new Rectangle(0, 0, 32, 32);
         }
 
@@ -59,7 +59,7 @@ namespace WindowsGame4
 
         public void HandleCollision(IPlayer player)
         {
-            int playerRadius = (player.GetPosition().Width + player.GetPosition().Height) / 4;
+            int playerRadius = (player.GetPosition().Width) / 2;
 
             // the center of the player's bounding circle
             int x1 = player.GetPosition().X + (player.GetPosition().Width/2);
@@ -76,7 +76,8 @@ namespace WindowsGame4
 
             if (distance < playerRadius + nimbusRadius && player.HiddenPercent > 0)
             {
-                player.HiddenPercent -= 0.2f;
+                // if the player is hitting a torch his hidden percent drops
+                player.HiddenPercent -= 0.49f;
             }
             
         }
