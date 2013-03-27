@@ -22,6 +22,8 @@ namespace WindowsGame4
         protected const int playerIndex = 0;
         protected const int guardIndex = 5;
         protected const int leverIndex = 9;
+        protected const int gateIndex = 10;
+
         protected Rectangle playerRange;
 
         int deathCounter = 0;
@@ -42,6 +44,8 @@ namespace WindowsGame4
         protected List<Torch> torches;
         protected List<Guard> guards;
         protected List<Lever> levers;
+        protected List<Gate> gates;
+        protected int[] leverGateMap;
 
         public Level(GameLoop game, ArrayList _textures, ArrayList _fonts, ArrayList _sounds, MusicManager _musicPlayer, LevelLoader loader) : base(game)
         {
@@ -52,6 +56,7 @@ namespace WindowsGame4
             torches = new List<Torch>();
             guards = new List<Guard>();
             levers = new List<Lever>();
+            gates = new List<Gate>();
 
             playerRange = new Rectangle((screenWidth * 2)/5, 0, screenWidth/5, screenHeight);
             
@@ -109,13 +114,29 @@ namespace WindowsGame4
                 guards.Add(new Guard(Game, (Texture2D)textures[guardIndex], x, y, Direction.right, 100));
             }
 
+            foreach (Vector2 v in levelLoader.Gates)
+            {
+                /* These offsets will be wrong right now */
+                int x = ((int)v.X) * (screenWidth / 64) - (24 / 2);
+                int y = ((int)v.Y) * (screenHeight / 32) - 15;
+                gates.Add(new Gate(Game, x, y, screenWidth, screenHeight, (Texture2D)textures[gateIndex]));
+            }
+
+            int[][] gateMaps = levelLoader.levelGateMaps;
+            int i = 0;
             foreach (Vector2 v in levelLoader.Levers)
             {
+                List<Gate> leverGates = new List<Gate>();
+                for (int j = 0; j < gateMaps[i].Length; j++)
+                {
+                    leverGates.Add(gates[j]);
+                }
                 int x = ((int)v.X) * (screenWidth / 64) - (24 / 2);
                 int y = ((int)v.Y) * (screenHeight / 32) - 22;
-                levers.Add(new Lever(Game, x, y, (int)v.X, (int)v.Y, Lever.LeverType.switcher, (Texture2D)textures[leverIndex]));
+                levers.Add(new Lever(Game, x, y, screenWidth, screenHeight, Lever.LeverType.switcher, leverGates, (Texture2D)textures[leverIndex]));
+                i++;
             }
-                
+    
             gameTimer = new GameTimer(levelLoader.TimeLimit, (SpriteFont)fonts[0]);
 
             musicPlayer.Play(levelLoader.LevelMusic);
@@ -216,6 +237,11 @@ namespace WindowsGame4
                     {
                         lever.reposition(deltaX);
                     }
+
+                    foreach (Gate gate in gates)
+                    {
+                        gate.reposition(deltaX);
+                    }
                 }
 
 
@@ -267,6 +293,11 @@ namespace WindowsGame4
                     guard.HandleHearing(collidedBolts);
                 }
 
+                foreach (Gate gate in gates)
+                {
+                    gate.Update(gameTime);
+                }
+
 
                 if (player.DoneLevel)
                 {
@@ -275,6 +306,8 @@ namespace WindowsGame4
                     bolts.Clear();
                     torches.Clear();
                     guards.Clear();
+                    levers.Clear();
+                    gates.Clear();
 
                     if (levelLoader.NumLevels > currentLevel)
                     {
@@ -295,6 +328,8 @@ namespace WindowsGame4
                     torches.Clear();
                     bolts.Clear();
                     guards.Clear();
+                    levers.Clear();
+                    gates.Clear();
                     game.State = GameLoop.GameState.gameOver;
                 }
             }
@@ -322,6 +357,10 @@ namespace WindowsGame4
             foreach (Lever lever in levers)
             {
                 lever.Draw(spriteBatch);
+            }
+            foreach (Gate gate in gates)
+            {
+                gate.Draw(spriteBatch);
             }
         }
 
