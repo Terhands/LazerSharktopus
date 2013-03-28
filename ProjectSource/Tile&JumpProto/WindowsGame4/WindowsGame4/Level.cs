@@ -180,6 +180,7 @@ namespace WindowsGame4
                     }
 
                     //update guards
+
                     foreach (Guard guard in guards)
                     {
                         guard.Update(playerAction, deltaX);
@@ -233,10 +234,12 @@ namespace WindowsGame4
                 foreach (Guard guard in guards)
                 {
                     guard.Update(gameTime);
-                    guard.HandleCollision(levelMap.GetNearbyTiles(guard.GetPosition()));
-                    guard.HandleVision(player, levelMap.GetNearbyTiles(guard.GetLOSRectangle()));
-                    // need a way to get back all bolts that have collided - have to actually hear it, not see it with my 360 degree camera strapped to the inside of the guard's visor
-                    guard.HandleHearing(collidedBolts);
+                   
+                        guard.HandleCollision(levelMap.GetNearbyTiles(guard.GetPosition()));
+                        guard.HandleVision(player, levelMap.GetNearbyTiles(guard.GetLOSRectangle()));
+                        // need a way to get back all bolts that have collided - have to actually hear it, not see it with my 360 degree camera strapped to the inside of the guard's visor
+                        guard.HandleHearing(collidedBolts);
+                   
                 }
 
                 if (player.DoneLevel)

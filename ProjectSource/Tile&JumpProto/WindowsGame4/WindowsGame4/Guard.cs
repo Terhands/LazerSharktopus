@@ -9,71 +9,101 @@ namespace WindowsGame4
 {
     class Guard : ADynamicGameObject, IDynamicGameObject
     {
-
+        protected int invisibleY; 
+        //distraction
         protected int distractedTime;
         protected int maxDistractedTime;
 
+        //keep track of how long the guard stands at the end of his patrol
         protected int guardCounter;
         protected int guardStartCount = 20;
 
+        protected int getBackCounter;
+        //patrol settings
         protected int patrolLength;
         protected int patrolBoundaryLeft;
         protected int patrolBoundaryRight;
+        protected int patrolY;
+       
+        //how long guard is distracted
         protected int distractionX;
 
+        //sprite thingees 
         protected Texture2D sprite;
         protected Rectangle source;
         protected Direction facingDirection;
 
+        //detection settings
         protected const int LOSRadius = 150;
         protected const int hearingRadius = 150;
         protected const float LOSSlope = 0.268f;
 
+        //gravity and movement and whatever oh my!
         protected bool isFalling;
         protected int velocity = 2;
         protected const int minFallingSpeed = -1;
 
-        protected enum Behaviour { patrol, guard, distracted, goCheckThatShitOut, gotoPatrol };
-
+        //guard states
+        protected enum Behaviour { patrol, guard, distracted, goCheckThatShitOut, gotoPatrol, getBack };
         protected Behaviour currentBehaviour;
 
 
+        //TODO: remember to get rid of this once they work
+        //actually just change it because right now it makes the guard invisible
         protected Color debugColor;
 
         //took this from the player class, may need a different value
         protected const float spriteDepth = 0.95f;
 
-
+        //position of the guards eyes, relative to his rectangle origin
         Vector2 eyePos;
         
 
         public Guard(Game game, Texture2D texture, int xStart, int yStart, Direction FacingDirectionStart, int patrolLength) : base(game)
         {
+            //assumes that the level is never going to be ridiculously huge
+            invisibleY = yStart - 1000;
+            //guard should be normal 
             debugColor = Color.White;
 
+            //direction guard starts walking in 
             facingDirection = FacingDirectionStart;
+
+            //distance the guards control should cover
             this.patrolLength = patrolLength;
 
+            patrolY = yStart;
+            /*patrol path extends from starting position in the direction 
+             * the guard is initially facing in to the length of the path*/
             if (facingDirection == Direction.left)
             {
                 patrolBoundaryRight = xStart;
                 patrolBoundaryLeft = xStart - patrolLength;
 
             }
+
+            
             else if (facingDirection == Direction.right)
             {
                 patrolBoundaryLeft = xStart;
                 patrolBoundaryRight = xStart + patrolLength;
             }
 
+            //set up of sprite and position
             source = new Rectangle(0, 0, 83, 108);
             position = new Rectangle(xStart, yStart, 36, 52);
             eyePos = new Vector2(position.Width/2, position.Height/4);
             sprite = texture;
 
+            //guard is initially patrolling
             currentBehaviour = Behaviour.patrol;
+            
             isFalling = false;
+
+            //guard count inactive when not at the patrol boundaries
             guardCounter = -1;
+
+            getBackCounter = -1;
 
             deltaX = 0;
             deltaY = 0;
@@ -84,6 +114,7 @@ namespace WindowsGame4
             return new Rectangle(position.X, position.Y, position.Width, position.Height);
         }
 
+        //updates position of guard relative to map
         public override void Update(Action direction, int velocity)
         {
             /*move guard and boundaries with the map*/
@@ -92,10 +123,13 @@ namespace WindowsGame4
             patrolBoundaryRight -= velocity;
         }
 
+        //regular update for stationary map
         public override void Update(GameTime gameTime)
         {
+            //perform the appropriate action for the current behaviour
             if (currentBehaviour == Behaviour.patrol)
             {
+                //default behaviour, walking back and forth
                 Patrol();
             }
             else if (currentBehaviour == Behaviour.guard)
@@ -117,6 +151,10 @@ namespace WindowsGame4
             {
                 // use the ultimate power of the goto to get back to your starting route!
             }
+            else if (Behaviour.getBack == currentBehaviour)
+            {
+                getBack();
+            }
 
             // guards fall straight down
             if (!isFalling)
@@ -130,6 +168,55 @@ namespace WindowsGame4
             }
         }
 
+
+        //the numbers will have to be tweaked to fit the animation probably
+        //right now it's like 100-71 is going in a door, 70 - 31 he disappears, 
+        //30-0 he comes back out of the door
+        private void getBack()
+        {
+            if (getBackCounter < 0)
+            {
+                deltaX = 0;
+                getBackCounter = 100;
+                
+                //door stuff goes here
+                
+                
+                
+            }
+            else if (0 < getBackCounter)
+            {
+          
+                //disappear after awhile, because you went through the door
+                if (70 == getBackCounter)
+                {
+                    //now he is off screen and can't collide with anything
+                    position.Y = invisibleY;
+                    
+                }
+                //you're now going out the other door!
+                if (30 == getBackCounter)
+                {
+                    deltaX = 0;
+                    position.X = patrolBoundaryLeft + velocity;
+                    position.Y = patrolY;
+                    facingDirection = Direction.right;
+                    
+                }
+
+                getBackCounter--;
+            }
+            else if (0 == getBackCounter)
+            {
+
+                getBackCounter = -1;
+                currentBehaviour = Behaviour.patrol;
+            }
+        }
+
+        /*
+         * guard falls when not in contact with the ground (durrr)
+         */
         protected void Fall()
         {
             if (deltaY >= minFallingSpeed)
@@ -142,11 +229,23 @@ namespace WindowsGame4
             }
         }
 
+        /**
+         * generic walking back and forth waiting for shit to go down
+         */
         protected void Patrol()
         {
-            //move right until you reach your patrol, then turn around
-            if (facingDirection == Direction.right)
-            {
+
+           // System.Console.WriteLine("\tLeft Boundary: " + patrolBoundaryLeft +
+           // "\tx: " + position.X + 
+           // "\tRight Boundary: " + patrolBoundaryRight);
+            //if you are outside of your patrol, you will need to go back to your patrol path
+            if(position.X < patrolBoundaryLeft || patrolBoundaryRight < position.X){
+               
+                currentBehaviour = Behaviour.getBack;
+            }
+             //move right until you reach your patrol, then turn around
+            else if (facingDirection == Direction.right)
+            {   
                 if (position.X < patrolBoundaryRight)
                 {
                     deltaX = velocity;
@@ -181,17 +280,26 @@ namespace WindowsGame4
             }
         }
 
+        /**
+         * stay at the boundary patrol for the preset amount of time 
+         * to watch for guards
+         */
         protected void StandWatch()
         {
+
             deltaX = 0;
+            //start the counter if you were previously not counting
             if (guardCounter < 0)
             {
                 guardCounter = guardStartCount;
             }
+
+            //decrease counter while standing watch
             else if (guardCounter > 0)
             {
                 guardCounter -= 1;
             }
+            //reset the counter when the watch is done and resume patrol in the other direction
             else
             {
                 guardCounter = -1;
@@ -208,8 +316,10 @@ namespace WindowsGame4
         }
 
 
+        //move towards the bolt that you sensed and be distracted for a bit
         protected void GoCheckThatShitOut()
         {
+            //i dont know what this math means
             if (Math.Abs(position.X + (position.Width / 2) - distractionX) > 38)
             {
                 // I dare say there is a distraction to your posterior good sir!
@@ -232,6 +342,7 @@ namespace WindowsGame4
             }
         }
 
+        //collisions and stuff, yo
         public override void HandleCollision(IList<ITile> tiles)
         {
             bool footCollision = false;
@@ -261,11 +372,12 @@ namespace WindowsGame4
                     case Direction.left:
                         if (t.getCollisionBehaviour() == CollisionType.impassable)
                         {
-                            // for some wierd reason with only 1 pixel of padding this breaks player's fall
+                            // for some weird reason with only 1 pixel of padding this breaks guards fall
                             position.X = t.getPosition().Right + 2;
                             deltaX = 0;
                         }
                         break;
+
                     case Direction.right:
                         if (t.getCollisionBehaviour() == CollisionType.impassable)
                         {
@@ -287,10 +399,13 @@ namespace WindowsGame4
             }
         }
 
+        //collision handling in case of sound
         public void HandleHearing(IList<Bolt> bolts)
         {
             Direction hearingDirection;
             Bolt distractingBolt = null;
+            
+            //the first bolt you actually hear will distract you
             foreach (Bolt bolt in bolts)
             {
                hearingDirection = determineRadialCollision(bolt.GetPosition(), hearingRadius);
@@ -304,7 +419,9 @@ namespace WindowsGame4
 
             if (distractingBolt != null)
             {
+                //set up an x coordinate to head towards to check out the sound
                 distractionX = distractingBolt.GetPosition().X;
+                //check out the sound
                 currentBehaviour = Behaviour.goCheckThatShitOut;
             }
         }
@@ -312,6 +429,7 @@ namespace WindowsGame4
         //if he sees the player, the player should die.
         public void HandleVision(IPlayer player, IList<ITile> surroundingTiles)
         {
+            //grab the position of the eyes(relative to guard) and make them relative to the map)
             Vector2  mapEyePos = new Vector2(this.position.X + eyePos.X, this.position.Y + eyePos.Y);
 
             //distance between the x and y position of the guards eyes and the middle of the player
@@ -337,6 +455,8 @@ namespace WindowsGame4
         }
 
 
+        //detects whether or not you can actually see something in your field of vision 
+        //aka, is there a wall in the way or am i golden?
         protected bool isVisible(Rectangle r, IList<ITile> tiles)
         {
             float m1 = -1 * LOSSlope;
@@ -358,6 +478,7 @@ namespace WindowsGame4
                 yBottom = yTop;
                 yTop = ySwap;
             }
+
 
             IList<ITile> cleanedTiles = new List<ITile>();
             // weed out irrelevant tiles
@@ -396,7 +517,7 @@ namespace WindowsGame4
                 foreach (ITile t in cleanedTiles)
                 {
                     // if the player is already being blocked - we don't care anymore
-                    if(isInLOS)
+                    if (isInLOS)
                     {
                         if (isSweepLineCollision(p1, p2, t.getPosition()))
                         {
@@ -499,6 +620,7 @@ namespace WindowsGame4
             return new Rectangle(x, y, LOSRadius, height);
         }
        
+        //the function for use with hearing( and viewing?) collision
         protected Direction determineRadialCollision(Rectangle r, float radius)
         {
             Direction direction = Direction.none;
@@ -563,6 +685,7 @@ namespace WindowsGame4
             return direction;
         }
 
+        //converts a vector to an angle
         protected float VectorToAngle(Vector2 v)
         {
             return (float)(Math.Atan2(v.Y, v.X) * (180 / Math.PI));
@@ -578,8 +701,5 @@ namespace WindowsGame4
         {
             spriteBatch.Draw(sprite, position, source, debugColor, 0, new Vector2(0, 0), SpriteEffects.None, spriteDepth);
         }
-        
-
-
     }
 }
