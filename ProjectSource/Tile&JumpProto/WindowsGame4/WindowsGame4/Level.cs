@@ -20,7 +20,11 @@ namespace WindowsGame4
         int currentLevel;
 
         protected const int playerIndex = 0;
-        protected const int guardIndex = 5;
+        protected const int wizardIndex = 5;
+        protected const int soldierIndex = 14;
+        protected const int leverIndex = 9;
+        protected const int gateIndex = 10;
+
         protected Rectangle playerRange;
 
         int deathCounter = 0;
@@ -31,6 +35,7 @@ namespace WindowsGame4
         ArrayList fonts;
 
         MusicManager musicPlayer;
+        GuardFactory guardFactory;
 
 	    Texture2D boltTexture;
         GameLoop game;
@@ -39,7 +44,10 @@ namespace WindowsGame4
 
         protected List<Bolt> bolts;
         protected List<Torch> torches;
-        protected List<Guard> guards;
+        protected List<IGuard> guards;
+        protected List<Lever> levers;
+        protected List<Gate> gates;
+        protected int[] leverGateMap;
 
         public Level(GameLoop game, ArrayList _textures, ArrayList _fonts, ArrayList _sounds, MusicManager _musicPlayer, LevelLoader loader) : base(game)
         {
@@ -48,7 +56,9 @@ namespace WindowsGame4
 
             bolts = new List<Bolt>();
             torches = new List<Torch>();
-            guards = new List<Guard>();
+            guards = new List<IGuard>();
+            levers = new List<Lever>();
+            gates = new List<Gate>();
 
             playerRange = new Rectangle((screenWidth * 2)/5, 0, screenWidth/5, screenHeight);
             
@@ -58,6 +68,7 @@ namespace WindowsGame4
             fonts = _fonts;
 
             musicPlayer = _musicPlayer;
+            guardFactory = new GuardFactory((Texture2D)textures[wizardIndex], (Texture2D)textures[soldierIndex]);
 
             currentLevel = 0;
             deathCounter = 0;
@@ -78,7 +89,7 @@ namespace WindowsGame4
                 game.State = GameLoop.GameState.victory;
                 return;
             }
-            levelMap = new Map(Game, levelLoader.Map, textures);
+            levelMap = new Map(Game, levelLoader.Map, textures, levelLoader.LevelBackground);
 
             int screenWidth = Game.GraphicsDevice.Viewport.Width;
             int screenHeight = Game.GraphicsDevice.Viewport.Height;
@@ -87,21 +98,49 @@ namespace WindowsGame4
             
             boltTexture = (Texture2D)textures[4];
 
+            Texture2D[] torchTextures = new Texture2D[2];
+            torchTextures[0] = (Texture2D)textures[6];
+            torchTextures[1] = (Texture2D)textures[8];
+
             // load torches from the level files
             foreach (Vector2 v in levelLoader.Torches)
             {
                 int x = ((int)v.X) * (screenWidth / 64) - (15/2);
                 int y = (((int)v.Y) * (screenHeight / 32)) - 25;
-                torches.Add(new Torch(Game, (Texture2D)textures[6], x, y));
+                torches.Add(new Torch(Game, torchTextures, x, y));
             }
 
-            foreach (Vector2 v in levelLoader.Guards)
+            foreach (Vector3 v in levelLoader.Guards)
             {
                 int x = ((int)v.X) * (screenWidth / 64) - (36/2);
-                int y = ((int)v.Y) * (screenHeight / 32) - 52;
-                guards.Add(new Guard(Game, (Texture2D)textures[guardIndex], x, y, Direction.right, 100));
+                int y = ((int)v.Y) * (screenHeight / 32) - (28*2);
+                int type = (int)v.Z;
+                guards.Add(guardFactory.createGuard(Game, x, y, Direction.right, 100, type));
             }
-                
+
+            foreach (Vector2 v in levelLoader.Gates)
+            {
+                /* These offsets will be wrong right now */
+                int x = ((int)v.X) * (screenWidth / 64) - (24 / 2);
+                int y = ((int)v.Y) * (screenHeight / 32) - 15;
+                gates.Add(new Gate(Game, x, y, screenWidth, screenHeight, (Texture2D)textures[gateIndex]));
+            }
+
+            int[][] gateMaps = levelLoader.levelGateMaps;
+            int i = 0;
+            foreach (Vector2 v in levelLoader.Levers)
+            {
+                List<Gate> leverGates = new List<Gate>();
+                for (int j = 0; j < gateMaps[i].Length; j++)
+                {
+                    leverGates.Add(gates[j]);
+                }
+                int x = ((int)v.X) * (screenWidth / 64) - (24 / 2);
+                int y = ((int)v.Y) * (screenHeight / 32) - 22;
+                levers.Add(new Lever(Game, x, y, screenWidth, screenHeight, Lever.LeverType.switcher, leverGates, (Texture2D)textures[leverIndex]));
+                i++;
+            }
+    
             gameTimer = new GameTimer(levelLoader.TimeLimit, (SpriteFont)fonts[0]);
 
             musicPlayer.Play(levelLoader.LevelMusic);
@@ -160,6 +199,14 @@ namespace WindowsGame4
                     velocity = -2;
                 }
 
+                if (keyState.IsKeyDown(Keys.F) && prevKeyState.IsKeyUp(Keys.F))
+                {
+                    foreach (Lever lever in levers)
+                    {
+                        lever.HandleCollision(levelMap.GetNearbyTiles(player.GetPosition()));
+                    }
+                }
+
                 // update the player position when the player needs to change position on screen
                 player.Update(playerAction, velocity);
                 player.HandleCollision(levelMap.GetNearbyTiles(player.GetPosition()));
@@ -190,6 +237,16 @@ namespace WindowsGame4
                     {
                         bolt.reposition(deltaX);
                     }
+
+                    foreach (Lever lever in levers)
+                    {
+                        lever.reposition(deltaX);
+                    }
+
+                    foreach (Gate gate in gates)
+                    {
+                        gate.reposition(deltaX);
+                    }
                 }
 
 
@@ -208,6 +265,7 @@ namespace WindowsGame4
                 foreach (Torch t in torches)
                 {
                     t.Update(gameTime);
+                    t.HandleCollision(player);
                 }
 
                 IList<Bolt> collidedBolts = new List<Bolt>();
@@ -242,6 +300,12 @@ namespace WindowsGame4
                    
                 }
 
+                foreach (Gate gate in gates)
+                {
+                    gate.Update(gameTime);
+                }
+
+
                 if (player.DoneLevel)
                 {
                     // do some intermediate next level screen...
@@ -249,6 +313,8 @@ namespace WindowsGame4
                     bolts.Clear();
                     torches.Clear();
                     guards.Clear();
+                    levers.Clear();
+                    gates.Clear();
 
                     if (levelLoader.NumLevels > currentLevel)
                     {
@@ -269,6 +335,8 @@ namespace WindowsGame4
                     torches.Clear();
                     bolts.Clear();
                     guards.Clear();
+                    levers.Clear();
+                    gates.Clear();
                     game.State = GameLoop.GameState.gameOver;
                 }
             }
@@ -292,6 +360,14 @@ namespace WindowsGame4
             foreach (Torch t in torches)
             {
                 t.Draw(spriteBatch);
+            }
+            foreach (Lever lever in levers)
+            {
+                lever.Draw(spriteBatch);
+            }
+            foreach (Gate gate in gates)
+            {
+                gate.Draw(spriteBatch);
             }
         }
 

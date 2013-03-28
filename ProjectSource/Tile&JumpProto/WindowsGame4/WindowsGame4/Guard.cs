@@ -7,12 +7,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace WindowsGame4
 {
-    class Guard : ADynamicGameObject, IDynamicGameObject
+    class Guard : ADynamicGameObject, IGuard
     {
         protected int invisibleY; 
         //distraction
-        protected int distractedTime;
-        protected int maxDistractedTime;
+        protected int distractionCount;
+        protected int maxDistractedCount = 40;
 
         //keep track of how long the guard stands at the end of his patrol
         protected int guardCounter;
@@ -40,7 +40,7 @@ namespace WindowsGame4
 
         //gravity and movement and whatever oh my!
         protected bool isFalling;
-        protected int velocity = 2;
+        protected int velocity = 1;
         protected const int minFallingSpeed = -1;
 
         //guard states
@@ -55,7 +55,19 @@ namespace WindowsGame4
         //took this from the player class, may need a different value
         protected const float spriteDepth = 0.95f;
 
-        //position of the guards eyes, relative to his rectangle origin
+        protected const int spriteY = 1;
+        protected const int spriteHeight = 28;
+
+        protected int[] spriteX = { 1, 16, 32, 48, 64, 80, 96, 111, 131, 153, 173, 196, 214, 238 };
+        protected int[] spriteWidth = { 13, 14, 14, 14, 14, 14, 14, 19, 21, 19, 22, 17, 23, 12 };
+
+        protected int standingIndex = 0;
+        protected int walkingIndex = 1;
+        protected int teleportIndex = 6;
+
+        protected int walkCounter;
+        protected int currWalkingIndex;
+        //position of the guards eyes relative to his source rectangle
         Vector2 eyePos;
         
 
@@ -89,10 +101,10 @@ namespace WindowsGame4
                 patrolBoundaryRight = xStart + patrolLength;
             }
 
-            //set up of sprite and position
-            source = new Rectangle(0, 0, 83, 108);
-            position = new Rectangle(xStart, yStart, 36, 52);
-            eyePos = new Vector2(position.Width/2, position.Height/4);
+            // default to the basic standing sprite
+            source = new Rectangle(spriteX[standingIndex], spriteY, spriteWidth[standingIndex], spriteHeight);
+            position = new Rectangle(xStart, yStart, source.Width*2, source.Height*2);
+            eyePos = new Vector2(position.Width/2, position.Height/2);
             sprite = texture;
 
             //guard is initially patrolling
@@ -102,6 +114,9 @@ namespace WindowsGame4
 
             //guard count inactive when not at the patrol boundaries
             guardCounter = -1;
+            walkCounter = 0;
+
+            distractionCount = 0;
 
             getBackCounter = -1;
 
@@ -131,25 +146,30 @@ namespace WindowsGame4
             {
                 //default behaviour, walking back and forth
                 Patrol();
+                Walk();
             }
             else if (currentBehaviour == Behaviour.guard)
             {
                 // chill out for a few and guard some shit
                 StandWatch();
+                Stand();
             }
             else if (currentBehaviour == Behaviour.goCheckThatShitOut)
             {
                 // WTF WAS THAT?!?!?
                 GoCheckThatShitOut();
+                Walk();
             }
             else if (currentBehaviour == Behaviour.distracted)
             {
                 // hmmm.... maybe I'm just going insane... and hearing things... like bolts
-                StandWatch();
+                BeDistracted();
+                Stand();
             }
             else if (currentBehaviour == Behaviour.gotoPatrol)
             {
                 // use the ultimate power of the goto to get back to your starting route!
+                Patrol();
             }
             else if (Behaviour.getBack == currentBehaviour)
             {
@@ -164,6 +184,7 @@ namespace WindowsGame4
             else
             {
                 Fall();
+                Stand();
                 position.Y -= deltaY;
             }
         }
@@ -229,9 +250,39 @@ namespace WindowsGame4
             }
         }
 
-        /**
-         * generic walking back and forth waiting for shit to go down
-         */
+        // handles the walking animation
+        protected void Walk()
+        {
+            walkCounter += 1;
+            // if the guard was not walking before or finished the walking animation (re-)start the walking animation
+            if (currWalkingIndex < walkingIndex || currWalkingIndex == teleportIndex)
+            {
+                walkCounter = 0;
+                currWalkingIndex = walkingIndex;
+            }
+            else if(walkCounter % 10 == 0)
+            {
+                // continue the walking animation
+                currWalkingIndex += 1;
+                walkCounter = 0;
+            }
+
+            source.X = spriteX[currWalkingIndex];
+            source.Width = spriteWidth[currWalkingIndex];
+            position.Width = source.Width * 2;
+        }
+
+        // handle the stand animation
+        protected void Stand()
+        {
+            // set the correct sprite for standing watch
+            source.X = spriteX[standingIndex];
+            source.Width = spriteWidth[standingIndex];
+
+            // scale the sprite to match the size of the previous sprite
+            position.Width = source.Width * 2;
+        }
+
         protected void Patrol()
         {
 
@@ -291,6 +342,7 @@ namespace WindowsGame4
             //start the counter if you were previously not counting
             if (guardCounter < 0)
             {
+                // the guard will stand watch for guardCounter frames
                 guardCounter = guardStartCount;
             }
 
@@ -342,7 +394,25 @@ namespace WindowsGame4
             }
         }
 
-        //collisions and stuff, yo
+        protected void BeDistracted()
+        {
+            deltaX = 0;
+            if (distractionCount < 0)
+            {
+                // the guard will stand watch for guardCounter frames
+                distractionCount = maxDistractedCount;
+            }
+            else if (distractionCount > 0)
+            {
+                distractionCount -= 1;
+            }
+            else
+            {
+                distractionCount = -1;
+                currentBehaviour = Behaviour.gotoPatrol;
+            }
+        }
+
         public override void HandleCollision(IList<ITile> tiles)
         {
             bool footCollision = false;
@@ -353,19 +423,14 @@ namespace WindowsGame4
                 // padding the tile with a pixel on either side so the player cannot climb the walls
                 Rectangle tilePos = t.getPosition();
 
-                tilePos.X -= 1;
                 tilePos.Y += 1;
                 tilePos.Height -= 1;
-                tilePos.Width += 2;
 
                 Direction direction = determineCollisionType(tilePos);
 
+                // check for left-right collisions
                 switch (direction)
                 {
-                    case Direction.bottom:
-                        position.Y = t.getPosition().Top - position.Height;
-                        footCollision = true;
-                        break;
                     case Direction.top:
                         // this should never happen, our guards don't jump... yet.
                         break;
@@ -373,7 +438,7 @@ namespace WindowsGame4
                         if (t.getCollisionBehaviour() == CollisionType.impassable)
                         {
                             // for some weird reason with only 1 pixel of padding this breaks guards fall
-                            position.X = t.getPosition().Right + 2;
+                            position.X = t.getPosition().Right;
                             deltaX = 0;
                         }
                         break;
@@ -381,9 +446,25 @@ namespace WindowsGame4
                     case Direction.right:
                         if (t.getCollisionBehaviour() == CollisionType.impassable)
                         {
-                            position.X = t.getPosition().Left - position.Width - 1;
+                            position.X = t.getPosition().Left - position.Width;
                             deltaX = 0;
                         }
+                        break;
+                }
+            }
+
+            // check for foot collisions
+            foreach (ITile t in tiles)
+            {
+                // padding the tile with a pixel on either side so the player cannot climb the walls
+                Rectangle tilePos = t.getPosition();
+
+                Direction direction = determineCollisionType(tilePos);
+
+                if (direction == Direction.bottom)
+                {
+                        position.Y = t.getPosition().Top - position.Height;
+                        footCollision = true;
                         break;
                 }
             }
@@ -441,17 +522,20 @@ namespace WindowsGame4
 
             debugColor = Color.White;
 
-            // is the player visible enough/close enough for the guard to be able to see
-            if (visibility <= 0 && isVisible(player.GetPosition(), surroundingTiles))
+            // if the player is behind the guard we don't care
+            if ((facingDirection == Direction.left && player.GetPosition().X <= mapEyePos.X) || (facingDirection == Direction.right && player.GetPosition().Right >= mapEyePos.X))
             {
-                debugColor = Color.Red;
-                //player.Kill();
+                // is the player visible enough/close enough for the guard to be able to see
+                if (visibility <= 0 && isVisible(player.GetPosition(), surroundingTiles))
+                {
+                    debugColor = Color.Red;
+                    //player.Kill();
+                }
+                else
+                {
+                    debugColor = Color.White;
+                }
             }
-            else
-            {
-                debugColor = Color.White;
-            }
-  
         }
 
 
@@ -650,35 +734,24 @@ namespace WindowsGame4
 
                 while (angle < 0)
                     angle += 360;
-
-                System.Console.WriteLine(angle);
                 
 
                 // may have to tweak the angle values it depends on how xna stores angles against world coords
                 if (angle >= 15 && angle <= 165)
                 {
                     direction = Direction.top;
-                    debugColor = Color.Beige;
-                    System.Console.WriteLine("top");
                 }
                 else if (angle >= 165 && angle <= 195)
                 {
                     direction = Direction.right;
-                    debugColor = Color.Crimson;
-                    System.Console.WriteLine("right");
-                 
                 }
                 else if (angle >= 195 && angle <= 345)
                 {
                     direction = Direction.bottom;
-                    debugColor = Color.Black;
-                    System.Console.WriteLine("bottom");
                 }
                 else
                 {
-                    System.Console.WriteLine("left");
                     direction = Direction.left;
-                    debugColor = Color.DarkMagenta;
                 }
             }
 
@@ -699,7 +772,17 @@ namespace WindowsGame4
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(sprite, position, source, debugColor, 0, new Vector2(0, 0), SpriteEffects.None, spriteDepth);
+            if (facingDirection == Direction.right)
+            {
+                spriteBatch.Draw(sprite, position, source, debugColor, 0, new Vector2(0, 0), SpriteEffects.None, spriteDepth);
+            }
+            else
+            {
+                spriteBatch.Draw(sprite, position, source, debugColor, 0, new Vector2(0, 0), SpriteEffects.FlipHorizontally, spriteDepth);
+            }
         }
+        
+
+
     }
 }

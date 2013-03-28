@@ -14,7 +14,8 @@ namespace WindowsGame4
         impassable,
         hideable,
         goal,
-        spike
+        spike,
+        invisible
     };
 
     public enum Action

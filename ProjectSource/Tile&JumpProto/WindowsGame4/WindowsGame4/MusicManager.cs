@@ -30,7 +30,7 @@ namespace WindowsGame4
                 MediaPlayer.Stop();
             }
 
-            MediaPlayer.Play((Song)songs[i]);
+            //MediaPlayer.Play((Song)songs[i]);
         }
 
     }

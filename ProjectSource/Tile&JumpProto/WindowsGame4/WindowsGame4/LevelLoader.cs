@@ -19,11 +19,16 @@ namespace WindowsGame4
         int dataPos;
         int timeLimit;
         int musicIndex;
+        int bgroundIndex;
 
         int[,] mapLayout;
 
-        Vector2[] guardLayout;
+        Vector3[] guardLayout;
         Vector2[] torchLayout;
+        Vector2[] leverLayout;
+        int[][] leverGateMaps;
+        Vector2[] gateLayout;
+
 
         public LevelLoader(string[] _levelFiles)
         {
@@ -40,6 +45,11 @@ namespace WindowsGame4
         public int LevelMusic
         {
             get { return musicIndex; }
+        }
+
+        public int LevelBackground
+        {
+            get { return bgroundIndex; }
         }
 
         public void LoadLevel(int levelIndex)
@@ -66,6 +76,7 @@ namespace WindowsGame4
             int numMapCols = NextInt(tokenizedData);
             timeLimit = NextInt(tokenizedData);
             musicIndex = NextInt(tokenizedData);
+            bgroundIndex = NextInt(tokenizedData);
 
             if (numMapRows * numMapCols > tokenizedData.Length)
             {
@@ -95,12 +106,37 @@ namespace WindowsGame4
             }
 
             int numGuards = NextInt(tokenizedData);
-            guardLayout = new Vector2[numGuards];
+            guardLayout = new Vector3[numGuards];
 
             for(int i = 0; i < numGuards; i++)
             {
                 guardLayout[i].X = NextInt(tokenizedData);
                 guardLayout[i].Y = NextInt(tokenizedData);
+                guardLayout[i].Z = NextInt(tokenizedData);
+            }
+
+            int numGates = NextInt(tokenizedData);
+            gateLayout = new Vector2[numGates];
+            for (int i = 0; i < numGates; i++)
+            {
+                gateLayout[i].X = NextInt(tokenizedData);
+                gateLayout[i].Y = NextInt(tokenizedData);
+            }
+
+            int numLevers = NextInt(tokenizedData);
+            leverLayout = new Vector2[numLevers];
+            leverGateMaps = new int[numLevers][];
+            for (int i = 0; i < numLevers; i++)
+            {
+                leverLayout[i].X = NextInt(tokenizedData);
+                leverLayout[i].Y = NextInt(tokenizedData);
+                int numGatesForLever = NextInt(tokenizedData);
+                // And then we read in the indexes of the gates we'll be using for this lever
+                leverGateMaps[i] = new int[numGatesForLever];
+                for (int j = 0; j < numGatesForLever; j++)
+                {
+                    leverGateMaps[i][j] = NextInt(tokenizedData);
+                }
             }
         }
 
@@ -121,21 +157,30 @@ namespace WindowsGame4
             get { return torchLayout; }
         }
 
-        public Vector2[] Guards
+        public Vector3[] Guards
         {
             get { return guardLayout; }
         }
-        
+
+        public Vector2[] Levers
+        {
+            get { return leverLayout; }
+        }
+
+        public int[][] levelGateMaps
+        {
+            get { return leverGateMaps; }
+        }
+
+        public Vector2[] Gates
+        {
+            get { return gateLayout; }
+        }
+
         public int NumLevels
         {
             get { return levelFiles.Length; }
         }
-
-       
-
-
-        
-        
 
         public string LevelName
         {
