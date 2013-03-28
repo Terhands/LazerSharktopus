@@ -109,9 +109,9 @@ namespace WindowsGame4
             IList<ITile> nearbyTiles = new List<ITile>();
 
             // add all of the relevant tiles for potential collision handling
-            for (int i = xMin; i <= xMax && i < tiles.GetLength(1); i++)
+            for (int j = yMin; j <= yMax && j < rowsPerScreen; j++)
             {
-                for (int j = yMin; j <= yMax && j < rowsPerScreen; j++)
+                for (int i = xMin; i <= xMax && i < tiles.GetLength(1); i++)
                 {
                     //only pass back platform tiles & impassable tiles (don't care if no collision could result)
                     if (tiles[j, i].getCollisionBehaviour() != CollisionType.passable)
