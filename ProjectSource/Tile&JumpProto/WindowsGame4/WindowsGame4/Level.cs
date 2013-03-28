@@ -254,6 +254,7 @@ namespace WindowsGame4
                         boltSounds.Add(sounds[1]);
                         boltSounds.Add(sounds[2]);
                         bolts.Add(new Bolt(Game, player.GetFacingDirection(), player.GetPosition().X, player.GetPosition().Y, boltTexture, boltSounds));
+                        player.throwBolt();
                     }
                 }
 

@@ -31,5 +31,8 @@ namespace WindowsGame4
         void reposition();
 
         void Kill();
+
+        /* Decrements Robro's health whenever bolt is thrown */
+        void throwBolt();
     }
 }

@@ -52,6 +52,8 @@ namespace WindowsGame4
         int animationMax = 8; // How many ticks to change frame after. 
         bool landed = false; //So the update doesnt keep reseting robro to standard land position this bool is used
 
+        int playerHealth; // The current health of Robro
+
         public Player(Game game, Texture2D texture, ArrayList _sounds, int xStart, int yStart)
             : base(game)
         {
@@ -76,6 +78,8 @@ namespace WindowsGame4
 
             deltaX = 0;
             deltaY = 0;
+
+            playerHealth = 20;
         }
 
         public bool DoneLevel
@@ -87,6 +91,16 @@ namespace WindowsGame4
         {
             get { return isDead; }
             set { isDead = value; }
+        }
+
+        /*  */
+        public void throwBolt()
+        {
+            playerHealth -= 2; // Lower Robro's health by 2
+            if (playerHealth <= 0) // If health is less than or equal to zero, Robro dies
+            {
+                this.Kill();
+            }
         }
 
         public void Jump()
