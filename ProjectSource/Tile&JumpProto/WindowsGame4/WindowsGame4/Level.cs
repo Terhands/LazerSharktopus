@@ -20,7 +20,8 @@ namespace WindowsGame4
         int currentLevel;
 
         protected const int playerIndex = 0;
-        protected const int guardIndex = 5;
+        protected const int wizardIndex = 5;
+        protected const int soldierIndex = 14;
         protected const int leverIndex = 9;
         protected const int gateIndex = 10;
 
@@ -67,7 +68,7 @@ namespace WindowsGame4
             fonts = _fonts;
 
             musicPlayer = _musicPlayer;
-            guardFactory = new GuardFactory();
+            guardFactory = new GuardFactory((Texture2D)textures[wizardIndex], (Texture2D)textures[soldierIndex]);
 
             currentLevel = 0;
             deathCounter = 0;
@@ -114,7 +115,7 @@ namespace WindowsGame4
                 int x = ((int)v.X) * (screenWidth / 64) - (36/2);
                 int y = ((int)v.Y) * (screenHeight / 32) - (28*2);
                 int type = (int)v.Z;
-                guards.Add(guardFactory.createGuard(Game, (Texture2D)textures[guardIndex], x, y, Direction.right, 100, type));
+                guards.Add(guardFactory.createGuard(Game, x, y, Direction.right, 100, type));
             }
 
             foreach (Vector2 v in levelLoader.Gates)

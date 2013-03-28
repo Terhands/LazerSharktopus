@@ -47,7 +47,7 @@ namespace WindowsGame4
         protected const int spriteHeight = 28;
 
         protected int[] spriteX = { 1, 15, 31, 47, 63, 79, 95, 111, 131, 153, 173, 196, 214, 238 };
-        protected int[] spriteWidth = { 13, 15, 15, 15, 15, 15, 15, 19, 21, 19, 22, 17, 23, 12 };
+        protected int[] spriteWidth = { 13, 14, 15, 15, 15, 15, 15, 19, 21, 19, 22, 17, 23, 12 };
 
         protected int standingIndex = 0;
         protected int walkingIndex = 1;
