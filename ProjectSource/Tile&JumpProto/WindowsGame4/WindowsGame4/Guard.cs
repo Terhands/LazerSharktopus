@@ -7,11 +7,11 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace WindowsGame4
 {
-    class Guard : ADynamicGameObject, IDynamicGameObject
+    class Guard : ADynamicGameObject, IGuard
     {
 
-        protected int distractedTime;
-        protected int maxDistractedTime;
+        protected int distractionCount;
+        protected int maxDistractedCount = 40;
 
         protected int guardCounter;
         protected int guardStartCount = 20;
@@ -30,10 +30,10 @@ namespace WindowsGame4
         protected const float LOSSlope = 0.268f;
 
         protected bool isFalling;
-        protected int velocity = 2;
+        protected int velocity = 1;
         protected const int minFallingSpeed = -1;
 
-        protected enum Behaviour { patrol, guard, distracted, goCheckThatShitOut, gotoPatrol };
+        protected enum Behaviour { patrol, guard, distracted, goCheckThatShitOut, gotoPatrol, wander };
 
         protected Behaviour currentBehaviour;
 
@@ -89,6 +89,8 @@ namespace WindowsGame4
             guardCounter = -1;
             walkCounter = 0;
 
+            distractionCount = 0;
+
             deltaX = 0;
             deltaY = 0;
         }
@@ -128,12 +130,13 @@ namespace WindowsGame4
             else if (currentBehaviour == Behaviour.distracted)
             {
                 // hmmm.... maybe I'm just going insane... and hearing things... like bolts
-                StandWatch();
+                BeDistracted();
                 Stand();
             }
             else if (currentBehaviour == Behaviour.gotoPatrol)
             {
                 // use the ultimate power of the goto to get back to your starting route!
+                Patrol();
             }
 
             // guards fall straight down
@@ -161,7 +164,7 @@ namespace WindowsGame4
         }
 
         // handles the walking animation
-        private void Walk()
+        protected void Walk()
         {
             walkCounter += 1;
             // if the guard was not walking before or finished the walking animation (re-)start the walking animation
@@ -183,7 +186,7 @@ namespace WindowsGame4
         }
 
         // handle the stand animation
-        private void Stand()
+        protected void Stand()
         {
             // set the correct sprite for standing watch
             source.X = spriteX[standingIndex];
@@ -284,6 +287,25 @@ namespace WindowsGame4
             }
         }
 
+        protected void BeDistracted()
+        {
+            deltaX = 0;
+            if (distractionCount < 0)
+            {
+                // the guard will stand watch for guardCounter frames
+                distractionCount = maxDistractedCount;
+            }
+            else if (distractionCount > 0)
+            {
+                distractionCount -= 1;
+            }
+            else
+            {
+                distractionCount = -1;
+                currentBehaviour = Behaviour.gotoPatrol;
+            }
+        }
+
         public override void HandleCollision(IList<ITile> tiles)
         {
             bool footCollision = false;
@@ -294,10 +316,10 @@ namespace WindowsGame4
                 // padding the tile with a pixel on either side so the player cannot climb the walls
                 Rectangle tilePos = t.getPosition();
 
-                tilePos.X -= 1;
-                tilePos.Y += 1;
-                tilePos.Height -= 1;
-                tilePos.Width += 2;
+                //tilePos.X -= 1;
+                //tilePos.Y += 1;
+                //tilePos.Height -= 1;
+                //tilePos.Width += 2;
 
                 Direction direction = determineCollisionType(tilePos);
 
@@ -314,14 +336,14 @@ namespace WindowsGame4
                         if (t.getCollisionBehaviour() == CollisionType.impassable)
                         {
                             // for some wierd reason with only 1 pixel of padding this breaks player's fall
-                            position.X = t.getPosition().Right + 2;
+                            position.X = t.getPosition().Right;
                             deltaX = 0;
                         }
                         break;
                     case Direction.right:
                         if (t.getCollisionBehaviour() == CollisionType.impassable)
                         {
-                            position.X = t.getPosition().Left - position.Width - 1;
+                            position.X = t.getPosition().Left - position.Width;
                             deltaX = 0;
                         }
                         break;

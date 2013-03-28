@@ -186,12 +186,12 @@ namespace WindowsGame4
             {
                 // padding the tile with a pixel on either side so the player cannot climb the walls
                 Rectangle tilePos = t.getPosition();
-
+                
                 tilePos.X -= 1;
                 tilePos.Y += 1;
                 tilePos.Height -= 1;
                 tilePos.Width += 2;
-
+                
                 Direction direction = determineCollisionType(tilePos);
 
                 if (direction != Direction.none && t.getCollisionBehaviour() == CollisionType.goal)

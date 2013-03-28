@@ -48,9 +48,9 @@ namespace WindowsGame4
             maxPixelOffset = (mapLayout.GetLength(1) * (screenWidth / colsPerScreen)) - screenWidth;
             minPixelOffset = 0;
 
-            for (int i = 0; i < mapLayout.GetLength(0); i++)
+            for (int j = 0; j < mapLayout.GetLength(1); j++)
             {
-                for (int j = 0; j < mapLayout.GetLength(1); j++)
+                for (int i = 0; i < mapLayout.GetLength(0); i++)
                 {
                     tiles[i, j] = new Tile(Game, (Texture2D)tileTextures[1], (CollisionType)mapLayout[i,j], j, i, screenWidth, screenHeight, rowsPerScreen, colsPerScreen);
                 }
