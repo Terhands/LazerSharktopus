@@ -43,6 +43,18 @@ namespace WindowsGame4
         //took this from the player class, may need a different value
         protected const float spriteDepth = 0.95f;
 
+        protected const int spriteY = 1;
+        protected const int spriteHeight = 28;
+
+        protected int[] spriteX = { 1, 15, 31, 47, 63, 79, 95, 111, 131, 153, 173, 196, 214, 238 };
+        protected int[] spriteWidth = { 13, 15, 15, 15, 15, 15, 15, 19, 21, 19, 22, 17, 23, 12 };
+
+        protected int standingIndex = 0;
+        protected int walkingIndex = 1;
+        protected int teleportIndex = 6;
+
+        protected int walkCounter;
+        protected int currWalkingIndex;
 
         Vector2 eyePos;
         
@@ -66,14 +78,16 @@ namespace WindowsGame4
                 patrolBoundaryRight = xStart + patrolLength;
             }
 
-            source = new Rectangle(0, 0, 83, 108);
-            position = new Rectangle(xStart, yStart, 36, 52);
+            // default to the basic standing sprite
+            source = new Rectangle(spriteX[standingIndex], spriteY, spriteWidth[standingIndex], spriteHeight);
+            position = new Rectangle(xStart, yStart, source.Width*2, source.Height*2);
             eyePos = new Vector2(position.Width/2, position.Height/2);
             sprite = texture;
 
             currentBehaviour = Behaviour.patrol;
             isFalling = false;
             guardCounter = -1;
+            walkCounter = 0;
 
             deltaX = 0;
             deltaY = 0;
@@ -97,21 +111,25 @@ namespace WindowsGame4
             if (currentBehaviour == Behaviour.patrol)
             {
                 Patrol();
+                Walk();
             }
             else if (currentBehaviour == Behaviour.guard)
             {
                 // chill out for a few and guard some shit
                 StandWatch();
+                Stand();
             }
             else if (currentBehaviour == Behaviour.goCheckThatShitOut)
             {
                 // WTF WAS THAT?!?!?
                 GoCheckThatShitOut();
+                Walk();
             }
             else if (currentBehaviour == Behaviour.distracted)
             {
                 // hmmm.... maybe I'm just going insane... and hearing things... like bolts
                 StandWatch();
+                Stand();
             }
             else if (currentBehaviour == Behaviour.gotoPatrol)
             {
@@ -140,6 +158,39 @@ namespace WindowsGame4
             {
                 deltaY -= deltaY * 5 / 3;
             }
+        }
+
+        // handles the walking animation
+        private void Walk()
+        {
+            walkCounter += 1;
+            // if the guard was not walking before or finished the walking animation (re-)start the walking animation
+            if (currWalkingIndex < walkingIndex || currWalkingIndex == teleportIndex)
+            {
+                walkCounter = 0;
+                currWalkingIndex = walkingIndex;
+            }
+            else if(walkCounter % 10 == 0)
+            {
+                // continue the walking animation
+                currWalkingIndex += 1;
+                walkCounter = 0;
+            }
+
+            source.X = spriteX[currWalkingIndex];
+            source.Width = spriteWidth[currWalkingIndex];
+            position.Width = source.Width * 2;
+        }
+
+        // handle the stand animation
+        private void Stand()
+        {
+            // set the correct sprite for standing watch
+            source.X = spriteX[standingIndex];
+            source.Width = spriteWidth[standingIndex];
+
+            // scale the sprite to match the size of the previous sprite
+            position.Width = source.Width * 2;
         }
 
         protected void Patrol()
@@ -186,6 +237,7 @@ namespace WindowsGame4
             deltaX = 0;
             if (guardCounter < 0)
             {
+                // the guard will stand watch for guardCounter frames
                 guardCounter = guardStartCount;
             }
             else if (guardCounter > 0)

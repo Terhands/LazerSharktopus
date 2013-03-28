@@ -110,7 +110,7 @@ namespace WindowsGame4
             foreach (Vector2 v in levelLoader.Guards)
             {
                 int x = ((int)v.X) * (screenWidth / 64) - (36/2);
-                int y = ((int)v.Y) * (screenHeight / 32) - 52;
+                int y = ((int)v.Y) * (screenHeight / 32) - (28*2);
                 guards.Add(new Guard(Game, (Texture2D)textures[guardIndex], x, y, Direction.right, 100));
             }
 

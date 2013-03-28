@@ -26,6 +26,7 @@ Content\gate.xnb
 Content\T1background.xnb
 Content\T2background.xnb
 Content\T3background.xnb
+Content\wizard.xnb
 Content\lathraia.config
 Content\Level1.txt
 Content\Level2.txt

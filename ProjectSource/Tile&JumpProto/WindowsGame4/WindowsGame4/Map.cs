@@ -24,9 +24,6 @@ namespace WindowsGame4
         protected const int rowsPerScreen = 32;
         protected const int colsPerScreen = 64;
 
-        // our test map has 100 columns
-        //protected int mapCols = 100;
-
         public Map(Game game, int[,] mapLayout, ArrayList tileTextures, int bgIndex) : base(game)
         {
             Initialize(mapLayout, tileTextures, bgIndex);

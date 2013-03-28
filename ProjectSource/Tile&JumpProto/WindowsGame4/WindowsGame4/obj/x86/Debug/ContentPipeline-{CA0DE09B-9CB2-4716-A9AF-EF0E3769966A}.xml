@@ -226,7 +226,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T2background.xnb</Output>
-      <Time>2013-03-26T23:33:40.5969762-06:00</Time>
+      <Time>2013-03-27T00:08:32.2666129-06:00</Time>
     </Item>
     <Item>
       <Source>T3background.png</Source>
@@ -236,6 +236,15 @@
       <Options>None</Options>
       <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T3background.xnb</Output>
       <Time>2013-03-26T23:58:12.7241771-06:00</Time>
+    </Item>
+    <Item>
+      <Source>wizard.png</Source>
+      <Name>wizard</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\wizard.xnb</Output>
+      <Time>2013-03-27T23:45:49.439461-06:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
