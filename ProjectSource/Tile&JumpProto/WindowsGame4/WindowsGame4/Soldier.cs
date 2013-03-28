@@ -12,10 +12,16 @@ namespace WindowsGame4
 
         private int startY;
 
+        protected int[] spriteX = { 1, 15, 31, 47, 63, 79, 95, 111, 131, 153, 173, 196, 214, 238 };
+        protected int[] spriteWidth = { 13, 14, 15, 15, 15, 15, 15, 19, 21, 19, 22, 17, 23, 12 };
+
         public Soldier(Game game, Texture2D texture, int xStart, int yStart, Direction FacingDirectionStart, int patrolLength)
             : base(game, texture, xStart, yStart, FacingDirectionStart, patrolLength)
         {
             startY = yStart;
+
+            base.spriteX = this.spriteX;
+            base.spriteWidth = this.spriteWidth;
         }
 
         public override void Update(GameTime gameTime)
