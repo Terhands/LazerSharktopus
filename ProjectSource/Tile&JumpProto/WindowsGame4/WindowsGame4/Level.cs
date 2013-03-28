@@ -34,6 +34,7 @@ namespace WindowsGame4
         ArrayList fonts;
 
         MusicManager musicPlayer;
+        GuardFactory guardFactory;
 
 	    Texture2D boltTexture;
         GameLoop game;
@@ -42,7 +43,7 @@ namespace WindowsGame4
 
         protected List<Bolt> bolts;
         protected List<Torch> torches;
-        protected List<Guard> guards;
+        protected List<IGuard> guards;
         protected List<Lever> levers;
         protected List<Gate> gates;
         protected int[] leverGateMap;
@@ -54,7 +55,7 @@ namespace WindowsGame4
 
             bolts = new List<Bolt>();
             torches = new List<Torch>();
-            guards = new List<Guard>();
+            guards = new List<IGuard>();
             levers = new List<Lever>();
             gates = new List<Gate>();
 
@@ -66,6 +67,7 @@ namespace WindowsGame4
             fonts = _fonts;
 
             musicPlayer = _musicPlayer;
+            guardFactory = new GuardFactory();
 
             currentLevel = 0;
             deathCounter = 0;
@@ -107,11 +109,12 @@ namespace WindowsGame4
                 torches.Add(new Torch(Game, torchTextures, x, y));
             }
 
-            foreach (Vector2 v in levelLoader.Guards)
+            foreach (Vector3 v in levelLoader.Guards)
             {
                 int x = ((int)v.X) * (screenWidth / 64) - (36/2);
                 int y = ((int)v.Y) * (screenHeight / 32) - (28*2);
-                guards.Add(new Soldier(Game, (Texture2D)textures[guardIndex], x, y, Direction.right, 100));
+                int type = (int)v.Z;
+                guards.Add(guardFactory.createGuard(Game, (Texture2D)textures[guardIndex], x, y, Direction.right, 100, type));
             }
 
             foreach (Vector2 v in levelLoader.Gates)

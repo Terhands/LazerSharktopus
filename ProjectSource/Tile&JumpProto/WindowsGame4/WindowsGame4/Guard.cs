@@ -147,6 +147,7 @@ namespace WindowsGame4
             else
             {
                 Fall();
+                Stand();
                 position.Y -= deltaY;
             }
         }
@@ -316,19 +317,14 @@ namespace WindowsGame4
                 // padding the tile with a pixel on either side so the player cannot climb the walls
                 Rectangle tilePos = t.getPosition();
 
-                //tilePos.X -= 1;
-                //tilePos.Y += 1;
-                //tilePos.Height -= 1;
-                //tilePos.Width += 2;
+                tilePos.Y += 1;
+                tilePos.Height -= 1;
 
                 Direction direction = determineCollisionType(tilePos);
 
+                // check for left-right collisions
                 switch (direction)
                 {
-                    case Direction.bottom:
-                        position.Y = t.getPosition().Top - position.Height;
-                        footCollision = true;
-                        break;
                     case Direction.top:
                         // this should never happen, our guards don't jump... yet.
                         break;
@@ -346,6 +342,22 @@ namespace WindowsGame4
                             position.X = t.getPosition().Left - position.Width;
                             deltaX = 0;
                         }
+                        break;
+                }
+            }
+
+            // check for foot collisions
+            foreach (ITile t in tiles)
+            {
+                // padding the tile with a pixel on either side so the player cannot climb the walls
+                Rectangle tilePos = t.getPosition();
+
+                Direction direction = determineCollisionType(tilePos);
+
+                if (direction == Direction.bottom)
+                {
+                        position.Y = t.getPosition().Top - position.Height;
+                        footCollision = true;
                         break;
                 }
             }

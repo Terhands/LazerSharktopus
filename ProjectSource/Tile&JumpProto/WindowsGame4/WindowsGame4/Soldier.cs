@@ -63,6 +63,7 @@ namespace WindowsGame4
             else
             {
                 Fall();
+                Stand();
                 position.Y -= deltaY;
             }
         }
