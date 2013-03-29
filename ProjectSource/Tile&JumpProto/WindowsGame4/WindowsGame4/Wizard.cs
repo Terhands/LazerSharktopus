@@ -383,13 +383,20 @@ namespace WindowsGame4
                 if (facingDirection == Direction.right && distractionX < position.X)
                 {
                     facingDirection = Direction.left;
-                    deltaX = -1 * velocity;
                 }
                 // the bolt is behind you I say!
                 else if (facingDirection == Direction.left && distractionX > position.X)
                 {
                     facingDirection = Direction.right;
+                }
+
+                if (facingDirection == Direction.right)
+                {
                     deltaX = velocity;
+                }
+                else
+                {
+                    deltaX = -1 * velocity;
                 }
             }
             else
