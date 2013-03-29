@@ -54,6 +54,8 @@ namespace WindowsGame4
 
         int playerHealth; // The current health of Robro
 
+        protected HealthMeter healthMeter;
+
         public Player(Game game, Texture2D texture, ArrayList _sounds, int xStart, int yStart)
             : base(game)
         {
@@ -67,6 +69,8 @@ namespace WindowsGame4
             int xCenter = xStart + (position.Width / 2);
             int yCenter = yStart - playerPadding;
             this.jumpMeter = new JumpMeter(game, xCenter, yCenter, spriteDepth);
+
+            this.healthMeter = new HealthMeter(game, 200, 10, spriteDepth);
 
             hidden = 0.0f;
             isJumping = false;
@@ -93,10 +97,18 @@ namespace WindowsGame4
             set { isDead = value; }
         }
 
-        /*  */
+        public int getPlayerHealth()
+        {
+            return this.playerHealth;
+        }
+
+        /* Updates Robro's health when a bolt is thrown */
         public void throwBolt()
         {
             playerHealth -= 2; // Lower Robro's health by 2
+            healthMeter.setMeterPosition(350, 10);
+            healthMeter.lowerHealthMeter();
+            healthMeter.Update(Action.right, playerHealth);
             if (playerHealth <= 0) // If health is less than or equal to zero, Robro dies
             {
                 this.Kill();
@@ -412,6 +424,7 @@ namespace WindowsGame4
             {
                 spriteBatch.Draw(sprite, position, source, Color.White * 1f, 0, new Vector2(0, 0), SpriteEffects.None, spriteDepth);
                 jumpMeter.Draw(spriteBatch);
+                healthMeter.Draw(spriteBatch);
             }
         }
 
