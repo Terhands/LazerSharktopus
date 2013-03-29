@@ -25,7 +25,7 @@ namespace WindowsGame4
 
             if (guardType == 0)
             {
-                guard = new Guard(game, guardTextures[guardType], xStart, yStart, FacingDirectionStart, patrolLength);
+                guard = new Wizard(game, guardTextures[guardType], xStart, yStart, FacingDirectionStart, patrolLength);
             }
             else if (guardType == 1)
             {

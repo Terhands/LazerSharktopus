@@ -228,7 +228,7 @@ namespace WindowsGame4
 
                     //update guards
 
-                    foreach (Guard guard in guards)
+                    foreach (Wizard guard in guards)
                     {
                         guard.Update(playerAction, deltaX);
                     }
@@ -289,7 +289,7 @@ namespace WindowsGame4
                     }
                 }
 
-                foreach (Guard guard in guards)
+                foreach (Wizard guard in guards)
                 {
                     guard.Update(gameTime);
                    
@@ -349,7 +349,7 @@ namespace WindowsGame4
             player.Draw(spriteBatch);
             gameTimer.Draw(spriteBatch);
 
-            foreach (Guard guard in guards)
+            foreach (Wizard guard in guards)
             {
                 guard.Draw(spriteBatch);
             }

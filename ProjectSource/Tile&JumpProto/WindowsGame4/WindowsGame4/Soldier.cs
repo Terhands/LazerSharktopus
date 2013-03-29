@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace WindowsGame4
 {
-    class Soldier : Guard, IGuard
+    class Soldier : Wizard, IGuard
     {
 
         private int startY;

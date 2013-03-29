@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace WindowsGame4
 {
-    class Guard : ADynamicGameObject, IGuard
+    class Wizard : ADynamicGameObject, IGuard
     {
         protected int invisibleY; 
         //distraction
@@ -44,7 +44,7 @@ namespace WindowsGame4
         protected const int minFallingSpeed = -1;
 
         //guard states
-        protected enum Behaviour { patrol, guard, distracted, goCheckThatShitOut, gotoPatrol, getBack };
+        protected enum Behaviour { patrol, guard, distracted, goCheckThatShitOut, gotoPatrol, wander, teleport };
         protected Behaviour currentBehaviour;
 
 
@@ -71,7 +71,7 @@ namespace WindowsGame4
         Vector2 eyePos;
         
 
-        public Guard(Game game, Texture2D texture, int xStart, int yStart, Direction FacingDirectionStart, int patrolLength) : base(game)
+        public Wizard(Game game, Texture2D texture, int xStart, int yStart, Direction FacingDirectionStart, int patrolLength) : base(game)
         {
             //assumes that the level is never going to be ridiculously huge
             invisibleY = yStart - 1000;
@@ -169,11 +169,11 @@ namespace WindowsGame4
             else if (currentBehaviour == Behaviour.gotoPatrol)
             {
                 // use the ultimate power of the goto to get back to your starting route!
-                Patrol();
+                GotoPatrol();
             }
-            else if (Behaviour.getBack == currentBehaviour)
+            else if (currentBehaviour == Behaviour.teleport)
             {
-                getBack();
+                Teleport();
             }
 
             // guards fall straight down
@@ -193,7 +193,7 @@ namespace WindowsGame4
         //the numbers will have to be tweaked to fit the animation probably
         //right now it's like 100-71 is going in a door, 70 - 31 he disappears, 
         //30-0 he comes back out of the door
-        private void getBack()
+        private void Teleport()
         {
             if (getBackCounter < 0)
             {
@@ -285,17 +285,8 @@ namespace WindowsGame4
 
         protected void Patrol()
         {
-
-           // System.Console.WriteLine("\tLeft Boundary: " + patrolBoundaryLeft +
-           // "\tx: " + position.X + 
-           // "\tRight Boundary: " + patrolBoundaryRight);
-            //if you are outside of your patrol, you will need to go back to your patrol path
-            if(position.X < patrolBoundaryLeft || patrolBoundaryRight < position.X){
-               
-                currentBehaviour = Behaviour.getBack;
-            }
              //move right until you reach your patrol, then turn around
-            else if (facingDirection == Direction.right)
+            if (facingDirection == Direction.right)
             {   
                 if (position.X < patrolBoundaryRight)
                 {
@@ -328,6 +319,20 @@ namespace WindowsGame4
                 {
                     currentBehaviour = Behaviour.guard;
                 }
+            }
+        }
+
+        protected void GotoPatrol()
+        {
+            // if the soldier fell - he can't jump he's wearing heavy armor
+            if (position.Y != patrolY || patrolBoundaryLeft > position.X || patrolBoundaryRight < position.X)
+            {
+                currentBehaviour = Behaviour.teleport;
+            }
+            else
+            {
+                // patrolling makes the guard turn back if he's out of his patrol range
+                currentBehaviour = Behaviour.patrol;
             }
         }
 
@@ -423,17 +428,14 @@ namespace WindowsGame4
                 // padding the tile with a pixel on either side so the player cannot climb the walls
                 Rectangle tilePos = t.getPosition();
 
-                tilePos.Y += 1;
-                tilePos.Height -= 1;
+                tilePos.Y += 2;
+                tilePos.Height -= 2;
 
                 Direction direction = determineCollisionType(tilePos);
 
                 // check for left-right collisions
                 switch (direction)
                 {
-                    case Direction.top:
-                        // this should never happen, our guards don't jump... yet.
-                        break;
                     case Direction.left:
                         if (t.getCollisionBehaviour() == CollisionType.impassable)
                         {
