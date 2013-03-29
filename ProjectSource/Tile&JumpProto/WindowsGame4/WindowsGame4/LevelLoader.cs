@@ -23,7 +23,7 @@ namespace WindowsGame4
 
         int[,] mapLayout;
 
-        Vector2[] guardLayout;
+        Vector3[] guardLayout;
         Vector2[] torchLayout;
         Vector2[] leverLayout;
         int[][] leverGateMaps;
@@ -106,12 +106,13 @@ namespace WindowsGame4
             }
 
             int numGuards = NextInt(tokenizedData);
-            guardLayout = new Vector2[numGuards];
+            guardLayout = new Vector3[numGuards];
 
             for(int i = 0; i < numGuards; i++)
             {
                 guardLayout[i].X = NextInt(tokenizedData);
                 guardLayout[i].Y = NextInt(tokenizedData);
+                guardLayout[i].Z = NextInt(tokenizedData);
             }
 
             int numGates = NextInt(tokenizedData);
@@ -156,7 +157,7 @@ namespace WindowsGame4
             get { return torchLayout; }
         }
 
-        public Vector2[] Guards
+        public Vector3[] Guards
         {
             get { return guardLayout; }
         }

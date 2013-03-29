@@ -20,7 +20,8 @@ namespace WindowsGame4
         int currentLevel;
 
         protected const int playerIndex = 0;
-        protected const int guardIndex = 5;
+        protected const int wizardIndex = 5;
+        protected const int soldierIndex = 14;
         protected const int leverIndex = 9;
         protected const int gateIndex = 10;
 
@@ -34,6 +35,7 @@ namespace WindowsGame4
         ArrayList fonts;
 
         MusicManager musicPlayer;
+        GuardFactory guardFactory;
 
 	    Texture2D boltTexture;
         GameLoop game;
@@ -42,7 +44,7 @@ namespace WindowsGame4
 
         protected List<Bolt> bolts;
         protected List<Torch> torches;
-        protected List<Guard> guards;
+        protected List<IGuard> guards;
         protected List<Lever> levers;
         protected List<Gate> gates;
         protected int[] leverGateMap;
@@ -54,7 +56,7 @@ namespace WindowsGame4
 
             bolts = new List<Bolt>();
             torches = new List<Torch>();
-            guards = new List<Guard>();
+            guards = new List<IGuard>();
             levers = new List<Lever>();
             gates = new List<Gate>();
 
@@ -66,6 +68,7 @@ namespace WindowsGame4
             fonts = _fonts;
 
             musicPlayer = _musicPlayer;
+            guardFactory = new GuardFactory((Texture2D)textures[wizardIndex], (Texture2D)textures[soldierIndex]);
 
             currentLevel = 0;
             deathCounter = 0;
@@ -107,11 +110,12 @@ namespace WindowsGame4
                 torches.Add(new Torch(Game, torchTextures, x, y));
             }
 
-            foreach (Vector2 v in levelLoader.Guards)
+            foreach (Vector3 v in levelLoader.Guards)
             {
                 int x = ((int)v.X) * (screenWidth / 64) - (36/2);
-                int y = ((int)v.Y) * (screenHeight / 32) - 52;
-                guards.Add(new Guard(Game, (Texture2D)textures[guardIndex], x, y, Direction.right, 100));
+                int y = ((int)v.Y) * (screenHeight / 32) - (28*2);
+                int type = (int)v.Z;
+                guards.Add(guardFactory.createGuard(Game, x, y, Direction.right, 100, type));
             }
 
             foreach (Vector2 v in levelLoader.Gates)
@@ -223,7 +227,8 @@ namespace WindowsGame4
                     }
 
                     //update guards
-                    foreach (Guard guard in guards)
+
+                    foreach (Wizard guard in guards)
                     {
                         guard.Update(playerAction, deltaX);
                     }
@@ -285,13 +290,15 @@ namespace WindowsGame4
                     }
                 }
 
-                foreach (Guard guard in guards)
+                foreach (Wizard guard in guards)
                 {
                     guard.Update(gameTime);
-                    guard.HandleCollision(levelMap.GetNearbyTiles(guard.GetPosition()));
-                    guard.HandleVision(player, levelMap.GetNearbyTiles(guard.GetLOSRectangle()));
-                    // need a way to get back all bolts that have collided - have to actually hear it, not see it with my 360 degree camera strapped to the inside of the guard's visor
-                    guard.HandleHearing(collidedBolts);
+                   
+                        guard.HandleCollision(levelMap.GetNearbyTiles(guard.GetPosition()));
+                        guard.HandleVision(player, levelMap.GetNearbyTiles(guard.GetLOSRectangle()));
+                        // need a way to get back all bolts that have collided - have to actually hear it, not see it with my 360 degree camera strapped to the inside of the guard's visor
+                        guard.HandleHearing(collidedBolts);
+                   
                 }
 
                 foreach (Gate gate in gates)
@@ -343,7 +350,7 @@ namespace WindowsGame4
             player.Draw(spriteBatch);
             gameTimer.Draw(spriteBatch);
 
-            foreach (Guard guard in guards)
+            foreach (Wizard guard in guards)
             {
                 guard.Draw(spriteBatch);
             }

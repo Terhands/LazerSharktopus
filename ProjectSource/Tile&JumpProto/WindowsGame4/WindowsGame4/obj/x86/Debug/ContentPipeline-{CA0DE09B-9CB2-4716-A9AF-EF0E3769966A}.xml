@@ -154,7 +154,7 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\menuFont.xnb</Output>
-      <Time>2013-03-14T22:38:20.0303259-06:00</Time>
+      <Time>2013-03-29T12:14:22.8511585-06:00</Time>
     </Item>
     <Item>
       <Source>clunk.wav</Source>
@@ -226,7 +226,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T2background.xnb</Output>
-      <Time>2013-03-26T23:33:40.5969762-06:00</Time>
+      <Time>2013-03-27T00:08:32.2666129-06:00</Time>
     </Item>
     <Item>
       <Source>T3background.png</Source>
@@ -236,6 +236,24 @@
       <Options>None</Options>
       <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T3background.xnb</Output>
       <Time>2013-03-26T23:58:12.7241771-06:00</Time>
+    </Item>
+    <Item>
+      <Source>wizard.png</Source>
+      <Name>wizard</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\wizard.xnb</Output>
+      <Time>2013-03-28T12:08:07.2948806-06:00</Time>
+    </Item>
+    <Item>
+      <Source>soldier.png</Source>
+      <Name>soldier</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\soldier.xnb</Output>
+      <Time>2013-03-28T11:47:01.9635078-06:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

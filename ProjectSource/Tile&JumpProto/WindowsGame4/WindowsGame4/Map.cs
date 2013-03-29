@@ -24,9 +24,6 @@ namespace WindowsGame4
         protected const int rowsPerScreen = 32;
         protected const int colsPerScreen = 64;
 
-        // our test map has 100 columns
-        //protected int mapCols = 100;
-
         public Map(Game game, int[,] mapLayout, ArrayList tileTextures, int bgIndex) : base(game)
         {
             Initialize(mapLayout, tileTextures, bgIndex);
@@ -51,9 +48,9 @@ namespace WindowsGame4
             maxPixelOffset = (mapLayout.GetLength(1) * (screenWidth / colsPerScreen)) - screenWidth;
             minPixelOffset = 0;
 
-            for (int i = 0; i < mapLayout.GetLength(0); i++)
+            for (int j = 0; j < mapLayout.GetLength(1); j++)
             {
-                for (int j = 0; j < mapLayout.GetLength(1); j++)
+                for (int i = 0; i < mapLayout.GetLength(0); i++)
                 {
                     tiles[i, j] = new Tile(Game, (Texture2D)tileTextures[1], (CollisionType)mapLayout[i,j], j, i, screenWidth, screenHeight, rowsPerScreen, colsPerScreen);
                 }
@@ -112,9 +109,9 @@ namespace WindowsGame4
             IList<ITile> nearbyTiles = new List<ITile>();
 
             // add all of the relevant tiles for potential collision handling
-            for (int i = xMin; i <= xMax && i < tiles.GetLength(1); i++)
+            for (int j = yMin; j <= yMax && j < rowsPerScreen; j++)
             {
-                for (int j = yMin; j <= yMax && j < rowsPerScreen; j++)
+                for (int i = xMin; i <= xMax && i < tiles.GetLength(1); i++)
                 {
                     //only pass back platform tiles & impassable tiles (don't care if no collision could result)
                     if (tiles[j, i].getCollisionBehaviour() != CollisionType.passable)
