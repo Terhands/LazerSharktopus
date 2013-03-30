@@ -58,8 +58,8 @@ namespace WindowsGame4
         protected const int spriteY = 1;
         protected const int spriteHeight = 28;
 
-        protected int[] spriteX = { 1, 16, 32, 48, 64, 80, 96, 111, 131, 153, 173, 196, 214, 238 };
-        protected int[] spriteWidth = { 13, 14, 14, 14, 14, 14, 14, 19, 21, 19, 22, 17, 23, 12 };
+        protected int[] spriteX = { 1, 16, 32, 48, 64, 80, 96, 111, 131, 153, 173, 214, 196, 196, 214, 240 };
+        protected int[] spriteWidth = { 13, 14, 14, 14, 14, 14, 14, 19, 21, 19, 22, 23, 17, 17, 23, 12 };
 
         protected int standingIndex = 0;
         protected int walkingIndex = 1;
@@ -67,6 +67,8 @@ namespace WindowsGame4
 
         protected int walkCounter;
         protected int currWalkingIndex;
+        protected int currTeleportIndex;
+
         //position of the guards eyes relative to his source rectangle
         Vector2 eyePos;
         
@@ -198,38 +200,41 @@ namespace WindowsGame4
             if (getBackCounter < 0)
             {
                 deltaX = 0;
-                getBackCounter = 100;
+                getBackCounter = 80;
                 
-                //door stuff goes here
-                
-                
-                
+                // start at the sprite before the teleportation animation so the %10 will flip it to teleportation
+                currTeleportIndex = teleportIndex - 1;
             }
-            else if (0 < getBackCounter)
+
+            if (getBackCounter > 0)
             {
-          
-                //disappear after awhile, because you went through the door
-                if (70 == getBackCounter)
-                {
-                    //now he is off screen and can't collide with anything
-                    position.Y = invisibleY;
-                    
-                }
                 //you're now going out the other door!
-                if (30 == getBackCounter)
+                if (40 == getBackCounter)
                 {
                     deltaX = 0;
                     position.X = patrolBoundaryLeft + velocity;
                     position.Y = patrolY;
                     facingDirection = Direction.right;
-                    
                 }
+
+                if (getBackCounter % 8 == 0)
+                {
+                    currTeleportIndex += 1;
+
+                    if (currTeleportIndex >= spriteX.Length)
+                    {
+                        currTeleportIndex = standingIndex;
+                    }
+                }
+
+                source.X = spriteX[currTeleportIndex];
+                source.Width = spriteWidth[currTeleportIndex];
+                position.Width = source.Width * 2;
 
                 getBackCounter--;
             }
             else if (0 == getBackCounter)
             {
-
                 getBackCounter = -1;
                 currentBehaviour = Behaviour.patrol;
             }
@@ -260,7 +265,7 @@ namespace WindowsGame4
                 walkCounter = 0;
                 currWalkingIndex = walkingIndex;
             }
-            else if(walkCounter % 10 == 0)
+            else if(walkCounter % 8 == 0)
             {
                 // continue the walking animation
                 currWalkingIndex += 1;

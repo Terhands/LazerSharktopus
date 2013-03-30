@@ -33,13 +33,13 @@ namespace WindowsGame4
         {
             spriteDepth = layer;
 
-            outline = new Rectangle(350, 10, 100, 10);
+            outline = new Rectangle(349, 9, 102, 12);
             healthBar = new Rectangle(350, 10, 100, 10);
 
             rectangleTexture = new Texture2D(game.GraphicsDevice, 1, 1);
             rectangleTexture.SetData(new Color[] { Color.White });
 
-            outlineColor = Color.Black;
+            outlineColor = Color.GhostWhite;
             healthBarColor = Color.Red;
             width = 100;
         }
@@ -53,14 +53,11 @@ namespace WindowsGame4
         /* Sets the position for the health bar, still need to get position to work without magic number! */
         public void setMeterPosition(int xCenter, int yCenter)
         {
-            outline.X = xCenter;
             healthBar.X = xCenter;
-
-            outline.Y = yCenter;
             healthBar.Y = yCenter;
         }
 
-        /* Update size if health bar */
+        /* Update size of health bar */
         public void Update(Action action, int velocity)
         {
             healthBar.Width = width;

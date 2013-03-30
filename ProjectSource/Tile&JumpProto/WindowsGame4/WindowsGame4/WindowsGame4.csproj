@@ -78,6 +78,7 @@
     <Compile Include="GameLoader.cs" />
     <Compile Include="GameOver.cs" />
     <Compile Include="GameTimer.cs" />
+    <Compile Include="HealthMeter.cs" />
     <Compile Include="Wizard.cs" />
     <Compile Include="GuardFactory.cs" />
     <Compile Include="IDynamicGameObject.cs" />

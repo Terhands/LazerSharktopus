@@ -424,8 +424,8 @@ namespace WindowsGame4
             {
                 spriteBatch.Draw(sprite, position, source, Color.White * 1f, 0, new Vector2(0, 0), SpriteEffects.None, spriteDepth);
                 jumpMeter.Draw(spriteBatch);
-                healthMeter.Draw(spriteBatch);
             }
+            healthMeter.Draw(spriteBatch);
         }
 
         public void UpdateAnimation()
