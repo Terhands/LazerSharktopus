@@ -298,7 +298,6 @@ namespace WindowsGame4
                         guard.HandleVision(player, levelMap.GetNearbyTiles(guard.GetLOSRectangle()));
                         // need a way to get back all bolts that have collided - have to actually hear it, not see it with my 360 degree camera strapped to the inside of the guard's visor
                         guard.HandleHearing(collidedBolts);
-                   
                 }
 
                 foreach (Gate gate in gates)
