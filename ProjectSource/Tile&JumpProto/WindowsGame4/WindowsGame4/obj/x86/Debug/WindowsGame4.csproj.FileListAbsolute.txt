@@ -194,3 +194,4 @@ C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGa
 C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T3background.xnb
 C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\wizard.xnb
 C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\soldier.xnb
+C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\Logo.xnb
