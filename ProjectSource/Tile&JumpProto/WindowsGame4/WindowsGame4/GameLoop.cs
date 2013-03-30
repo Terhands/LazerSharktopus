@@ -28,14 +28,17 @@ namespace WindowsGame4
 
         GameLoader config;
         
-        public enum GameState { titleMenu, titleScreen, level, gameOver, victory, levelIntro };
+        public enum GameState { titleMenu, titleScreen, level, tutorial, gameOver, victory, levelIntro, credits };
         GameState gameState;
+        GameState prevGameState;
+
         GameOver gameOver;
         TitleMenu titleMenu;
         TitleScreen titleScreen;
         LevelIntroScreen levelIntroScreen;
 
         Level level;
+        Level tutorial;
 
         /* Keyboard controls */
         protected const Keys keyRight = Keys.D;
@@ -70,8 +73,10 @@ namespace WindowsGame4
             // TODO: Add your initialization logic here
             base.Initialize();
             gameState = GameState.titleScreen;
+            prevGameState = gameState;
 
             level = new Level(this, textures, fonts, sounds, musicPlayer, new LevelLoader(config.LevelFiles));
+            tutorial = new Level(this, textures, fonts, sounds, musicPlayer, new LevelLoader(config.TutorialFiles));
             gameOver = new GameOver(this, (Texture2D)textures[3], (SpriteFont)fonts[2]);
             titleScreen = new TitleScreen(this, (Texture2D)textures[7], (SpriteFont)fonts[2]);
             titleMenu = new TitleMenu(this, (Texture2D)textures[7], (SpriteFont)fonts[2]);
@@ -138,6 +143,10 @@ namespace WindowsGame4
             {
                 level.Update(gameTime);
             }
+            else if (gameState == GameState.tutorial)
+            {
+                tutorial.Update(gameTime);
+            }
             else if (gameState == GameState.levelIntro)
             {
                 levelIntroScreen.Update();
@@ -152,12 +161,24 @@ namespace WindowsGame4
             }
             else if (gameState == GameState.victory)
             {
-                this.Exit();
+                if (prevGameState == GameState.tutorial)
+                {
+                    SetGameState(GameState.titleMenu);
+                }
+                else
+                {
+                    SetGameState(GameState.credits);
+                }
             }
             else if (gameState == GameState.titleScreen)
             {
                 level.CurrentLevel = 0;
                 titleScreen.Update();
+            }
+            else if (gameState == GameState.credits)
+            {
+                // credits.Update();
+                this.Exit();
             }
 
             if (prevState == null)
@@ -186,6 +207,10 @@ namespace WindowsGame4
             if (gameState == GameState.level)
             {
                 level.Draw(spriteBatch);
+            }
+            else if (gameState == GameState.tutorial)
+            {
+                tutorial.Draw(spriteBatch);
             }
             else if (gameState == GameState.levelIntro)
             {
@@ -217,20 +242,42 @@ namespace WindowsGame4
 
         public GameState State
         {
-            set { gameState = value; }
+            set 
+            {
+                prevGameState = gameState; 
+                gameState = value;
+            }
+        }
+
+        public GameState PrevGameState
+        {
+            get { return prevGameState; }
         }
 
         // when level state is set the new map needs to be built
         public void SetGameState(GameState _gameState)
         {
+            prevGameState = gameState;
             gameState = _gameState;
+
             if (GameState.level == gameState)
             {
                 level.InitLevel();
             }
+            else if (GameState.tutorial == gameState)
+            {
+                tutorial.InitLevel();
+            }
             else if (GameState.levelIntro == gameState)
             {
-                levelIntroScreen.InitLevelScreen(level.LevelName);
+                if (prevGameState == GameState.level)
+                {
+                    levelIntroScreen.InitLevelScreen(level.LevelName);
+                }
+                else if (prevGameState == GameState.tutorial)
+                {
+                    levelIntroScreen.InitLevelScreen(tutorial.LevelName);
+                }
             }
         }
     }

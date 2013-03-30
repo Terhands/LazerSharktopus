@@ -150,7 +150,7 @@ namespace WindowsGame4
         }
 
         /* procedure responsible for updating this level given an action (velocity should eventually be determined by player)*/
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {   
             /* Timer update logic */
             gameTimer.Update();

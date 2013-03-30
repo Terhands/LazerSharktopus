@@ -59,7 +59,7 @@ namespace WindowsGame4
             countdown -= 1;
             if (0 == countdown)
             {
-                game.SetGameState(GameLoop.GameState.level);
+                game.SetGameState(game.PrevGameState);
             }
         }
 
