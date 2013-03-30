@@ -27,16 +27,20 @@ namespace WindowsGame4
         int channelValue;
         int fadeIncrement = 1;
 
-        public TitleScreen(GameLoop game, Texture2D _background, Texture2D _logo, SpriteFont _menuFont) : base(game)
+        MusicManager musicPlayer;
+
+        public TitleScreen(GameLoop game, Texture2D _background, Texture2D _logo, SpriteFont _menuFont, MusicManager _musicPlayer) : base(game)
         {
             background = _background;
             logo = _logo;
+            musicPlayer = _musicPlayer;
+
             gameLoop = game;
             menuFont = _menuFont;
             keyState = Keyboard.GetState();
             prevKeyState = keyState;
             blinkCount = 0;
-            logoCount = 70;
+            logoCount = 110;
             currFadeStep = fadeDelay;
             alpha = 1;
             channelValue = 1;
@@ -49,7 +53,7 @@ namespace WindowsGame4
             if (keyState.IsKeyDown(Keys.Space) && prevKeyState.IsKeyUp(Keys.Space) && logoCount == 0)
             {
                 gameLoop.State = GameLoop.GameState.titleMenu;
-                logoCount = 70;
+                logoCount = 110;
             }
 
             prevKeyState = keyState;
@@ -69,9 +73,10 @@ namespace WindowsGame4
             else
             {
 
-                if (channelValue == 175 || channelValue == -1)
+                if (channelValue == 255 || channelValue == -1)
                 {
                     fadeIncrement *= -1;
+                    musicPlayer.Play(2);
                 }
                 channelValue += fadeIncrement;
             }

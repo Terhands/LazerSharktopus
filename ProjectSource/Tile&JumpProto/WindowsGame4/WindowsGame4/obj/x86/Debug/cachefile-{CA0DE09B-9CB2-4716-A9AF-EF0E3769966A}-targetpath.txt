@@ -28,7 +28,9 @@ Content\T2background.xnb
 Content\T3background.xnb
 Content\wizard.xnb
 Content\soldier.xnb
-Content\logo.xnb
+Content\Logo.xnb
+Content\DST-MechaNoir.xnb
+Content\DST-MechaNoir.wma
 Content\lathraia.config
 Content\Level1.txt
 Content\Level2.txt

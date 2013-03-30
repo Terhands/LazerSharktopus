@@ -37,6 +37,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Logo.png">
+      <Name>Logo</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Compile Include="Robro1.1.png">
       <Name>Robro1.1</Name>
       <Importer>TextureImporter</Importer>
@@ -256,10 +261,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Logo.jpg">
-      <Name>Logo</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
+    <Compile Include="DST-MechaNoir.mp3">
+      <Name>DST-MechaNoir</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />

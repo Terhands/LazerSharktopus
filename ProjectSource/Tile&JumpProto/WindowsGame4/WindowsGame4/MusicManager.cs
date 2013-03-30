@@ -33,7 +33,7 @@ namespace WindowsGame4
             // so we can have music-less levels if we want
             if (i > -1)
             {
-                //MediaPlayer.Play((Song)songs[i]);
+                MediaPlayer.Play((Song)songs[i]);
             }
         }
 
