@@ -37,5 +37,10 @@ namespace WindowsGame4
             }
         }
 
+        public bool isStopped
+        {
+            get { return MediaPlayer.State != MediaState.Playing; }
+        }
+
     }
 }

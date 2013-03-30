@@ -197,3 +197,7 @@ C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGa
 C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\Logo.xnb
 C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-MechaNoir.xnb
 C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-MechaNoir.wma
+C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Beneathere.xnb
+C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Beneathere.wma
+C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-BlueMist.xnb
+C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-BlueMist.wma

@@ -21,11 +21,11 @@ namespace WindowsGame4
 
         int blinkCount;
         int logoCount;
-        float alpha;
         protected const int fadeDelay = 4;
         protected int currFadeStep;
         int channelValue;
         int fadeIncrement = 1;
+        int fadeCount = 0;
 
         MusicManager musicPlayer;
 
@@ -40,20 +40,24 @@ namespace WindowsGame4
             keyState = Keyboard.GetState();
             prevKeyState = keyState;
             blinkCount = 0;
-            logoCount = 110;
+            logoCount = 35;
             currFadeStep = fadeDelay;
-            alpha = 1;
             channelValue = 1;
         }
 
         public void Update()
         {
+            if (musicPlayer.isStopped)
+            {
+                musicPlayer.Play(2);
+            }
+
             keyState = Keyboard.GetState();
 
             if (keyState.IsKeyDown(Keys.Space) && prevKeyState.IsKeyUp(Keys.Space) && logoCount == 0)
             {
                 gameLoop.State = GameLoop.GameState.titleMenu;
-                logoCount = 110;
+                logoCount = 35;
             }
 
             prevKeyState = keyState;
@@ -76,9 +80,19 @@ namespace WindowsGame4
                 if (channelValue == 255 || channelValue == -1)
                 {
                     fadeIncrement *= -1;
-                    musicPlayer.Play(2);
                 }
-                channelValue += fadeIncrement;
+
+                if (fadeIncrement > 0)
+                {
+                    channelValue += fadeIncrement;
+                }
+                else if (fadeCount % 2 == 0)
+                {
+                    channelValue += fadeIncrement;
+                }
+                
+
+                fadeCount += 1;
             }
         }
 

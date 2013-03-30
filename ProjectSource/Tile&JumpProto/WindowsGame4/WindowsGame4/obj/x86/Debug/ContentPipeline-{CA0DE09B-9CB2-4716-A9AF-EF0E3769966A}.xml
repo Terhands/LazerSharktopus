@@ -274,6 +274,26 @@
       <Extra>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-MechaNoir.wma</Extra>
       <Time>2013-03-30T14:58:06.8618571-06:00</Time>
     </Item>
+    <Item>
+      <Source>DST-Beneathere.mp3</Source>
+      <Name>DST-Beneathere</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Beneathere.xnb</Output>
+      <Extra>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Beneathere.wma</Extra>
+      <Time>2013-03-30T15:19:08.0999958-06:00</Time>
+    </Item>
+    <Item>
+      <Source>DST-BlueMist.mp3</Source>
+      <Name>DST-BlueMist</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-BlueMist.xnb</Output>
+      <Extra>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-BlueMist.wma</Extra>
+      <Time>2013-03-30T15:21:19.702523-06:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{CA0DE09B-9CB2-4716-A9AF-EF0E3769966A}</ContentProjectGUID>
