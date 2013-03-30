@@ -89,7 +89,7 @@ namespace WindowsGame4
 
             // get the right-most tile position that we will care about for collisions
             int xMax = xMin;
-            while ((xMax < 100 - 1) && tiles[0, xMax].getPosition().Right < position.Right)
+            while ((xMax < tiles.GetLength(1) - 1) && tiles[0, xMax].getPosition().Right < position.Right)
             {
                 xMax += 1;
             }
@@ -101,7 +101,7 @@ namespace WindowsGame4
 
             // get the bottom-most tile position that we will case about for collisions
             int yMax = yMin;
-            while (yMax < (rowsPerScreen - 1) && tiles[yMax, 0].getPosition().Bottom <= position.Bottom)
+            while (yMax < (tiles.GetLength(0) - 1) && tiles[yMax, 0].getPosition().Bottom <= position.Bottom)
             {
                 yMax += 1;
             }
