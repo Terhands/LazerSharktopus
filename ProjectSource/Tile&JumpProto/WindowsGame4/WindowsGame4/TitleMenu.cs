@@ -60,11 +60,13 @@ namespace WindowsGame4
                 {
                     gameLoop.SetGameState(GameLoop.GameState.level);
                     gameLoop.SetGameState(GameLoop.GameState.levelIntro);
+                    gameLoop.AnimatePlayer = false;
                 }
                 else if (selectedIndex == 1)
                 {
                     gameLoop.SetGameState(GameLoop.GameState.tutorial);
                     gameLoop.SetGameState(GameLoop.GameState.levelIntro);
+                    gameLoop.AnimatePlayer = false;
                 }
                 else if (selectedIndex == 2)
                 {

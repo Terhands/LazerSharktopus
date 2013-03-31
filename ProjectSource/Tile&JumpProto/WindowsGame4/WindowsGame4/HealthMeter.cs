@@ -12,8 +12,11 @@ namespace WindowsGame4
     class HealthMeter : DrawableGameComponent, IGameObject
     {
         // the dimensions of the health meter
-        protected const int outlineWidth = 50;
-        protected const int outlineHeight = 10;
+        protected const int healthWidth = 200;
+        protected const int healthHeight = 10;
+        protected const int healthHeightLooksGood = 20;
+
+        protected const int healthPadding = 2;
 
         protected float spriteDepth;
 
@@ -33,28 +36,28 @@ namespace WindowsGame4
         {
             spriteDepth = layer;
 
-            outline = new Rectangle(349, 9, 102, 12);
-            healthBar = new Rectangle(350, 10, 100, 10);
+            int screenWidth = game.GraphicsDevice.Viewport.Width;
+
+            outline = new Rectangle((screenWidth/2) - (healthWidth/2) - healthPadding, healthHeightLooksGood - healthPadding, healthWidth + 2 * healthPadding, healthHeight + 2 * healthPadding);
+            healthBar = new Rectangle((screenWidth / 2) - (healthWidth / 2), healthHeightLooksGood, healthWidth, healthHeight);
 
             rectangleTexture = new Texture2D(game.GraphicsDevice, 1, 1);
             rectangleTexture.SetData(new Color[] { Color.White });
 
             outlineColor = Color.GhostWhite;
             healthBarColor = Color.Red;
-            width = 100;
+            width = healthBar.Width;
         }
 
         /* Lowers the width of the health bar when bolt is thrown */
         public void lowerHealthMeter()
         {
-            width -= 10;
+            width -= 20;
         }
 
-        /* Sets the position for the health bar, still need to get position to work without magic number! */
-        public void setMeterPosition(int xCenter, int yCenter)
+        public int Health
         {
-            healthBar.X = xCenter;
-            healthBar.Y = yCenter;
+            get { return width; }
         }
 
         /* Update size of health bar */

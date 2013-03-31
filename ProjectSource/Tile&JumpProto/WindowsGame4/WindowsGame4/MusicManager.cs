@@ -37,6 +37,14 @@ namespace WindowsGame4
             }
         }
 
+        public void Stop()
+        {
+            if (MediaPlayer.State == MediaState.Playing)
+            {
+                MediaPlayer.Stop();
+            }
+        }
+
         public bool isStopped
         {
             get { return MediaPlayer.State != MediaState.Playing; }

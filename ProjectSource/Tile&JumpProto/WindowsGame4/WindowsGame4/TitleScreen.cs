@@ -64,8 +64,9 @@ namespace WindowsGame4
 
             if (channelValue == 0 && logoCount == 0)
             {
+                gameLoop.AnimatePlayer = true;
                 blinkCount++;
-                if (blinkCount > 60)
+                if (blinkCount > 50)
                 {
                     blinkCount = 0;
                 }

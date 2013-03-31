@@ -36,9 +36,13 @@ namespace WindowsGame4
         TitleMenu titleMenu;
         TitleScreen titleScreen;
         LevelIntroScreen levelIntroScreen;
+        PlayerAnimation playerAnimation;
+        bool animatePlayer;
 
         Level level;
         Level tutorial;
+
+        int mainMenuIndex = 2;
 
         /* Keyboard controls */
         protected const Keys keyRight = Keys.D;
@@ -58,7 +62,7 @@ namespace WindowsGame4
 
             if (!graphics.IsFullScreen)
             {
-                graphics.ToggleFullScreen();
+                //graphics.ToggleFullScreen();
             }
         }
 
@@ -82,6 +86,9 @@ namespace WindowsGame4
             titleMenu = new TitleMenu(this, (Texture2D)textures[7], (SpriteFont)fonts[2]);
             levelIntroScreen = new LevelIntroScreen(this, (SpriteFont)fonts[1]);
             levelIntroScreen.InitLevelScreen(level.LevelName);
+
+            playerAnimation = new PlayerAnimation(this, new Player(this, (Texture2D)textures[0], sounds, -100, 400));
+            animatePlayer = false;
         }
 
         /// <summary>
@@ -157,6 +164,11 @@ namespace WindowsGame4
             }
             else if (gameState == GameState.titleMenu)
             {
+                AnimatePlayer = true;
+                if (musicPlayer.isStopped)
+                {
+                    musicPlayer.Play(mainMenuIndex);
+                }
                 titleMenu.Update();
             }
             else if (gameState == GameState.victory)
@@ -191,9 +203,19 @@ namespace WindowsGame4
                 this.Exit();
             }
 
+            if (animatePlayer)
+            {
+                playerAnimation.Update(Action.none, 0);
+            }
+
             prevState = currState;
 
             base.Update(gameTime);
+        }
+
+        public bool AnimatePlayer
+        {
+            set { animatePlayer = value; }
         }
 
         /// <summary>
@@ -233,7 +255,10 @@ namespace WindowsGame4
                 titleScreen.Draw(spriteBatch);
             }
 
-
+            if (animatePlayer)
+            {
+                playerAnimation.Draw(spriteBatch);
+            }
 
             this.spriteBatch.End();
 

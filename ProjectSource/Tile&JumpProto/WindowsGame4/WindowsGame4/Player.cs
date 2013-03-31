@@ -25,6 +25,7 @@ namespace WindowsGame4
         protected bool isStopped;
         protected bool isDead;
         protected bool hasReachedGoal;
+        protected bool displayHealthBar;
 
         protected float spriteDepth = 0.8f;
 
@@ -34,6 +35,9 @@ namespace WindowsGame4
 
         // the speed that player starts falling
         protected const float startFalling = -0.25f;
+        protected const int maxPainlessFall = 30;
+        protected int fallDistance;
+
 
         // robro's change in height from crouching to standing up straight
         protected const int crouchDiff = 30;
@@ -52,8 +56,6 @@ namespace WindowsGame4
         int animationMax = 8; // How many ticks to change frame after. 
         bool landed = false; //So the update doesnt keep reseting robro to standard land position this bool is used
 
-        int playerHealth; // The current health of Robro
-
         protected HealthMeter healthMeter;
 
         public Player(Game game, Texture2D texture, ArrayList _sounds, int xStart, int yStart)
@@ -68,22 +70,22 @@ namespace WindowsGame4
 
             int xCenter = xStart + (position.Width / 2);
             int yCenter = yStart - playerPadding;
-            this.jumpMeter = new JumpMeter(game, xCenter, yCenter, spriteDepth);
+            jumpMeter = new JumpMeter(game, xCenter, yCenter, spriteDepth);
 
-            this.healthMeter = new HealthMeter(game, 200, 10, spriteDepth);
+            healthMeter = new HealthMeter(game, 200, 10, spriteDepth);
 
             hidden = 0.0f;
+            fallDistance = 0;
             isJumping = false;
             isStopped = true; // will we need to know this?? Maybe for a funny animation if you take too long...
             isDead = false;
             hasReachedGoal = false;
+            displayHealthBar = true;
 
             sounds = _sounds;
 
             deltaX = 0;
             deltaY = 0;
-
-            playerHealth = 20;
         }
 
         public bool DoneLevel
@@ -97,44 +99,27 @@ namespace WindowsGame4
             set { isDead = value; }
         }
 
-        public int getPlayerHealth()
-        {
-            return this.playerHealth;
-        }
-
         /* Updates Robro's health when a bolt is thrown */
         public void throwBolt()
         {
-            playerHealth -= 2; // Lower Robro's health by 2
-            healthMeter.setMeterPosition(350, 10);
             healthMeter.lowerHealthMeter();
-            healthMeter.Update(Action.right, playerHealth);
-            if (playerHealth <= 0) // If health is less than or equal to zero, Robro dies
-            {
-                this.Kill();
-            }
         }
 
         public void Jump()
         {
             // scale the jump so you can go high fast, but fall a bit slower - less sudden
-            if (jumpMeter.JumpPower > 0.00001 || jumpMeter.JumpPower < 0)
+            deltaY = (int)(.9 * jumpMeter.JumpPower);
+            if (jumpMeter.JumpPower > 0)
             {
-                deltaY = (int)(.9 * jumpMeter.JumpPower);
-                if (jumpMeter.JumpPower > 0)
-                {
-                    jumpMeter.drainJumpPower(0.25f);
-                }
-                else
-                {
-                    jumpMeter.drainJumpPower(0.2f);
-                }
+                jumpMeter.drainJumpPower(0.25f);
+                fallDistance = 0;
             }
             else
             {
-                deltaY = 0;
-                jumpMeter.JumpPower = startFalling;
+                jumpMeter.drainJumpPower(0.2f);
+                fallDistance -= deltaY;
             }
+
             isJumping = true;
         }
 
@@ -163,9 +148,10 @@ namespace WindowsGame4
                         
                     }
                 }
-                this.frameCountCol = 4;
-                this.source.X = this.frameStartX + this.frameSkipX * this.frameCountCol;
             }
+
+            frameCountCol = 4;
+            source.X = frameStartX + frameSkipX * frameCountCol;
         }
 
         public void StopHiding()
@@ -173,8 +159,8 @@ namespace WindowsGame4
             hidden = 0.0f;
             spriteDepth = 0.8f;
             // will also need to swap the texture source rectangle to the standing sprite
-            this.frameCountCol = 1;
-            this.source.X = this.frameStartX + this.frameSkipX * this.frameCountCol;
+            frameCountCol = 1;
+            source.X = frameStartX + frameSkipX * frameCountCol;
         }
 
         /* make sure player isn't falling through platforms/walking through walls */
@@ -213,10 +199,10 @@ namespace WindowsGame4
                 // padding the tile with a pixel on either side so the player cannot climb the walls
                 Rectangle tilePos = t.getPosition();
                 
-                tilePos.X -= 2;
-                tilePos.Y += 1;
+                tilePos.X -= 1;
+                tilePos.Y += 2;
                 tilePos.Height -= 2;
-                tilePos.Width += 2;
+                tilePos.Width += 1;
                 
                 Direction direction = determineCollisionType(tilePos);
 
@@ -227,7 +213,7 @@ namespace WindowsGame4
 
                 if (direction != Direction.none && t.getCollisionBehaviour() == CollisionType.spike)
                 {
-                    this.Kill();
+                    Kill();
                 }
 
                 switch (direction)
@@ -354,8 +340,8 @@ namespace WindowsGame4
                             deltaX = velocity / 2;
                         }
                     }
-                    this.frameCountRow = 0;
-                    this.animationCount += 1;
+                    frameCountRow = 0;
+                    animationCount += 1;
 
                     break;
                 case Action.left:
@@ -380,13 +366,6 @@ namespace WindowsGame4
                     this.animationCount += 1;
                     break;
 
-                // have to decide if we will implement ladder mechanics or rely on jumps
-                case Action.up:
-                    break;
-
-                case Action.down:
-                    break;
-
                 case Action.none:
                     deltaX = 0;
                     break;
@@ -394,15 +373,26 @@ namespace WindowsGame4
 
             if (isJumping)
             {
-                this.frameCountCol = 3;
+                frameCountCol = 3;
                 Jump();
-                
             }
 
             if (landed)
             {
                 landed = false;
-                this.frameCountCol = 1;
+                frameCountCol = 1;
+
+                if (fallDistance > maxPainlessFall)
+                {
+                    healthMeter.lowerHealthMeter();
+                    fallDistance = 0;
+                }
+            }
+
+            healthMeter.Update(Action.none, 0);
+            if (healthMeter.Health <= 0) // If health is less than or equal to zero, Robro dies
+            {
+                Kill();
             }
 
             position.X += deltaX;
@@ -425,29 +415,42 @@ namespace WindowsGame4
                 spriteBatch.Draw(sprite, position, source, Color.White * 1f, 0, new Vector2(0, 0), SpriteEffects.None, spriteDepth);
                 jumpMeter.Draw(spriteBatch);
             }
-            healthMeter.Draw(spriteBatch);
+
+            if (displayHealthBar)
+            {
+                healthMeter.Draw(spriteBatch);
+            }
+        }
+
+        public void ToggleHealthBar()
+        {
+            displayHealthBar = !displayHealthBar;
         }
 
         public void UpdateAnimation()
         {
-            if (this.animationCount > this.animationMax)
+            if (animationCount > animationMax)
             {
-                this.animationCount = 0;
+                animationCount = 0;
                 if (hidden > 0 || isJumping)
                 { }
                 else
-                    this.frameCountCol += 1;
+                {
+                    frameCountCol += 1;
+                }
             }
 
             if (isJumping)
-                this.frameCountCol = 3;
-            else if (this.frameCountCol == 3)
             {
-                this.frameCountCol = 0;
+                frameCountCol = 3;
+            }
+            else if (frameCountCol == 3)
+            {
+                frameCountCol = 0;
             }
             else { }
-            this.source.X = this.frameStartX + this.frameSkipX * this.frameCountCol;
-            this.source.Y = this.frameStartY + this.frameSkipY * this.frameCountRow;
+            source.X = frameStartX + frameSkipX * frameCountCol;
+            source.Y = frameStartY + frameSkipY * frameCountRow;
         }
     }
 }

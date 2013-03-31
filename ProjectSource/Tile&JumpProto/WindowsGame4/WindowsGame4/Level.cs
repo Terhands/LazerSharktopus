@@ -315,6 +315,7 @@ namespace WindowsGame4
                     guards.Clear();
                     levers.Clear();
                     gates.Clear();
+                    musicPlayer.Stop();
 
                     if (levelLoader.NumLevels > currentLevel)
                     {
