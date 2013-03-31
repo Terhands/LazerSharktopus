@@ -53,7 +53,7 @@ namespace WindowsGame4
 
         // when robro takes damage he is invincible for a short period of time (from spikes & long falls not invisible/gets free bolt throws)
         protected int damageCounter;
-        private const int invincibleMax = 40;
+        private const int invincibleMax = 50;
         private const int damageIndex = 3;
 
         // Keep a counter, to count the number of ticks since the last change of animation frame.
@@ -227,7 +227,8 @@ namespace WindowsGame4
                     hasReachedGoal = true;
                 }
 
-                if (direction != Direction.none && t.getCollisionBehaviour() == CollisionType.spike)
+                // bottom collisions are all handled later - don't want to take double the damage
+                if (direction != Direction.none && direction != Direction.bottom && t.getCollisionBehaviour() == CollisionType.spike)
                 {
                     TakeDamage();
                 }
@@ -273,6 +274,11 @@ namespace WindowsGame4
 
                 if (Direction.bottom == direction)
                 {
+                    if (t.getCollisionBehaviour() == CollisionType.spike)
+                    {
+                        TakeDamage();
+                    }
+
                     footCollision = true;
 
                     position.Y = t.getPosition().Top - position.Height;

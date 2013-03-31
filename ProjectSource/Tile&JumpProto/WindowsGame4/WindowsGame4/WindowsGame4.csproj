@@ -74,12 +74,14 @@
   <ItemGroup>
     <Compile Include="ADynamicGameObject.cs" />
     <Compile Include="Bolt.cs" />
+    <Compile Include="Credits.cs" />
     <Compile Include="Gate.cs" />
     <Compile Include="GameLoader.cs" />
     <Compile Include="GameOver.cs" />
     <Compile Include="GameTimer.cs" />
     <Compile Include="HealthMeter.cs" />
     <Compile Include="PlayerAnimation.cs" />
+    <Compile Include="ScrollingTextScreen.cs" />
     <Compile Include="Wizard.cs" />
     <Compile Include="GuardFactory.cs" />
     <Compile Include="IDynamicGameObject.cs" />

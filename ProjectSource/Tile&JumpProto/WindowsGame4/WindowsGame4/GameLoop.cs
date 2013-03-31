@@ -36,6 +36,8 @@ namespace WindowsGame4
         TitleMenu titleMenu;
         TitleScreen titleScreen;
         LevelIntroScreen levelIntroScreen;
+        Credits credits;
+
         PlayerAnimation playerAnimation;
         bool animatePlayer;
 
@@ -86,6 +88,10 @@ namespace WindowsGame4
             titleMenu = new TitleMenu(this, (Texture2D)textures[7], (SpriteFont)fonts[2]);
             levelIntroScreen = new LevelIntroScreen(this, (SpriteFont)fonts[1]);
             levelIntroScreen.InitLevelScreen(level.LevelName);
+
+            String[] test = { "some", "test", "text", "more teeeexxxxt" };
+            int[] fi = { 0, 0, 0, 0 };
+            credits = new Credits(this, (Texture2D)textures[0], musicPlayer, 2, test, fonts, fi, ScrollingTextScreen.Justification.center);
 
             playerAnimation = new PlayerAnimation(this, new Player(this, (Texture2D)textures[0], sounds, -100, 400));
             animatePlayer = false;
@@ -189,8 +195,7 @@ namespace WindowsGame4
             }
             else if (gameState == GameState.credits)
             {
-                // credits.Update();
-                this.Exit();
+                credits.Update();
             }
 
             if (prevState == null)
@@ -254,6 +259,10 @@ namespace WindowsGame4
             {
                 titleScreen.Draw(spriteBatch);
             }
+            else if (gameState == GameState.credits)
+            {
+                credits.Draw(spriteBatch);
+            }
 
             if (animatePlayer)
             {
@@ -298,6 +307,10 @@ namespace WindowsGame4
                 {
                     levelIntroScreen.InitLevelScreen(tutorial.LevelName);
                 }
+            }
+            else if (GameState.credits == gameState)
+            {
+                credits.initScrollingTextScreen();
             }
         }
     }
