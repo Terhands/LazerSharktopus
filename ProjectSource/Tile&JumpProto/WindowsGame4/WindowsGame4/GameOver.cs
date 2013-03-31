@@ -35,19 +35,27 @@ namespace WindowsGame4
             keyState = Keyboard.GetState();
 
             if (keyState.IsKeyDown(Keys.S) && prevKeyState.IsKeyUp(Keys.S))
+            {
                 selectedIndex++;
+            }
             if (keyState.IsKeyDown(Keys.W) && prevKeyState.IsKeyUp(Keys.W))
+            {
                 selectedIndex--;
+            }
 
-            if (selectedIndex < 0) selectedIndex = 1;
-            if (selectedIndex > 1) selectedIndex = 0;
+            if (selectedIndex < 0) { selectedIndex = 1; }
+            if (selectedIndex > 1) { selectedIndex = 0; }
 
             if (keyState.IsKeyDown(Keys.Enter))
             {
                 if (selectedIndex == 0)
+                {
                     gameLoop.SetGameState(GameLoop.GameState.levelIntro);
+                }
                 else if (selectedIndex == 1)
-                    gameLoop.State = GameLoop.GameState.titleMenu;
+                {
+                    gameLoop.SetGameState(GameLoop.GameState.titleMenu);
+                }
             }
 
             prevKeyState = keyState;
@@ -57,14 +65,22 @@ namespace WindowsGame4
         {
             spriteBatch.Draw(background, new Rectangle(0, 0, Game.GraphicsDevice.Viewport.Width, Game.GraphicsDevice.Viewport.Height), Color.White);
             if (selectedIndex == 0)
-                spriteBatch.DrawString(menuFont, "Retry Level", new Vector2(650, 10), Color.Yellow, 0f, new Vector2(0, 0), 1.0f, SpriteEffects.None, 1.0f);
+            {
+                spriteBatch.DrawString(menuFont, "Retry Level", new Vector2(650, 20), Color.Yellow, 0f, new Vector2(0, 0), 1.0f, SpriteEffects.None, 1.0f);
+            }
             else
-                spriteBatch.DrawString(menuFont, "Retry Level", new Vector2(650, 10), Color.White, 0f, new Vector2(0, 0), 1.0f, SpriteEffects.None, 1.0f);
-            
+            {
+                spriteBatch.DrawString(menuFont, "Retry Level", new Vector2(650, 20), Color.White, 0f, new Vector2(0, 0), 1.0f, SpriteEffects.None, 1.0f);
+            }
+
             if (selectedIndex == 1)
+            {
                 spriteBatch.DrawString(menuFont, "Main Menu", new Vector2(650, 90), Color.Yellow, 0f, new Vector2(0, 0), 1.0f, SpriteEffects.None, 1.0f);
+            }
             else
+            {
                 spriteBatch.DrawString(menuFont, "Main Menu", new Vector2(650, 90), Color.White, 0f, new Vector2(0, 0), 1.0f, SpriteEffects.None, 1.0f);
+            }
         }
     }
 }

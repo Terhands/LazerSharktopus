@@ -86,7 +86,7 @@ namespace WindowsGame4
             if (levelLoader.Map == null)
             {
                 // If there's no level, then we've passed the last level and the player has won the game
-                game.State = GameLoop.GameState.victory;
+                game.SetGameState(GameLoop.GameState.victory);
                 return;
             }
             levelMap = new Map(Game, levelLoader.Map, textures, levelLoader.LevelBackground);
@@ -338,7 +338,7 @@ namespace WindowsGame4
                     guards.Clear();
                     levers.Clear();
                     gates.Clear();
-                    game.State = GameLoop.GameState.gameOver;
+                    game.SetGameState(GameLoop.GameState.gameOver);
                 }
             }
             prevKeyState = keyState;

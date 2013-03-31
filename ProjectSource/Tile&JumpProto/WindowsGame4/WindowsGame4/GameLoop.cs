@@ -265,15 +265,6 @@ namespace WindowsGame4
             base.Draw(gameTime);
         }
 
-        public GameState State
-        {
-            set 
-            {
-                prevGameState = gameState; 
-                gameState = value;
-            }
-        }
-
         public GameState PrevGameState
         {
             get { return prevGameState; }
@@ -282,7 +273,11 @@ namespace WindowsGame4
         // when level state is set the new map needs to be built
         public void SetGameState(GameState _gameState)
         {
-            prevGameState = gameState;
+            // need to know if the user is running actual levels or the tutorials
+            if (gameState != GameState.gameOver)
+            {
+                prevGameState = gameState;
+            }
             gameState = _gameState;
 
             if (GameState.level == gameState)

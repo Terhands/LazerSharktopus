@@ -60,6 +60,7 @@ namespace WindowsGame4
             if (0 == countdown)
             {
                 game.SetGameState(game.PrevGameState);
+                countdown = startCountdown;
             }
         }
 

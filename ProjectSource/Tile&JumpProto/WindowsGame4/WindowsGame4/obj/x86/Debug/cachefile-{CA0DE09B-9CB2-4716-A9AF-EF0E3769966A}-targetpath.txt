@@ -35,6 +35,7 @@ Content\DST-Beneathere.xnb
 Content\DST-Beneathere.wma
 Content\DST-BlueMist.xnb
 Content\DST-BlueMist.wma
+Content\Swords_Collide.xnb
 Content\lathraia.config
 Content\Level1.txt
 Content\Level2.txt

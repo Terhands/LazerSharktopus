@@ -35,21 +35,26 @@ namespace WindowsGame4
 
         // the speed that player starts falling
         protected const float startFalling = -0.25f;
-        protected const int maxPainlessFall = 30;
+        protected const int maxPainlessFall = 200;
         protected int fallDistance;
 
 
         // robro's change in height from crouching to standing up straight
         protected const int crouchDiff = 30;
 
-        int frameCountCol = 1; // Which frame we are.  Values = {0, 1, 2, 3, 4} this 4 = crouch only in row 0 
-        int frameCountRow = 0; //Value = {0,1} 1 = left direction , 0 = right directions
-        int frameSkipX = 75; // How much to move the frame in X when we increment a frame--X distance between top left corners.
-        int frameSkipY = 127; // how much to move the frame in y when we change directions 
-        int frameStartX = 1; // X of top left corner of frame 0. 
-        int frameStartY = 1; // Y of top left corner of frame 0.
-        int frameWidth = 75; // X of right minus X of left. 
-        int frameHeight = 126; // Y of bottom minus Y of top.
+        protected int frameCountCol = 1; // Which frame we are.  Values = {0, 1, 2, 3, 4} this 4 = crouch only in row 0 
+        protected int frameCountRow = 0; //Value = {0,1} 1 = left direction , 0 = right directions
+        protected int frameSkipX = 75; // How much to move the frame in X when we increment a frame--X distance between top left corners.
+        protected int frameSkipY = 127; // how much to move the frame in y when we change directions 
+        protected int frameStartX = 1; // X of top left corner of frame 0. 
+        protected int frameStartY = 1; // Y of top left corner of frame 0.
+        protected int frameWidth = 75; // X of right minus X of left. 
+        protected int frameHeight = 126; // Y of bottom minus Y of top.
+
+        // when robro takes damage he is invincible for a short period of time (from spikes & long falls not invisible/gets free bolt throws)
+        protected int damageCounter;
+        private const int invincibleMax = 40;
+        private const int damageIndex = 3;
 
         // Keep a counter, to count the number of ticks since the last change of animation frame.
         int animationCount; // How many ticks since the last frame change.
@@ -75,6 +80,7 @@ namespace WindowsGame4
             healthMeter = new HealthMeter(game, 200, 10, spriteDepth);
 
             hidden = 0.0f;
+            damageCounter = 0;
             fallDistance = 0;
             isJumping = false;
             isStopped = true; // will we need to know this?? Maybe for a funny animation if you take too long...
@@ -191,6 +197,16 @@ namespace WindowsGame4
             HandleFootCollisions(tilesBelowPlayer);
         }
 
+        protected void TakeDamage()
+        {
+            if (damageCounter == 0)
+            {
+                healthMeter.lowerHealthMeter();
+                ((SoundEffect)sounds[damageIndex]).Play();
+                damageCounter = invincibleMax;
+            }
+        }
+
         protected void HandleIntersectionCollisions(IList<ITile> tiles)
         {
             // check that any intersections are only on passable tiles
@@ -213,7 +229,7 @@ namespace WindowsGame4
 
                 if (direction != Direction.none && t.getCollisionBehaviour() == CollisionType.spike)
                 {
-                    Kill();
+                    TakeDamage();
                 }
 
                 switch (direction)
@@ -255,7 +271,7 @@ namespace WindowsGame4
             {
                 Direction direction = determineCollisionType(t.getPosition());
 
-                if (Direction.bottom == direction && t.getCollisionBehaviour() != CollisionType.spike)
+                if (Direction.bottom == direction)
                 {
                     footCollision = true;
 
@@ -384,7 +400,7 @@ namespace WindowsGame4
 
                 if (fallDistance > maxPainlessFall)
                 {
-                    healthMeter.lowerHealthMeter();
+                    TakeDamage();
                     fallDistance = 0;
                 }
             }
@@ -401,7 +417,11 @@ namespace WindowsGame4
             jumpMeter.setMeterPosition(position.X + (position.Width / 2), position.Y - playerPadding);
             jumpMeter.Update(Action.none, 0);
 
-            this.UpdateAnimation();
+            if (damageCounter > 0)
+            {
+                damageCounter -= 1;
+            }
+            UpdateAnimation();
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -410,7 +430,12 @@ namespace WindowsGame4
             {
                 spriteBatch.Draw(sprite, position, source, Color.Crimson, 0, new Vector2(0, 0), SpriteEffects.None, spriteDepth);
             }
-            else
+            else if(damageCounter <= 0)
+            {
+                spriteBatch.Draw(sprite, position, source, Color.White * 1f, 0, new Vector2(0, 0), SpriteEffects.None, spriteDepth);
+                jumpMeter.Draw(spriteBatch);
+            }
+            else if (damageCounter % 2 == 0)
             {
                 spriteBatch.Draw(sprite, position, source, Color.White * 1f, 0, new Vector2(0, 0), SpriteEffects.None, spriteDepth);
                 jumpMeter.Draw(spriteBatch);

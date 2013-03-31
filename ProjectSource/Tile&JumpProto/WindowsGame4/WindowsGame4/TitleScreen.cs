@@ -56,7 +56,7 @@ namespace WindowsGame4
 
             if (keyState.IsKeyDown(Keys.Space) && prevKeyState.IsKeyUp(Keys.Space) && logoCount == 0)
             {
-                gameLoop.State = GameLoop.GameState.titleMenu;
+                gameLoop.SetGameState(GameLoop.GameState.titleMenu);
                 logoCount = 35;
             }
 

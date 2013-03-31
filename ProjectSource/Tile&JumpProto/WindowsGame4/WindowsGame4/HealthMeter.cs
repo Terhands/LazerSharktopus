@@ -13,10 +13,10 @@ namespace WindowsGame4
     {
         // the dimensions of the health meter
         protected const int healthWidth = 200;
-        protected const int healthHeight = 10;
+        protected const int healthHeight = 8;
         protected const int healthHeightLooksGood = 20;
 
-        protected const int healthPadding = 2;
+        protected const int healthPadding = 1;
 
         protected float spriteDepth;
 
@@ -37,14 +37,18 @@ namespace WindowsGame4
             spriteDepth = layer;
 
             int screenWidth = game.GraphicsDevice.Viewport.Width;
+            int screenHeight = game.GraphicsDevice.Viewport.Height;
 
-            outline = new Rectangle((screenWidth/2) - (healthWidth/2) - healthPadding, healthHeightLooksGood - healthPadding, healthWidth + 2 * healthPadding, healthHeight + 2 * healthPadding);
-            healthBar = new Rectangle((screenWidth / 2) - (healthWidth / 2), healthHeightLooksGood, healthWidth, healthHeight);
+            int xPos = healthHeightLooksGood;
+            int yPos = (screenWidth / 2) - (healthWidth / 2);
+
+            outline = new Rectangle(yPos - healthPadding, xPos - healthPadding, healthWidth + 2 * healthPadding, healthHeight + 2 * healthPadding);
+            healthBar = new Rectangle(yPos, xPos, healthWidth, healthHeight);
 
             rectangleTexture = new Texture2D(game.GraphicsDevice, 1, 1);
             rectangleTexture.SetData(new Color[] { Color.White });
 
-            outlineColor = Color.GhostWhite;
+            outlineColor = new Color(255, 255, 255, 100);
             healthBarColor = Color.Red;
             width = healthBar.Width;
         }
