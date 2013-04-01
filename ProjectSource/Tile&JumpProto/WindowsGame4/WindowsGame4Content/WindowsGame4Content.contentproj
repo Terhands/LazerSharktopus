@@ -63,6 +63,17 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="creditsHeaderFont.spritefont">
+      <Name>creditsHeaderFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <SubType>Designer</SubType>
+    </Compile>
+    <Compile Include="creditsFont.spritefont">
+      <Name>creditsFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
     <None Include="lathraia.config">
       <Name>lathraia</Name>
       <Importer>XmlImporter</Importer>

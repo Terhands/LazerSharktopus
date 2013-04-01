@@ -310,7 +310,25 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\credits.xnb</Output>
-      <Time>2013-03-31T19:35:15.7017697-06:00</Time>
+      <Time>2013-03-31T23:18:13.1629167-06:00</Time>
+    </Item>
+    <Item>
+      <Source>creditsHeaderFont.spritefont</Source>
+      <Name>creditsHeaderFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\creditsHeaderFont.xnb</Output>
+      <Time>2013-03-31T23:29:18.3509633-06:00</Time>
+    </Item>
+    <Item>
+      <Source>creditsFont.spritefont</Source>
+      <Name>creditsFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\creditsFont.xnb</Output>
+      <Time>2013-03-31T23:27:09.1035707-06:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

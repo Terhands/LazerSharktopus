@@ -37,6 +37,8 @@ Content\DST-BlueMist.xnb
 Content\DST-BlueMist.wma
 Content\Swords_Collide.xnb
 Content\credits.xnb
+Content\creditsHeaderFont.xnb
+Content\creditsFont.xnb
 Content\lathraia.config
 Content\Level1.txt
 Content\Level2.txt

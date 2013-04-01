@@ -12,8 +12,54 @@ namespace WindowsGame4
     class Credits : ScrollingTextScreen
     {
 
-        public Credits(GameLoop _game, Texture2D _background, MusicManager _musicPlayer, int _songIndex, string[] _scrollingText, ArrayList _fonts, int[] _fontIndices, Justification _justification)
-            : base(_game, _background, _musicPlayer, _songIndex, _scrollingText, _fonts, _fontIndices, _justification)
+        private static string[] credits = { "Lathraia",
+                                            " ",
+                                            "Developed By", 
+                                            " ",
+                                            " ",
+                                            " ",
+                                            "Lazer Sharktopus Games",
+                                            "Programming Team",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            "Teresa Hume",
+                                            "Mike Fulton",
+                                            "Mike Greve",
+                                            "Alexa Elliot",
+                                            "Alicia Spencer",
+                                            "Music By DST",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            "http://www.nosoapradio.us/",
+                                            "Songs",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            "Blue Mist - Intro Screen",
+                                            "Aronara - Level Music",
+                                            "Angry Robot - Level Music",
+                                            "Sound Effects From",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            "http://soundbible.com",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            "A Sharktopus Production",
+                                            " ",
+                                            " ",
+                                            "Thank You!"
+                                          };
+
+        private static int[] creditFonts = { 3, 4, 3, 4, 4, 4, 4, 3, 4, 4, 4, 4, 4, 4, 4, 4, 3, 4, 4, 4, 4, 3, 4, 4, 4, 4, 4, 4, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3};
+        private static Justification justification = Justification.left;
+        private static int songIndex = 2;
+
+        public Credits(GameLoop _game, Texture2D _background, MusicManager _musicPlayer, ArrayList _fonts)
+            : base(_game, _background, _musicPlayer, songIndex, credits, _fonts, creditFonts, justification)
         { }
 
         public void Update()

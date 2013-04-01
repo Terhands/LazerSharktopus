@@ -79,7 +79,7 @@ namespace WindowsGame4
         {
             // TODO: Add your initialization logic here
             base.Initialize();
-            gameState = GameState.titleScreen;
+            gameState = GameState.credits;
             prevGameState = gameState;
 
             level = new Level(this, textures, fonts, sounds, musicPlayer, new LevelLoader(config.LevelFiles));
@@ -90,9 +90,7 @@ namespace WindowsGame4
             levelIntroScreen = new LevelIntroScreen(this, (SpriteFont)fonts[1]);
             levelIntroScreen.InitLevelScreen(level.LevelName);
 
-            String[] test = { "some", "test", "text", "more teeeexxxxt" };
-            int[] fi = { 0, 0, 0, 0 };
-            credits = new Credits(this, (Texture2D)textures[creditsIndex], musicPlayer, 2, test, fonts, fi, ScrollingTextScreen.Justification.center);
+            credits = new Credits(this, (Texture2D)textures[creditsIndex], musicPlayer, fonts);
 
             playerAnimation = new PlayerAnimation(this, new Player(this, (Texture2D)textures[0], sounds, -100, 400));
             animatePlayer = false;
