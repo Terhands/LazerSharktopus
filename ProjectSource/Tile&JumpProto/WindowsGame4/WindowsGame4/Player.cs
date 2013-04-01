@@ -267,6 +267,7 @@ namespace WindowsGame4
         protected void HandleFootCollisions(IList<ITile> tiles)
         {
             bool footCollision = false;
+            bool isSlowed = false;
 
             foreach (ITile t in tiles)
             {
@@ -283,6 +284,16 @@ namespace WindowsGame4
 
                     position.Y = t.getPosition().Top - position.Height;
 
+                    // when the player's feet hit a magnet his speed decreases until off the magnet
+                    if (CollisionType.magnet == t.getCollisionBehaviour())
+                    {
+                        if (Math.Abs((float)deltaX) > 1)
+                        {
+                            deltaX = deltaX / 2;
+                        }
+                        isSlowed = true;
+                    }
+
                     if (isJumping)
                     {
                         isJumping = false;
@@ -290,6 +301,11 @@ namespace WindowsGame4
                         jumpMeter.reset();
                     }
                 }
+            }
+
+            if (isSlowed)
+            {
+                reposition();
             }
 
             // if the player is not jumping and has no tiles under their feet, they start falling

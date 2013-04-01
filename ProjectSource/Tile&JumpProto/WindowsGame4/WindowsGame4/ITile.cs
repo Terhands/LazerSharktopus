@@ -15,6 +15,7 @@ namespace WindowsGame4
         hideable,
         goal,
         spike,
+        magnet,
         invisible
     };
 
