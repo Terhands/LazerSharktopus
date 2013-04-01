@@ -40,6 +40,7 @@ namespace WindowsGame4
                                             "Blue Mist - Intro Screen",
                                             "Aronara - Level Music",
                                             "Angry Robot - Level Music",
+                                            "Starry Book - End Credits",
                                             "Sound Effects From",
                                             " ",
                                             " ",
@@ -64,11 +65,11 @@ namespace WindowsGame4
                                              3, 4, 4, 4, 4, 
                                              3, 4, 4, 4, 4, 4, 4, 4, 4, 
                                              3, 4, 4, 4, 4, 
-                                             3, 4, 4, 4, 4, 4, 4, 
+                                             3, 4, 4, 4, 4, 4, 4, 4, 
                                              3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
                                              3};
         private static Justification _justification = Justification.left;
-        private static int _songIndex = 2;
+        private static int _songIndex = 3;
 
         public Credits(GameLoop _game, Texture2D _background, MusicManager _musicPlayer, ArrayList _fonts)
             : base(_game, _background, _musicPlayer, _songIndex, credits, _fonts, creditFonts, _justification)

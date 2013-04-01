@@ -79,7 +79,7 @@ namespace WindowsGame4
         {
             // TODO: Add your initialization logic here
             base.Initialize();
-            gameState = GameState.titleScreen;
+            gameState = GameState.credits;
             prevGameState = gameState;
 
             level = new Level(this, textures, fonts, sounds, musicPlayer, new LevelLoader(config.LevelFiles));

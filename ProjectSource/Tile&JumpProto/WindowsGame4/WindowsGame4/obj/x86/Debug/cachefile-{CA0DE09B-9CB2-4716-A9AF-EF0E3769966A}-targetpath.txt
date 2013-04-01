@@ -39,6 +39,8 @@ Content\Swords_Collide.xnb
 Content\credits.xnb
 Content\creditsHeaderFont.xnb
 Content\creditsFont.xnb
+Content\DST-StarryBook.xnb
+Content\DST-StarryBook.wma
 Content\lathraia.config
 Content\Level1.txt
 Content\Level2.txt

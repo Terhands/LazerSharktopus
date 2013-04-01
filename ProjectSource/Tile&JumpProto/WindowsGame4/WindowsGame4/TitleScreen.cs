@@ -21,6 +21,8 @@ namespace WindowsGame4
 
         int blinkCount;
         int logoCount;
+
+        protected const int introSong = 2;
         protected const int fadeDelay = 4;
         protected int currFadeStep;
         int channelValue;
@@ -47,9 +49,9 @@ namespace WindowsGame4
 
         public void Update()
         {
-            if (musicPlayer.isStopped)
+            if (musicPlayer.isStopped || musicPlayer.CurrSong != introSong)
             {
-                musicPlayer.Play(2);
+                musicPlayer.Play(introSong);
             }
 
             keyState = Keyboard.GetState();

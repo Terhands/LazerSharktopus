@@ -330,6 +330,16 @@
       <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\creditsFont.xnb</Output>
       <Time>2013-03-31T23:27:09.1035707-06:00</Time>
     </Item>
+    <Item>
+      <Source>DST-StarryBook.mp3</Source>
+      <Name>DST-StarryBook</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-StarryBook.xnb</Output>
+      <Extra>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-StarryBook.wma</Extra>
+      <Time>2013-04-01T10:44:01.1114447-06:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{CA0DE09B-9CB2-4716-A9AF-EF0E3769966A}</ContentProjectGUID>
