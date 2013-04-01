@@ -303,6 +303,15 @@
       <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\Swords_Collide.xnb</Output>
       <Time>2013-03-31T01:21:23.4798213-06:00</Time>
     </Item>
+    <Item>
+      <Source>credits.png</Source>
+      <Name>credits</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\credits.xnb</Output>
+      <Time>2013-03-31T19:35:15.7017697-06:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{CA0DE09B-9CB2-4716-A9AF-EF0E3769966A}</ContentProjectGUID>

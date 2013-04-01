@@ -45,6 +45,7 @@ namespace WindowsGame4
         Level tutorial;
 
         int mainMenuIndex = 2;
+        int creditsIndex = 16;
 
         /* Keyboard controls */
         protected const Keys keyRight = Keys.D;
@@ -91,7 +92,7 @@ namespace WindowsGame4
 
             String[] test = { "some", "test", "text", "more teeeexxxxt" };
             int[] fi = { 0, 0, 0, 0 };
-            credits = new Credits(this, (Texture2D)textures[0], musicPlayer, 2, test, fonts, fi, ScrollingTextScreen.Justification.center);
+            credits = new Credits(this, (Texture2D)textures[creditsIndex], musicPlayer, 2, test, fonts, fi, ScrollingTextScreen.Justification.center);
 
             playerAnimation = new PlayerAnimation(this, new Player(this, (Texture2D)textures[0], sounds, -100, 400));
             animatePlayer = false;
