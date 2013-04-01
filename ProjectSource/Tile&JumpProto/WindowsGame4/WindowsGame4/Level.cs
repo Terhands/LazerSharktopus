@@ -143,7 +143,11 @@ namespace WindowsGame4
     
             gameTimer = new GameTimer(levelLoader.TimeLimit, (SpriteFont)fonts[0]);
 
-            musicPlayer.Play(levelLoader.LevelMusic);
+            // don't keep restarting the song if it is already playing
+            if (musicPlayer.CurrSong != levelLoader.LevelMusic || musicPlayer.isStopped)
+            {
+                musicPlayer.Play(levelLoader.LevelMusic);
+            }
 
             keyState = Keyboard.GetState();
             prevKeyState = keyState;

@@ -78,7 +78,7 @@ namespace WindowsGame4
 
                 else if (justification == Justification.left)
                 {
-                    textPosition[i].X = screenCenter / 4;
+                    textPosition[i].X = screenCenter / 6;
                 }
                 else
                 {

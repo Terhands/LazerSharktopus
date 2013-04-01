@@ -51,15 +51,27 @@ namespace WindowsGame4
                                             "A Sharktopus Production",
                                             " ",
                                             " ",
-                                            "Thank You!"
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            "Thank You For Playing!"
                                           };
 
-        private static int[] creditFonts = { 3, 4, 3, 4, 4, 4, 4, 3, 4, 4, 4, 4, 4, 4, 4, 4, 3, 4, 4, 4, 4, 3, 4, 4, 4, 4, 4, 4, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3};
-        private static Justification justification = Justification.left;
-        private static int songIndex = 2;
+        private static int[] creditFonts = { 3, 4, 
+                                             3, 4, 4, 4, 4, 
+                                             3, 4, 4, 4, 4, 4, 4, 4, 4, 
+                                             3, 4, 4, 4, 4, 
+                                             3, 4, 4, 4, 4, 4, 4, 
+                                             3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+                                             3};
+        private static Justification _justification = Justification.left;
+        private static int _songIndex = 2;
 
         public Credits(GameLoop _game, Texture2D _background, MusicManager _musicPlayer, ArrayList _fonts)
-            : base(_game, _background, _musicPlayer, songIndex, credits, _fonts, creditFonts, justification)
+            : base(_game, _background, _musicPlayer, _songIndex, credits, _fonts, creditFonts, _justification)
         { }
 
         public void Update()
