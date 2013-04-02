@@ -54,12 +54,13 @@ namespace WindowsGame4
             if (selectedIndex < 0) { selectedIndex = 2; }
             if (selectedIndex > 2) { selectedIndex = 0; }
 
-            if (keyState.IsKeyDown(Keys.Enter) && prevKeyState.IsKeyUp(Keys.Enter))
+            if (prevKeyState.IsKeyDown(Keys.Enter) && keyState.IsKeyUp(Keys.Enter))
             {
                 if (selectedIndex == 0)
                 {
                     gameLoop.SetGameState(GameLoop.GameState.level);
-                    gameLoop.SetGameState(GameLoop.GameState.levelIntro);
+                    gameLoop.SetGameState(GameLoop.GameState.plotScreen);
+                    gameLoop.ResetScreens();
                     gameLoop.AnimatePlayer = false;
                 }
                 else if (selectedIndex == 1)

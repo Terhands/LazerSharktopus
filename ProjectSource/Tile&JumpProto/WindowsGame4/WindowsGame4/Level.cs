@@ -37,6 +37,7 @@ namespace WindowsGame4
 
         MusicManager musicPlayer;
         GuardFactory guardFactory;
+        PlotScreen plotScreen;
 
 	    Texture2D boltTexture;
         GameLoop game;
@@ -50,7 +51,7 @@ namespace WindowsGame4
         protected List<Gate> gates;
         protected int[] leverGateMap;
 
-        public Level(GameLoop game, ArrayList _textures, ArrayList _fonts, ArrayList _sounds, MusicManager _musicPlayer, LevelLoader loader) : base(game)
+        public Level(GameLoop game, ArrayList _textures, ArrayList _fonts, ArrayList _sounds, MusicManager _musicPlayer, PlotScreen _plotScreen, LevelLoader loader) : base(game)
         {
             int screenWidth = Game.GraphicsDevice.Viewport.Width;
             int screenHeight = Game.GraphicsDevice.Viewport.Height;
@@ -69,6 +70,7 @@ namespace WindowsGame4
             fonts = _fonts;
 
             musicPlayer = _musicPlayer;
+            plotScreen = _plotScreen;
             guardFactory = new GuardFactory((Texture2D)textures[wizardIndex], (Texture2D)textures[soldierIndex], (Texture2D)textures[LOSIndex]);
 
             currentLevel = 0;
@@ -326,7 +328,13 @@ namespace WindowsGame4
                     gates.Clear();
                     musicPlayer.Stop();
 
-                    if (levelLoader.NumLevels > currentLevel)
+                    if (currentLevel % 1 == 0 && plotScreen != null)
+                    {
+                        plotScreen.initPlotScreen();
+                        levelLoader.LoadLevel(currentLevel);
+                        game.SetGameState(GameLoop.GameState.plotScreen);
+                    }
+                    else if(levelLoader.NumLevels > currentLevel)
                     {
                         levelLoader.LoadLevel(currentLevel);
                         game.SetGameState(GameLoop.GameState.levelIntro);

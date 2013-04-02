@@ -81,6 +81,7 @@
     <Compile Include="GameTimer.cs" />
     <Compile Include="HealthMeter.cs" />
     <Compile Include="PlayerAnimation.cs" />
+    <Compile Include="PlotScreen.cs" />
     <Compile Include="ScrollingTextScreen.cs" />
     <Compile Include="Wizard.cs" />
     <Compile Include="GuardFactory.cs" />

@@ -45,6 +45,7 @@ Content\dashedLine.xnb
 Content\robot-death2.xnb
 Content\Sad_Trombone.xnb
 Content\total-malfunct.xnb
+Content\storyFont.xnb
 Content\lathraia.config
 Content\Level1.txt
 Content\Level2.txt

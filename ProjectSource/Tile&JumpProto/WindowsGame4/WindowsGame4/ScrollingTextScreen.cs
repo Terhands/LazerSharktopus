@@ -91,5 +91,48 @@ namespace WindowsGame4
             }
         
         }
+
+        public virtual void Update()
+        {
+            if (musicPlayer.CurrSong != songIndex)
+            {
+                musicPlayer.Play(songIndex);
+            }
+
+            if (textPosition[textPosition.Length - 1].Y == 0)
+            {
+                fadeCounter = countdown;
+            }
+            else if (textPosition[textPosition.Length - 1].Y < 0)
+            {
+                fadeCounter -= 1;
+            }
+            else if (textPosition[textPosition.Length - 1].Y < screenHeight / 3)
+            {
+                currFadeValue += fadeIncrement;
+            }
+
+            for (int i = 0; i < textPosition.Length; i++)
+            {
+                textPosition[i].Y -= scrollSpeed;
+            }
+        }
+
+        public virtual void Draw(SpriteBatch spriteBatch)
+        {
+            Color color = new Color(currFadeValue, currFadeValue, currFadeValue, 255);
+
+            spriteBatch.Draw(background, bgPosition, bgSource, color, 0, new Vector2(0, 0), SpriteEffects.None, 0.01f);
+
+            for (int i = 0; i < scrollingText.Length; i++)
+            {
+                spriteBatch.DrawString(((SpriteFont)fonts[fontIndices[i]]), scrollingText[i], textPosition[i], Color.White, 0, new Vector2(0, 0), 1, SpriteEffects.None, 0.99f);
+            }
+        }
+
+        public bool IsDone
+        {
+            get { return textPosition[textPosition.Length - 1].Y < 0 && currFadeValue <= 0; }
+        }
     }
 }
