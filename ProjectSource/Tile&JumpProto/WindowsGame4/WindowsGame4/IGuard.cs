@@ -16,5 +16,10 @@ namespace WindowsGame4
 
         // procedure to retrieve the bounding rectangle of the guard's line of sight cone
         Rectangle GetLOSRectangle();
+
+        bool IsDead
+        {
+            get;
+        }
     }
 }

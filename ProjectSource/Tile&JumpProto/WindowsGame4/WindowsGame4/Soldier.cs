@@ -162,6 +162,7 @@ namespace WindowsGame4
                 {
                     position.Y = t.getPosition().Top - position.Height;
                     footCollision = true;
+                    DieOnTile(t.getCollisionBehaviour());
 
                     // when a guard's feet hit a magnet he gets stuck to it & can no longer move freely
                     if (CollisionType.magnet == t.getCollisionBehaviour())

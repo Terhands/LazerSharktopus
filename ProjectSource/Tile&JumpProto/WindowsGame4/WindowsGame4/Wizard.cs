@@ -48,6 +48,9 @@ namespace WindowsGame4
         protected int velocity = 1;
         protected const int minFallingSpeed = -1;
 
+        // keeps track of if the guard is alive or not (a dead guard == game over)
+        protected bool isDead;
+
         //guard states
         protected enum Behaviour { patrol, guard, distracted, goCheckThatShitOut, gotoPatrol, wander, teleport };
         protected Behaviour currentBehaviour;
@@ -122,6 +125,7 @@ namespace WindowsGame4
             currentBehaviour = Behaviour.patrol;
             
             isFalling = false;
+            isDead = false;
 
             //guard count inactive when not at the patrol boundaries
             guardCounter = -1;
@@ -488,7 +492,7 @@ namespace WindowsGame4
                 {
                         position.Y = t.getPosition().Top - position.Height;
                         footCollision = true;
-                        break;
+                        DieOnTile(t.getCollisionBehaviour());
                 }
             }
 
@@ -500,6 +504,15 @@ namespace WindowsGame4
             else
             {
                 isFalling = false;
+            }
+        }
+
+        protected void DieOnTile(CollisionType type)
+        {
+            if(type == CollisionType.spike)
+            {
+                debugColor = Color.Green;
+                isDead = true;
             }
         }
 
@@ -516,7 +529,6 @@ namespace WindowsGame4
                if (hearingDirection != Direction.none)
                {
                    distractingBolt = bolt;
-                   debugColor = Color.Blue;
                    break;
                }
             }
@@ -543,20 +555,13 @@ namespace WindowsGame4
 
             float visibility = distance - ((1 - player.HiddenPercent) * LOSRadius);
 
-            debugColor = Color.White;
-
             // if the player is behind the guard we don't care
             if ((facingDirection == Direction.left && player.GetPosition().X <= mapEyePos.X) || (facingDirection == Direction.right && player.GetPosition().Right >= mapEyePos.X))
             {
                 // is the player visible enough/close enough for the guard to be able to see
                 if (visibility <= 0 && isVisible(player.GetPosition(), surroundingTiles))
                 {
-                    debugColor = Color.Red;
                     //player.Kill();
-                }
-                else
-                {
-                    debugColor = Color.White;
                 }
             }
         }
@@ -747,8 +752,6 @@ namespace WindowsGame4
             float dY = mapEyePos.Y - (r.Y + (r.Height / 2));
             float distance = (float)Math.Sqrt(Math.Pow(dX, 2) + Math.Pow(dY, 2));
 
-            debugColor = Color.White;
-
             // if the distance is less than the two radii, then the rectange is in collision with this Guard's collision radius
             if (distance <= recRadius + radius)
             {
@@ -795,6 +798,11 @@ namespace WindowsGame4
         protected Vector2 AngleToVector(float angle)
         {
             return new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle));
+        }
+
+        public bool IsDead
+        {
+            get { return isDead; }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
