@@ -328,20 +328,20 @@ namespace WindowsGame4
                     gates.Clear();
                     musicPlayer.Stop();
 
-                    if (currentLevel % 1 == 0 && plotScreen != null)
+                    // if there is a next level get the map loaded
+                    if (levelLoader.NumLevels > currentLevel)
+                    {
+                        levelLoader.LoadLevel(currentLevel);
+                    }
+
+                    if (currentLevel % 3 == 0 && plotScreen != null)
                     {
                         plotScreen.initPlotScreen();
-                        levelLoader.LoadLevel(currentLevel);
                         game.SetGameState(GameLoop.GameState.plotScreen);
                     }
                     else if(levelLoader.NumLevels > currentLevel)
                     {
-                        levelLoader.LoadLevel(currentLevel);
                         game.SetGameState(GameLoop.GameState.levelIntro);
-                    }
-                    else
-                    {
-                        game.SetGameState(GameLoop.GameState.victory);
                     }
                 }
             }
