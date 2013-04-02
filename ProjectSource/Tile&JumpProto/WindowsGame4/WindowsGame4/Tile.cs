@@ -116,6 +116,10 @@ namespace WindowsGame4
                     source = new Rectangle(spriteOffset, spriteOffset * 5 + spriteWidth * 4, spriteWidth, spriteWidth);
                     spriteDepth = 0.2f;
                     break;
+                case CollisionType.magnet:
+                    source = new Rectangle(spriteOffset * 2 + spriteWidth, spriteOffset * 5 + spriteWidth * 4, spriteWidth, spriteWidth);
+                    spriteDepth = 0.2f;
+                    break;
                 case CollisionType.invisible:
                     color = Color.Transparent;
                     source = new Rectangle(0, 0, spriteWidth, spriteWidth);

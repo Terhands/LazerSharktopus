@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -41,9 +41,11 @@ namespace WindowsGame4
                 inputHandler.isNewlyPressed(InputHandler.InputTypes.start))
             {
                 if (selectedIndex == 0)
+                {
                     gameLoop.SetGameState(GameLoop.GameState.levelIntro);
+                }
                 else if (selectedIndex == 1)
-                    gameLoop.State = GameLoop.GameState.titleMenu;
+                    gameLoop.SetGameState(GameLoop.GameState.titleMenu);
             }
         }
 

@@ -25,6 +25,7 @@ namespace WindowsGame4
         protected bool isStopped;
         protected bool isDead;
         protected bool hasReachedGoal;
+        protected bool displayHealthBar;
 
         protected float spriteDepth = 0.8f;
 
@@ -34,23 +35,33 @@ namespace WindowsGame4
 
         // the speed that player starts falling
         protected const float startFalling = -0.25f;
+        protected const int maxPainlessFall = 200;
+        protected int fallDistance;
+
 
         // robro's change in height from crouching to standing up straight
         protected const int crouchDiff = 30;
 
-        int frameCountCol = 1; // Which frame we are.  Values = {0, 1, 2, 3, 4} this 4 = crouch only in row 0 
-        int frameCountRow = 0; //Value = {0,1} 1 = left direction , 0 = right directions
-        int frameSkipX = 75; // How much to move the frame in X when we increment a frame--X distance between top left corners.
-        int frameSkipY = 127; // how much to move the frame in y when we change directions 
-        int frameStartX = 1; // X of top left corner of frame 0. 
-        int frameStartY = 1; // Y of top left corner of frame 0.
-        int frameWidth = 75; // X of right minus X of left. 
-        int frameHeight = 126; // Y of bottom minus Y of top.
+        protected int frameCountCol = 1; // Which frame we are.  Values = {0, 1, 2, 3, 4} this 4 = crouch only in row 0 
+        protected int frameCountRow = 0; //Value = {0,1} 1 = left direction , 0 = right directions
+        protected int frameSkipX = 75; // How much to move the frame in X when we increment a frame--X distance between top left corners.
+        protected int frameSkipY = 127; // how much to move the frame in y when we change directions 
+        protected int frameStartX = 1; // X of top left corner of frame 0. 
+        protected int frameStartY = 1; // Y of top left corner of frame 0.
+        protected int frameWidth = 75; // X of right minus X of left. 
+        protected int frameHeight = 126; // Y of bottom minus Y of top.
+
+        // when robro takes damage he is invincible for a short period of time (from spikes & long falls not invisible/gets free bolt throws)
+        protected int damageCounter;
+        private const int invincibleMax = 50;
+        private const int damageIndex = 3;
 
         // Keep a counter, to count the number of ticks since the last change of animation frame.
         int animationCount; // How many ticks since the last frame change.
         int animationMax = 8; // How many ticks to change frame after. 
         bool landed = false; //So the update doesnt keep reseting robro to standard land position this bool is used
+
+        protected HealthMeter healthMeter;
 
         public Player(Game game, Texture2D texture, ArrayList _sounds, int xStart, int yStart)
             : base(game)
@@ -64,13 +75,18 @@ namespace WindowsGame4
 
             int xCenter = xStart + (position.Width / 2);
             int yCenter = yStart - playerPadding;
-            this.jumpMeter = new JumpMeter(game, xCenter, yCenter, spriteDepth);
+            jumpMeter = new JumpMeter(game, xCenter, yCenter, spriteDepth);
+
+            healthMeter = new HealthMeter(game, 200, 10, spriteDepth);
 
             hidden = 0.0f;
+            damageCounter = 0;
+            fallDistance = 0;
             isJumping = false;
             isStopped = true; // will we need to know this?? Maybe for a funny animation if you take too long...
             isDead = false;
             hasReachedGoal = false;
+            displayHealthBar = true;
 
             sounds = _sounds;
 
@@ -89,26 +105,27 @@ namespace WindowsGame4
             set { isDead = value; }
         }
 
+        /* Updates Robro's health when a bolt is thrown */
+        public void throwBolt()
+        {
+            healthMeter.lowerHealthMeter();
+        }
+
         public void Jump()
         {
             // scale the jump so you can go high fast, but fall a bit slower - less sudden
-            if (jumpMeter.JumpPower > 0.00001 || jumpMeter.JumpPower < 0)
+            deltaY = (int)(.9 * jumpMeter.JumpPower);
+            if (jumpMeter.JumpPower > 0)
             {
-                deltaY = (int)(.9 * jumpMeter.JumpPower);
-                if (jumpMeter.JumpPower > 0)
-                {
-                    jumpMeter.drainJumpPower(0.25f);
-                }
-                else
-                {
-                    jumpMeter.drainJumpPower(0.2f);
-                }
+                jumpMeter.drainJumpPower(0.25f);
+                fallDistance = 0;
             }
             else
             {
-                deltaY = 0;
-                jumpMeter.JumpPower = startFalling;
+                jumpMeter.drainJumpPower(0.2f);
+                fallDistance -= deltaY;
             }
+
             isJumping = true;
         }
 
@@ -137,9 +154,10 @@ namespace WindowsGame4
                         
                     }
                 }
-                this.frameCountCol = 4;
-                this.source.X = this.frameStartX + this.frameSkipX * this.frameCountCol;
             }
+
+            frameCountCol = 4;
+            source.X = frameStartX + frameSkipX * frameCountCol;
         }
 
         public void StopHiding()
@@ -147,8 +165,8 @@ namespace WindowsGame4
             hidden = 0.0f;
             spriteDepth = 0.8f;
             // will also need to swap the texture source rectangle to the standing sprite
-            this.frameCountCol = 1;
-            this.source.X = this.frameStartX + this.frameSkipX * this.frameCountCol;
+            frameCountCol = 1;
+            source.X = frameStartX + frameSkipX * frameCountCol;
         }
 
         /* make sure player isn't falling through platforms/walking through walls */
@@ -170,13 +188,23 @@ namespace WindowsGame4
 
             foreach (ITile t in tiles)
             {
-                if (t.getPosition().Top >= position.Bottom && t.getCollisionBehaviour() != CollisionType.hideable)
+                if (t.getPosition().Top >= position.Top && t.getCollisionBehaviour() != CollisionType.hideable)
                 {
                     tilesBelowPlayer.Add(t);
                 }
             }
 
             HandleFootCollisions(tilesBelowPlayer);
+        }
+
+        protected void TakeDamage()
+        {
+            if (damageCounter == 0)
+            {
+                healthMeter.lowerHealthMeter();
+                ((SoundEffect)sounds[damageIndex]).Play();
+                damageCounter = invincibleMax;
+            }
         }
 
         protected void HandleIntersectionCollisions(IList<ITile> tiles)
@@ -186,12 +214,12 @@ namespace WindowsGame4
             {
                 // padding the tile with a pixel on either side so the player cannot climb the walls
                 Rectangle tilePos = t.getPosition();
-
+                
                 tilePos.X -= 1;
-                tilePos.Y += 1;
-                tilePos.Height -= 1;
-                tilePos.Width += 2;
-
+                tilePos.Y += 2;
+                tilePos.Height -= 2;
+                tilePos.Width += 1;
+                
                 Direction direction = determineCollisionType(tilePos);
 
                 if (direction != Direction.none && t.getCollisionBehaviour() == CollisionType.goal)
@@ -199,26 +227,14 @@ namespace WindowsGame4
                     hasReachedGoal = true;
                 }
 
-                if (direction != Direction.none && t.getCollisionBehaviour() == CollisionType.spike)
+                // bottom collisions are all handled later - don't want to take double the damage
+                if (direction != Direction.none && direction != Direction.bottom && t.getCollisionBehaviour() == CollisionType.spike)
                 {
-                    this.Kill();
+                    TakeDamage();
                 }
 
                 switch (direction)
                 {
-                    case Direction.bottom:
-                        if(t.getCollisionBehaviour() != CollisionType.hideable)
-                        {
-                            position.Y = t.getPosition().Top - position.Height;
-
-                            if (isJumping)
-                            {
-                                isJumping = false;
-                                landed = true;
-                                jumpMeter.reset();
-                            }
-                        }
-                        break;
                     case Direction.top:
                         if (t.getCollisionBehaviour() == CollisionType.impassable)
                         {
@@ -233,7 +249,7 @@ namespace WindowsGame4
                         if (t.getCollisionBehaviour() == CollisionType.impassable)
                         {
                             // for some wierd reason with only 1 pixel of padding this breaks player's fall
-                            position.X = t.getPosition().Right + 2;
+                            position.X = t.getPosition().Right + 3;
                             deltaX = 0;
                         }
                         break;
@@ -251,14 +267,32 @@ namespace WindowsGame4
         protected void HandleFootCollisions(IList<ITile> tiles)
         {
             bool footCollision = false;
+            bool isSlowed = false;
 
             foreach (ITile t in tiles)
             {
                 Direction direction = determineCollisionType(t.getPosition());
 
-                if (Direction.bottom == direction && t.getCollisionBehaviour() != CollisionType.spike)
+                if (Direction.bottom == direction)
                 {
+                    if (t.getCollisionBehaviour() == CollisionType.spike)
+                    {
+                        TakeDamage();
+                    }
+
                     footCollision = true;
+
+                    position.Y = t.getPosition().Top - position.Height;
+
+                    // when the player's feet hit a magnet his speed decreases until off the magnet
+                    if (CollisionType.magnet == t.getCollisionBehaviour())
+                    {
+                        if (Math.Abs((float)deltaX) > 1)
+                        {
+                            deltaX = deltaX / 2;
+                        }
+                        isSlowed = true;
+                    }
 
                     if (isJumping)
                     {
@@ -267,6 +301,11 @@ namespace WindowsGame4
                         jumpMeter.reset();
                     }
                 }
+            }
+
+            if (isSlowed)
+            {
+                reposition();
             }
 
             // if the player is not jumping and has no tiles under their feet, they start falling
@@ -339,8 +378,8 @@ namespace WindowsGame4
                             deltaX = velocity / 2;
                         }
                     }
-                    this.frameCountRow = 0;
-                    this.animationCount += 1;
+                    frameCountRow = 0;
+                    animationCount += 1;
 
                     break;
                 case Action.left:
@@ -365,13 +404,6 @@ namespace WindowsGame4
                     this.animationCount += 1;
                     break;
 
-                // have to decide if we will implement ladder mechanics or rely on jumps
-                case Action.up:
-                    break;
-
-                case Action.down:
-                    break;
-
                 case Action.none:
                     deltaX = 0;
                     break;
@@ -379,15 +411,26 @@ namespace WindowsGame4
 
             if (isJumping)
             {
-                this.frameCountCol = 3;
+                frameCountCol = 3;
                 Jump();
-                
             }
 
             if (landed)
             {
                 landed = false;
-                this.frameCountCol = 1;
+                frameCountCol = 1;
+
+                if (fallDistance > maxPainlessFall)
+                {
+                    TakeDamage();
+                    fallDistance = 0;
+                }
+            }
+
+            healthMeter.Update(Action.none, 0);
+            if (healthMeter.Health <= 0) // If health is less than or equal to zero, Robro dies
+            {
+                Kill();
             }
 
             position.X += deltaX;
@@ -396,7 +439,11 @@ namespace WindowsGame4
             jumpMeter.setMeterPosition(position.X + (position.Width / 2), position.Y - playerPadding);
             jumpMeter.Update(Action.none, 0);
 
-            this.UpdateAnimation();
+            if (damageCounter > 0)
+            {
+                damageCounter -= 1;
+            }
+            UpdateAnimation();
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -405,33 +452,52 @@ namespace WindowsGame4
             {
                 spriteBatch.Draw(sprite, position, source, Color.Crimson, 0, new Vector2(0, 0), SpriteEffects.None, spriteDepth);
             }
-            else
+            else if(damageCounter <= 0)
             {
                 spriteBatch.Draw(sprite, position, source, Color.White * 1f, 0, new Vector2(0, 0), SpriteEffects.None, spriteDepth);
                 jumpMeter.Draw(spriteBatch);
             }
+            else if (damageCounter % 2 == 0)
+            {
+                spriteBatch.Draw(sprite, position, source, Color.White * 1f, 0, new Vector2(0, 0), SpriteEffects.None, spriteDepth);
+                jumpMeter.Draw(spriteBatch);
+            }
+
+            if (displayHealthBar)
+            {
+                healthMeter.Draw(spriteBatch);
+            }
+        }
+
+        public void ToggleHealthBar()
+        {
+            displayHealthBar = !displayHealthBar;
         }
 
         public void UpdateAnimation()
         {
-            if (this.animationCount > this.animationMax)
+            if (animationCount > animationMax)
             {
-                this.animationCount = 0;
+                animationCount = 0;
                 if (hidden > 0 || isJumping)
                 { }
                 else
-                    this.frameCountCol += 1;
+                {
+                    frameCountCol += 1;
+                }
             }
 
             if (isJumping)
-                this.frameCountCol = 3;
-            else if (this.frameCountCol == 3)
             {
-                this.frameCountCol = 0;
+                frameCountCol = 3;
+            }
+            else if (frameCountCol == 3)
+            {
+                frameCountCol = 0;
             }
             else { }
-            this.source.X = this.frameStartX + this.frameSkipX * this.frameCountCol;
-            this.source.Y = this.frameStartY + this.frameSkipY * this.frameCountRow;
+            source.X = frameStartX + frameSkipX * frameCountCol;
+            source.Y = frameStartY + frameSkipY * frameCountRow;
         }
     }
 }

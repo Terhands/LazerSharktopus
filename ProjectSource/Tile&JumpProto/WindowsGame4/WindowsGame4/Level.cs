@@ -20,7 +20,9 @@ namespace WindowsGame4
         int currentLevel;
 
         protected const int playerIndex = 0;
-        protected const int guardIndex = 5;
+        protected const int wizardIndex = 5;
+        protected const int soldierIndex = 14;
+        protected const int LOSIndex = 17;
         protected const int leverIndex = 9;
         protected const int gateIndex = 10;
 
@@ -34,6 +36,8 @@ namespace WindowsGame4
         ArrayList fonts;
 
         MusicManager musicPlayer;
+        GuardFactory guardFactory;
+        PlotScreen plotScreen;
 
 	    Texture2D boltTexture;
         GameLoop game;
@@ -41,19 +45,19 @@ namespace WindowsGame4
         
         protected List<Bolt> bolts;
         protected List<Torch> torches;
-        protected List<Guard> guards;
+        protected List<IGuard> guards;
         protected List<Lever> levers;
         protected List<Gate> gates;
         protected int[] leverGateMap;
 
-        public Level(GameLoop game, ArrayList _textures, ArrayList _fonts, ArrayList _sounds, MusicManager _musicPlayer, LevelLoader loader, InputHandler _inputHandler) : base(game)
+        public Level(GameLoop game, ArrayList _textures, ArrayList _fonts, ArrayList _sounds, MusicManager _musicPlayer, PlotScreen _plotScreen, LevelLoader loader, InputHandler _inputHandler) : base(game)
         {
             int screenWidth = Game.GraphicsDevice.Viewport.Width;
             int screenHeight = Game.GraphicsDevice.Viewport.Height;
 
             bolts = new List<Bolt>();
             torches = new List<Torch>();
-            guards = new List<Guard>();
+            guards = new List<IGuard>();
             levers = new List<Lever>();
             gates = new List<Gate>();
 
@@ -65,6 +69,8 @@ namespace WindowsGame4
             fonts = _fonts;
 
             musicPlayer = _musicPlayer;
+            plotScreen = _plotScreen;
+            guardFactory = new GuardFactory((Texture2D)textures[wizardIndex], (Texture2D)textures[soldierIndex], (Texture2D)textures[LOSIndex]);
 
             currentLevel = 0;
             deathCounter = 0;
@@ -83,10 +89,10 @@ namespace WindowsGame4
             if (levelLoader.Map == null)
             {
                 // If there's no level, then we've passed the last level and the player has won the game
-                game.State = GameLoop.GameState.victory;
+                game.SetGameState(GameLoop.GameState.victory);
                 return;
             }
-            levelMap = new Map(Game, levelLoader.Map, textures);
+            levelMap = new Map(Game, levelLoader.Map, textures, levelLoader.LevelBackground);
 
             int screenWidth = Game.GraphicsDevice.Viewport.Width;
             int screenHeight = Game.GraphicsDevice.Viewport.Height;
@@ -107,11 +113,12 @@ namespace WindowsGame4
                 torches.Add(new Torch(Game, torchTextures, x, y));
             }
 
-            foreach (Vector2 v in levelLoader.Guards)
+            foreach (Vector3 v in levelLoader.Guards)
             {
                 int x = ((int)v.X) * (screenWidth / 64) - (36/2);
-                int y = ((int)v.Y) * (screenHeight / 32) - 52;
-                guards.Add(new Guard(Game, (Texture2D)textures[guardIndex], x, y, Direction.right, 100));
+                int y = ((int)v.Y) * (screenHeight / 32) - (28*2);
+                int type = (int)v.Z;
+                guards.Add(guardFactory.createGuard(Game, x, y, Direction.right, 100, type));
             }
 
             foreach (Vector2 v in levelLoader.Gates)
@@ -139,12 +146,16 @@ namespace WindowsGame4
     
             gameTimer = new GameTimer(levelLoader.TimeLimit, (SpriteFont)fonts[0]);
 
-            musicPlayer.Play(levelLoader.LevelMusic);
+            // don't keep restarting the song if it is already playing
+            if (musicPlayer.CurrSong != levelLoader.LevelMusic || musicPlayer.isStopped)
+            {
+                musicPlayer.Play(levelLoader.LevelMusic);
+            }
 
         }
 
         /* procedure responsible for updating this level given an action (velocity should eventually be determined by player)*/
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {   
             /* Timer update logic */
             gameTimer.Update();
@@ -220,9 +231,14 @@ namespace WindowsGame4
                     }
 
                     //update guards
-                    foreach (Guard guard in guards)
+
+                    foreach (Wizard guard in guards)
                     {
                         guard.Update(playerAction, deltaX);
+                        if (guard.IsDead)
+                        {
+                            player.Kill();
+                        }
                     }
 
                     foreach (Bolt bolt in bolts)
@@ -251,6 +267,7 @@ namespace WindowsGame4
                         boltSounds.Add(sounds[1]);
                         boltSounds.Add(sounds[2]);
                         bolts.Add(new Bolt(Game, player.GetFacingDirection(), player.GetPosition().X, player.GetPosition().Y, boltTexture, boltSounds));
+                        player.throwBolt();
                     }
                 }
 
@@ -281,13 +298,14 @@ namespace WindowsGame4
                     }
                 }
 
-                foreach (Guard guard in guards)
+                foreach (Wizard guard in guards)
                 {
                     guard.Update(gameTime);
-                    guard.HandleCollision(levelMap.GetNearbyTiles(guard.GetPosition()));
-                    guard.HandleVision(player, levelMap.GetNearbyTiles(guard.GetLOSRectangle()));
-                    // need a way to get back all bolts that have collided - have to actually hear it, not see it with my 360 degree camera strapped to the inside of the guard's visor
-                    guard.HandleHearing(collidedBolts);
+                   
+                        guard.HandleCollision(levelMap.GetNearbyTiles(guard.GetPosition()));
+                        guard.HandleVision(player, levelMap.GetNearbyTiles(guard.GetLOSRectangle()));
+                        // need a way to get back all bolts that have collided - have to actually hear it, not see it with my 360 degree camera strapped to the inside of the guard's visor
+                        guard.HandleHearing(collidedBolts);
                 }
 
                 foreach (Gate gate in gates)
@@ -305,10 +323,21 @@ namespace WindowsGame4
                     guards.Clear();
                     levers.Clear();
                     gates.Clear();
+                    musicPlayer.Stop();
 
+                    // if there is a next level get the map loaded
                     if (levelLoader.NumLevels > currentLevel)
                     {
                         levelLoader.LoadLevel(currentLevel);
+                    }
+
+                    if (currentLevel % 3 == 0 && plotScreen != null)
+                    {
+                        plotScreen.initPlotScreen();
+                        game.SetGameState(GameLoop.GameState.plotScreen);
+                    }
+                    else if (levelLoader.NumLevels > currentLevel)
+                    {
                         game.SetGameState(GameLoop.GameState.levelIntro);
                     }
                     else
@@ -327,7 +356,8 @@ namespace WindowsGame4
                     guards.Clear();
                     levers.Clear();
                     gates.Clear();
-                    game.State = GameLoop.GameState.gameOver;
+                    musicPlayer.Stop();
+                    game.SetGameState(GameLoop.GameState.gameOver);
                 }
             }
         }
@@ -338,7 +368,7 @@ namespace WindowsGame4
             player.Draw(spriteBatch);
             gameTimer.Draw(spriteBatch);
 
-            foreach (Guard guard in guards)
+            foreach (Wizard guard in guards)
             {
                 guard.Draw(spriteBatch);
             }

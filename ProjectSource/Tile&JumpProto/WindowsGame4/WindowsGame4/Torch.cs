@@ -28,7 +28,7 @@ namespace WindowsGame4
         protected int flamesAnimation;
 
         protected const int nimbusRadius = 30;
-        protected const int flameOffset = 10;
+        protected const int flameOffset = 3;
 
         protected int maxSprite = 4;
         protected int minSprite = 0;
@@ -47,7 +47,7 @@ namespace WindowsGame4
             positionBase = new Rectangle(xStart, yStart, torchWidth, torchHeight);
             sourceBase = new Rectangle(xPosition[currSprite], 1, spriteWidth, spriteHeight);
 
-            positionNimbus = new Rectangle(xStart + (torchWidth / 2) - (nimbusRadius), yStart + flameOffset - nimbusRadius, nimbusRadius * 2, nimbusRadius * 2); 
+            positionNimbus = new Rectangle(xStart + (torchWidth / 2) - (nimbusRadius), yStart - flameOffset - nimbusRadius, nimbusRadius * 2, nimbusRadius * 2); 
             sourceNimbus = new Rectangle(0, 0, 32, 32);
         }
 

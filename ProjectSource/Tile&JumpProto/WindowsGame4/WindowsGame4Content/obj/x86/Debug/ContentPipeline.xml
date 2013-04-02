@@ -11,6 +11,15 @@
       <Time>2013-03-10T20:30:31.495287-06:00</Time>
     </Item>
     <Item>
+      <Source>Logo.png</Source>
+      <Name>Logo</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\Logo.xnb</Output>
+      <Time>2013-04-02T16:57:02.9007777-06:00</Time>
+    </Item>
+    <Item>
       <Source>Robro1.1.png</Source>
       <Name>Robro1.1</Name>
       <Importer>TextureImporter</Importer>
@@ -35,7 +44,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\groundSpriteFile.xnb</Output>
-      <Time>2013-03-10T20:30:31.4962871-06:00</Time>
+      <Time>2013-04-02T16:57:02.94078-06:00</Time>
     </Item>
     <Item>
       <Source>gameOver.png</Source>
@@ -92,6 +101,123 @@
       <Time>2013-03-12T23:33:58.1036184-06:00</Time>
     </Item>
     <Item>
+      <Source>castleBackground.png</Source>
+      <Name>castleBackground</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\castleBackground.xnb</Output>
+      <Time>2013-03-25T22:04:10.228097-06:00</Time>
+    </Item>
+    <Item>
+      <Source>lever.png</Source>
+      <Name>lever</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\lever.xnb</Output>
+      <Time>2013-03-25T19:05:50.3505611-06:00</Time>
+    </Item>
+    <Item>
+      <Source>torchNimbus.png</Source>
+      <Name>torchNimbus</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\torchNimbus.xnb</Output>
+      <Time>2013-03-25T22:04:10.2320972-06:00</Time>
+    </Item>
+    <Item>
+      <Source>gate.png</Source>
+      <Name>gate</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\gate.xnb</Output>
+      <Time>2013-03-26T11:45:38.5457448-06:00</Time>
+    </Item>
+    <Item>
+      <Source>T1background.png</Source>
+      <Name>T1background</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T1background.xnb</Output>
+      <Time>2013-04-02T16:57:02.9307795-06:00</Time>
+    </Item>
+    <Item>
+      <Source>T2background.png</Source>
+      <Name>T2background</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T2background.xnb</Output>
+      <Time>2013-04-02T16:57:02.9317795-06:00</Time>
+    </Item>
+    <Item>
+      <Source>T3background.png</Source>
+      <Name>T3background</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T3background.xnb</Output>
+      <Time>2013-04-02T16:57:02.9327796-06:00</Time>
+    </Item>
+    <Item>
+      <Source>wizard.png</Source>
+      <Name>wizard</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\wizard.xnb</Output>
+      <Time>2013-04-02T16:57:02.9737819-06:00</Time>
+    </Item>
+    <Item>
+      <Source>soldier.png</Source>
+      <Name>soldier</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\soldier.xnb</Output>
+      <Time>2013-04-02T16:57:02.9517807-06:00</Time>
+    </Item>
+    <Item>
+      <Source>credits.png</Source>
+      <Name>credits</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\credits.xnb</Output>
+      <Time>2013-04-02T16:57:02.9377799-06:00</Time>
+    </Item>
+    <Item>
+      <Source>dashedLine.png</Source>
+      <Name>dashedLine</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\dashedLine.xnb</Output>
+      <Time>2013-04-02T16:57:02.93978-06:00</Time>
+    </Item>
+    <Item>
+      <Source>creditsHeaderFont.spritefont</Source>
+      <Name>creditsHeaderFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\creditsHeaderFont.xnb</Output>
+      <Time>2013-04-02T16:57:02.9387799-06:00</Time>
+    </Item>
+    <Item>
+      <Source>creditsFont.spritefont</Source>
+      <Name>creditsFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\creditsFont.xnb</Output>
+      <Time>2013-04-02T16:57:02.9387799-06:00</Time>
+    </Item>
+    <Item>
       <Source>timerFont.spritefont</Source>
       <Name>timerFont</Name>
       <Importer>FontDescriptionImporter</Importer>
@@ -107,7 +233,25 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\levelNameFont.xnb</Output>
-      <Time>2013-03-12T22:26:11.5270235-06:00</Time>
+      <Time>2013-04-02T16:57:02.9427801-06:00</Time>
+    </Item>
+    <Item>
+      <Source>menuFont.spritefont</Source>
+      <Name>menuFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\menuFont.xnb</Output>
+      <Time>2013-04-02T16:57:02.9437802-06:00</Time>
+    </Item>
+    <Item>
+      <Source>storyFont.spritefont</Source>
+      <Name>storyFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\storyFont.xnb</Output>
+      <Time>2013-04-02T16:57:02.9527807-06:00</Time>
     </Item>
     <Item>
       <Source>SumoHit.wav</Source>
@@ -146,6 +290,42 @@
       <Time>2013-03-12T22:48:35.738908-06:00</Time>
     </Item>
     <Item>
+      <Source>Swords_Collide.wav</Source>
+      <Name>Swords_Collide</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\Swords_Collide.xnb</Output>
+      <Time>2013-04-02T16:57:02.9287793-06:00</Time>
+    </Item>
+    <Item>
+      <Source>robot-death2.wav</Source>
+      <Name>robot-death2</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\robot-death2.xnb</Output>
+      <Time>2013-04-02T16:57:02.9507806-06:00</Time>
+    </Item>
+    <Item>
+      <Source>Sad_Trombone.wav</Source>
+      <Name>Sad_Trombone</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\Sad_Trombone.xnb</Output>
+      <Time>2013-04-02T16:57:02.9087782-06:00</Time>
+    </Item>
+    <Item>
+      <Source>total-malfunct.wav</Source>
+      <Name>total-malfunct</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\total-malfunct.xnb</Output>
+      <Time>2013-04-02T16:57:02.9727819-06:00</Time>
+    </Item>
+    <Item>
       <Source>DST-Aronara.mp3</Source>
       <Name>DST-Aronara</Name>
       <Importer>Mp3Importer</Importer>
@@ -166,49 +346,44 @@
       <Time>2013-03-12T14:27:11.95277-06:00</Time>
     </Item>
     <Item>
-      <Source>menuFont.spritefont</Source>
-      <Name>menuFont</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
+      <Source>DST-MechaNoir.mp3</Source>
+      <Name>DST-MechaNoir</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\menuFont.xnb</Output>
-      <Time>2013-03-12T21:23:28.3347812-06:00</Time>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-MechaNoir.xnb</Output>
+      <Extra>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-MechaNoir.wma</Extra>
+      <Time>2013-04-02T16:57:02.870776-06:00</Time>
     </Item>
     <Item>
-      <Source>castleBackground.png</Source>
-      <Name>castleBackground</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
+      <Source>DST-Beneathere.mp3</Source>
+      <Name>DST-Beneathere</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\castleBackground.xnb</Output>
-      <Time>2013-03-25T22:04:10.228097-06:00</Time>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Beneathere.xnb</Output>
+      <Extra>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Beneathere.wma</Extra>
+      <Time>2013-04-02T16:57:02.8257734-06:00</Time>
     </Item>
     <Item>
-      <Source>lever.png</Source>
-      <Name>lever</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
+      <Source>DST-BlueMist.mp3</Source>
+      <Name>DST-BlueMist</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\lever.xnb</Output>
-      <Time>2013-03-25T19:05:50.3505611-06:00</Time>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-BlueMist.xnb</Output>
+      <Extra>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-BlueMist.wma</Extra>
+      <Time>2013-04-02T16:57:02.8477747-06:00</Time>
     </Item>
     <Item>
-      <Source>torchNimbus.png</Source>
-      <Name>torchNimbus</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
+      <Source>DST-StarryBook.mp3</Source>
+      <Name>DST-StarryBook</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\torchNimbus.xnb</Output>
-      <Time>2013-03-25T22:04:10.2320972-06:00</Time>
-    </Item>
-    <Item>
-      <Source>gate.png</Source>
-      <Name>gate</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\gate.xnb</Output>
-      <Time>2013-03-26T11:45:38.5457448-06:00</Time>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-StarryBook.xnb</Output>
+      <Extra>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-StarryBook.wma</Extra>
+      <Time>2013-04-02T16:57:02.888777-06:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

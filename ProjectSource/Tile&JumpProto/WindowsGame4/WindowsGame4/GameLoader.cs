@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,10 +12,44 @@ namespace WindowsGame4
     {
 
         protected string[] levelFiles;
+        protected string[] tutorialFiles;
         protected string[] textureFiles;
         protected string[] soundFiles;
         protected string[] songFiles;
         protected string[] fontFiles;
+
+        // method to load the basic game configuration - i.e. levels, sounds, textures, etc.
+        public void Load(string fileName)
+        {
+            string configFile = System.IO.File.ReadAllText(fileName);
+
+            levelFiles = LoadTag(configFile, @"<levels>([.\s\w\d-]*)</levels>");
+            tutorialFiles = LoadTag(configFile, @"<tutorials>([.\s\w\d-]*)</tutorials>");
+            textureFiles = LoadTag(configFile, @"<.*textures.*>([.\s\w\d-]*)</textures>");
+            soundFiles = LoadTag(configFile, @"<.*soundEffects.*>([.\s\w\d-]*)</soundEffects>");
+            songFiles = LoadTag(configFile, @"<.*songs.*>([.\s\w\d-]*)</songs>");
+            fontFiles = LoadTag(configFile, @"<fonts>([.\s\w\d-]*)</fonts>");
+        }
+
+        // procedure to load all of the data nested between tagRegex xml tags
+        public string[] LoadTag(string source, string tagRegex)
+        {
+            //Use a regex match with the proper regex string + capture group to capture the model name within the XML tags
+            Match dataMatch = Regex.Match(source, tagRegex);
+            string raw_data = dataMatch.Groups[1].Value.Trim(); // trim out extra whitespace
+            raw_data = Regex.Replace(raw_data, @"\n", " "); // remove newlines
+            raw_data = Regex.Replace(raw_data, @"[\s\t]{1,}", " "); // only have one space between elements in levels
+            string[] tokenizedData = raw_data.Split(' '); // split up the level files by spaces
+            int numData = tokenizedData.Length;
+            string[] tagData = new string[numData];
+
+            for (int i = 0; i < numData; i++)
+            {
+                tagData[i] = tokenizedData[i];
+            }
+
+            return tagData;
+        }
 
         public GameLoader(string fileName)
         {
@@ -32,6 +66,11 @@ namespace WindowsGame4
             get { return levelFiles.Length; }
         }
 
+        public int NumTutorials
+        {
+            get { return tutorialFiles.Length; }
+        }
+
         public int NumSoundEffects
         {
             get { return soundFiles.Length; }
@@ -45,6 +84,11 @@ namespace WindowsGame4
         public string[] LevelFiles
         {
             get { return levelFiles; }
+        }
+
+        public string[] TutorialFiles
+        {
+            get { return tutorialFiles; }
         }
 
         public string[] SpriteFiles
@@ -80,37 +124,6 @@ namespace WindowsGame4
             Debug.Assert(i < songFiles.Length);
             return songFiles[i];
         }
-
-        public void Load(string fileName)
-        {
-            string configFile = System.IO.File.ReadAllText(fileName);
-
-            levelFiles = LoadTag(configFile, @"<levels>([.\s\w\d-]*)</levels>");
-            textureFiles = LoadTag(configFile, @"<.*textures.*>([.\s\w\d-]*)</textures>");
-            soundFiles = LoadTag(configFile, @"<.*soundEffects.*>([.\s\w\d-]*)</soundEffects>");
-            songFiles = LoadTag(configFile, @"<.*songs.*>([.\s\w\d-]*)</songs>");
-            fontFiles = LoadTag(configFile, @"<fonts>([.\s\w\d-]*)</fonts>");
-        }
-
-        public string[] LoadTag(string source, string tagRegex)
-        {
-            //Use a regex match with the proper regex string + capture group to capture the model name within the XML tags
-            Match dataMatch = Regex.Match(source, tagRegex);
-            string raw_data = dataMatch.Groups[1].Value.Trim(); // trim out extra whitespace
-            raw_data = Regex.Replace(raw_data, @"\n", " "); // remove newlines
-            raw_data = Regex.Replace(raw_data, @"[\s\t]{1,}", " "); // only have one space between elements in levels
-            string[] tokenizedData = raw_data.Split(' '); // split up the level files by spaces
-            int numData = tokenizedData.Length;
-            string[] tagData = new string[numData];
-
-            for (int i = 0; i < numData; i++)
-            {
-                tagData[i] = tokenizedData[i];
-            }
-
-            return tagData;
-        }
-
 
     }
 }

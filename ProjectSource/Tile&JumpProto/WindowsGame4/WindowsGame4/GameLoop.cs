@@ -28,14 +28,25 @@ namespace WindowsGame4
 
         GameLoader config;
         
-        public enum GameState { titleMenu, titleScreen, level, gameOver, victory, levelIntro };
+        public enum GameState { titleMenu, titleScreen, level, tutorial, gameOver, victory, levelIntro, credits, plotScreen };
         GameState gameState;
+        GameState prevGameState;
+
         GameOver gameOver;
         TitleMenu titleMenu;
         TitleScreen titleScreen;
         LevelIntroScreen levelIntroScreen;
+        Credits credits;
+        PlotScreen plotScreen;
+
+        PlayerAnimation playerAnimation;
+        bool animatePlayer;
 
         Level level;
+        Level tutorial;
+
+        int mainMenuIndex = 2;
+        int creditsIndex = 16;
 
         InputHandler inputHandler;
 
@@ -69,17 +80,24 @@ namespace WindowsGame4
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
             base.Initialize();
             gameState = GameState.titleScreen;
-
+            prevGameState = gameState;
             inputHandler = new InputHandler();
-            level = new Level(this, textures, fonts, sounds, musicPlayer, new LevelLoader(config.LevelFiles), inputHandler);
+
+            plotScreen = new PlotScreen(this, musicPlayer, textures, fonts);
+            level = new Level(this, textures, fonts, sounds, musicPlayer, plotScreen, new LevelLoader(config.LevelFiles), inputHandler);
+            tutorial = new Level(this, textures, fonts, sounds, musicPlayer, null, new LevelLoader(config.TutorialFiles), inputHandler);
             gameOver = new GameOver(this, (Texture2D)textures[3], (SpriteFont)fonts[2], inputHandler);
-            titleScreen = new TitleScreen(this, (Texture2D)textures[7], (SpriteFont)fonts[2], inputHandler);
+            titleScreen = new TitleScreen(this, (Texture2D)textures[7], (Texture2D)textures[15], (SpriteFont)fonts[2], musicPlayer, inputHandler);
             titleMenu = new TitleMenu(this, (Texture2D)textures[7], (SpriteFont)fonts[2], inputHandler);
             levelIntroScreen = new LevelIntroScreen(this, (SpriteFont)fonts[1]);
             levelIntroScreen.InitLevelScreen(level.LevelName);
+
+            credits = new Credits(this, (Texture2D)textures[creditsIndex], musicPlayer, fonts);
+
+            playerAnimation = new PlayerAnimation(this, new Player(this, (Texture2D)textures[0], sounds, -100, 400));
+            animatePlayer = false;
         }
 
         /// <summary>
@@ -141,6 +159,10 @@ namespace WindowsGame4
             {
                 level.Update(gameTime);
             }
+            else if (gameState == GameState.tutorial)
+            {
+                tutorial.Update(gameTime);
+            }
             else if (gameState == GameState.levelIntro)
             {
                 levelIntroScreen.Update();
@@ -151,16 +173,51 @@ namespace WindowsGame4
             }
             else if (gameState == GameState.titleMenu)
             {
+                AnimatePlayer = true;
+                if (musicPlayer.isStopped)
+                {
+                    musicPlayer.Play(mainMenuIndex);
+                }
                 titleMenu.Update();
             }
             else if (gameState == GameState.victory)
             {
-                this.Exit();
+                if (prevGameState == GameState.tutorial)
+                {
+                    SetGameState(GameState.titleMenu);
+                }
+                else
+                {
+                    SetGameState(GameState.credits);
+                }
             }
             else if (gameState == GameState.titleScreen)
             {
                 level.CurrentLevel = 0;
                 titleScreen.Update();
+            }
+            else if (gameState == GameState.credits)
+            {
+                credits.Update();
+                if (prevState.IsKeyDown(Keys.Enter) && Keyboard.GetState().IsKeyUp(Keys.Enter))
+                {
+                    SetGameState(GameState.titleScreen);
+                }
+            }
+            else if (gameState == GameState.plotScreen)
+            {
+                plotScreen.Update();
+                if (inputHandler.isNewlyPressed(InputHandler.InputTypes.start) || inputHandler.isNewlyPressed(InputHandler.InputTypes.jump))
+                {
+                    if (plotScreen.IsEnding)
+                    {
+                        SetGameState(GameState.credits);
+                    }
+                    else
+                    {
+                        SetGameState(GameState.levelIntro);
+                    }
+                }
             }
 
             if (inputHandler.isPressed(InputHandler.InputTypes.quit))
@@ -168,7 +225,17 @@ namespace WindowsGame4
                 this.Exit();
             }
 
+            if (animatePlayer)
+            {
+                playerAnimation.Update(Action.none, 0);
+            }
+
             base.Update(gameTime);
+        }
+
+        public bool AnimatePlayer
+        {
+            set { animatePlayer = value; }
         }
 
         /// <summary>
@@ -182,6 +249,10 @@ namespace WindowsGame4
             if (gameState == GameState.level)
             {
                 level.Draw(spriteBatch);
+            }
+            else if (gameState == GameState.tutorial)
+            {
+                tutorial.Draw(spriteBatch);
             }
             else if (gameState == GameState.levelIntro)
             {
@@ -203,28 +274,68 @@ namespace WindowsGame4
             {
                 titleScreen.Draw(spriteBatch);
             }
+            else if (gameState == GameState.credits)
+            {
+                credits.Draw(spriteBatch);
+            }
+            else if (gameState == GameState.plotScreen)
+            {
+                plotScreen.Draw(spriteBatch);
+            }
+
+            if (animatePlayer)
+            {
+                playerAnimation.Draw(spriteBatch);
+            }
 
             this.spriteBatch.End();
 
             base.Draw(gameTime);
         }
 
-        public GameState State
+        public GameState PrevGameState
         {
-            set { gameState = value; }
+            get { return prevGameState; }
+        }
+
+        // reset the plot screen so the correct ones play when restarting the game
+        public void ResetScreens()
+        {
+            plotScreen.Reset();
         }
 
         // when level state is set the new map needs to be built
         public void SetGameState(GameState _gameState)
         {
+            // need to know if the user is running actual levels or the tutorials
+            if (gameState == GameState.level || gameState == GameState.tutorial)
+            {
+                prevGameState = gameState;
+            }
             gameState = _gameState;
+
             if (GameState.level == gameState)
             {
                 level.InitLevel();
             }
+            else if (GameState.tutorial == gameState)
+            {
+                tutorial.InitLevel();
+            }
             else if (GameState.levelIntro == gameState)
             {
-                levelIntroScreen.InitLevelScreen(level.LevelName);
+                if (prevGameState == GameState.level)
+                {
+                    levelIntroScreen.InitLevelScreen(level.LevelName);
+                }
+                else if (prevGameState == GameState.tutorial)
+                {
+                    levelIntroScreen.InitLevelScreen(tutorial.LevelName);
+                }
+            }
+            else if (GameState.credits == gameState)
+            {
+                credits.initScrollingTextScreen();
             }
         }
     }

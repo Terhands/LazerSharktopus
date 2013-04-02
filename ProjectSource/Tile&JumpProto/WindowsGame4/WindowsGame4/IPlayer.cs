@@ -31,5 +31,11 @@ namespace WindowsGame4
         void reposition();
 
         void Kill();
+
+        /* turn the health bar display on or off */
+        void ToggleHealthBar();
+
+        /* Decrements Robro's health whenever bolt is thrown */
+        void throwBolt();
     }
 }
