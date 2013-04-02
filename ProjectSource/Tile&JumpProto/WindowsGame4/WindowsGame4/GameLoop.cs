@@ -45,7 +45,7 @@ namespace WindowsGame4
         Level tutorial;
 
         int mainMenuIndex = 2;
-        int creditsIndex = 16;
+        int creditsIndex = 17;
 
         /* Keyboard controls */
         protected const Keys keyRight = Keys.D;
@@ -84,7 +84,7 @@ namespace WindowsGame4
             level = new Level(this, textures, fonts, sounds, musicPlayer, new LevelLoader(config.LevelFiles));
             tutorial = new Level(this, textures, fonts, sounds, musicPlayer, new LevelLoader(config.TutorialFiles));
             gameOver = new GameOver(this, (Texture2D)textures[3], (SpriteFont)fonts[2]);
-            titleScreen = new TitleScreen(this, (Texture2D)textures[7], (Texture2D)textures[15], (SpriteFont)fonts[2], musicPlayer);
+            titleScreen = new TitleScreen(this, (Texture2D)textures[7], (Texture2D)textures[16], (SpriteFont)fonts[2], musicPlayer);
             titleMenu = new TitleMenu(this, (Texture2D)textures[7], (SpriteFont)fonts[2]);
             levelIntroScreen = new LevelIntroScreen(this, (SpriteFont)fonts[1]);
             levelIntroScreen.InitLevelScreen(level.LevelName);
