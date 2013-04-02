@@ -506,20 +506,28 @@ namespace WindowsGame4
                 }
             }
 
-            if (!footCollision)
+            // when patrolling a guard should not kill themselves on tiles or wander off ledges
+            if (!footCollision || isDead)
             {
                 // if the guard is patrolling then they should not walk off of ledges
                 if (currentBehaviour == Behaviour.patrol)
                 {
+                    int tileWidth = Game.GraphicsDevice.Viewport.Width / 64;
+
+                    if (isDead)
+                    {
+                        isDead = false;
+                        debugColor = Color.White;
+                        tileWidth = 0;
+                    }
+
                     position.X -= deltaX;
                     if (facingDirection == Direction.right)
                     {
-                        int tileWidth = Game.GraphicsDevice.Viewport.Width/64;
                         patrolBoundaryRight = position.X - tileWidth;
                     }
                     else
                     {
-                        int tileWidth = Game.GraphicsDevice.Viewport.Width / 64;
                         patrolBoundaryLeft = position.X + tileWidth;
                     }
                 }

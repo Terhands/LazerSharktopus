@@ -77,7 +77,6 @@ namespace WindowsGame4
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
             base.Initialize();
             gameState = GameState.titleScreen;
             prevGameState = gameState;
