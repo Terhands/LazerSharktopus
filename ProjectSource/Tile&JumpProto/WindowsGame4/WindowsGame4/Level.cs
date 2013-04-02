@@ -339,9 +339,13 @@ namespace WindowsGame4
                         plotScreen.initPlotScreen();
                         game.SetGameState(GameLoop.GameState.plotScreen);
                     }
-                    else if(levelLoader.NumLevels > currentLevel)
+                    else if (levelLoader.NumLevels > currentLevel)
                     {
                         game.SetGameState(GameLoop.GameState.levelIntro);
+                    }
+                    else
+                    {
+                        game.SetGameState(GameLoop.GameState.victory);
                     }
                 }
             }
