@@ -81,11 +81,13 @@
     <Compile Include="GameTimer.cs" />
     <Compile Include="HealthMeter.cs" />
     <Compile Include="PlayerAnimation.cs" />
+    <Compile Include="PlotScreen.cs" />
     <Compile Include="ScrollingTextScreen.cs" />
     <Compile Include="Wizard.cs" />
     <Compile Include="GuardFactory.cs" />
     <Compile Include="IDynamicGameObject.cs" />
     <Compile Include="IGameObject.cs" />
+    <Compile Include="InputHandler.cs" />
     <Compile Include="IGuard.cs" />
     <Compile Include="JumpMeter.cs" />
     <Compile Include="Level.cs" />

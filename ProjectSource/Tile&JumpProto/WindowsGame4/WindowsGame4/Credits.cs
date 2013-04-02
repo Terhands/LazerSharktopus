@@ -74,34 +74,7 @@ namespace WindowsGame4
             thanksWidth = (int)((SpriteFont)fonts[3]).MeasureString(thankYou).X;
         }
 
-        public void Update()
-        {
-            if (musicPlayer.CurrSong != songIndex)
-            {
-                musicPlayer.Play(songIndex);
-            }
-
-            if (textPosition[textPosition.Length - 1].Y == 0)
-            {
-                fadeCounter = countdown;
-            }
-            else if (textPosition[textPosition.Length - 1].Y < 0)
-            {
-                fadeCounter -= 1;
-            }
-            else if (textPosition[textPosition.Length - 1].Y < screenHeight / 3)
-            {
-                currFadeValue += fadeIncrement;
-            }
-
-            for (int i = 0; i < textPosition.Length; i++)
-            {
-                textPosition[i].Y -= scrollSpeed;
-            }
-
-        }
-
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             Color color = new Color(currFadeValue, currFadeValue, currFadeValue, 255);
 

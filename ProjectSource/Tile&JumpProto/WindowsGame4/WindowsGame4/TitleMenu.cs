@@ -17,49 +17,36 @@ namespace WindowsGame4
 
         GameLoop gameLoop;
 
-        KeyboardState keyState;
-        KeyboardState prevKeyState;
+        InputHandler inputHandler;
 
-        public TitleMenu(GameLoop game, Texture2D _background, SpriteFont _menuFont) : base(game)
+        public TitleMenu(GameLoop game, Texture2D _background, SpriteFont _menuFont, InputHandler _inputHandler) : base(game)
         {
             background = _background;
             gameLoop = game;
             menuFont = _menuFont;
             selectedIndex = 0;
-            keyState = Keyboard.GetState();
-            prevKeyState = Keyboard.GetState();
+            inputHandler = _inputHandler;
         }
 
         public void Update()
         {
-            keyState = Keyboard.GetState();
-
-            if (prevKeyState == null)
-            {
-                prevKeyState = keyState;
-            }
-
-            // hitting the S key selects the next item in the list
-            if (keyState.IsKeyDown(Keys.S) && prevKeyState.IsKeyUp(Keys.S))
-            {
+            if (inputHandler.isNewlyPressed(InputHandler.InputTypes.down))
                 selectedIndex++;
-            }
-            // hitting the w key selects the previous item in the list
-            if (keyState.IsKeyDown(Keys.W) && prevKeyState.IsKeyUp(Keys.W))
-            {
+            if (inputHandler.isNewlyPressed(InputHandler.InputTypes.up))
                 selectedIndex--;
-            }
 
             // doubly link the selectable items on the screen (hitting up at the top moves the cursor to the bottom)
             if (selectedIndex < 0) { selectedIndex = 2; }
             if (selectedIndex > 2) { selectedIndex = 0; }
 
-            if (keyState.IsKeyDown(Keys.Enter) && prevKeyState.IsKeyUp(Keys.Enter))
+            if (inputHandler.isNewlyPressed(InputHandler.InputTypes.start) ||
+                inputHandler.isNewlyPressed(InputHandler.InputTypes.jump))
             {
                 if (selectedIndex == 0)
                 {
                     gameLoop.SetGameState(GameLoop.GameState.level);
-                    gameLoop.SetGameState(GameLoop.GameState.levelIntro);
+                    gameLoop.SetGameState(GameLoop.GameState.plotScreen);
+                    gameLoop.ResetScreens();
                     gameLoop.AnimatePlayer = false;
                 }
                 else if (selectedIndex == 1)
@@ -73,8 +60,6 @@ namespace WindowsGame4
                     gameLoop.Exit();
                 }
             }
-
-            prevKeyState = keyState;
         }
 
         public void Draw(SpriteBatch spriteBatch)

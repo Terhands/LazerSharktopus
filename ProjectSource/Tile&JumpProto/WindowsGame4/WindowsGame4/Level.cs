@@ -37,12 +37,12 @@ namespace WindowsGame4
 
         MusicManager musicPlayer;
         GuardFactory guardFactory;
+        PlotScreen plotScreen;
 
 	    Texture2D boltTexture;
         GameLoop game;
-        KeyboardState keyState;
-        KeyboardState prevKeyState;
-
+        InputHandler inputHandler;
+        
         protected List<Bolt> bolts;
         protected List<Torch> torches;
         protected List<IGuard> guards;
@@ -50,7 +50,7 @@ namespace WindowsGame4
         protected List<Gate> gates;
         protected int[] leverGateMap;
 
-        public Level(GameLoop game, ArrayList _textures, ArrayList _fonts, ArrayList _sounds, MusicManager _musicPlayer, LevelLoader loader) : base(game)
+        public Level(GameLoop game, ArrayList _textures, ArrayList _fonts, ArrayList _sounds, MusicManager _musicPlayer, PlotScreen _plotScreen, LevelLoader loader, InputHandler _inputHandler) : base(game)
         {
             int screenWidth = Game.GraphicsDevice.Viewport.Width;
             int screenHeight = Game.GraphicsDevice.Viewport.Height;
@@ -69,6 +69,7 @@ namespace WindowsGame4
             fonts = _fonts;
 
             musicPlayer = _musicPlayer;
+            plotScreen = _plotScreen;
             guardFactory = new GuardFactory((Texture2D)textures[wizardIndex], (Texture2D)textures[soldierIndex], (Texture2D)textures[LOSIndex]);
 
             currentLevel = 0;
@@ -78,6 +79,7 @@ namespace WindowsGame4
             screenHeight = Game.GraphicsDevice.Viewport.Height;
 
             this.game = game;
+            inputHandler = _inputHandler;
             levelLoader.LoadLevel(currentLevel);
         }
 
@@ -150,8 +152,6 @@ namespace WindowsGame4
                 musicPlayer.Play(levelLoader.LevelMusic);
             }
 
-            keyState = Keyboard.GetState();
-            prevKeyState = keyState;
         }
 
         /* procedure responsible for updating this level given an action (velocity should eventually be determined by player)*/
@@ -168,23 +168,22 @@ namespace WindowsGame4
             // no need to perform update if the player died - get ready for some serious death-screen action
             if (!player.IsDead)
             {
-                keyState = Keyboard.GetState();
                 /* Control jumping state of player */
-                if (keyState.IsKeyDown(Keys.Space))
+                if (inputHandler.isPressed(InputHandler.InputTypes.jump))
                 {
                     player.ChargeJumpPower();
                 }
-                if (keyState.IsKeyUp(Keys.Space) && prevKeyState.IsKeyDown(Keys.Space))
+                if (inputHandler.isNewlyReleased(InputHandler.InputTypes.jump))
                 {
                     player.Jump();
                 }
 
                 /* Control hiding state of player */
-                if (keyState.IsKeyDown(Keys.S))
+                if (inputHandler.isPressed(InputHandler.InputTypes.down))
                 {
                     player.Hide(levelMap.GetNearbyTiles(player.GetPosition()));
                 }
-                if (keyState.IsKeyUp(Keys.S) && prevKeyState.IsKeyDown(Keys.S))
+                if (inputHandler.isNewlyReleased(InputHandler.InputTypes.down))
                 {
                     player.StopHiding();
                 }
@@ -193,18 +192,18 @@ namespace WindowsGame4
                 int velocity = 0;
 
 
-                if (keyState.IsKeyDown(Keys.D))
+                if (inputHandler.isPressed(InputHandler.InputTypes.right))
                 {
                     playerAction = Action.right;
                     velocity = 2;
                 }
-                else if (keyState.IsKeyDown(Keys.A))
+                else if (inputHandler.isPressed(InputHandler.InputTypes.left))
                 {
                     playerAction = Action.left;
                     velocity = -2;
                 }
 
-                if (keyState.IsKeyDown(Keys.F) && prevKeyState.IsKeyUp(Keys.F))
+                if (inputHandler.isNewlyPressed(InputHandler.InputTypes.pull))
                 {
                     foreach (Lever lever in levers)
                     {
@@ -260,7 +259,7 @@ namespace WindowsGame4
 
 
                 /* Below this are Bolt actions */
-                if (keyState.IsKeyDown(Keys.E) && prevKeyState.IsKeyUp(Keys.E))
+                if (inputHandler.isNewlyPressed(InputHandler.InputTypes.bolt))
                 {
                     if (bolts.Count < 5)
                     {
@@ -326,9 +325,19 @@ namespace WindowsGame4
                     gates.Clear();
                     musicPlayer.Stop();
 
+                    // if there is a next level get the map loaded
                     if (levelLoader.NumLevels > currentLevel)
                     {
                         levelLoader.LoadLevel(currentLevel);
+                    }
+
+                    if (currentLevel % 3 == 0 && plotScreen != null)
+                    {
+                        plotScreen.initPlotScreen();
+                        game.SetGameState(GameLoop.GameState.plotScreen);
+                    }
+                    else if (levelLoader.NumLevels > currentLevel)
+                    {
                         game.SetGameState(GameLoop.GameState.levelIntro);
                     }
                     else
@@ -351,7 +360,6 @@ namespace WindowsGame4
                     game.SetGameState(GameLoop.GameState.gameOver);
                 }
             }
-            prevKeyState = keyState;
         }
 
         public void Draw(SpriteBatch spriteBatch)

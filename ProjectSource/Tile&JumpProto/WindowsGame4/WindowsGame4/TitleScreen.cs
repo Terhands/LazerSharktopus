@@ -15,10 +15,7 @@ namespace WindowsGame4
         Texture2D logo;
 
         GameLoop gameLoop;
-
-        KeyboardState keyState;
-        KeyboardState prevKeyState;
-
+        InputHandler inputHandler;
         int blinkCount;
         int logoCount;
 
@@ -31,7 +28,7 @@ namespace WindowsGame4
 
         MusicManager musicPlayer;
 
-        public TitleScreen(GameLoop game, Texture2D _background, Texture2D _logo, SpriteFont _menuFont, MusicManager _musicPlayer) : base(game)
+        public TitleScreen(GameLoop game, Texture2D _background, Texture2D _logo, SpriteFont _menuFont, MusicManager _musicPlayer, InputHandler _inputHandler) : base(game)
         {
             background = _background;
             logo = _logo;
@@ -39,8 +36,7 @@ namespace WindowsGame4
 
             gameLoop = game;
             menuFont = _menuFont;
-            keyState = Keyboard.GetState();
-            prevKeyState = keyState;
+            inputHandler = _inputHandler;
             blinkCount = 0;
             logoCount = 35;
             currFadeStep = fadeDelay;
@@ -49,20 +45,21 @@ namespace WindowsGame4
 
         public void Update()
         {
+            if (inputHandler.isNewlyPressed(InputHandler.InputTypes.jump) ||
+                inputHandler.isNewlyPressed(InputHandler.InputTypes.start))
+                gameLoop.SetGameState(GameLoop.GameState.titleMenu);
+
             if (musicPlayer.isStopped || musicPlayer.CurrSong != introSong)
             {
                 musicPlayer.Play(introSong);
             }
 
-            keyState = Keyboard.GetState();
-
-            if (keyState.IsKeyDown(Keys.Space) && prevKeyState.IsKeyUp(Keys.Space) && logoCount == 0)
+            
+            if ((inputHandler.isNewlyPressed(InputHandler.InputTypes.jump) || inputHandler.isNewlyPressed(InputHandler.InputTypes.start)) && logoCount == 0)
             {
                 gameLoop.SetGameState(GameLoop.GameState.titleMenu);
                 logoCount = 35;
             }
-
-            prevKeyState = keyState;
 
             if (channelValue == 0 && logoCount == 0)
             {

@@ -28,7 +28,7 @@ namespace WindowsGame4
 
         GameLoader config;
         
-        public enum GameState { titleMenu, titleScreen, level, tutorial, gameOver, victory, levelIntro, credits };
+        public enum GameState { titleMenu, titleScreen, level, tutorial, gameOver, victory, levelIntro, credits, plotScreen };
         GameState gameState;
         GameState prevGameState;
 
@@ -37,6 +37,7 @@ namespace WindowsGame4
         TitleScreen titleScreen;
         LevelIntroScreen levelIntroScreen;
         Credits credits;
+        PlotScreen plotScreen;
 
         PlayerAnimation playerAnimation;
         bool animatePlayer;
@@ -46,6 +47,8 @@ namespace WindowsGame4
 
         int mainMenuIndex = 2;
         int creditsIndex = 17;
+
+        InputHandler inputHandler;
 
         /* Keyboard controls */
         protected const Keys keyRight = Keys.D;
@@ -80,11 +83,13 @@ namespace WindowsGame4
             base.Initialize();
             gameState = GameState.titleScreen;
             prevGameState = gameState;
+            inputHandler = new InputHandler();
 
-            level = new Level(this, textures, fonts, sounds, musicPlayer, new LevelLoader(config.LevelFiles));
-            tutorial = new Level(this, textures, fonts, sounds, musicPlayer, new LevelLoader(config.TutorialFiles));
-            gameOver = new GameOver(this, (Texture2D)textures[3], (SpriteFont)fonts[2]);
+            plotScreen = new PlotScreen(this, musicPlayer, textures, fonts);
+            level = new Level(this, textures, fonts, sounds, musicPlayer, plotScreen, new LevelLoader(config.LevelFiles), inputHandler);
+            tutorial = new Level(this, textures, fonts, sounds, musicPlayer, null, new LevelLoader(config.TutorialFiles), inputHandler);
             titleScreen = new TitleScreen(this, (Texture2D)textures[7], (Texture2D)textures[16], (SpriteFont)fonts[2], musicPlayer);
+            gameOver = new GameOver(this, (Texture2D)textures[3], (SpriteFont)fonts[2], inputHandler);
             titleMenu = new TitleMenu(this, (Texture2D)textures[7], (SpriteFont)fonts[2]);
             levelIntroScreen = new LevelIntroScreen(this, (SpriteFont)fonts[1]);
             levelIntroScreen.InitLevelScreen(level.LevelName);
@@ -149,7 +154,7 @@ namespace WindowsGame4
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            KeyboardState currState = Keyboard.GetState();
+            inputHandler.Update();
             if (gameState == GameState.level)
             {
                 level.Update(gameTime);
@@ -194,18 +199,28 @@ namespace WindowsGame4
             else if (gameState == GameState.credits)
             {
                 credits.Update();
-                if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+                if (prevState.IsKeyDown(Keys.Enter) && Keyboard.GetState().IsKeyUp(Keys.Enter))
                 {
                     SetGameState(GameState.titleScreen);
                 }
             }
-
-            if (prevState == null)
+            else if (gameState == GameState.plotScreen)
             {
-                prevState = currState;
+                plotScreen.Update();
+                if (inputHandler.isNewlyPressed(InputHandler.InputTypes.start) || inputHandler.isNewlyPressed(InputHandler.InputTypes.jump))
+                {
+                    if (plotScreen.IsEnding)
+                    {
+                        SetGameState(GameState.credits);
+                    }
+                    else
+                    {
+                        SetGameState(GameState.levelIntro);
+                    }
+                }
             }
 
-            if (currState.IsKeyDown(keyQuit))
+            if (inputHandler.isPressed(InputHandler.InputTypes.quit))
             {
                 this.Exit();
             }
@@ -214,8 +229,6 @@ namespace WindowsGame4
             {
                 playerAnimation.Update(Action.none, 0);
             }
-
-            prevState = currState;
 
             base.Update(gameTime);
         }
@@ -265,6 +278,10 @@ namespace WindowsGame4
             {
                 credits.Draw(spriteBatch);
             }
+            else if (gameState == GameState.plotScreen)
+            {
+                plotScreen.Draw(spriteBatch);
+            }
 
             if (animatePlayer)
             {
@@ -281,11 +298,17 @@ namespace WindowsGame4
             get { return prevGameState; }
         }
 
+        // reset the plot screen so the correct ones play when restarting the game
+        public void ResetScreens()
+        {
+            plotScreen.Reset();
+        }
+
         // when level state is set the new map needs to be built
         public void SetGameState(GameState _gameState)
         {
             // need to know if the user is running actual levels or the tutorials
-            if (gameState != GameState.gameOver)
+            if (gameState == GameState.level || gameState == GameState.tutorial)
             {
                 prevGameState = gameState;
             }
