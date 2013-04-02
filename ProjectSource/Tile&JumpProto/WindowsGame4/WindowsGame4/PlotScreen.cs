@@ -24,18 +24,29 @@ namespace WindowsGame4
                                             new string[]
                                                 { "Act 2",
                                                   " ",
-                                                  "After days of hard travel you have arrived at the castle. Instinctively you know that the princess is trapped inside, waiting for you to free her."}, 
+                                                  " ",
+                                                  "After days of hard travel you have arrived at the castle.",
+                                                  "Instinctively you know that the princess is trapped inside,", 
+                                                  "waiting for you to free her."}, 
                                             new string[]    
                                                 { "Act 3",
                                                   " ",
-                                                  "Princess: What? Who are you and how did you get past my guards?? Robro: ... ... ... Beep ... Princess: *muffled cry* After safely securing the princess in a burlap sac, you begin the long trek back to your master."} 
+                                                  " ",
+                                                  "Princess: What? Who are you and how did you get past my guards??",
+                                                  " ",
+                                                  "Robro: ... ... ... Beep ...",
+                                                  " ",
+                                                  "Princess: *muffled cry*",
+                                                  " ",
+                                                  "After safely securing the princess in a burlap sac,",
+                                                  "you begin the long trek back to your master."} 
                                         };
 
         private ArrayList fontSelection = new ArrayList
                                             {
                                                 new int[] {3, 3, 5, 5, 5, 5}, 
-                                                new int[] {3, 4, 4}, 
-                                                new int[] {3, 4, 4}
+                                                new int[] {3, 3, 5, 5, 5, 5}, 
+                                                new int[] {3, 3, 5, 5, 5, 5, 5, 5, 5, 5, 5}
                                             };
 
         private int[] textureSelection = { 16, 16, 16 };
