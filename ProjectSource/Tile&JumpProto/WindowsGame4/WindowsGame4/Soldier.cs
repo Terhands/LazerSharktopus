@@ -17,8 +17,8 @@ namespace WindowsGame4
 
         protected bool isStuck;
 
-        public Soldier(Game game, Texture2D texture, int xStart, int yStart, Direction FacingDirectionStart, int patrolLength)
-            : base(game, texture, xStart, yStart, FacingDirectionStart, patrolLength)
+        public Soldier(Game game, Texture2D texture, Texture2D LOStexture, int xStart, int yStart, Direction FacingDirectionStart, int patrolLength)
+            : base(game, texture, LOStexture, xStart, yStart, FacingDirectionStart, patrolLength)
         {
             startY = yStart;
             isStuck = false;

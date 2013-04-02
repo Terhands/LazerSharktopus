@@ -340,6 +340,15 @@
       <Extra>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-StarryBook.wma</Extra>
       <Time>2013-04-01T10:44:01.1114447-06:00</Time>
     </Item>
+    <Item>
+      <Source>dashedLine.png</Source>
+      <Name>dashedLine</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\dashedLine.xnb</Output>
+      <Time>2013-04-01T19:28:43.7001458-06:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{CA0DE09B-9CB2-4716-A9AF-EF0E3769966A}</ContentProjectGUID>

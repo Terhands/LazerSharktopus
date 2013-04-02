@@ -28,9 +28,14 @@ namespace WindowsGame4
         //how long guard is distracted
         protected int distractionX;
 
-        //sprite thingees 
-        protected Texture2D sprite;
+        // guard sprite location & spritesheet 
+        protected Texture2D guardSprite;
         protected Rectangle source;
+
+        // guard's LOS location & texture
+        protected Texture2D LOSSprite;
+        protected Rectangle LOSSource;
+        
         protected Direction facingDirection;
 
         //detection settings
@@ -73,7 +78,7 @@ namespace WindowsGame4
         Vector2 eyePos;
         
 
-        public Wizard(Game game, Texture2D texture, int xStart, int yStart, Direction FacingDirectionStart, int patrolLength) : base(game)
+        public Wizard(Game game, Texture2D texture, Texture2D LOSTexture, int xStart, int yStart, Direction FacingDirectionStart, int patrolLength) : base(game)
         {
             //assumes that the level is never going to be ridiculously huge
             invisibleY = yStart - 1000;
@@ -106,8 +111,12 @@ namespace WindowsGame4
             // default to the basic standing sprite
             source = new Rectangle(spriteX[standingIndex], spriteY, spriteWidth[standingIndex], spriteHeight);
             position = new Rectangle(xStart, yStart, source.Width*2, source.Height*2);
-            eyePos = new Vector2(position.Width/2, position.Height/2);
-            sprite = texture;
+            eyePos = new Vector2(position.Width/2, position.Height/6);
+            guardSprite = texture;
+
+            // the LOS texture is the length of the guard's line of sight & always height 1 since it is a line
+            LOSSprite = LOSTexture;
+            LOSSource = new Rectangle(0, 0, LOSRadius, 1);
 
             //guard is initially patrolling
             currentBehaviour = Behaviour.patrol;
@@ -601,12 +610,16 @@ namespace WindowsGame4
             while (yTop <= yBottom && !isInLOS)
             {
                 // there are two possible values that this could retrieve - for this it will ALWAYS get the x as though the guard were facing right
-                p2.X = (int)Math.Sqrt((double)(Math.Abs((LOSRadius * LOSRadius) - (yTop * yTop))));
+                //p2.X = (int)Math.Sqrt((double)(Math.Abs((LOSRadius * LOSRadius) - (yTop * yTop))));
                 p2.Y = yTop;
 
-                if (facingDirection == Direction.left && p2.X > x1)
+                if (facingDirection == Direction.right)
                 {
-                    p2.X = x1 - (p2.X - x1);
+                    p2.X = x1 + LOSRadius;
+                }
+                else if (facingDirection == Direction.left)
+                {
+                    p2.X = x1 - LOSRadius;
                 }
 
                 // check that the player hits this sweep line otherwise we dont care if tiles are in the way
@@ -788,11 +801,15 @@ namespace WindowsGame4
         {
             if (facingDirection == Direction.right)
             {
-                spriteBatch.Draw(sprite, position, source, debugColor, 0, new Vector2(0, 0), SpriteEffects.None, spriteDepth);
+                spriteBatch.Draw(guardSprite, position, source, debugColor, 0, new Vector2(0, 0), SpriteEffects.None, spriteDepth);
+                spriteBatch.Draw(LOSSprite, new Rectangle(position.X + (int)eyePos.X, position.Y + (int)eyePos.Y, LOSRadius, 1), LOSSource, Color.White, 0.268f, new Vector2(0,0), SpriteEffects.None, spriteDepth);
+                spriteBatch.Draw(LOSSprite, new Rectangle(position.X + (int)eyePos.X, position.Y + (int)eyePos.Y, LOSRadius, 1), LOSSource, Color.White, -0.268f, new Vector2(0, 0), SpriteEffects.None, spriteDepth);
             }
             else
             {
-                spriteBatch.Draw(sprite, position, source, debugColor, 0, new Vector2(0, 0), SpriteEffects.FlipHorizontally, spriteDepth);
+                spriteBatch.Draw(guardSprite, position, source, debugColor, 0, new Vector2(0, 0), SpriteEffects.FlipHorizontally, spriteDepth);
+                spriteBatch.Draw(LOSSprite, new Rectangle(position.X + (int)eyePos.X, position.Y + (int)eyePos.Y, LOSRadius, 1), LOSSource, Color.White, 0.268f + 3.14f, new Vector2(0, 0), SpriteEffects.FlipHorizontally, spriteDepth);
+                spriteBatch.Draw(LOSSprite, new Rectangle(position.X + (int)eyePos.X, position.Y + (int)eyePos.Y, LOSRadius, 1), LOSSource, Color.White, -0.268f - 3.14f, new Vector2(0, 0), SpriteEffects.FlipHorizontally, spriteDepth);
             }
         }
         

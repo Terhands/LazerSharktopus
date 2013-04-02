@@ -22,6 +22,7 @@ namespace WindowsGame4
         protected const int playerIndex = 0;
         protected const int wizardIndex = 5;
         protected const int soldierIndex = 14;
+        protected const int LOSIndex = 17;
         protected const int leverIndex = 9;
         protected const int gateIndex = 10;
 
@@ -68,7 +69,7 @@ namespace WindowsGame4
             fonts = _fonts;
 
             musicPlayer = _musicPlayer;
-            guardFactory = new GuardFactory((Texture2D)textures[wizardIndex], (Texture2D)textures[soldierIndex]);
+            guardFactory = new GuardFactory((Texture2D)textures[wizardIndex], (Texture2D)textures[soldierIndex], (Texture2D)textures[LOSIndex]);
 
             currentLevel = 0;
             deathCounter = 0;
