@@ -17,40 +17,34 @@ namespace WindowsGame4
 
         GameLoop gameLoop;
 
-        KeyboardState keyState;
-        KeyboardState prevKeyState;
-
-        public GameOver(GameLoop game, Texture2D _background, SpriteFont _menuFont) : base(game)
+        InputHandler inputHandler;
+        public GameOver(GameLoop game, Texture2D _background, SpriteFont _menuFont, InputHandler _inputHandler) : base(game)
         {
             background = _background;
             gameLoop = game;
             menuFont = _menuFont;
             selectedIndex = 0;
-            keyState = Keyboard.GetState();
-            prevKeyState = keyState;
+            inputHandler = _inputHandler;
         }
 
         public void Update()
         {
-            keyState = Keyboard.GetState();
-
-            if (keyState.IsKeyDown(Keys.S) && prevKeyState.IsKeyUp(Keys.S))
+            if (inputHandler.isNewlyPressed(InputHandler.InputTypes.down))
                 selectedIndex++;
-            if (keyState.IsKeyDown(Keys.W) && prevKeyState.IsKeyUp(Keys.W))
+            if (inputHandler.isNewlyPressed(InputHandler.InputTypes.up))
                 selectedIndex--;
 
             if (selectedIndex < 0) selectedIndex = 1;
             if (selectedIndex > 1) selectedIndex = 0;
 
-            if (keyState.IsKeyDown(Keys.Enter))
+            if (inputHandler.isNewlyPressed(InputHandler.InputTypes.jump) ||
+                inputHandler.isNewlyPressed(InputHandler.InputTypes.start))
             {
                 if (selectedIndex == 0)
                     gameLoop.SetGameState(GameLoop.GameState.levelIntro);
                 else if (selectedIndex == 1)
                     gameLoop.State = GameLoop.GameState.titleMenu;
             }
-
-            prevKeyState = keyState;
         }
 
         public void Draw(SpriteBatch spriteBatch)

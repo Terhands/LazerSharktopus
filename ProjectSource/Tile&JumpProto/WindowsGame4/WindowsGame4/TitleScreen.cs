@@ -14,29 +14,25 @@ namespace WindowsGame4
         Texture2D background;
 
         GameLoop gameLoop;
-
-        KeyboardState keyState;
-        KeyboardState prevKeyState;
-
+        InputHandler inputHandler;
         int blinkCount;
 
-        public TitleScreen(GameLoop game, Texture2D _background, SpriteFont _menuFont) : base(game)
+        public TitleScreen(GameLoop game, Texture2D _background, SpriteFont _menuFont, InputHandler _inputHandler)
+            : base(game)
         {
             background = _background;
             gameLoop = game;
             menuFont = _menuFont;
-            keyState = Keyboard.GetState();
-            prevKeyState = keyState;
+            inputHandler = _inputHandler;
             blinkCount = 0;
         }
 
         public void Update()
         {
-            keyState = Keyboard.GetState();
 
-            if (keyState.IsKeyDown(Keys.Space) && prevKeyState.IsKeyUp(Keys.Space))
+            if (inputHandler.isNewlyPressed(InputHandler.InputTypes.jump) ||
+                inputHandler.isNewlyPressed(InputHandler.InputTypes.start))
                 gameLoop.State = GameLoop.GameState.titleMenu;
-            prevKeyState = keyState;
 
             blinkCount++;
             if (blinkCount > 60) blinkCount = 0;

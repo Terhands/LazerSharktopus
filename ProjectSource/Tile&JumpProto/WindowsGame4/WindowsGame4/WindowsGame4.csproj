@@ -81,6 +81,7 @@
     <Compile Include="Guard.cs" />
     <Compile Include="IDynamicGameObject.cs" />
     <Compile Include="IGameObject.cs" />
+    <Compile Include="InputHandler.cs" />
     <Compile Include="JumpMeter.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="IPlayer.cs" />

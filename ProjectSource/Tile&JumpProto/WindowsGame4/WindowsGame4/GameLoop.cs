@@ -37,6 +37,8 @@ namespace WindowsGame4
 
         Level level;
 
+        InputHandler inputHandler;
+
         /* Keyboard controls */
         protected const Keys keyRight = Keys.D;
         protected const Keys keyLeft = Keys.A;
@@ -55,7 +57,7 @@ namespace WindowsGame4
 
             if (!graphics.IsFullScreen)
             {
-                graphics.ToggleFullScreen();
+                //graphics.ToggleFullScreen();
             }
         }
 
@@ -71,10 +73,11 @@ namespace WindowsGame4
             base.Initialize();
             gameState = GameState.titleScreen;
 
-            level = new Level(this, textures, fonts, sounds, musicPlayer, new LevelLoader(config.LevelFiles));
-            gameOver = new GameOver(this, (Texture2D)textures[3], (SpriteFont)fonts[2]);
-            titleScreen = new TitleScreen(this, (Texture2D)textures[7], (SpriteFont)fonts[2]);
-            titleMenu = new TitleMenu(this, (Texture2D)textures[7], (SpriteFont)fonts[2]);
+            inputHandler = new InputHandler();
+            level = new Level(this, textures, fonts, sounds, musicPlayer, new LevelLoader(config.LevelFiles), inputHandler);
+            gameOver = new GameOver(this, (Texture2D)textures[3], (SpriteFont)fonts[2], inputHandler);
+            titleScreen = new TitleScreen(this, (Texture2D)textures[7], (SpriteFont)fonts[2], inputHandler);
+            titleMenu = new TitleMenu(this, (Texture2D)textures[7], (SpriteFont)fonts[2], inputHandler);
             levelIntroScreen = new LevelIntroScreen(this, (SpriteFont)fonts[1]);
             levelIntroScreen.InitLevelScreen(level.LevelName);
         }
@@ -133,7 +136,7 @@ namespace WindowsGame4
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            KeyboardState currState = Keyboard.GetState();
+            inputHandler.Update();
             if (gameState == GameState.level)
             {
                 level.Update(gameTime);
@@ -160,17 +163,10 @@ namespace WindowsGame4
                 titleScreen.Update();
             }
 
-            if (prevState == null)
-            {
-                prevState = currState;
-            }
-
-            if (currState.IsKeyDown(keyQuit))
+            if (inputHandler.isPressed(InputHandler.InputTypes.quit))
             {
                 this.Exit();
             }
-
-            prevState = currState;
 
             base.Update(gameTime);
         }
@@ -207,8 +203,6 @@ namespace WindowsGame4
             {
                 titleScreen.Draw(spriteBatch);
             }
-
-
 
             this.spriteBatch.End();
 
