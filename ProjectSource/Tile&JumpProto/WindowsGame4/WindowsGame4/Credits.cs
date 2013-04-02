@@ -50,15 +50,6 @@ namespace WindowsGame4
                                             " ",
                                             " ",
                                             "A Sharktopus Production",
-                                            " ",
-                                            " ",
-                                            " ",
-                                            " ",
-                                            " ",
-                                            " ",
-                                            " ",
-                                            " ",
-                                            "Thank You For Playing!"
                                           };
 
         private static int[] creditFonts = { 3, 4, 
@@ -66,14 +57,22 @@ namespace WindowsGame4
                                              3, 4, 4, 4, 4, 4, 4, 4, 4, 
                                              3, 4, 4, 4, 4, 
                                              3, 4, 4, 4, 4, 4, 4, 4, 
-                                             3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
-                                             3};
+                                             3, 4, 4, 4, 4, 4, 4, 4, 4 };
+
+        protected const string thankYou = "Thank You For Playing!";
+
+        protected int thanksWidth;
+
         private static Justification _justification = Justification.left;
         private static int _songIndex = 3;
 
+        private const int maxFadeValue = 255;
+
         public Credits(GameLoop _game, Texture2D _background, MusicManager _musicPlayer, ArrayList _fonts)
             : base(_game, _background, _musicPlayer, _songIndex, credits, _fonts, creditFonts, _justification)
-        { }
+        {
+            thanksWidth = (int)((SpriteFont)fonts[3]).MeasureString(thankYou).X;
+        }
 
         public void Update()
         {
@@ -90,16 +89,10 @@ namespace WindowsGame4
             {
                 fadeCounter -= 1;
             }
-            else if (textPosition[textPosition.Length - 1].Y < screenHeight / 2)
+            else if (textPosition[textPosition.Length - 1].Y < screenHeight / 3)
             {
                 currFadeValue += fadeIncrement;
             }
-
-            if (fadeCounter == 0 && textPosition[textPosition.Length - 1].Y < 0)
-            {
-                game.SetGameState(GameLoop.GameState.titleScreen);
-            }
-
 
             for (int i = 0; i < textPosition.Length; i++)
             {
@@ -118,7 +111,13 @@ namespace WindowsGame4
             {
                 spriteBatch.DrawString(((SpriteFont)fonts[fontIndices[i]]), scrollingText[i], textPosition[i], Color.White, 0, new Vector2(0, 0), 1, SpriteEffects.None, 0.99f);
             }
-        }
 
+            if (currFadeValue < 255)
+            {
+                int colorChannel = maxFadeValue - currFadeValue;
+                Color fadeIn = new Color(colorChannel, colorChannel, colorChannel, colorChannel);
+                spriteBatch.DrawString((SpriteFont)fonts[3], thankYou, new Vector2(screenCenter - thanksWidth/2, screenHeight/2) , fadeIn, 0, new Vector2(0,0), 1, SpriteEffects.None, 0.99f); 
+            }
+        }
     }
 }

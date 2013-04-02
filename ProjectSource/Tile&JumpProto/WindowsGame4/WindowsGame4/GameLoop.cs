@@ -195,6 +195,10 @@ namespace WindowsGame4
             else if (gameState == GameState.credits)
             {
                 credits.Update();
+                if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+                {
+                    SetGameState(GameState.titleScreen);
+                }
             }
 
             if (prevState == null)
