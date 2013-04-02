@@ -349,6 +349,33 @@
       <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\dashedLine.xnb</Output>
       <Time>2013-04-01T19:28:43.7001458-06:00</Time>
     </Item>
+    <Item>
+      <Source>robot-death2.wav</Source>
+      <Name>robot-death2</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\robot-death2.xnb</Output>
+      <Time>2013-04-01T22:37:19.0373461-06:00</Time>
+    </Item>
+    <Item>
+      <Source>Sad_Trombone.wav</Source>
+      <Name>Sad_Trombone</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\Sad_Trombone.xnb</Output>
+      <Time>2013-04-01T22:39:12.8098535-06:00</Time>
+    </Item>
+    <Item>
+      <Source>total-malfunct.wav</Source>
+      <Name>total-malfunct</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\total-malfunct.xnb</Output>
+      <Time>2013-04-01T22:42:25.5968803-06:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{CA0DE09B-9CB2-4716-A9AF-EF0E3769966A}</ContentProjectGUID>

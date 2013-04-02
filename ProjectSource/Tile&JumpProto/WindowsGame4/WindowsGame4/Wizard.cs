@@ -77,6 +77,9 @@ namespace WindowsGame4
         protected int currWalkingIndex;
         protected int currTeleportIndex;
 
+        protected bool isCorrectRightBoundary;
+        protected bool isCorrectLeftBoundary;
+
         //position of the guards eyes relative to his source rectangle
         Vector2 eyePos;
         
@@ -126,6 +129,10 @@ namespace WindowsGame4
             
             isFalling = false;
             isDead = false;
+
+            // so the guard will not walk of ledges while patrolling - on the first circuit check that the boundaries will not have them falling
+            isCorrectRightBoundary = false;
+            isCorrectLeftBoundary = false;
 
             //guard count inactive when not at the patrol boundaries
             guardCounter = -1;
@@ -319,6 +326,7 @@ namespace WindowsGame4
                 else if (position.X == patrolBoundaryRight)
                 {
                     currentBehaviour = Behaviour.guard;
+                    deltaX = 0;
                 }
             }
             //move left until you reach your patrol, then turn around
@@ -336,6 +344,7 @@ namespace WindowsGame4
                 else if (patrolBoundaryLeft == position.X)
                 {
                     currentBehaviour = Behaviour.guard;
+                    deltaX = 0;
                 }
             }
         }
@@ -490,16 +499,35 @@ namespace WindowsGame4
 
                 if (direction == Direction.bottom)
                 {
-                        position.Y = t.getPosition().Top - position.Height;
-                        footCollision = true;
-                        DieOnTile(t.getCollisionBehaviour());
+                    position.Y = t.getPosition().Top - position.Height;
+                    footCollision = true;
+                    
+                    HandleSpecialTileTypeCases(t);
                 }
             }
 
             if (!footCollision)
             {
-                isFalling = true;
-                Fall();
+                // if the guard is patrolling then they should not walk off of ledges
+                if (currentBehaviour == Behaviour.patrol)
+                {
+                    position.X -= deltaX;
+                    if (facingDirection == Direction.right)
+                    {
+                        int tileWidth = Game.GraphicsDevice.Viewport.Width/64;
+                        patrolBoundaryRight = position.X - tileWidth;
+                    }
+                    else
+                    {
+                        int tileWidth = Game.GraphicsDevice.Viewport.Width / 64;
+                        patrolBoundaryLeft = position.X + tileWidth;
+                    }
+                }
+                else
+                {
+                    isFalling = true;
+                    Fall();
+                }
             }
             else
             {
@@ -507,11 +535,16 @@ namespace WindowsGame4
             }
         }
 
+        protected virtual void HandleSpecialTileTypeCases(ITile t)
+        {
+            DieOnTile(t.getCollisionBehaviour());
+        }
+
         protected void DieOnTile(CollisionType type)
         {
             if(type == CollisionType.spike)
             {
-                debugColor = Color.Green;
+                debugColor = Color.Red;
                 isDead = true;
             }
         }

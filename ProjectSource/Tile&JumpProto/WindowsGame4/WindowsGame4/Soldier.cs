@@ -112,76 +112,15 @@ namespace WindowsGame4
             }
         }
 
-        // soldiers differ from guards - magnets hold them in place
-        public override void HandleCollision(IList<ITile> tiles)
+        protected override void HandleSpecialTileTypeCases(ITile t)
         {
-            bool footCollision = false;
-
-            // check that any intersections are only on passable tiles
-            foreach (ITile t in tiles)
+            // when a guard's feet hit a magnet he gets stuck to it & can no longer move freely
+            if (CollisionType.magnet == t.getCollisionBehaviour() && !isStuck)
             {
-                // padding the tile with a pixel on either side so the player cannot climb the walls
-                Rectangle tilePos = t.getPosition();
-
-                tilePos.Y += 2;
-                tilePos.Height -= 2;
-
-                Direction direction = determineCollisionType(tilePos);
-
-                // check for left-right collisions
-                switch (direction)
-                {
-                    case Direction.left:
-                        if (t.getCollisionBehaviour() == CollisionType.impassable)
-                        {
-                            // for some weird reason with only 1 pixel of padding this breaks guards fall
-                            position.X = t.getPosition().Right;
-                            deltaX = 0;
-                        }
-                        break;
-
-                    case Direction.right:
-                        if (t.getCollisionBehaviour() == CollisionType.impassable)
-                        {
-                            position.X = t.getPosition().Left - position.Width;
-                            deltaX = 0;
-                        }
-                        break;
-                }
+                isStuck = true;
+                position.X = t.getPosition().X + t.getPosition().Width / 2 - position.Width / 2;
             }
-
-            // check for foot collisions
-            foreach (ITile t in tiles)
-            {
-                // padding the tile with a pixel on either side so the player cannot climb the walls
-                Rectangle tilePos = t.getPosition();
-
-                Direction direction = determineCollisionType(tilePos);
-
-                if (direction == Direction.bottom)
-                {
-                    position.Y = t.getPosition().Top - position.Height;
-                    footCollision = true;
-                    DieOnTile(t.getCollisionBehaviour());
-
-                    // when a guard's feet hit a magnet he gets stuck to it & can no longer move freely
-                    if (CollisionType.magnet == t.getCollisionBehaviour())
-                    {
-                        isStuck = true;
-                        position.X = t.getPosition().X + t.getPosition().Width / 2 - position.Width / 2;
-                    }
-                }
-            }
-
-            if (!footCollision)
-            {
-                isFalling = true;
-                Fall();
-            }
-            else
-            {
-                isFalling = false;
-            }
+            base.HandleSpecialTileTypeCases(t);
         }
 
     }

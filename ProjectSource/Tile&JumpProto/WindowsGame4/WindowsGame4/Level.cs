@@ -236,6 +236,10 @@ namespace WindowsGame4
                     foreach (Wizard guard in guards)
                     {
                         guard.Update(playerAction, deltaX);
+                        if (guard.IsDead)
+                        {
+                            player.Kill();
+                        }
                     }
 
                     foreach (Bolt bolt in bolts)
@@ -343,6 +347,7 @@ namespace WindowsGame4
                     guards.Clear();
                     levers.Clear();
                     gates.Clear();
+                    musicPlayer.Stop();
                     game.SetGameState(GameLoop.GameState.gameOver);
                 }
             }
