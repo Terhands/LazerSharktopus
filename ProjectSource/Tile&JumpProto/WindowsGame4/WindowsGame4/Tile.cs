@@ -31,6 +31,12 @@ namespace WindowsGame4
             position.Y = yIndex * position.Height;
         }
 
+        /* change the type of this tile */
+        public void changeType(CollisionType newType)
+        {
+            this.collisionBehaviour = newType;
+        }
+
         /* determine whether or not component is in collision with this tile */
         public bool isInCollision(IDynamicGameObject obj)
         {

@@ -59,6 +59,8 @@ namespace WindowsGame4
                 }
                 else if (state == GateState.halfOpen)
                 {
+                    //Gate is not fully open - make sure it won't let anything through now
+
                     leftHalf.X = spriteWidth * 2;
                     if (status == GateStatus.opening) state = GateState.open;
                     else state = GateState.quarterOpen;
@@ -66,8 +68,15 @@ namespace WindowsGame4
                 else if (state == GateState.open)
                 {
                     leftHalf.X = spriteWidth * 3;
-                    if (status == GateStatus.closing) state = GateState.halfOpen;
-                    else ticker = -1;
+                    if (status == GateStatus.closing)
+                    {
+                        state = GateState.halfOpen;
+                    }
+                    else
+                    {
+                        //Gate has fully opened. Stop the timer and change the underlying tiles to let it through
+                        ticker = -1;
+                    }
                 }
                 rightHalf.X = leftHalf.X + spriteWidth / 2;
             }

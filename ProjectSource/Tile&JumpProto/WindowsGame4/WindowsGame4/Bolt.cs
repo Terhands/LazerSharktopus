@@ -56,6 +56,8 @@ namespace WindowsGame4
                     case CollisionType.spike:
                     case CollisionType.impassable:
                     case CollisionType.platform:
+                    case CollisionType.magnet:
+                    case CollisionType.invisible:
                         Rectangle tilePos = t.getPosition();
                         Direction direction = determineCollisionType(tilePos);
                         if (direction == Direction.none)

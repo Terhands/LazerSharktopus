@@ -44,5 +44,8 @@ namespace WindowsGame4
 
         /* get the collision behaviour property for this tile */
         CollisionType getCollisionBehaviour();
+
+        /* Change the collision type of this tile */
+        void changeType(CollisionType newType);
     }
 }

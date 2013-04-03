@@ -439,5 +439,16 @@ namespace WindowsGame4
 
             return result;
         }
+
+        private void modifyTiles(Rectangle changeRect, CollisionType newType)
+        {
+            for (int i = changeRect.X; i < changeRect.Width; i++)
+            {
+                for (int j = changeRect.Y; j < changeRect.Width; j++)
+                {
+                    levelMap.changeTile(i, j, newType);
+                }
+            }
+        }
     }
 }
