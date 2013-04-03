@@ -84,6 +84,7 @@ namespace WindowsGame4
             gameState = GameState.titleScreen;
             prevGameState = gameState;
             inputHandler = new InputHandler();
+           
 
             plotScreen = new PlotScreen(this, musicPlayer, textures, fonts);
             level = new Level(this, textures, fonts, sounds, musicPlayer, plotScreen, new LevelLoader(config.LevelFiles), inputHandler);
@@ -92,6 +93,7 @@ namespace WindowsGame4
             
             gameOver = new GameOver(this, (Texture2D)textures[3], (SpriteFont)fonts[2], inputHandler);
             titleMenu = new TitleMenu(this, (Texture2D)textures[7], (SpriteFont)fonts[2], inputHandler);
+            levelIntroScreen = new LevelIntroScreen(this, (SpriteFont)fonts[2]);
             levelIntroScreen.InitLevelScreen(level.LevelName);
 
             credits = new Credits(this, (Texture2D)textures[creditsIndex], musicPlayer, fonts);

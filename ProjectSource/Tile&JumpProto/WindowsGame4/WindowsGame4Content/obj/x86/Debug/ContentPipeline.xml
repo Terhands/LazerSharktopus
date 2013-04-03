@@ -385,6 +385,15 @@
       <Extra>C:\Users\Alexa\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-StarryBook.wma</Extra>
       <Time>2013-04-02T14:39:31.0032682-06:00</Time>
     </Item>
+    <Item>
+      <Source>T4background.png</Source>
+      <Name>T4background</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Alexa\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T4background.xnb</Output>
+      <Time>2013-04-02T17:33:16.7545871-06:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
