@@ -25,22 +25,28 @@ namespace WindowsGame4
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(timerFont, levelTime.ToString(), new Vector2(20, 15), Color.Gold, 0f, new Vector2(0, 0), 1.0f, SpriteEffects.None, spriteDepth);
+            // Do not draw if there is no timer for this level
+            if (levelTime != -1 )
+                spriteBatch.DrawString(timerFont, levelTime.ToString(), new Vector2(20, 15), Color.Gold, 0f, new Vector2(0, 0), 1.0f, SpriteEffects.None, spriteDepth);
         }
 
         public void Update()
         {
-            beatCounter--;
-            if (beatCounter <= 0)
+            // If there's no level timer, then don't worry about anything
+            if (levelTime != -1)
             {
-                levelTime--;
-                beatCounter = 30;
+                beatCounter--;
+                if (beatCounter <= 0)
+                {
+                    levelTime--;
+                    beatCounter = 30;
+                }
             }
         }
 
         public bool isFinished()
         {
-            if (levelTime <= 0)
+            if (levelTime == 0)
                 return true;
             else
                 return false;

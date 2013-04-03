@@ -43,7 +43,6 @@ namespace WindowsGame4
         
         public void Update(GameTime gameTime)
         {
-            Console.WriteLine(ticker);
             if (ticker == 0)
             {
                 if (state == GateState.closed)
@@ -115,7 +114,7 @@ namespace WindowsGame4
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(gateTexture, new Rectangle(position.X, position.Y, spriteWidth/2, spriteHeight), leftHalf, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.2f);
+            spriteBatch.Draw(gateTexture, new Rectangle(position.X, position.Y, spriteWidth/2, spriteHeight), leftHalf, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.15f);
             spriteBatch.Draw(gateTexture, new Rectangle(position.X + spriteWidth/2, position.Y, spriteWidth/2, spriteHeight), rightHalf, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.95f);
         }
     }

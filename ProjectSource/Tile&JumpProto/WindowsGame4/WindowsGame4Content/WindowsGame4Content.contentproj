@@ -353,6 +353,15 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="boxParts.png">
+      <Name>boxParts</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Tutorial4.txt">
       <Name>Tutorial4</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -99,6 +99,12 @@ namespace WindowsGame4
             get { return hasReachedGoal; }
         }
 
+        /* Called when a bucket of bolts is gathered, calls the reset health method and resets player health to full */
+        public void healDamage()
+        {
+            healthMeter.resetHealth();
+        }
+
         public bool IsDead
         {
             get { return isDead; }
