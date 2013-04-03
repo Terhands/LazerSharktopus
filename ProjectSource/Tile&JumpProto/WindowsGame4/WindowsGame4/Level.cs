@@ -167,12 +167,12 @@ namespace WindowsGame4
                 boxBolts.Add(new BoxOfBolts(Game, x, y, boxTexture));
             }
 
-            foreach (Vector2 v in levelLoader.Spouts)
+            foreach (Vector3 v in levelLoader.Spouts)
             {
                 /* These offsets will be wrong right now */
                 int x = ((int)v.X);
                 int y = ((int)v.Y);
-                spouts.Add(new Spout(Game, x, y, screenWidth, screenHeight, (Texture2D)textures[21]));
+                spouts.Add(new Spout(Game, x, y, screenWidth, screenHeight, (int)v.Z, (Texture2D)textures[21], this));
             }
 
             int[][] buttonMaps = levelLoader.ButtonSpoutMaps;
@@ -452,6 +452,14 @@ namespace WindowsGame4
                     game.SetGameState(GameLoop.GameState.gameOver);
                 }
             }
+        }
+
+        public void spoutBolt(int xPos, int yPos, int facingDirection)
+        {
+            ArrayList boltSounds = new ArrayList();
+            boltSounds.Add(sounds[1]);
+            boltSounds.Add(sounds[2]);
+            bolts.Add(new Bolt(game, facingDirection, xPos, yPos, boltTexture, boltSounds));
         }
 
         public void Draw(SpriteBatch spriteBatch)

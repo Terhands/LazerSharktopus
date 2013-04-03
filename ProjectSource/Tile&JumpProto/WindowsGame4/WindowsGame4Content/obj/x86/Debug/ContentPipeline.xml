@@ -233,7 +233,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\button.xnb</Output>
-      <Time>2013-04-02T22:21:51.1094395-06:00</Time>
+      <Time>2013-04-03T11:07:06.6652445-06:00</Time>
     </Item>
     <Item>
       <Source>spout.png</Source>
@@ -242,7 +242,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\spout.xnb</Output>
-      <Time>2013-04-02T22:22:04.476204-06:00</Time>
+      <Time>2013-04-03T02:39:35.5433506-06:00</Time>
     </Item>
     <Item>
       <Source>creditsHeaderFont.spritefont</Source>
@@ -429,6 +429,16 @@
       <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-StarryBook.xnb</Output>
       <Extra>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-StarryBook.wma</Extra>
       <Time>2013-04-02T16:57:02.888777-06:00</Time>
+    </Item>
+    <Item>
+      <Source>DST-Muses.mp3</Source>
+      <Name>DST-Muses</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Muses.xnb</Output>
+      <Extra>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Muses.wma</Extra>
+      <Time>2013-04-03T01:44:07.8740188-06:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

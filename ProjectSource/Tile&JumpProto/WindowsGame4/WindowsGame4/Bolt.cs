@@ -26,14 +26,54 @@ namespace WindowsGame4
         private float rotation;
         protected ArrayList sounds;
 
+        /* Constructor when the bolt is thrown by the player */
         public Bolt(Game game, Action direction, int xStart, int yStart, Texture2D texture, ArrayList _sounds) : base(game)
         {
             position = new Rectangle(xStart, yStart, 15, 15);
+            
+            /* Set the starting information for the bolt based on where it's going */
             if (direction == Action.right)
                 position.X += 35;
-            boltTexture = texture;
             if (direction == Action.left)
                 deltaX = deltaX * -1;
+
+            /* Set basic always the same values for the bolt */
+            boltTexture = texture;
+            expiryTime = 30;
+            spriteDepth = 0.5f;
+            rotation = 0;
+            sounds = _sounds;
+        }
+
+        /* Constructor when the bolt is generated from a spout */
+        /* Orientations: down=0, left=1, up=2, right=3 */
+        public Bolt(Game game, int orientation, int xStart, int yStart, Texture2D texture, ArrayList _sounds)
+            : base(game)
+        {
+            position = new Rectangle(xStart, yStart, 15, 15);
+
+            /* Set the starting information for the bolt based on where it's going */
+            if (orientation == 0 || orientation == 2)
+            {
+                deltaX = 0; // Throw the bolt straight up
+                if (orientation == 0)
+                {
+                    deltaY = deltaY * -1; // Throw it down
+                }
+                else if (orientation == 2)
+                {
+                    deltaY = deltaY * 2; //More force!
+                }
+            }
+            if (orientation == 1 || orientation == 3)
+            {
+                deltaY = 0; // Throw it horiztonally
+                if (orientation == 1)
+                    deltaX = deltaX * -1; // Throw it left instead of right
+            }
+
+            /* Set basic always the same values for the bolt */
+            boltTexture = texture;
             expiryTime = 30;
             spriteDepth = 0.5f;
             rotation = 0;

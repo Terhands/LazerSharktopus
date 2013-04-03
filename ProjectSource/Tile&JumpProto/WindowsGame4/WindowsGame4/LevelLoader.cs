@@ -30,7 +30,7 @@ namespace WindowsGame4
         Vector2[] gateLayout;
         Vector2[] boxOfBoltsLayout;
         Vector2[] buttonLayout;
-        Vector2[] spoutLayout;
+        Vector3[] spoutLayout;
         int[][] buttonSpoutMaps;
 
 
@@ -167,11 +167,12 @@ namespace WindowsGame4
             }
 
             int numSpouts = NextInt(tokenizedData);
-            spoutLayout = new Vector2[numSpouts];
+            spoutLayout = new Vector3[numSpouts];
             for (int i = 0; i < numSpouts; i++)
             {
                 spoutLayout[i].X = NextInt(tokenizedData);
                 spoutLayout[i].Y = NextInt(tokenizedData);
+                spoutLayout[i].Z = NextInt(tokenizedData);
             }
 
             int numButtons = NextInt(tokenizedData);
@@ -228,7 +229,7 @@ namespace WindowsGame4
             get { return buttonLayout; }
         }
 
-        public Vector2[] Spouts
+        public Vector3[] Spouts
         {
             get { return spoutLayout; }
         }
