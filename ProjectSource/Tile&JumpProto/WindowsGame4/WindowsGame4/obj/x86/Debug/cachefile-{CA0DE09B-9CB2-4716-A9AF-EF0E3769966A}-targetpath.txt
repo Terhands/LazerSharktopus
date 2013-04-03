@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 Content\blank.xnb
 Content\Logo.xnb
 Content\Robro1.1.xnb
@@ -40,6 +39,7 @@ Content\DST-Aronara.xnb
 Content\DST-Aronara.wma
 Content\DST-AngryRobotIII.xnb
 Content\DST-AngryRobotIII.wma
+Content\torchSprites.xnb
 Content\DST-MechaNoir.xnb
 Content\DST-MechaNoir.wma
 Content\DST-Beneathere.xnb
@@ -57,7 +57,6 @@ Content\Tutorial1.txt
 Content\Tutorial2.txt
 Content\Tutorial3.txt
 Content\Tutorial4.txt
-=======
 Content\blank.xnb
 Content\Logo.xnb
 Content\Robro1.1.xnb
@@ -69,7 +68,12 @@ Content\torchSprites.xnb
 Content\RoBro.xnb
 Content\bolt.xnb
 Content\TitleScreen.xnb
+Content\levelNameFont.xnb
+Content\menuFont.xnb
+Content\clunk.xnb
+Content\tink.xnb
 Content\castleBackground.xnb
+Content\torchNimbus.xnb
 Content\lever.xnb
 Content\torchNimbus.xnb
 Content\gate.xnb
@@ -104,8 +108,17 @@ Content\DST-Beneathere.xnb
 Content\DST-Beneathere.wma
 Content\DST-BlueMist.xnb
 Content\DST-BlueMist.wma
+Content\Swords_Collide.xnb
+Content\credits.xnb
+Content\creditsHeaderFont.xnb
+Content\creditsFont.xnb
 Content\DST-StarryBook.xnb
 Content\DST-StarryBook.wma
+Content\dashedLine.xnb
+Content\robot-death2.xnb
+Content\Sad_Trombone.xnb
+Content\total-malfunct.xnb
+Content\storyFont.xnb
 Content\T4background.xnb
 Content\boxParts.xnb
 Content\lathraia.config
@@ -116,4 +129,3 @@ Content\Tutorial1.txt
 Content\Tutorial2.txt
 Content\Tutorial3.txt
 Content\Tutorial4.txt
->>>>>>> origin/master
