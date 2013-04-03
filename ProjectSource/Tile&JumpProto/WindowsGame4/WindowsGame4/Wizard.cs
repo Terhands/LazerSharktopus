@@ -403,8 +403,8 @@ namespace WindowsGame4
         //move towards the bolt that you sensed and be distracted for a bit
         protected void GoCheckThatShitOut()
         {
-            //i dont know what this math means
-            if (Math.Abs(position.X + (position.Width / 2) - distractionX) > 38)
+            //i dont know what this math means -> if the distance from the center of the guard to the center of the distraction is > 20 go a bit closer....
+            if (Math.Abs(position.X + (position.Width / 2) - distractionX) > 20)
             {
                 // I dare say there is a distraction to your posterior good sir!
                 if (facingDirection == Direction.right && distractionX < position.X)
@@ -429,6 +429,7 @@ namespace WindowsGame4
             else
             {
                 currentBehaviour = Behaviour.distracted;
+                distractionCount = maxDistractedCount;
                 guardCounter = 70;
             }
         }

@@ -449,6 +449,36 @@
       <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\storylineScreen1.xnb</Output>
       <Time>2013-04-03T01:13:17.4244518-06:00</Time>
     </Item>
+    <Item>
+      <Source>DST-Birge.mp3</Source>
+      <Name>DST-Birge</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Birge.xnb</Output>
+      <Extra>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Birge.wma</Extra>
+      <Time>2013-04-03T01:27:09.9820713-06:00</Time>
+    </Item>
+    <Item>
+      <Source>DST-ConFuze.mp3</Source>
+      <Name>DST-ConFuze</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-ConFuze.xnb</Output>
+      <Extra>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-ConFuze.wma</Extra>
+      <Time>2013-04-03T01:29:39.1606039-06:00</Time>
+    </Item>
+    <Item>
+      <Source>DST-Pariah.mp3</Source>
+      <Name>DST-Pariah</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Pariah.xnb</Output>
+      <Extra>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Pariah.wma</Extra>
+      <Time>2013-04-03T01:45:28.849923-06:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{CA0DE09B-9CB2-4716-A9AF-EF0E3769966A}</ContentProjectGUID>

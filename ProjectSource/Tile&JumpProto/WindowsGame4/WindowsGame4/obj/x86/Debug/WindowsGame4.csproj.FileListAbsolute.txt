@@ -133,3 +133,9 @@ C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGa
 C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Muses.xnb
 C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Muses.wma
 C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\storylineScreen1.xnb
+C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Birge.xnb
+C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Birge.wma
+C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-ConFuze.xnb
+C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-ConFuze.wma
+C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Pariah.xnb
+C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Pariah.wma

@@ -54,6 +54,12 @@ Content\spout.xnb
 Content\DST-Muses.xnb
 Content\DST-Muses.wma
 Content\storylineScreen1.xnb
+Content\DST-Birge.xnb
+Content\DST-Birge.wma
+Content\DST-ConFuze.xnb
+Content\DST-ConFuze.wma
+Content\DST-Pariah.xnb
+Content\DST-Pariah.wma
 Content\lathraia.config
 Content\Level1.txt
 Content\Level2.txt

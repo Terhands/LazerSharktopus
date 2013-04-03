@@ -52,7 +52,7 @@ namespace WindowsGame4
                                             };
 
         private int[] textureSelection = { 22, 17, 17 };
-        private int[] songSelection = { 4, 4, 4};
+        private int[] songSelection = { 7, 6, 8};
 
         protected ScrollingTextScreen displayScreen;
         protected GameLoop game;
