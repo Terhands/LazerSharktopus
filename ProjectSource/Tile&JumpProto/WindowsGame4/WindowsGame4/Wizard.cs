@@ -602,7 +602,7 @@ namespace WindowsGame4
                 // is the player visible enough/close enough for the guard to be able to see
                 if (visibility <= 0 && isVisible(player.GetPosition(), surroundingTiles))
                 {
-                    //player.Kill();
+                    player.Kill();
                 }
             }
         }

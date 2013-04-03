@@ -51,6 +51,8 @@ Content\DST-StarryBook.xnb
 Content\DST-StarryBook.wma
 Content\button.xnb
 Content\spout.xnb
+Content\DST-Muses.xnb
+Content\DST-Muses.wma
 Content\lathraia.config
 Content\Level1.txt
 Content\Level2.txt
