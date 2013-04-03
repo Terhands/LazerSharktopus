@@ -20,6 +20,7 @@ Content\wizard.xnb
 Content\soldier.xnb
 Content\credits.xnb
 Content\dashedLine.xnb
+Content\T4background.xnb
 Content\creditsHeaderFont.xnb
 Content\creditsFont.xnb
 Content\timerFont.xnb
@@ -46,7 +47,7 @@ Content\DST-BlueMist.xnb
 Content\DST-BlueMist.wma
 Content\DST-StarryBook.xnb
 Content\DST-StarryBook.wma
-Content\T4background.xnb
+Content\RoBro2.0.xnb
 Content\lathraia.config
 Content\Level1.txt
 Content\Level2.txt

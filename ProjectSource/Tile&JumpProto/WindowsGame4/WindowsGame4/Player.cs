@@ -59,7 +59,8 @@ namespace WindowsGame4
         // Keep a counter, to count the number of ticks since the last change of animation frame.
         int animationCount; // How many ticks since the last frame change.
         int animationMax = 8; // How many ticks to change frame after. 
-        bool landed = false; //So the update doesnt keep reseting robro to standard land position this bool is used
+        bool landed = false; //So the update doesnt keep reseting robro to standard land position this bool is used to do that
+        bool setDead = false; //This is so that i can set frameCountCol to the starting frame of death animation then not do it again in update animation function
 
         protected HealthMeter healthMeter;
 
@@ -428,10 +429,10 @@ namespace WindowsGame4
             }
 
             healthMeter.Update(Action.none, 0);
-            if (healthMeter.Health <= 0) // If health is less than or equal to zero, Robro dies
-            {
-                Kill();
-            }
+            //if (healthMeter.Health <= 0) // If health is less than or equal to zero, Robro dies
+            //{
+            //    Kill();
+            //}
 
             position.X += deltaX;
             position.Y -= deltaY;
@@ -476,6 +477,10 @@ namespace WindowsGame4
 
         public void UpdateAnimation()
         {
+
+            
+            // if the count exceeds the animax time up the frame count
+            // or if the player has died, because we dont have enough time to wait for full count divide animationMax by 2
             if (animationCount > animationMax)
             {
                 animationCount = 0;
@@ -491,13 +496,50 @@ namespace WindowsGame4
             {
                 frameCountCol = 3;
             }
-            else if (frameCountCol == 3)
+            //once it gets to 3 reset it, however i have dying animation below so i need frame 3 if he dies
+            else if (frameCountCol == 3 && !setDead)
             {
                 frameCountCol = 0;
             }
             else { }
             source.X = frameStartX + frameSkipX * frameCountCol;
             source.Y = frameStartY + frameSkipY * frameCountRow;
+
+            //If the player is below half health get to the damaged sprites
+            if (healthMeter.Health <= 100)
+            {
+                //multiply by 2 in order to get to the first damaged row (right facing) in robro2.0
+                if (frameCountRow == 0)
+                {
+                    source.Y = frameStartY + frameSkipY * 2;
+                }
+                //multiply by 3 in order to get to the 2nd damaged row (left facing) in robro2.0
+                else
+                {
+                    source.Y = frameStartY + frameSkipY * 3;
+                }
+
+            }
+            
+            //When he dies time to crumble into a pile
+            if (healthMeter.Health <= 0)
+            {
+                //Set to the row with the death animation by multiplying by 4
+                source.Y = frameStartY + frameSkipY * 4;
+                animationCount += 1;
+                if (!setDead)
+                {
+                    frameCountCol = 0;
+                    setDead = true;
+                }
+                //Kill him after it gets to 3 where his head is on his hand
+                if (frameCountCol == 3)
+                {
+                    Kill();
+                }
+
+
+            }
         }
     }
 }
