@@ -135,9 +135,9 @@ namespace WindowsGame4
             foreach (Vector2 v in levelLoader.Gates)
             {
                 /* These offsets will be wrong right now */
-                int x = ((int)v.X) * (screenWidth / 64) - (24 / 2);
-                int y = ((int)v.Y) * (screenHeight / 32) - 15;
-                gates.Add(new Gate(Game, x, y, screenWidth, screenHeight, (Texture2D)textures[gateIndex]));
+                int x = ((int)v.X);
+                int y = ((int)v.Y);
+                gates.Add(new Gate(Game, x, y, screenWidth, screenHeight, (Texture2D)textures[gateIndex], this));
             }
 
             int[][] gateMaps = levelLoader.levelGateMaps;
@@ -474,5 +474,17 @@ namespace WindowsGame4
 
             return result;
         }
+
+        public void modifyTiles(Rectangle changeRect, CollisionType newType)
+        {
+            for (int i = changeRect.X; i < changeRect.X + changeRect.Width; i++)
+            {
+                for (int j = changeRect.Y; j < changeRect.Y + changeRect.Height; j++)
+                {
+                    levelMap.changeTile(i, j, newType);
+                }
+            }
+        }
+
     }
 }

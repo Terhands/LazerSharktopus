@@ -3,39 +3,89 @@
   level1.txt
   level2.txt
   level3.txt
+  tutorial1.txt
+  tutorial2.txt
+  tutorial3.txt
 </levels>
 
+<tutorials>
+
+  tutorial1.txt
+  tutorial2.txt
+  tutorial3.txt  
+  tutorial4.txt
+
+</tutorials>
+
 <textures>
-RoBro
+<<<<<<< HEAD
+RoBro2.0
 groundSpriteFile
 castleBackground
 gameOver
 bolt
-tempGuard
+wizard
 torchSprites
 TitleScreen
-<<<<<<< HEAD
 torchNimbus
-=======
 lever
->>>>>>> b6a52c6c12246229c7f34ed5f307e6f924d2691c
+gate
+T1background
+T2background
+T3background
+T4background
+soldier
+Logo
+credits
+dashedLine
+boxParts
+=======
+  RoBro
+  groundSpriteFile
+  castleBackground
+  gameOver
+  bolt
+  wizard
+  torchSprites
+  TitleScreen
+  torchNimbus
+  lever
+  gate
+  T1background
+  T2background
+  T3background
+  T4background
+  soldier
+  Logo
+  credits
+  dashedLine
+  boxParts
+
+>>>>>>> 5d78faa6bae825b9429342cb6bb1bb615f6bddf9
 </textures>
 
 <soundEffects>
-  scream
+  total-malfunct
   clunk
   tink
+  Swords_Collide
 </soundEffects>
 
 <songs>
   DST-Aronara
   DST-AngryRobotIII
+  DST-BlueMist
+  DST-StarryBook
+  DST-MechaNoir
 </songs>
 
 <fonts>
   timerFont
   levelNamefont
   menufont
+  creditsHeaderFont
+  creditsFont
+  storyFont
 </fonts>
 
 <derp>
