@@ -18,27 +18,39 @@ namespace WindowsGame4
         private Rectangle rightHalf;
         private GateState state;
         private GateStatus status;
+        private Level parentLevel;
 
-        private Rectangle region;
-
-        private const int spriteWidth = 32;
+        private const int spriteWidth = 16;
         private const int spriteHeight = 64;
+        protected const int rowsPerScreen = 32;
+        protected const int colsPerScreen = 64;
+
+        // keep track of how much the level has shifted, total
+        private int totalDeltaX = 0;
 
         Texture2D gateTexture;
 
-        public Gate(Game game, int xPos, int yPos, int screenWidth, int screenHeight, Texture2D texture)
+        public Gate(Game game, int xPos, int yPos, int screenWidth, int screenHeight, Texture2D texture, Level _parentLevel)
         {
-            position = new Rectangle(xPos, yPos, screenWidth * 2/64, screenHeight * 4 / 32);
+            parentLevel = _parentLevel;
+            position = new Rectangle();
+            position.Width = screenWidth / colsPerScreen;
+            position.Height = screenHeight / rowsPerScreen;
+
+            position.X = xPos * position.Width;
+            position.Y = yPos * position.Height;
+
+            leftHalf = new Rectangle(0, 0, spriteWidth, spriteHeight);
+            rightHalf = new Rectangle(spriteWidth, 0, spriteWidth, spriteHeight);
             
-            region = new Rectangle(0, 0, spriteWidth, spriteHeight);
-
-            leftHalf = new Rectangle(0, 0, spriteWidth / 2, spriteHeight);
-            rightHalf = new Rectangle(spriteWidth / 2, 0, spriteWidth / 2, spriteHeight);
-
             state = GateState.closed;
             status = GateStatus.closing;
             ticker = -1;
             gateTexture = texture;
+
+            /* Block off the right half of the gate right now */
+            Rectangle changeRect = new Rectangle((position.X / position.Width) + 1, position.Y / position.Height, 1, 4);
+            parentLevel.modifyTiles(changeRect, CollisionType.invisible);
         }
         
         public void Update(GameTime gameTime)
@@ -53,23 +65,34 @@ namespace WindowsGame4
                 }
                 else if (state == GateState.quarterOpen)
                 {
-                    leftHalf.X = spriteWidth * 1;
+                    leftHalf.X = spriteWidth * 1 * 2;
                     if (status == GateStatus.opening) state = GateState.halfOpen;
                     else state = GateState.closed;
                 }
                 else if (state == GateState.halfOpen)
                 {
-                    leftHalf.X = spriteWidth * 2;
+                    //Gate is not fully open - make sure it won't let anything through now
+                    Rectangle changeRect = new Rectangle(((position.X  + totalDeltaX)/ position.Width) + 1, position.Y / position.Height, 1, 4);
+                    parentLevel.modifyTiles(changeRect, CollisionType.invisible);
+                    leftHalf.X = spriteWidth * 2 * 2;
                     if (status == GateStatus.opening) state = GateState.open;
                     else state = GateState.quarterOpen;
                 }
                 else if (state == GateState.open)
                 {
-                    leftHalf.X = spriteWidth * 3;
-                    if (status == GateStatus.closing) state = GateState.halfOpen;
-                    else ticker = -1;
+                    leftHalf.X = spriteWidth * 3 * 2;
+                    if (status == GateStatus.closing)
+                    {
+                        state = GateState.halfOpen;
+                    }
+                    else
+                    {
+                        //Gate has fully opened. Stop the timer and change the underlying tiles to let it through
+                        ticker = -1;
+                        parentLevel.modifyTiles(new Rectangle(((position.X + totalDeltaX) / position.Width) + 1, position.Y / position.Height, 1, 4), CollisionType.passable);
+                    }
                 }
-                rightHalf.X = leftHalf.X + spriteWidth / 2;
+                rightHalf.X = leftHalf.X + spriteWidth;
             }
             if (ticker >= 0)
             {
@@ -100,6 +123,7 @@ namespace WindowsGame4
         public void reposition(int deltaX)
         {
             position.X -= deltaX;
+            totalDeltaX += deltaX;
         }
 
         public void HandleCollision(IList<ITile> tiles)
@@ -114,8 +138,8 @@ namespace WindowsGame4
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(gateTexture, new Rectangle(position.X, position.Y, spriteWidth/2, spriteHeight), leftHalf, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.15f);
-            spriteBatch.Draw(gateTexture, new Rectangle(position.X + spriteWidth/2, position.Y, spriteWidth/2, spriteHeight), rightHalf, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.95f);
+            spriteBatch.Draw(gateTexture, new Rectangle(position.X, position.Y, position.Width, position.Height * 4), leftHalf, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.15f);
+            spriteBatch.Draw(gateTexture, new Rectangle(position.X + position.Width, position.Y, position.Width, position.Height * 4), rightHalf, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.95f);
         }
     }
 }
