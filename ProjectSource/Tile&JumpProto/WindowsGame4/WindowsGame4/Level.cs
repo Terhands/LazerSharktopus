@@ -51,7 +51,8 @@ namespace WindowsGame4
         protected List<Lever> levers;
         protected List<Gate> gates;
         protected List<BoxOfBolts> boxBolts;
-        protected int[] leverGateMap;
+        protected List<Button> buttons;
+        protected List<Spout> spouts;
 
         public Level(GameLoop game, ArrayList _textures, ArrayList _fonts, ArrayList _sounds, MusicManager _musicPlayer, PlotScreen _plotScreen, LevelLoader loader, InputHandler _inputHandler) : base(game)
         {
@@ -64,6 +65,8 @@ namespace WindowsGame4
             levers = new List<Lever>();
             gates = new List<Gate>();
             boxBolts = new List<BoxOfBolts>();
+            buttons = new List<Button>();
+            spouts = new List<Spout>();
 
             playerRange = new Rectangle((screenWidth * 2)/5, 0, screenWidth/5, screenHeight);
             
@@ -95,6 +98,8 @@ namespace WindowsGame4
             levers.Clear();
             gates.Clear();
             musicPlayer.Stop();
+            spouts.Clear();
+            buttons.Clear();
 
             levelLoader.LoadLevel(currentLevel);
             if (levelLoader.Map == null)
@@ -161,6 +166,30 @@ namespace WindowsGame4
                 int y = ((int)v.Y) * (screenHeight / 32) - 22;
                 boxBolts.Add(new BoxOfBolts(Game, x, y, boxTexture));
             }
+
+            foreach (Vector2 v in levelLoader.Spouts)
+            {
+                /* These offsets will be wrong right now */
+                int x = ((int)v.X);
+                int y = ((int)v.Y);
+                spouts.Add(new Spout(Game, x, y, screenWidth, screenHeight, (Texture2D)textures[21]));
+            }
+
+            int[][] buttonMaps = levelLoader.ButtonSpoutMaps;
+            i = 0;
+            foreach (Vector2 v in levelLoader.Buttons)
+            {
+                List<Spout> buttonSpouts = new List<Spout>();
+                for (int j = 0; j < buttonMaps[i].Length; j++)
+                {
+                    buttonSpouts.Add(spouts[j]);
+                }
+                int x = ((int)v.X) * (screenWidth / 64) - (24 / 2);
+                int y = ((int)v.Y) * (screenHeight / 32) - 22;
+                buttons.Add(new Button(Game, x, y, screenWidth, screenHeight, buttonSpouts, (Texture2D)textures[20]));
+                i++;
+            }
+
     
             gameTimer = new GameTimer(levelLoader.TimeLimit, (SpriteFont)fonts[0]);
 
@@ -229,6 +258,14 @@ namespace WindowsGame4
                     }
                 }
 
+                if (inputHandler.isNewlyPressed(InputHandler.InputTypes.pull))
+                {
+                    foreach (Button button in buttons)
+                    {
+                        button.HandleCollision(levelMap.GetNearbyTiles(player.GetPosition()));
+                    }
+                }
+
                 // update the player position when the player needs to change position on screen
                 player.Update(playerAction, velocity);
                 player.HandleCollision(levelMap.GetNearbyTiles(player.GetPosition()));
@@ -272,6 +309,16 @@ namespace WindowsGame4
                     foreach (Gate gate in gates)
                     {
                         gate.reposition(deltaX);
+                    }
+
+                    foreach (Button button in buttons)
+                    {
+                        button.reposition(deltaX);
+                    }
+
+                    foreach (Spout spout in spouts)
+                    {
+                        spout.reposition(deltaX);
                     }
 
                     // Update position
@@ -349,6 +396,10 @@ namespace WindowsGame4
                     gate.Update(gameTime);
                 }
 
+                foreach (Button button in buttons)
+                {
+                    button.Update(gameTime);
+                }
 
                 if (player.DoneLevel)
                 {
@@ -361,6 +412,8 @@ namespace WindowsGame4
                     gates.Clear();
                     boxBolts.Clear();
                     musicPlayer.Stop();
+                    buttons.Clear();
+                    spouts.Clear();
 
                     // if there is a next level get the map loaded
                     if (levelLoader.NumLevels > currentLevel)
@@ -429,6 +482,14 @@ namespace WindowsGame4
             foreach (BoxOfBolts box in boxBolts)
             {
                 box.Draw(spriteBatch);
+            }
+            foreach (Spout spout in spouts)
+            {
+                spout.Draw(spriteBatch);
+            }
+            foreach (Button button in buttons)
+            {
+                button.Draw(spriteBatch);
             }
         }
 

@@ -75,6 +75,8 @@
     <Compile Include="ADynamicGameObject.cs" />
     <Compile Include="Bolt.cs" />
     <Compile Include="BoxOfBolts.cs" />
+    <Compile Include="Button.cs" />
+    <Compile Include="Spout.cs" />
     <Compile Include="Credits.cs" />
     <Compile Include="Gate.cs" />
     <Compile Include="GameLoader.cs" />

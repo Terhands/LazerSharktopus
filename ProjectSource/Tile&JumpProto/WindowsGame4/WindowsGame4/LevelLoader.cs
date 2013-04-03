@@ -29,6 +29,9 @@ namespace WindowsGame4
         int[][] leverGateMaps;
         Vector2[] gateLayout;
         Vector2[] boxOfBoltsLayout;
+        Vector2[] buttonLayout;
+        Vector2[] spoutLayout;
+        int[][] buttonSpoutMaps;
 
 
         public LevelLoader(string[] _levelFiles)
@@ -148,6 +151,29 @@ namespace WindowsGame4
                 boxOfBoltsLayout[i].X = NextInt(tokenizedData); // Next int is the X poistion for the box
                 boxOfBoltsLayout[i].Y = NextInt(tokenizedData); // Next int is the Y position for the box
             }
+
+            int numSpouts = NextInt(tokenizedData);
+            spoutLayout = new Vector2[numSpouts];
+            for (int i = 0; i < numSpouts; i++)
+            {
+                spoutLayout[i].X = NextInt(tokenizedData);
+                spoutLayout[i].Y = NextInt(tokenizedData);
+            }
+
+            int numButtons = NextInt(tokenizedData);
+            buttonLayout = new Vector2[numButtons];
+            buttonSpoutMaps = new int[numSpouts][];
+            for (int i = 0; i < numButtons; i++)
+            {
+                buttonLayout[i].X = NextInt(tokenizedData);
+                buttonLayout[i].Y = NextInt(tokenizedData);
+                int numSpoutsForButton = NextInt(tokenizedData);
+                buttonSpoutMaps[i] = new int[numSpoutsForButton];
+                for (int j = 0; j < numSpoutsForButton; j++)
+                {
+                    buttonSpoutMaps[i][j] = NextInt(tokenizedData);
+                }
+            }
         }
 
         // read the next integer from data
@@ -181,6 +207,21 @@ namespace WindowsGame4
         public Vector2[] BoxesOfBolts
         {
             get { return boxOfBoltsLayout; }
+        }
+
+        public Vector2[] Buttons
+        {
+            get { return buttonLayout; }
+        }
+
+        public Vector2[] Spouts
+        {
+            get { return spoutLayout; }
+        }
+
+        public int[][] ButtonSpoutMaps
+        {
+            get { return buttonSpoutMaps; }
         }
 
         public int[][] levelGateMaps

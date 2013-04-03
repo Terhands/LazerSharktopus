@@ -50,17 +50,6 @@ namespace WindowsGame4
 
         InputHandler inputHandler;
 
-        /* Keyboard controls */
-        protected const Keys keyRight = Keys.D;
-        protected const Keys keyLeft = Keys.A;
-        protected const Keys keyUp = Keys.W;
-        protected const Keys keyDown = Keys.S;
-        protected const Keys keyJump = Keys.Space;
-        protected const Keys keyBolt = Keys.E;
-        protected const Keys keyQuit = Keys.Escape;
-
-        KeyboardState prevState;
-
         public GameLoop()
         {
             graphics = new GraphicsDeviceManager(this);

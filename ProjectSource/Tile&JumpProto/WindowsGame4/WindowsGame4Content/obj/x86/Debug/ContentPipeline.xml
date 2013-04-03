@@ -403,6 +403,24 @@
       <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\boxParts.xnb</Output>
       <Time>2013-04-02T21:23:40.2907761-06:00</Time>
     </Item>
+    <Item>
+      <Source>button.png</Source>
+      <Name>button</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\button.xnb</Output>
+      <Time>2013-04-02T22:21:51.1094395-06:00</Time>
+    </Item>
+    <Item>
+      <Source>spout.png</Source>
+      <Name>spout</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\spout.xnb</Output>
+      <Time>2013-04-02T22:22:04.476204-06:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

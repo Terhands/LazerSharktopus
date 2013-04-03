@@ -48,6 +48,8 @@ Content\DST-StarryBook.xnb
 Content\DST-StarryBook.wma
 Content\T4background.xnb
 Content\boxParts.xnb
+Content\button.xnb
+Content\spout.xnb
 Content\lathraia.config
 Content\Level1.txt
 Content\Level2.txt
