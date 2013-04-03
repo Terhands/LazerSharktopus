@@ -448,6 +448,7 @@ namespace WindowsGame4
                     gates.Clear();
                     boxBolts.Clear();
                     musicPlayer.Stop();
+                    deathCounter = 0;
                     game.SetGameState(GameLoop.GameState.gameOver);
                 }
             }
