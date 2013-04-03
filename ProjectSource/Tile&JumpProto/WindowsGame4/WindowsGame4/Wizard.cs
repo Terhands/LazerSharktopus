@@ -12,7 +12,7 @@ namespace WindowsGame4
         protected int invisibleY; 
         //distraction
         protected int distractionCount;
-        protected int maxDistractedCount = 40;
+        protected int maxDistractedCount = 70;
 
         //keep track of how long the guard stands at the end of his patrol
         protected int guardCounter;
