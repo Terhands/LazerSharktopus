@@ -57,10 +57,7 @@ namespace WindowsGame4
 
         public void Update(GameTime gameTime)
         {
-            /* The lever object itself doesn't actually do anything each round.
-             * Any changes to it are called from the level controller.
-             * Any changes in things that the lever operates happen in those objects (gates, etc).
-             */
+            // Nothing actually needs to be updated
         }
 
         public void Update(Action action, int myInt)
