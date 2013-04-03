@@ -59,9 +59,11 @@ namespace WindowsGame4
                 if (orientation == 0)
                 {
                     deltaY = deltaY * -1; // Throw it down
+                    position.Y += 10;
                 }
                 else if (orientation == 2)
                 {
+                    position.Y -= 10;
                     deltaY = deltaY * 2; //More force!
                 }
             }
@@ -69,7 +71,14 @@ namespace WindowsGame4
             {
                 deltaY = 0; // Throw it horiztonally
                 if (orientation == 1)
+                {
+                    position.Y -= 10;
                     deltaX = deltaX * -1; // Throw it left instead of right
+                }
+                else if (orientation == 3)
+                {
+                    position.X += 10;
+                }
             }
 
             /* Set basic always the same values for the bolt */

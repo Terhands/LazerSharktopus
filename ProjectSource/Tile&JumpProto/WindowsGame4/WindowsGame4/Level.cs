@@ -182,7 +182,7 @@ namespace WindowsGame4
                 List<Spout> buttonSpouts = new List<Spout>();
                 for (int j = 0; j < buttonMaps[i].Length; j++)
                 {
-                    buttonSpouts.Add(spouts[j]);
+                    buttonSpouts.Add(spouts[buttonMaps[i][j]]);
                 }
                 int x = ((int)v.X) * (screenWidth / 64) - (24 / 2);
                 int y = ((int)v.Y) * (screenHeight / 32) - 22;
@@ -401,7 +401,7 @@ namespace WindowsGame4
                     button.Update(gameTime);
                 }
 
-                if (player.DoneLevel)
+                if (player.DoneLevel || inputHandler.cheat())
                 {
                     // do some intermediate next level screen...
                     currentLevel += 1;

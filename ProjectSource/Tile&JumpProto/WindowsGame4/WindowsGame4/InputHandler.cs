@@ -44,6 +44,12 @@ namespace WindowsGame4
             gamePadState = GamePad.GetState(PlayerIndex.One);
         }
 
+        public bool cheat()
+        {
+            if (keyboardState.IsKeyDown(Keys.P) && keyboardState.IsKeyDown(Keys.M) && keyboardState.IsKeyDown(Keys.H)) return true;
+            return false;
+        }
+
         public bool isPressed(InputTypes action)
         {
             switch (action)
