@@ -350,7 +350,7 @@
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\robot-death2.xnb</Output>
-      <Time>2013-04-02T16:57:02.9507806-06:00</Time>
+      <Time>2013-04-03T11:25:22.3519142-06:00</Time>
     </Item>
     <Item>
       <Source>Sad_Trombone.wav</Source>
@@ -439,6 +439,54 @@
       <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Muses.xnb</Output>
       <Extra>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Muses.wma</Extra>
       <Time>2013-04-03T01:44:07.8740188-06:00</Time>
+    </Item>
+    <Item>
+      <Source>storylineScreen1.png</Source>
+      <Name>storylineScreen1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\storylineScreen1.xnb</Output>
+      <Time>2013-04-03T11:19:08.5285328-06:00</Time>
+    </Item>
+    <Item>
+      <Source>storylineScreen2.png</Source>
+      <Name>storylineScreen2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\storylineScreen2.xnb</Output>
+      <Time>2013-04-03T11:19:08.5305329-06:00</Time>
+    </Item>
+    <Item>
+      <Source>DST-Birge.mp3</Source>
+      <Name>DST-Birge</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Birge.xnb</Output>
+      <Extra>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Birge.wma</Extra>
+      <Time>2013-04-03T11:19:08.4745297-06:00</Time>
+    </Item>
+    <Item>
+      <Source>DST-ConFuze.mp3</Source>
+      <Name>DST-ConFuze</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-ConFuze.xnb</Output>
+      <Extra>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-ConFuze.wma</Extra>
+      <Time>2013-04-03T11:19:08.4925307-06:00</Time>
+    </Item>
+    <Item>
+      <Source>DST-Pariah.mp3</Source>
+      <Name>DST-Pariah</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Pariah.xnb</Output>
+      <Extra>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Pariah.wma</Extra>
+      <Time>2013-04-03T11:19:08.5215324-06:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

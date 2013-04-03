@@ -19,8 +19,8 @@ namespace WindowsGame4
                                                 { "Act 1",
                                                   " ",
                                                   " ",
-                                                  "You wake in the middle of a clearing.", 
-                                                  "In the distance looms a dark castle.",
+                                                  "You wake up from a deep and troubled sleep.", 
+                                                  "A dark castle took shape in your dreams.",
                                                   "It is time to rescue the princess."}, 
                                             new string[]
                                                 { "Act 2",
@@ -33,7 +33,8 @@ namespace WindowsGame4
                                                 { "Act 3",
                                                   " ",
                                                   " ",
-                                                  "Princess: What? Who are you and how did you get past my guards??",
+                                                  "Princess: What??",
+                                                  "Princess: Who are you and how did you get past my guards??",
                                                   " ",
                                                   "Robro: ... ... ... Beep ...",
                                                   " ",
@@ -47,11 +48,11 @@ namespace WindowsGame4
                                             {
                                                 new int[] {3, 3, 5, 5, 5, 5}, 
                                                 new int[] {3, 3, 5, 5, 5, 5}, 
-                                                new int[] {3, 3, 5, 5, 5, 5, 5, 5, 5, 5, 5}
+                                                new int[] {3, 3, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5}
                                             };
 
-        private int[] textureSelection = { 17, 17, 17 };
-        private int[] songSelection = { 4, 4, 4};
+        private int[] textureSelection = { 22, 23, 17 };
+        private int[] songSelection = { 7, 6, 8};
 
         protected ScrollingTextScreen displayScreen;
         protected GameLoop game;
