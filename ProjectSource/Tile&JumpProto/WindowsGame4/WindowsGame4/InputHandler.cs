@@ -41,8 +41,6 @@ namespace WindowsGame4
             oldGamePadState = gamePadState;
             keyboardState = Keyboard.GetState(); 
             gamePadState = GamePad.GetState(PlayerIndex.One);
-
-            Console.WriteLine(isPressed(InputTypes.start));
         }
 
         public bool isPressed(InputTypes action)
@@ -74,7 +72,6 @@ namespace WindowsGame4
 
         public bool isNewlyPressed(InputTypes action)
         {
-            Console.WriteLine(gamePadState.ThumbSticks.Left.X);
             switch (action)
             {
                 case InputTypes.up:
