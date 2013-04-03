@@ -143,7 +143,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T1background.xnb</Output>
-      <Time>2013-04-02T16:57:02.9307795-06:00</Time>
+      <Time>2013-04-02T21:23:40.2827756-06:00</Time>
     </Item>
     <Item>
       <Source>T2background.png</Source>
@@ -152,7 +152,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T2background.xnb</Output>
-      <Time>2013-04-02T16:57:02.9317795-06:00</Time>
+      <Time>2013-04-02T21:23:40.2847758-06:00</Time>
     </Item>
     <Item>
       <Source>T3background.png</Source>
@@ -161,7 +161,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T3background.xnb</Output>
-      <Time>2013-04-02T16:57:02.9327796-06:00</Time>
+      <Time>2013-04-02T21:23:40.2857758-06:00</Time>
     </Item>
     <Item>
       <Source>wizard.png</Source>
@@ -197,7 +197,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\dashedLine.xnb</Output>
-      <Time>2013-04-02T16:57:02.93978-06:00</Time>
+      <Time>2013-04-02T21:23:40.2927762-06:00</Time>
     </Item>
     <Item>
       <Source>creditsHeaderFont.spritefont</Source>
@@ -393,6 +393,15 @@
       <Options>None</Options>
       <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T4background.xnb</Output>
       <Time>2013-04-02T18:24:45.7637963-06:00</Time>
+    </Item>
+    <Item>
+      <Source>boxParts.png</Source>
+      <Name>boxParts</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\boxParts.xnb</Output>
+      <Time>2013-04-02T21:23:40.2907761-06:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

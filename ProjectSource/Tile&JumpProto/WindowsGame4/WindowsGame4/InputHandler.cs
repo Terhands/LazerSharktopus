@@ -22,11 +22,12 @@ namespace WindowsGame4
         private static Keys KEYJUMP = Keys.Space;
         private static Keys KEYPULL = Keys.F;
         private static Keys KEYBOLT = Keys.E;
+        private static Keys KEYGATHER = Keys.G;
         private static Keys KEYQUIT = Keys.Escape;
 
         private static float STICK_THRESHOLD = 0.3f;
 
-        public enum InputTypes {up, down, left, right, start, jump, pull, bolt, quit};
+        public enum InputTypes {up, down, left, right, start, jump, pull, bolt, gather, quit};
         public InputHandler()
         {
             keyboardState = Keyboard.GetState();
@@ -62,7 +63,9 @@ namespace WindowsGame4
                 case InputTypes.pull:
                     return (keyboardState.IsKeyDown(KEYPULL) || gamePadState.Buttons.B == ButtonState.Pressed);
                 case InputTypes.bolt:
-                    return (keyboardState.IsKeyDown(KEYBOLT) || gamePadState.Buttons.X == ButtonState.Pressed); 
+                    return (keyboardState.IsKeyDown(KEYBOLT) || gamePadState.Buttons.X == ButtonState.Pressed);
+                case InputTypes.gather:
+                    return (keyboardState.IsKeyDown(KEYGATHER) || gamePadState.Buttons.Y == ButtonState.Pressed); 
                 case InputTypes.quit:
                     return (keyboardState.IsKeyDown(KEYQUIT));
                 default:
@@ -87,9 +90,11 @@ namespace WindowsGame4
                 case InputTypes.jump:
                     return ((keyboardState.IsKeyDown(KEYJUMP) && oldKeyboardState.IsKeyUp(KEYJUMP)) || (gamePadState.Buttons.A == ButtonState.Pressed && oldGamePadState.Buttons.A == ButtonState.Released));
                 case InputTypes.pull:
-                    return ((keyboardState.IsKeyDown(KEYPULL) && oldKeyboardState.IsKeyUp(KEYPULL)) || (gamePadState.Buttons.B == ButtonState.Pressed && oldGamePadState.Buttons.B == ButtonState.Released));
+                    return ((keyboardState.IsKeyDown(KEYPULL) && oldKeyboardState.IsKeyUp(KEYPULL)) || (gamePadState.Buttons.B == ButtonState.Pressed && oldGamePadState.Buttons.B == ButtonState.Released)); 
                 case InputTypes.bolt:
                     return ((keyboardState.IsKeyDown(KEYBOLT) && oldKeyboardState.IsKeyUp(KEYBOLT)) || (gamePadState.Buttons.X == ButtonState.Pressed && oldGamePadState.Buttons.X == ButtonState.Released));
+                case InputTypes.gather:
+                    return ((keyboardState.IsKeyDown(KEYGATHER) && oldKeyboardState.IsKeyUp(KEYGATHER)) || (gamePadState.Buttons.Y == ButtonState.Pressed && oldGamePadState.Buttons.Y == ButtonState.Released));
                 default:
                     return false;
             }
@@ -115,6 +120,8 @@ namespace WindowsGame4
                     return ((oldKeyboardState.IsKeyDown(KEYPULL) && keyboardState.IsKeyUp(KEYPULL)) || (oldGamePadState.Buttons.B == ButtonState.Pressed && gamePadState.Buttons.B == ButtonState.Released));
                 case InputTypes.bolt:
                     return ((oldKeyboardState.IsKeyDown(KEYBOLT) && keyboardState.IsKeyUp(KEYBOLT)) || (oldGamePadState.Buttons.X == ButtonState.Pressed && gamePadState.Buttons.X == ButtonState.Released));
+                case InputTypes.gather:
+                    return ((oldKeyboardState.IsKeyDown(KEYGATHER) && keyboardState.IsKeyUp(KEYGATHER)) || (oldGamePadState.Buttons.Y == ButtonState.Pressed && gamePadState.Buttons.Y == ButtonState.Released));
                 default:
                     return false;
             }

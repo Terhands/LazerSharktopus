@@ -46,7 +46,7 @@ namespace WindowsGame4
         Level tutorial;
 
         int mainMenuIndex = 2;
-        int creditsIndex = 16;
+        int creditsIndex = 17;
 
         InputHandler inputHandler;
 
@@ -89,7 +89,7 @@ namespace WindowsGame4
             level = new Level(this, textures, fonts, sounds, musicPlayer, plotScreen, new LevelLoader(config.LevelFiles), inputHandler);
             tutorial = new Level(this, textures, fonts, sounds, musicPlayer, null, new LevelLoader(config.TutorialFiles), inputHandler);
             gameOver = new GameOver(this, (Texture2D)textures[3], (SpriteFont)fonts[2], inputHandler);
-            titleScreen = new TitleScreen(this, (Texture2D)textures[7], (Texture2D)textures[15], (SpriteFont)fonts[2], musicPlayer, inputHandler);
+            titleScreen = new TitleScreen(this, (Texture2D)textures[7], (Texture2D)textures[16], (SpriteFont)fonts[2], musicPlayer, inputHandler);
             titleMenu = new TitleMenu(this, (Texture2D)textures[7], (SpriteFont)fonts[2], inputHandler);
             levelIntroScreen = new LevelIntroScreen(this, (SpriteFont)fonts[1]);
             levelIntroScreen.InitLevelScreen(level.LevelName);
@@ -199,7 +199,7 @@ namespace WindowsGame4
             else if (gameState == GameState.credits)
             {
                 credits.Update();
-                if (prevState.IsKeyDown(Keys.Enter) && Keyboard.GetState().IsKeyUp(Keys.Enter))
+                if (inputHandler.isNewlyPressed(InputHandler.InputTypes.start) || inputHandler.isNewlyPressed(InputHandler.InputTypes.jump))
                 {
                     SetGameState(GameState.titleScreen);
                 }
