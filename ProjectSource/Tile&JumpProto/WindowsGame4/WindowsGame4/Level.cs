@@ -147,7 +147,7 @@ namespace WindowsGame4
                 List<Gate> leverGates = new List<Gate>();
                 for (int j = 0; j < gateMaps[i].Length; j++)
                 {
-                    leverGates.Add(gates[j]);
+                    leverGates.Add(gates[gateMaps[i][j]]);
                 }
                 int x = ((int)v.X) * (screenWidth / 64) - (24 / 2);
                 int y = ((int)v.Y) * (screenHeight / 32) - 22;
