@@ -535,6 +535,7 @@ namespace WindowsGame4
             //When he dies time to crumble into a pile
             if (healthMeter.Health <= 0)
             {
+                //Console.WriteLine("THE FUCK IS THIS SHIT");
                 //Set to the row with the death animation by multiplying by 4
                 source.Y = frameStartY + frameSkipY * 4;
                 animationCount += 1;
