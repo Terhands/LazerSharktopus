@@ -25,6 +25,7 @@ namespace WindowsGame4
         protected const int LOSIndex = 17;
         protected const int leverIndex = 9;
         protected const int gateIndex = 10;
+        protected const int boxOfBoltsIndex = 19;
 
         protected Rectangle playerRange;
 
@@ -39,6 +40,7 @@ namespace WindowsGame4
         GuardFactory guardFactory;
         PlotScreen plotScreen;
 
+        Texture2D boxTexture;
 	    Texture2D boltTexture;
         GameLoop game;
         InputHandler inputHandler;
@@ -48,6 +50,7 @@ namespace WindowsGame4
         protected List<IGuard> guards;
         protected List<Lever> levers;
         protected List<Gate> gates;
+        protected List<BoxOfBolts> boxBolts;
         protected int[] leverGateMap;
 
         public Level(GameLoop game, ArrayList _textures, ArrayList _fonts, ArrayList _sounds, MusicManager _musicPlayer, PlotScreen _plotScreen, LevelLoader loader, InputHandler _inputHandler) : base(game)
@@ -60,6 +63,7 @@ namespace WindowsGame4
             guards = new List<IGuard>();
             levers = new List<Lever>();
             gates = new List<Gate>();
+            boxBolts = new List<BoxOfBolts>();
 
             playerRange = new Rectangle((screenWidth * 2)/5, 0, screenWidth/5, screenHeight);
             
@@ -100,7 +104,7 @@ namespace WindowsGame4
             player = new Player(Game, (Texture2D)textures[playerIndex], sounds, 50, screenHeight - 52 - (screenHeight / 32));
             
             boltTexture = (Texture2D)textures[4];
-
+            boxTexture = (Texture2D)textures[boxOfBoltsIndex];
             Texture2D[] torchTextures = new Texture2D[2];
             torchTextures[0] = (Texture2D)textures[6];
             torchTextures[1] = (Texture2D)textures[8];
@@ -142,6 +146,13 @@ namespace WindowsGame4
                 int y = ((int)v.Y) * (screenHeight / 32) - 22;
                 levers.Add(new Lever(Game, x, y, screenWidth, screenHeight, Lever.LeverType.switcher, leverGates, (Texture2D)textures[leverIndex]));
                 i++;
+            }
+
+            foreach (Vector2 v in levelLoader.BoxesOfBolts)
+            {
+                int x = ((int)v.X) * (screenWidth / 64) - (15 / 2);
+                int y = ((int)v.Y) * (screenHeight / 32) - 22;
+                boxBolts.Add(new BoxOfBolts(Game, x, y, boxTexture));
             }
     
             gameTimer = new GameTimer(levelLoader.TimeLimit, (SpriteFont)fonts[0]);
@@ -255,8 +266,26 @@ namespace WindowsGame4
                     {
                         gate.reposition(deltaX);
                     }
+
+                    // Update position
+                    foreach (BoxOfBolts boxBolt in boxBolts)
+                    {
+                        boxBolt.reposition(deltaX);
+                    }
                 }
 
+                // Will gather bolts to reset players health
+                if (inputHandler.isNewlyPressed(InputHandler.InputTypes.gather))
+                {
+                    foreach (BoxOfBolts box in boxBolts)
+                    {
+                        box.HandleCollision(levelMap.GetNearbyTiles(player.GetPosition()));
+                        if (box.getGathered())
+                        {
+                            player.healDamage();
+                        }
+                    }
+                }
 
                 /* Below this are Bolt actions */
                 if (inputHandler.isNewlyPressed(InputHandler.InputTypes.bolt))
@@ -323,6 +352,7 @@ namespace WindowsGame4
                     guards.Clear();
                     levers.Clear();
                     gates.Clear();
+                    boxBolts.Clear();
                     musicPlayer.Stop();
 
                     // if there is a next level get the map loaded
@@ -356,6 +386,7 @@ namespace WindowsGame4
                     guards.Clear();
                     levers.Clear();
                     gates.Clear();
+                    boxBolts.Clear();
                     musicPlayer.Stop();
                     game.SetGameState(GameLoop.GameState.gameOver);
                 }
@@ -387,6 +418,10 @@ namespace WindowsGame4
             foreach (Gate gate in gates)
             {
                 gate.Draw(spriteBatch);
+            }
+            foreach (BoxOfBolts box in boxBolts)
+            {
+                box.Draw(spriteBatch);
             }
         }
 
