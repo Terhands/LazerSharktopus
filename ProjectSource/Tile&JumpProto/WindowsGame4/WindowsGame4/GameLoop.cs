@@ -46,7 +46,7 @@ namespace WindowsGame4
         Level tutorial;
 
         int mainMenuIndex = 2;
-        int creditsIndex = 17;
+        int creditsIndex = 16;
 
         InputHandler inputHandler;
 
@@ -88,10 +88,10 @@ namespace WindowsGame4
             plotScreen = new PlotScreen(this, musicPlayer, textures, fonts);
             level = new Level(this, textures, fonts, sounds, musicPlayer, plotScreen, new LevelLoader(config.LevelFiles), inputHandler);
             tutorial = new Level(this, textures, fonts, sounds, musicPlayer, null, new LevelLoader(config.TutorialFiles), inputHandler);
-            titleScreen = new TitleScreen(this, (Texture2D)textures[7], (Texture2D)textures[16], (SpriteFont)fonts[2], musicPlayer, inputHandler);
-            
             gameOver = new GameOver(this, (Texture2D)textures[3], (SpriteFont)fonts[2], inputHandler);
+            titleScreen = new TitleScreen(this, (Texture2D)textures[7], (Texture2D)textures[15], (SpriteFont)fonts[2], musicPlayer, inputHandler);
             titleMenu = new TitleMenu(this, (Texture2D)textures[7], (SpriteFont)fonts[2], inputHandler);
+            levelIntroScreen = new LevelIntroScreen(this, (SpriteFont)fonts[1]);
             levelIntroScreen.InitLevelScreen(level.LevelName);
 
             credits = new Credits(this, (Texture2D)textures[creditsIndex], musicPlayer, fonts);
