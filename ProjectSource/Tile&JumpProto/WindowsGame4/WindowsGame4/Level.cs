@@ -89,6 +89,13 @@ namespace WindowsGame4
 
         public void InitLevel()
         {
+            bolts.Clear();
+            torches.Clear();
+            guards.Clear();
+            levers.Clear();
+            gates.Clear();
+            musicPlayer.Stop();
+
             levelLoader.LoadLevel(currentLevel);
             if (levelLoader.Map == null)
             {
