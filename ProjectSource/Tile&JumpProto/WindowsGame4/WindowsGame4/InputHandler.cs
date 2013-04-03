@@ -125,7 +125,6 @@ namespace WindowsGame4
                 default:
                     return false;
             }
-            return false;
         }
     }
 }
