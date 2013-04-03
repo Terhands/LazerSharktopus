@@ -37,5 +37,8 @@ namespace WindowsGame4
 
         /* Decrements Robro's health whenever bolt is thrown */
         void throwBolt();
+
+        /* Called when a bucket of bolts is gathered, calls the reset health method and resets player health to full */
+        void healDamage();
     }
 }

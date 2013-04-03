@@ -28,6 +28,7 @@ namespace WindowsGame4
         Vector2[] leverLayout;
         int[][] leverGateMaps;
         Vector2[] gateLayout;
+        Vector2[] boxOfBoltsLayout;
 
 
         public LevelLoader(string[] _levelFiles)
@@ -138,6 +139,15 @@ namespace WindowsGame4
                     leverGateMaps[i][j] = NextInt(tokenizedData);
                 }
             }
+
+            // Loading in the boxes of bolts for the player to gather
+            int numBoxes = NextInt(tokenizedData); // Next int is number of boxes in level
+            boxOfBoltsLayout = new Vector2[numBoxes];
+            for (int i = 0; i < numBoxes; i++)
+            {
+                boxOfBoltsLayout[i].X = NextInt(tokenizedData); // Next int is the X poistion for the box
+                boxOfBoltsLayout[i].Y = NextInt(tokenizedData); // Next int is the Y position for the box
+            }
         }
 
         // read the next integer from data
@@ -165,6 +175,12 @@ namespace WindowsGame4
         public Vector2[] Levers
         {
             get { return leverLayout; }
+        }
+
+        /* Return the layout for the boxes of bolts */
+        public Vector2[] BoxesOfBolts
+        {
+            get { return boxOfBoltsLayout; }
         }
 
         public int[][] levelGateMaps
