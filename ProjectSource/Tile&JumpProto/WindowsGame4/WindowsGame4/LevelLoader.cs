@@ -74,10 +74,15 @@ namespace WindowsGame4
             dataPos = 0;
 
             int numMapRows = NextInt(tokenizedData);
+            System.Console.WriteLine("YA 1");
             int numMapCols = NextInt(tokenizedData);
+            System.Console.WriteLine("YA 2");
             timeLimit = NextInt(tokenizedData);
+            System.Console.WriteLine("YA 3");
             musicIndex = NextInt(tokenizedData);
+            System.Console.WriteLine("YA 4");
             bgroundIndex = NextInt(tokenizedData);
+            System.Console.WriteLine("YA 5");
 
             if (numMapRows * numMapCols > tokenizedData.Length)
             {
@@ -86,17 +91,19 @@ namespace WindowsGame4
             }
 
             mapLayout = new int[numMapRows, numMapCols];
-
+            System.Console.WriteLine("YA 6");
             // load the rows and columns value of the map into the mapLayout variable
             for (int i = 0; i < numMapRows; i++)
             {
                 for (int j = 0; j < numMapCols; j++)
                 {
                     mapLayout[i, j] = NextInt(tokenizedData);
+                   
                 }
             }
-
+            System.Console.WriteLine("YA 7");
             int numTorches = NextInt(tokenizedData);
+            System.Console.WriteLine("YA 8");
             torchLayout = new Vector2[numTorches];
 
             // load the row/column indices for torch placement
@@ -105,8 +112,9 @@ namespace WindowsGame4
                 torchLayout[i].X = NextInt(tokenizedData);
                 torchLayout[i].Y = NextInt(tokenizedData);
             }
-
+            System.Console.WriteLine("YA 9");
             int numGuards = NextInt(tokenizedData);
+            System.Console.WriteLine("YA 10");
             guardLayout = new Vector3[numGuards];
 
             for(int i = 0; i < numGuards; i++)
@@ -117,21 +125,26 @@ namespace WindowsGame4
             }
 
             int numGates = NextInt(tokenizedData);
+            System.Console.WriteLine("YA 11");
             gateLayout = new Vector2[numGates];
             for (int i = 0; i < numGates; i++)
             {
                 gateLayout[i].X = NextInt(tokenizedData);
                 gateLayout[i].Y = NextInt(tokenizedData);
             }
-
+            System.Console.WriteLine("YA 12");
             int numLevers = NextInt(tokenizedData);
+            System.Console.WriteLine("YA 12.1");
             leverLayout = new Vector2[numLevers];
             leverGateMaps = new int[numLevers][];
             for (int i = 0; i < numLevers; i++)
             {
                 leverLayout[i].X = NextInt(tokenizedData);
+                System.Console.WriteLine("YA 13");
                 leverLayout[i].Y = NextInt(tokenizedData);
+                System.Console.WriteLine("YA 14");
                 int numGatesForLever = NextInt(tokenizedData);
+                System.Console.WriteLine("YA 15");
                 // And then we read in the indexes of the gates we'll be using for this lever
                 leverGateMaps[i] = new int[numGatesForLever];
                 for (int j = 0; j < numGatesForLever; j++)
@@ -143,11 +156,13 @@ namespace WindowsGame4
             // Loading in the boxes of bolts for the player to gather
             int numBoxes = NextInt(tokenizedData); // Next int is number of boxes in level
             boxOfBoltsLayout = new Vector2[numBoxes];
+            System.Console.WriteLine("YA 16");
             for (int i = 0; i < numBoxes; i++)
             {
                 boxOfBoltsLayout[i].X = NextInt(tokenizedData); // Next int is the X poistion for the box
                 boxOfBoltsLayout[i].Y = NextInt(tokenizedData); // Next int is the Y position for the box
             }
+            System.Console.WriteLine("YA 17");
         }
 
         // read the next integer from data
