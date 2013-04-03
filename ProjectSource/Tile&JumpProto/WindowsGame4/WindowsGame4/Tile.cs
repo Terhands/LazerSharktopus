@@ -34,7 +34,7 @@ namespace WindowsGame4
         /* change the type of this tile */
         public void changeType(CollisionType newType)
         {
-            this.collisionBehaviour = newType;
+            this.LoadContent(tileTexture, newType);
         }
 
         /* determine whether or not component is in collision with this tile */
@@ -137,7 +137,6 @@ namespace WindowsGame4
         /* draw this tile to screen with the current spriteBatch */
         public void Draw(SpriteBatch spriteBatch)
         {
-            //spriteBatch.Draw(tileTexture, position, color);
             spriteBatch.Draw(tileTexture, position, source, color, 0, new Vector2(0, 0), SpriteEffects.None, spriteDepth);
         }
     }

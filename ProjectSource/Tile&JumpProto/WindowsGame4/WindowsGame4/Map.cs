@@ -127,7 +127,7 @@ namespace WindowsGame4
         /* Modify the type of the given tile */
         public void changeTile(int xCoord, int yCoord, CollisionType newType)
         {
-            this.tiles[xCoord,yCoord].changeType(newType);
+            this.tiles[yCoord,xCoord].changeType(newType);
         }
 
         /* update the level position */
