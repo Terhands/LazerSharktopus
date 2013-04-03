@@ -300,3 +300,5 @@ C:\Users\mf\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGam
 C:\Users\mf\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-BlueMist.wma
 C:\Users\mf\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-StarryBook.wma
 C:\Users\mf\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T4background.xnb
+C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\storyFont.xnb
+C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T4background.xnb
