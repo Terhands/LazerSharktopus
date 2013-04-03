@@ -78,10 +78,7 @@ namespace WindowsGame4
                 }
             }
 
-            if (collided)
-            {
-                flip();
-            }
+            if (collided) flip();
         }
 
         public Rectangle GetPosition()

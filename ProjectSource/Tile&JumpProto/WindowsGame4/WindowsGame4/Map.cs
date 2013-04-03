@@ -124,6 +124,12 @@ namespace WindowsGame4
             return nearbyTiles;
         }
 
+        /* Modify the type of the given tile */
+        public void changeTile(int xCoord, int yCoord, CollisionType newType)
+        {
+            this.tiles[yCoord,xCoord].changeType(newType);
+        }
+
         /* update the level position */
         public void Update(Action direction, int velocity)
         {

@@ -21,5 +21,7 @@ namespace WindowsGame4
 
         /* get the tiles that are either intersecting position on the screen */
         IList<ITile> GetNearbyTiles(Rectangle position);
+
+        void changeTile(int xCoord, int yCoord, CollisionType newType);
     }
 }

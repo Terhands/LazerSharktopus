@@ -100,6 +100,12 @@ namespace WindowsGame4
             get { return hasReachedGoal; }
         }
 
+        /* Called when a bucket of bolts is gathered, calls the reset health method and resets player health to full */
+        public void healDamage()
+        {
+            healthMeter.resetHealth();
+        }
+
         public bool IsDead
         {
             get { return isDead; }
@@ -237,7 +243,7 @@ namespace WindowsGame4
                 switch (direction)
                 {
                     case Direction.top:
-                        if (t.getCollisionBehaviour() == CollisionType.impassable)
+                        if (t.getCollisionBehaviour() == CollisionType.impassable || t.getCollisionBehaviour() == CollisionType.invisible)
                         {
                             position.Y = t.getPosition().Bottom;
                             if (isJumping && startFalling < jumpMeter.JumpPower)
@@ -247,7 +253,7 @@ namespace WindowsGame4
                         }
                         break;
                     case Direction.left:
-                        if (t.getCollisionBehaviour() == CollisionType.impassable)
+                        if (t.getCollisionBehaviour() == CollisionType.impassable || t.getCollisionBehaviour() == CollisionType.invisible)
                         {
                             // for some wierd reason with only 1 pixel of padding this breaks player's fall
                             position.X = t.getPosition().Right + 3;
@@ -255,7 +261,7 @@ namespace WindowsGame4
                         }
                         break;
                     case Direction.right:
-                        if (t.getCollisionBehaviour() == CollisionType.impassable)
+                        if (t.getCollisionBehaviour() == CollisionType.impassable || t.getCollisionBehaviour() == CollisionType.invisible)
                         {
                             position.X = t.getPosition().Left - position.Width - 1;
                             deltaX = 0;
@@ -281,6 +287,11 @@ namespace WindowsGame4
                         TakeDamage();
                     }
 
+                    if (t.getCollisionBehaviour() == CollisionType.goal)
+                    {
+                        hasReachedGoal = true;
+                    }
+
                     footCollision = true;
 
                     position.Y = t.getPosition().Top - position.Height;
@@ -300,6 +311,12 @@ namespace WindowsGame4
                         isJumping = false;
                         landed = true;
                         jumpMeter.reset();
+
+                        if (fallDistance > maxPainlessFall)
+                        {
+                            TakeDamage();
+                        }
+                        fallDistance = 0;
                     }
                 }
             }
@@ -420,12 +437,6 @@ namespace WindowsGame4
             {
                 landed = false;
                 frameCountCol = 1;
-
-                if (fallDistance > maxPainlessFall)
-                {
-                    TakeDamage();
-                    fallDistance = 0;
-                }
             }
 
             healthMeter.Update(Action.none, 0);

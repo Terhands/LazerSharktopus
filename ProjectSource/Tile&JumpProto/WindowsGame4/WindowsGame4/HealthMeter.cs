@@ -53,6 +53,12 @@ namespace WindowsGame4
             width = healthBar.Width;
         }
 
+        /* Resets the width of the health bar, which resets the players health */
+        public void resetHealth()
+        {
+            width = healthWidth;
+        }
+
         /* Lowers the width of the health bar when bolt is thrown */
         public void lowerHealthMeter()
         {

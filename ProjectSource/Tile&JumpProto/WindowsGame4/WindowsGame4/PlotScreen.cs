@@ -50,7 +50,7 @@ namespace WindowsGame4
                                                 new int[] {3, 3, 5, 5, 5, 5, 5, 5, 5, 5, 5}
                                             };
 
-        private int[] textureSelection = { 16, 16, 16 };
+        private int[] textureSelection = { 17, 17, 17 };
         private int[] songSelection = { 4, 4, 4};
 
         protected ScrollingTextScreen displayScreen;
