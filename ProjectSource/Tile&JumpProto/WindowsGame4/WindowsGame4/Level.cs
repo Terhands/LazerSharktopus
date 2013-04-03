@@ -22,7 +22,7 @@ namespace WindowsGame4
         protected const int playerIndex = 0;
         protected const int wizardIndex = 5;
         protected const int soldierIndex = 15;
-        protected const int LOSIndex = 17;
+        protected const int LOSIndex = 18;
         protected const int leverIndex = 9;
         protected const int gateIndex = 10;
         protected const int boxOfBoltsIndex = 19;
