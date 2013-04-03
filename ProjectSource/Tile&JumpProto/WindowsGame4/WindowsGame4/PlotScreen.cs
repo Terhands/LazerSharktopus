@@ -34,7 +34,7 @@ namespace WindowsGame4
                                                   " ",
                                                   " ",
                                                   "Princess: What??",
-                                                  "          Who are you and how did you get past my guards??",
+                                                  "Princess: Who are you and how did you get past my guards??",
                                                   " ",
                                                   "Robro: ... ... ... Beep ...",
                                                   " ",
@@ -51,7 +51,7 @@ namespace WindowsGame4
                                                 new int[] {3, 3, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5}
                                             };
 
-        private int[] textureSelection = { 22, 17, 17 };
+        private int[] textureSelection = { 22, 23, 17 };
         private int[] songSelection = { 7, 6, 8};
 
         protected ScrollingTextScreen displayScreen;

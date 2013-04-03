@@ -479,6 +479,15 @@
       <Extra>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Pariah.wma</Extra>
       <Time>2013-04-03T01:45:28.849923-06:00</Time>
     </Item>
+    <Item>
+      <Source>storylineScreen2.png</Source>
+      <Name>storylineScreen2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Terhands\Desktop\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\storylineScreen2.xnb</Output>
+      <Time>2013-04-03T02:29:48.9750734-06:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{CA0DE09B-9CB2-4716-A9AF-EF0E3769966A}</ContentProjectGUID>
