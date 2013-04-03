@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections;
 using System.Linq;
@@ -46,7 +47,7 @@ namespace WindowsGame4
         Level tutorial;
 
         int mainMenuIndex = 2;
-        int creditsIndex = 16;
+        int creditsIndex = 17;
 
         InputHandler inputHandler;
 
@@ -84,7 +85,6 @@ namespace WindowsGame4
             gameState = GameState.titleScreen;
             prevGameState = gameState;
             inputHandler = new InputHandler();
-           
 
             plotScreen = new PlotScreen(this, musicPlayer, textures, fonts);
             level = new Level(this, textures, fonts, sounds, musicPlayer, plotScreen, new LevelLoader(config.LevelFiles), inputHandler);
@@ -200,7 +200,7 @@ namespace WindowsGame4
             else if (gameState == GameState.credits)
             {
                 credits.Update();
-                if (prevState.IsKeyDown(Keys.Enter) && Keyboard.GetState().IsKeyUp(Keys.Enter))
+                if (inputHandler.isNewlyPressed(InputHandler.InputTypes.start) || inputHandler.isNewlyPressed(InputHandler.InputTypes.jump))
                 {
                     SetGameState(GameState.titleScreen);
                 }
@@ -340,4 +340,5 @@ namespace WindowsGame4
             }
         }
     }
+
 }

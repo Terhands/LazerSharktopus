@@ -286,6 +286,11 @@ namespace WindowsGame4
                         TakeDamage();
                     }
 
+                    if (t.getCollisionBehaviour() == CollisionType.goal)
+                    {
+                        hasReachedGoal = true;
+                    }
+
                     footCollision = true;
 
                     position.Y = t.getPosition().Top - position.Height;
@@ -305,6 +310,12 @@ namespace WindowsGame4
                         isJumping = false;
                         landed = true;
                         jumpMeter.reset();
+
+                        if (fallDistance > maxPainlessFall)
+                        {
+                            TakeDamage();
+                        }
+                        fallDistance = 0;
                     }
                 }
             }
@@ -425,12 +436,6 @@ namespace WindowsGame4
             {
                 landed = false;
                 frameCountCol = 1;
-
-                if (fallDistance > maxPainlessFall)
-                {
-                    TakeDamage();
-                    fallDistance = 0;
-                }
             }
 
             healthMeter.Update(Action.none, 0);
