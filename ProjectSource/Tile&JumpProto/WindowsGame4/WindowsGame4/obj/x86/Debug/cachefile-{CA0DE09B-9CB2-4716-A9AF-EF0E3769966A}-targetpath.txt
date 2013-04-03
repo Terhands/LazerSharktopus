@@ -23,8 +23,6 @@ Content\dashedLine.xnb
 Content\T4background.xnb
 Content\RoBro2.0.xnb
 Content\boxParts.xnb
-Content\button.xnb
-Content\spout.xnb
 Content\creditsHeaderFont.xnb
 Content\creditsFont.xnb
 Content\timerFont.xnb
@@ -51,6 +49,10 @@ Content\DST-BlueMist.xnb
 Content\DST-BlueMist.wma
 Content\DST-StarryBook.xnb
 Content\DST-StarryBook.wma
+Content\button.xnb
+Content\spout.xnb
+Content\DST-Muses.xnb
+Content\DST-Muses.wma
 Content\lathraia.config
 Content\Level1.txt
 Content\Level2.txt

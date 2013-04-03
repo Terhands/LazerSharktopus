@@ -234,16 +234,10 @@ namespace WindowsGame4
                     hasReachedGoal = true;
                 }
 
-                // bottom collisions are all handled later - don't want to take double the damage
-                if (direction != Direction.none && direction != Direction.bottom && t.getCollisionBehaviour() == CollisionType.spike)
-                {
-                    TakeDamage();
-                }
-
                 switch (direction)
                 {
                     case Direction.top:
-                        if (t.getCollisionBehaviour() == CollisionType.impassable || t.getCollisionBehaviour() == CollisionType.invisible)
+                        if (t.getCollisionBehaviour() != CollisionType.platform)
                         {
                             position.Y = t.getPosition().Bottom;
                             if (isJumping && startFalling < jumpMeter.JumpPower)
