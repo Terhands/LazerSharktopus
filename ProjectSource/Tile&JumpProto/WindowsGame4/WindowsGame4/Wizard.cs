@@ -9,7 +9,6 @@ namespace WindowsGame4
 {
     class Wizard : ADynamicGameObject, IGuard
     {
-        protected int invisibleY; 
         //distraction
         protected int distractionCount;
         protected int maxDistractedCount = 70;
@@ -86,8 +85,6 @@ namespace WindowsGame4
 
         public Wizard(Game game, Texture2D texture, Texture2D LOSTexture, int xStart, int yStart, Direction FacingDirectionStart, int patrolLength) : base(game)
         {
-            //assumes that the level is never going to be ridiculously huge
-            invisibleY = yStart - 1000;
             //guard should be normal 
             debugColor = Color.White;
 

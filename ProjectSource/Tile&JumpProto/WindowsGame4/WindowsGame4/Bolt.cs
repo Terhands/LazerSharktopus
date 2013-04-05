@@ -14,17 +14,22 @@ namespace WindowsGame4
         Texture2D boltTexture;
         Rectangle position;
 
-        float deltaX = 3;
-        float deltaY = -3;
-        float k_looks_gravity = 0.15f;
+        float deltaX = 3; //Initial horizontal speed
+        float deltaY = -3; //Initial vertical speed
+        float k_looks_gravity = 0.15f; // Power of gravity
         public bool hasCollided = false;
         public int expiryTime;
         float spriteDepth;
 
-        private Rectangle boltArea = new Rectangle(0, 0, 64, 64);
-        private Vector2 spriteOrigin = new Vector2(32, 32);
+        private static int spriteWidth = 64;
+        private static int spriteHeight = 64;
+
+        private Rectangle boltArea = new Rectangle(0, 0, spriteWidth, spriteHeight);
+        private Vector2 spriteOrigin = new Vector2(spriteWidth/2, spriteHeight/2);
         private float rotation;
         protected ArrayList sounds;
+
+        private static int PIPE_OFFSET = 10; // Amount to adjust the start position by when coming out of a pipe
 
         /* Constructor when the bolt is thrown by the player */
         public Bolt(Game game, Action direction, int xStart, int yStart, Texture2D texture, ArrayList _sounds) : base(game)
@@ -59,11 +64,11 @@ namespace WindowsGame4
                 if (orientation == 0)
                 {
                     deltaY = deltaY * -1; // Throw it down
-                    position.Y += 10;
+                    position.Y += PIPE_OFFSET;
                 }
                 else if (orientation == 2)
                 {
-                    position.Y -= 10;
+                    position.Y -= PIPE_OFFSET;
                     deltaY = deltaY * 2; //More force!
                 }
             }
@@ -72,12 +77,12 @@ namespace WindowsGame4
                 deltaY = 0; // Throw it horiztonally
                 if (orientation == 1)
                 {
-                    position.Y -= 10;
+                    position.Y -= PIPE_OFFSET;
                     deltaX = deltaX * -1; // Throw it left instead of right
                 }
                 else if (orientation == 3)
                 {
-                    position.X += 10;
+                    position.X += PIPE_OFFSET;
                 }
             }
 

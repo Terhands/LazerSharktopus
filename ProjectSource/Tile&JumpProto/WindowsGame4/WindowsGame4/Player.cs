@@ -69,8 +69,13 @@ namespace WindowsGame4
         {
             facingDirection = Action.right;
             source = new Rectangle(this.frameStartX + this.frameSkipX * this.frameCountCol, this.frameStartY + this.frameSkipY * this.frameCountRow, this.frameWidth, this.frameHeight);
-            position = new Rectangle(xStart, yStart, 36, 52);
+            int screenwidth = Game.GraphicsDevice.Viewport.Width;
+            int screenheight = Game.GraphicsDevice.Viewport.Height;
+            int playerHeight = screenheight * 4 / 32;
+            int playerWidth = screenwidth * 2 / 64;
+            position = new Rectangle(xStart, yStart, playerWidth, playerHeight);
             leftRightCollisionRectangle = new Rectangle(position.X, position.Y, position.Width, position.Height - 2);
+
 
             sprite = texture;
 

@@ -55,6 +55,8 @@ namespace WindowsGame4
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
+            //graphics.PreferredBackBufferHeight = 480;
+            //graphics.PreferredBackBufferWidth = 800;
             if (!graphics.IsFullScreen)
             {
                 //graphics.ToggleFullScreen();

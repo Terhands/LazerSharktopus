@@ -143,7 +143,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T1background.xnb</Output>
-      <Time>2013-04-02T21:23:40.2827756-06:00</Time>
+      <Time>2013-04-03T14:31:00.8860019-06:00</Time>
     </Item>
     <Item>
       <Source>T2background.png</Source>
@@ -152,7 +152,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T2background.xnb</Output>
-      <Time>2013-04-02T21:23:40.2847758-06:00</Time>
+      <Time>2013-04-03T14:31:00.8900022-06:00</Time>
     </Item>
     <Item>
       <Source>T3background.png</Source>
@@ -161,7 +161,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T3background.xnb</Output>
-      <Time>2013-04-02T21:23:40.2857758-06:00</Time>
+      <Time>2013-04-03T14:31:00.8940024-06:00</Time>
     </Item>
     <Item>
       <Source>wizard.png</Source>
@@ -206,7 +206,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T4background.xnb</Output>
-      <Time>2013-04-02T23:18:50.806035-06:00</Time>
+      <Time>2013-04-03T14:31:00.8970026-06:00</Time>
     </Item>
     <Item>
       <Source>RoBro2.0.png</Source>
@@ -487,6 +487,15 @@
       <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Pariah.xnb</Output>
       <Extra>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Pariah.wma</Extra>
       <Time>2013-04-03T11:19:08.5215324-06:00</Time>
+    </Item>
+    <Item>
+      <Source>T5background.png</Source>
+      <Name>T5background</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T5background.xnb</Output>
+      <Time>2013-04-03T14:31:00.9000027-06:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

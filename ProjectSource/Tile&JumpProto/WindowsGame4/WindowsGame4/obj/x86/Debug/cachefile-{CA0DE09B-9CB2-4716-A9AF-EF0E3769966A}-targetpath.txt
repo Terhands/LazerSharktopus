@@ -61,6 +61,7 @@ Content\DST-ConFuze.xnb
 Content\DST-ConFuze.wma
 Content\DST-Pariah.xnb
 Content\DST-Pariah.wma
+Content\T5background.xnb
 Content\lathraia.config
 Content\Level1.txt
 Content\Level2.txt
@@ -69,3 +70,4 @@ Content\Tutorial1.txt
 Content\Tutorial2.txt
 Content\Tutorial3.txt
 Content\Tutorial4.txt
+Content\Tutorial5.txt

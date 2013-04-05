@@ -58,6 +58,8 @@ namespace WindowsGame4
         {
             int screenWidth = Game.GraphicsDevice.Viewport.Width;
             int screenHeight = Game.GraphicsDevice.Viewport.Height;
+            Console.WriteLine(screenWidth);
+            Console.WriteLine(screenHeight);
 
             bolts = new List<Bolt>();
             torches = new List<Torch>();
@@ -113,7 +115,7 @@ namespace WindowsGame4
             int screenWidth = Game.GraphicsDevice.Viewport.Width;
             int screenHeight = Game.GraphicsDevice.Viewport.Height;
 
-            player = new Player(Game, (Texture2D)textures[playerIndex], sounds, 50, screenHeight - 52 - (screenHeight / 32));
+            player = new Player(Game, (Texture2D)textures[playerIndex], sounds, 50, screenHeight - 100 - (screenHeight / 32));
             
             boltTexture = (Texture2D)textures[4];
             boxTexture = (Texture2D)textures[boxOfBoltsIndex];

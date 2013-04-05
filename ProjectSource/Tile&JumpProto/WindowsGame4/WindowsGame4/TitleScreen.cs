@@ -100,13 +100,13 @@ namespace WindowsGame4
         {
             if (logoCount == 0)
             {
-                Vector2 item0size = menuFont.MeasureString("Press Space to Start");
+                Vector2 item0size = menuFont.MeasureString("Press Start");
 
                 spriteBatch.Draw(background, new Rectangle(0, 0, Game.GraphicsDevice.Viewport.Width, Game.GraphicsDevice.Viewport.Height), Color.White);
 
                 if (blinkCount < 30)
                 {
-                    spriteBatch.DrawString(menuFont, "Press Space to Start", new Vector2(Game.GraphicsDevice.Viewport.Width / 2, Game.GraphicsDevice.Viewport.Height / 2), Color.White, 0f, item0size / 2, 1.0f, SpriteEffects.None, 1.0f);
+                    spriteBatch.DrawString(menuFont, "Press Start", new Vector2(Game.GraphicsDevice.Viewport.Width / 2, Game.GraphicsDevice.Viewport.Height / 2), Color.White, 0f, item0size / 2, 1.0f, SpriteEffects.None, 1.0f);
                 }
             }
             else
