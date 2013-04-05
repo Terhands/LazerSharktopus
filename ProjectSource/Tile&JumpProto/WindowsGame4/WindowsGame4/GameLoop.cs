@@ -87,6 +87,14 @@ namespace WindowsGame4
 
             playerAnimation = new PlayerAnimation(this, new Player(this, (Texture2D)textures[0], sounds, -100, 400));
             animatePlayer = false;
+
+            int screenWidth = graphics.GraphicsDevice.Viewport.Width;
+            int screenHeight = graphics.GraphicsDevice.Viewport.Height;
+
+            //initializing virtual screen resolution to be mapped to the actual screen
+            Resolution.Init(ref graphics);
+            Resolution.SetVirtualResolution(screenWidth, screenHeight);
+            Resolution.SetResolution(800, 600, true);
         }
 
         /// <summary>
@@ -233,7 +241,10 @@ namespace WindowsGame4
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            this.spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
+            Resolution.BeginDraw();
+
+            //this.spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
+            spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, null, null, null, null, Resolution.getTransformationMatrix());
 
             if (gameState == GameState.level)
             {
