@@ -756,26 +756,20 @@ namespace WindowsGame4
             int x=0 , y=0, height=0;
 
             float b = position.Y + eyePos.Y;
+            float mUp = -1 * LOSSlope;
+            float mDown = LOSSlope;
+            float xLOS = LOSRadius;
+
+            y = (int)((mUp * xLOS) + b);
+            height = (int)((mDown * xLOS) + b) - y;
 
             if (facingDirection == Direction.right)
             {
-                float mUp = -1 * LOSSlope;
-                float mDown = LOSSlope;
-                float xLOS = LOSRadius;
-
                 x = position.X + (int)eyePos.X;
-                y = (int)((mUp * xLOS) + b);
-                height = (int)((mDown * xLOS) + b) - y;
             }
             else
             {
-                float mUp = LOSSlope;
-                float mDown = -1 * LOSSlope;
-                float xLOS = LOSRadius;
-
                 x = position.X + (int)eyePos.X - LOSRadius;
-                y = (int)((mUp * xLOS) + b);
-                height = (int)(y - ((mDown * xLOS) + b));
             }
 
             return new Rectangle(x, y, LOSRadius, height);
