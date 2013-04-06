@@ -598,7 +598,7 @@ namespace WindowsGame4
             float visibility = distance - ((1 - player.HiddenPercent) * LOSRadius);
 
             // if the player is behind the guard we don't care
-            if ((facingDirection == Direction.left && player.GetPosition().X <= mapEyePos.X) || (facingDirection == Direction.right && player.GetPosition().Right >= mapEyePos.X))
+            if ((facingDirection == Direction.left && player.GetPosition().Left <= mapEyePos.X) || (facingDirection == Direction.right && player.GetPosition().Right >= mapEyePos.X))
             {
                 // is the player visible enough/close enough for the guard to be able to see
                 if (visibility <= 0 && isVisible(player.GetPosition(), surroundingTiles))
@@ -641,7 +641,7 @@ namespace WindowsGame4
                 // if the tile is completely behind the player relative to the guard's perspective we don't care about it
                 if (!((facingDirection == Direction.right && t.getPosition().Left > r.Right) || (facingDirection == Direction.left && t.getPosition().Right < r.Left)))
                 {
-                    if (t.getCollisionBehaviour() == CollisionType.impassable || (t.getCollisionBehaviour() == CollisionType.platform && r.Bottom <= t.getPosition().Top))
+                    if (t.getCollisionBehaviour() == CollisionType.impassable || t.getCollisionBehaviour() == CollisionType.platform)
                     {
                         cleanedTiles.Add(t);
                     }
@@ -656,8 +656,7 @@ namespace WindowsGame4
 
             while (yTop <= yBottom && !isInLOS)
             {
-                // there are two possible values that this could retrieve - for this it will ALWAYS get the x as though the guard were facing right
-                //p2.X = (int)Math.Sqrt((double)(Math.Abs((LOSRadius * LOSRadius) - (yTop * yTop))));
+                // instead of a true sweep to have a curved fov going to use a simple cone
                 p2.Y = yTop;
 
                 if (facingDirection == Direction.right)
@@ -670,14 +669,14 @@ namespace WindowsGame4
                 }
 
                 // check that the player hits this sweep line otherwise we dont care if tiles are in the way
-                isInLOS = isSweepLineCollision(p1, p2, r);
+                isInLOS = isSweepLineCollision(p1, p2, r, false);
 
-                foreach (ITile t in cleanedTiles)
+                foreach (ITile t in tiles)
                 {
                     // if the player is already being blocked - we don't care anymore
                     if (isInLOS)
                     {
-                        if (isSweepLineCollision(p1, p2, t.getPosition()))
+                        if (isSweepLineCollision(p1, p2, t.getPosition(), t.getCollisionBehaviour() == CollisionType.impassable))
                         {
                             isInLOS = false;
                         }
@@ -690,37 +689,41 @@ namespace WindowsGame4
         }
 
         // test to see if r intersects the sweep line from p1 -> p2
-        protected bool isSweepLineCollision(Point p1, Point p2, Rectangle r)
+        protected bool isSweepLineCollision(Point p1, Point p2, Rectangle r, bool isRightLeft)
         {
 
             Point q1 = new Point();
             Point q2 = new Point();
             Point collisionPoint;
 
-            if (facingDirection == Direction.right)
+            // only perform left/right sweep tests on objects that block left/righ LOS
+            if (isRightLeft)
             {
-                // q1 -> q2 is the left side of the rectangle
-                q1.X = r.Left;
-                q1.Y = r.Top;
-                q2.X = r.Left;
-                q2.Y = r.Bottom;
-            }
-            else
-            {
-                // q1 -> q2 is the right side of the rectangle
-                q1.X = r.Right;
-                q1.Y = r.Top;
-                q2.X = r.Right;
-                q2.Y = r.Bottom;
+                if (facingDirection == Direction.right)
+                {
+                    // q1 -> q2 is the left side of the rectangle
+                    q1.X = r.Left;
+                    q1.Y = r.Top;
+                    q2.X = r.Left;
+                    q2.Y = r.Bottom;
+                }
+                else
+                {
+                    // q1 -> q2 is the right side of the rectangle
+                    q1.X = r.Right;
+                    q1.Y = r.Top;
+                    q2.X = r.Right;
+                    q2.Y = r.Bottom;
+                }
+
+                collisionPoint = getLineCollisionLocation(p1, p2, q1, q2);
+                if (collisionPoint.X != -1 || collisionPoint.Y != -1)
+                {
+                    return true;
+                }
             }
 
-            collisionPoint = getLineCollisionLocation(p1, p2, q1, q2);
-            if (collisionPoint.X != -1 || collisionPoint.Y != -1)
-            {
-                return true;
-            }
-
-            // q1 - > q2 is the top of the rectangle
+            // q1 - > q2 is the top of the rectangle +  a padding
             q1.X = r.Left;
             q1.Y = r.Top;
             q2.X = r.Right;

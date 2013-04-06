@@ -182,7 +182,11 @@ namespace WindowsGame4
 
             foreach (ITile t in tiles)
             {
-                Direction direction = determineCollisionType(t.getPosition());
+                Rectangle tilePosition = t.getPosition();
+                tilePosition.Width -= 4;
+                tilePosition.X -= 2;
+
+                Direction direction = determineCollisionType(tilePosition);
 
                 if (direction == Direction.bottom)
                 {
@@ -230,15 +234,7 @@ namespace WindowsGame4
             // check that any intersections are only on passable tiles
             foreach (ITile t in tiles)
             {
-                // padding the tile with a pixel on either side so the player cannot climb the walls
-                Rectangle tilePos = t.getPosition();
-                
-                tilePos.X -= 1;
-                tilePos.Y += 2;
-                tilePos.Height -= 2;
-                tilePos.Width += 1;
-                
-                Direction direction = determineCollisionType(tilePos);
+                Direction direction = determineCollisionType(t.getPosition());
 
                 if (direction != Direction.none && t.getCollisionBehaviour() == CollisionType.goal)
                 {
@@ -260,15 +256,14 @@ namespace WindowsGame4
                     case Direction.left:
                         if (t.getCollisionBehaviour() == CollisionType.impassable || t.getCollisionBehaviour() == CollisionType.invisible)
                         {
-                            // for some wierd reason with only 1 pixel of padding this breaks player's fall
-                            position.X = t.getPosition().Right + 3;
+                            position.X = t.getPosition().Right;
                             deltaX = 0;
                         }
                         break;
                     case Direction.right:
                         if (t.getCollisionBehaviour() == CollisionType.impassable || t.getCollisionBehaviour() == CollisionType.invisible)
                         {
-                            position.X = t.getPosition().Left - position.Width - 1;
+                            position.X = t.getPosition().Left - position.Width;
                             deltaX = 0;
                         }
                         break;
@@ -283,7 +278,11 @@ namespace WindowsGame4
 
             foreach (ITile t in tiles)
             {
-                Direction direction = determineCollisionType(t.getPosition());
+                Rectangle tilePosition = t.getPosition();
+                tilePosition.Width -= 8;
+                tilePosition.X += 4;
+
+                Direction direction = determineCollisionType(tilePosition);
 
                 if (Direction.bottom == direction)
                 {
