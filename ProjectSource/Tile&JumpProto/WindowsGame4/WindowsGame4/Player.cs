@@ -179,6 +179,17 @@ namespace WindowsGame4
         /* make sure player isn't falling through platforms/walking through walls */
         public override void HandleCollision(IList<ITile> tiles)
         {
+
+            foreach (ITile t in tiles)
+            {
+                Direction direction = determineCollisionType(t.getPosition());
+
+                if (direction == Direction.bottom)
+                {
+                    position.Y = t.getPosition().Top - position.Height;
+                }
+            }
+
             // handle foot to floor collisions after intersection collisions have been resolved
             IList<ITile> tilesBelowPlayer = new List<ITile>();
             IList<ITile> tilesAtPlayerLevel = new List<ITile>();
