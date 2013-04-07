@@ -447,6 +447,8 @@ namespace WindowsGame4
                     levers.Clear();
                     gates.Clear();
                     boxBolts.Clear();
+                    spouts.Clear();
+                    buttons.Clear();
                     musicPlayer.Stop();
                     deathCounter = 0;
                     game.SetGameState(GameLoop.GameState.gameOver);
