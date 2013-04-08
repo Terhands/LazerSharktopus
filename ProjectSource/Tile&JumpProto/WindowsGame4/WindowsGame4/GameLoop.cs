@@ -55,9 +55,11 @@ namespace WindowsGame4
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
+            //graphics.PreferredBackBufferHeight = 480;
+            //graphics.PreferredBackBufferWidth = 800;
             if (!graphics.IsFullScreen)
             {
-                graphics.ToggleFullScreen();
+                //graphics.ToggleFullScreen();
             }
         }
 
@@ -94,7 +96,7 @@ namespace WindowsGame4
             //initializing virtual screen resolution to be mapped to the actual screen
             Resolution.Init(ref graphics);
             Resolution.SetVirtualResolution(screenWidth, screenHeight);
-            Resolution.SetResolution(800, 600, false);
+            Resolution.SetResolution(800, 600, true);
         }
 
         /// <summary>
