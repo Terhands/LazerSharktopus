@@ -76,6 +76,7 @@
     <Compile Include="Bolt.cs" />
     <Compile Include="BoxOfBolts.cs" />
     <Compile Include="Button.cs" />
+    <Compile Include="Resolution.cs" />
     <Compile Include="Spout.cs" />
     <Compile Include="Credits.cs" />
     <Compile Include="Gate.cs" />

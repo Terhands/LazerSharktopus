@@ -25,6 +25,9 @@ Content\RoBro2.0.xnb
 Content\boxParts.xnb
 Content\button.xnb
 Content\spout.xnb
+Content\storylineScreen1.xnb
+Content\storylineScreen2.xnb
+Content\T5background.xnb
 Content\creditsHeaderFont.xnb
 Content\creditsFont.xnb
 Content\timerFont.xnb
@@ -46,12 +49,9 @@ Content\DST-Beneathere.xnb
 Content\DST-BlueMist.xnb
 Content\DST-StarryBook.xnb
 Content\DST-Muses.xnb
-Content\storylineScreen1.xnb
-Content\storylineScreen2.xnb
 Content\DST-Birge.xnb
 Content\DST-ConFuze.xnb
 Content\DST-Pariah.xnb
-Content\T5background.xnb
 Content\DST-Aronara.wma
 Content\DST-AngryRobotIII.wma
 Content\DST-MechaNoir.wma

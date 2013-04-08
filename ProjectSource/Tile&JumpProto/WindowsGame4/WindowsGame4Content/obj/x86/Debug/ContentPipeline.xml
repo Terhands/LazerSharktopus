@@ -245,6 +245,33 @@
       <Time>2013-04-03T02:39:35.5433506-06:00</Time>
     </Item>
     <Item>
+      <Source>storylineScreen1.png</Source>
+      <Name>storylineScreen1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\storylineScreen1.xnb</Output>
+      <Time>2013-04-03T11:19:08.5285328-06:00</Time>
+    </Item>
+    <Item>
+      <Source>storylineScreen2.png</Source>
+      <Name>storylineScreen2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\storylineScreen2.xnb</Output>
+      <Time>2013-04-03T11:19:08.5305329-06:00</Time>
+    </Item>
+    <Item>
+      <Source>T5background.png</Source>
+      <Name>T5background</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T5background.xnb</Output>
+      <Time>2013-04-03T14:31:00.9000027-06:00</Time>
+    </Item>
+    <Item>
       <Source>creditsHeaderFont.spritefont</Source>
       <Name>creditsHeaderFont</Name>
       <Importer>FontDescriptionImporter</Importer>
@@ -441,24 +468,6 @@
       <Time>2013-04-03T01:44:07.8740188-06:00</Time>
     </Item>
     <Item>
-      <Source>storylineScreen1.png</Source>
-      <Name>storylineScreen1</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\storylineScreen1.xnb</Output>
-      <Time>2013-04-03T11:19:08.5285328-06:00</Time>
-    </Item>
-    <Item>
-      <Source>storylineScreen2.png</Source>
-      <Name>storylineScreen2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\storylineScreen2.xnb</Output>
-      <Time>2013-04-03T11:19:08.5305329-06:00</Time>
-    </Item>
-    <Item>
       <Source>DST-Birge.mp3</Source>
       <Name>DST-Birge</Name>
       <Importer>Mp3Importer</Importer>
@@ -487,15 +496,6 @@
       <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Pariah.xnb</Output>
       <Extra>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Pariah.wma</Extra>
       <Time>2013-04-03T11:19:08.5215324-06:00</Time>
-    </Item>
-    <Item>
-      <Source>T5background.png</Source>
-      <Name>T5background</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T5background.xnb</Output>
-      <Time>2013-04-03T14:31:00.9000027-06:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

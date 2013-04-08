@@ -25,6 +25,9 @@ Content\RoBro2.0.xnb
 Content\boxParts.xnb
 Content\button.xnb
 Content\spout.xnb
+Content\storylineScreen1.xnb
+Content\storylineScreen2.xnb
+Content\T5background.xnb
 Content\creditsHeaderFont.xnb
 Content\creditsFont.xnb
 Content\timerFont.xnb
@@ -53,15 +56,12 @@ Content\DST-StarryBook.xnb
 Content\DST-StarryBook.wma
 Content\DST-Muses.xnb
 Content\DST-Muses.wma
-Content\storylineScreen1.xnb
-Content\storylineScreen2.xnb
 Content\DST-Birge.xnb
 Content\DST-Birge.wma
 Content\DST-ConFuze.xnb
 Content\DST-ConFuze.wma
 Content\DST-Pariah.xnb
 Content\DST-Pariah.wma
-Content\T5background.xnb
 Content\lathraia.config
 Content\Level1.txt
 Content\Level2.txt
