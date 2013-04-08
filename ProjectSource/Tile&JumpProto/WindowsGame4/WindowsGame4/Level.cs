@@ -41,10 +41,10 @@ namespace WindowsGame4
         PlotScreen plotScreen;
 
         Texture2D boxTexture;
-	    Texture2D boltTexture;
+        Texture2D boltTexture;
         GameLoop game;
         InputHandler inputHandler;
-        
+
         protected List<Bolt> bolts;
         protected List<Torch> torches;
         protected List<IGuard> guards;
@@ -54,12 +54,11 @@ namespace WindowsGame4
         protected List<Button> buttons;
         protected List<Spout> spouts;
 
-        public Level(GameLoop game, ArrayList _textures, ArrayList _fonts, ArrayList _sounds, MusicManager _musicPlayer, PlotScreen _plotScreen, LevelLoader loader, InputHandler _inputHandler) : base(game)
+        public Level(GameLoop game, ArrayList _textures, ArrayList _fonts, ArrayList _sounds, MusicManager _musicPlayer, PlotScreen _plotScreen, LevelLoader loader, InputHandler _inputHandler)
+            : base(game)
         {
             int screenWidth = Game.GraphicsDevice.Viewport.Width;
             int screenHeight = Game.GraphicsDevice.Viewport.Height;
-            Console.WriteLine(screenWidth);
-            Console.WriteLine(screenHeight);
 
             bolts = new List<Bolt>();
             torches = new List<Torch>();
@@ -70,8 +69,8 @@ namespace WindowsGame4
             buttons = new List<Button>();
             spouts = new List<Spout>();
 
-            playerRange = new Rectangle((screenWidth * 2)/5, 0, screenWidth/5, screenHeight);
-            
+            playerRange = new Rectangle((screenWidth * 2) / 5, 0, screenWidth / 5, screenHeight);
+
             levelLoader = loader;
             textures = _textures;
             sounds = _sounds;
@@ -115,8 +114,8 @@ namespace WindowsGame4
             int screenWidth = Game.GraphicsDevice.Viewport.Width;
             int screenHeight = Game.GraphicsDevice.Viewport.Height;
 
-            player = new Player(Game, (Texture2D)textures[playerIndex], sounds, 50, screenHeight - 100 - (screenHeight / 32));
-            
+            player = new Player(Game, (Texture2D)textures[playerIndex], sounds, 50, screenHeight - 52 - (screenHeight / 32));
+
             boltTexture = (Texture2D)textures[4];
             boxTexture = (Texture2D)textures[boxOfBoltsIndex];
             Texture2D[] torchTextures = new Texture2D[2];
@@ -126,15 +125,15 @@ namespace WindowsGame4
             // load torches from the level files
             foreach (Vector2 v in levelLoader.Torches)
             {
-                int x = ((int)v.X) * (screenWidth / 64) - (15/2);
+                int x = ((int)v.X) * (screenWidth / 64) - (15 / 2);
                 int y = (((int)v.Y) * (screenHeight / 32)) - 25;
                 torches.Add(new Torch(Game, torchTextures, x, y));
             }
 
             foreach (Vector3 v in levelLoader.Guards)
             {
-                int x = ((int)v.X) * (screenWidth / 64) - (36/2);
-                int y = ((int)v.Y) * (screenHeight / 32) - (28*2);
+                int x = ((int)v.X) * (screenWidth / 64) - (36 / 2);
+                int y = ((int)v.Y) * (screenHeight / 32) - (28 * 2);
                 int type = (int)v.Z;
                 guards.Add(guardFactory.createGuard(Game, x, y, Direction.right, 100, type));
             }
@@ -192,7 +191,7 @@ namespace WindowsGame4
                 i++;
             }
 
-    
+
             gameTimer = new GameTimer(levelLoader.TimeLimit, (SpriteFont)fonts[0]);
 
             // don't keep restarting the song if it is already playing
@@ -205,7 +204,7 @@ namespace WindowsGame4
 
         /* procedure responsible for updating this level given an action (velocity should eventually be determined by player)*/
         public override void Update(GameTime gameTime)
-        {   
+        {
             /* Timer update logic */
             gameTimer.Update();
             if (gameTimer.isFinished() && !player.IsDead)
@@ -386,11 +385,11 @@ namespace WindowsGame4
                 foreach (Wizard guard in guards)
                 {
                     guard.Update(gameTime);
-                   
-                        guard.HandleCollision(levelMap.GetNearbyTiles(guard.GetPosition()));
-                        guard.HandleVision(player, levelMap.GetNearbyTiles(guard.GetLOSRectangle()));
-                        // need a way to get back all bolts that have collided - have to actually hear it, not see it with my 360 degree camera strapped to the inside of the guard's visor
-                        guard.HandleHearing(collidedBolts);
+
+                    guard.HandleCollision(levelMap.GetNearbyTiles(guard.GetPosition()));
+                    guard.HandleVision(player, levelMap.GetNearbyTiles(guard.GetLOSRectangle()));
+                    // need a way to get back all bolts that have collided - have to actually hear it, not see it with my 360 degree camera strapped to the inside of the guard's visor
+                    guard.HandleHearing(collidedBolts);
                 }
 
                 foreach (Gate gate in gates)
@@ -449,7 +448,8 @@ namespace WindowsGame4
                     levers.Clear();
                     gates.Clear();
                     boxBolts.Clear();
-                    musicPlayer.Stop();
+                    spouts.Clear();
+                    buttons.Clear(); musicPlayer.Stop();
                     deathCounter = 0;
                     game.SetGameState(GameLoop.GameState.gameOver);
                 }
