@@ -202,6 +202,34 @@ namespace WindowsGame4
                 }
             }
 
+            foreach (ITile t in combinedTiles)
+            {
+                Rectangle tilePos = t.getPosition();
+                Direction direction = determineCollisionType(tilePos);
+
+                if (direction == Direction.bottom)
+                {
+                    if ((tilePos.Right <= position.Right && tilePos.Left >= position.Left) || (tilePos.Right == position.Right) || (tilePos.Left == position.Left))
+                    {
+                        position.Y = t.getPosition().Top - position.Height;
+                    }
+                }
+            }
+
+            foreach (ITile t in tiles)
+            {
+                Rectangle tilePos = t.getPosition();
+                Direction direction = determineCollisionType(tilePos);
+
+                if (direction == Direction.bottom)
+                {
+                    if ((tilePos.Right <= position.Right && tilePos.Left >= position.Left) || (tilePos.Right == position.Right) || (tilePos.Left == position.Left))
+                    {
+                        position.Y = t.getPosition().Top - position.Height;
+                    }
+                }
+            }
+
             // handle merged tile collisions
             HandleIntersectionCollisions(combinedTiles);
 
@@ -473,7 +501,9 @@ namespace WindowsGame4
             // check that any intersections are only on passable tiles
             foreach (ITile t in tiles)
             {
-                Direction direction = determineCollisionType(t.getPosition());
+                Rectangle tilePos = t.getPosition();
+
+                Direction direction = determineCollisionType(tilePos);
 
                 if (direction != Direction.none && t.getCollisionBehaviour() == CollisionType.goal)
                 {
@@ -493,15 +523,16 @@ namespace WindowsGame4
                         }
                         break;
                     case Direction.left:
-                        if (t.getCollisionBehaviour() == CollisionType.impassable || t.getCollisionBehaviour() == CollisionType.invisible  
-                            || t.getCollisionBehaviour() == CollisionType.magnet || t.getCollisionBehaviour() == CollisionType.spike)
+                        if (t.getCollisionBehaviour() == CollisionType.impassable || t.getCollisionBehaviour() == CollisionType.invisible ||
+                            t.getCollisionBehaviour() == CollisionType.magnet || t.getCollisionBehaviour() == CollisionType.spike)
                         {
                             position.X = t.getPosition().Right;
                             deltaX = 0;
                         }
                         break;
                     case Direction.right:
-                        if (t.getCollisionBehaviour() == CollisionType.impassable || t.getCollisionBehaviour() == CollisionType.invisible)
+                        if (t.getCollisionBehaviour() == CollisionType.impassable || t.getCollisionBehaviour() == CollisionType.invisible ||
+                            t.getCollisionBehaviour() == CollisionType.magnet || t.getCollisionBehaviour() == CollisionType.spike)
                         {
                             position.X = t.getPosition().Left - position.Width;
                             deltaX = 0;

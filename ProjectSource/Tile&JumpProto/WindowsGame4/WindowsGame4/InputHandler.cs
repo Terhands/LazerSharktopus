@@ -50,6 +50,24 @@ namespace WindowsGame4
             return false;
         }
 
+        public bool goat()
+        {
+            // holding GOAT will never detect all 4 of those chars for some reason - try this @ school machines...
+            foreach (Keys k in keyboardState.GetPressedKeys())
+            {
+                System.Console.Write(k);
+            }
+            System.Console.WriteLine("");
+            if (keyboardState.IsKeyDown(Keys.G) && keyboardState.IsKeyDown(Keys.O) && keyboardState.IsKeyDown(Keys.E) && keyboardState.IsKeyDown(Keys.T))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public bool isPressed(InputTypes action)
         {
             switch (action)
