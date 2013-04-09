@@ -62,6 +62,7 @@ Content\DST-ConFuze.xnb
 Content\DST-ConFuze.wma
 Content\DST-Pariah.xnb
 Content\DST-Pariah.wma
+Content\trollGoat.xnb
 Content\lathraia.config
 Content\Level1.txt
 Content\Level2.txt
