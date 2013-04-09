@@ -155,6 +155,8 @@ namespace WindowsGame4
             position.X -= velocity;
             patrolBoundaryLeft -= velocity;
             patrolBoundaryRight -= velocity;
+            distractionX -= velocity;
+           
         }
 
         //regular update for stationary map
