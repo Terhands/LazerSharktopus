@@ -62,6 +62,7 @@ Content\DST-ConFuze.xnb
 Content\DST-ConFuze.wma
 Content\DST-Pariah.xnb
 Content\DST-Pariah.wma
+Content\trollGoat.xnb
 Content\lathraia.config
 Content\Level1.txt
 Content\Level2.txt
@@ -71,3 +72,4 @@ Content\Tutorial2.txt
 Content\Tutorial3.txt
 Content\Tutorial4.txt
 Content\Tutorial5.txt
+Content\Goats.txt

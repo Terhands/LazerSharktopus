@@ -110,7 +110,6 @@ namespace WindowsGame4
             // if player's feet are touching the ground - this handles pure bottom collisions
             else if ((r.Top <= position.Bottom && r.Top >= position.Bottom + deltaY) && ((r.Right >= position.Right && r.Left <= position.Right) || (r.Right >= position.Left && r.Left <= position.Left) || (r.Right <= position.Right && r.Left >= position.Left)))
             {
-                // this is wrong and doesn't handle all of the possilbe cases! yay!
                 direction = Direction.bottom;
             }
             // inner body collision - will ony get here if none of the corner collision cases have ocurred 

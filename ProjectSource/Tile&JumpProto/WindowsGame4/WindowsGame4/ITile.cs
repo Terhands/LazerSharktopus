@@ -42,6 +42,9 @@ namespace WindowsGame4
         /* get the screen position of this tile */
         Rectangle getPosition();
 
+        /* set the screen position of this tile */
+        void setPosition(Rectangle r);
+
         /* get the collision behaviour property for this tile */
         CollisionType getCollisionBehaviour();
 

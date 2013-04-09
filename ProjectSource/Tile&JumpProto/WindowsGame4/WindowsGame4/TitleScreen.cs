@@ -45,54 +45,63 @@ namespace WindowsGame4
 
         public void Update()
         {
-            if (inputHandler.isNewlyPressed(InputHandler.InputTypes.jump) ||
-                inputHandler.isNewlyPressed(InputHandler.InputTypes.start))
-                gameLoop.SetGameState(GameLoop.GameState.titleMenu);
-
-            if (musicPlayer.isStopped || musicPlayer.CurrSong != introSong)
+            if (inputHandler.goat())
             {
-                musicPlayer.Play(introSong);
-            }
-
-            
-            if ((inputHandler.isNewlyPressed(InputHandler.InputTypes.jump) || inputHandler.isNewlyPressed(InputHandler.InputTypes.start)) && logoCount == 0)
-            {
-                gameLoop.SetGameState(GameLoop.GameState.titleMenu);
-                logoCount = 35;
-            }
-
-            if (channelValue == 0 && logoCount == 0)
-            {
-                gameLoop.AnimatePlayer = true;
-                blinkCount++;
-                if (blinkCount > 50)
-                {
-                    blinkCount = 0;
-                }
-            }
-            else if (channelValue == 0)
-            {
-                logoCount -= 1;
+               // gameLoop.SetGameState(GameLoop.GameState.goats);
             }
             else
             {
 
-                if (channelValue == 255 || channelValue == -1)
+                if (inputHandler.isNewlyPressed(InputHandler.InputTypes.jump) || inputHandler.isNewlyPressed(InputHandler.InputTypes.start))
                 {
-                    fadeIncrement *= -1;
+                    gameLoop.SetGameState(GameLoop.GameState.titleMenu);
                 }
 
-                if (fadeIncrement > 0)
+                if (musicPlayer.isStopped || musicPlayer.CurrSong != introSong)
                 {
-                    channelValue += fadeIncrement;
+                    musicPlayer.Play(introSong);
                 }
-                else if (fadeCount % 2 == 0)
-                {
-                    channelValue += fadeIncrement;
-                }
-                
 
-                fadeCount += 1;
+
+                if ((inputHandler.isNewlyPressed(InputHandler.InputTypes.jump) || inputHandler.isNewlyPressed(InputHandler.InputTypes.start)) && logoCount == 0)
+                {
+                    gameLoop.SetGameState(GameLoop.GameState.titleMenu);
+                    logoCount = 35;
+                }
+
+                if (channelValue == 0 && logoCount == 0)
+                {
+                    gameLoop.AnimatePlayer = true;
+                    blinkCount++;
+                    if (blinkCount > 50)
+                    {
+                        blinkCount = 0;
+                    }
+                }
+                else if (channelValue == 0)
+                {
+                    logoCount -= 1;
+                }
+                else
+                {
+
+                    if (channelValue == 255 || channelValue == -1)
+                    {
+                        fadeIncrement *= -1;
+                    }
+
+                    if (fadeIncrement > 0)
+                    {
+                        channelValue += fadeIncrement;
+                    }
+                    else if (fadeCount % 2 == 0)
+                    {
+                        channelValue += fadeIncrement;
+                    }
+
+
+                    fadeCount += 1;
+                }
             }
         }
 

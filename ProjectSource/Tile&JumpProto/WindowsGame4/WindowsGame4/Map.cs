@@ -75,7 +75,8 @@ namespace WindowsGame4
             return (pixelOffset == maxPixelOffset);
         }
 
-        /* get the tiles that are either intersecting position on the screen */
+        /* get the tiles that are either intersecting position on the screen or are under it - these will
+         always be ordered left-to-right, top-to-bottom */
         public IList<ITile> GetNearbyTiles(Rectangle position)
         {
             // the x and y indices in tiles of the tile being intersected by the top-left of position
