@@ -474,6 +474,15 @@ namespace WindowsGame4
                             // for some weird reason with only 1 pixel of padding this breaks guards fall
                             position.X = t.getPosition().Right;
                             deltaX = 0;
+
+                            if (currentBehaviour == Behaviour.goCheckThatShitOut)
+                            {
+                                currentBehaviour = Behaviour.distracted;
+                            }
+                            else if (currentBehaviour == Behaviour.patrol)
+                            {
+                                patrolBoundaryLeft = position.X;
+                            }
                         }
                         break;
 
@@ -482,6 +491,15 @@ namespace WindowsGame4
                         {
                             position.X = t.getPosition().Left - position.Width;
                             deltaX = 0;
+
+                            if (currentBehaviour == Behaviour.goCheckThatShitOut)
+                            {
+                                currentBehaviour = Behaviour.distracted;
+                            }
+                            else if (currentBehaviour == Behaviour.patrol)
+                            {
+                                patrolBoundaryRight = position.X;
+                            }
                         }
                         break;
                 }
