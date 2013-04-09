@@ -56,6 +56,8 @@ namespace WindowsGame4
         private const int invincibleMax = 50;
         private const int damageIndex = 3;
 
+        private Game game;
+
         // Keep a counter, to count the number of ticks since the last change of animation frame.
         int animationCount; // How many ticks since the last frame change.
         int animationMax = 8; // How many ticks to change frame after. 
@@ -64,9 +66,11 @@ namespace WindowsGame4
 
         protected HealthMeter healthMeter;
 
-        public Player(Game game, Texture2D texture, ArrayList _sounds, int xStart, int yStart)
-            : base(game)
+        public Player(Game _game, Texture2D texture, ArrayList _sounds, int xStart, int yStart)
+            : base(_game)
         {
+            game = _game;
+
             facingDirection = Action.right;
             source = new Rectangle(this.frameStartX + this.frameSkipX * this.frameCountCol, this.frameStartY + this.frameSkipY * this.frameCountRow, this.frameWidth, this.frameHeight);
             int screenwidth = Game.GraphicsDevice.Viewport.Width;
@@ -184,20 +188,7 @@ namespace WindowsGame4
         /* make sure player isn't falling through platforms/walking through walls */
         public override void HandleCollision(IList<ITile> tiles)
         {
-
-            foreach (ITile t in tiles)
-            {
-                Rectangle tilePosition = t.getPosition();
-                tilePosition.Width -= 4;
-                tilePosition.X -= 2;
-
-                Direction direction = determineCollisionType(tilePosition);
-
-                if (direction == Direction.bottom)
-                {
-                    position.Y = t.getPosition().Top - position.Height;
-                }
-            }
+            IList<ITile> combinedTiles = joinTiles(tiles);
 
             // handle foot to floor collisions after intersection collisions have been resolved
             IList<ITile> tilesBelowPlayer = new List<ITile>();
@@ -211,6 +202,10 @@ namespace WindowsGame4
                 }
             }
 
+            // handle merged tile collisions
+            HandleIntersectionCollisions(combinedTiles);
+
+            // handle any outliers that were not connected to a larger structure
             HandleIntersectionCollisions(tilesAtPlayerLevel);
 
             foreach (ITile t in tiles)
@@ -222,6 +217,245 @@ namespace WindowsGame4
             }
 
             HandleFootCollisions(tilesBelowPlayer);
+        }
+
+        // join tiles that are side by side into larger rectangles to allow for smoother wall collisions
+        // these tiles are not meant for foot collisions -> losing some of the collision types (only persisting platform vs. impassable)
+        // where impassable will be a lump of all non-platform, non-hideable, non-passable tiles
+        //
+        // NOTE: this ONLY returns tiles that have merged up to larger tiles, anything that stayed as a single tile will still need to check collisions
+        protected IList<ITile> joinTiles(IList<ITile> tiles)
+        {
+            IList<ITile> result = new List<ITile>();
+
+            if (tiles.Count > 0)
+            {
+                int singleWidth = 0;
+                int singleHeight = 0;
+
+                // the tile layout size will be more like 5 x 4 - using 10 so there is a buffer
+                ITile[,] tileLayout = new Tile[10, 10];
+
+                // creating a dummy tile
+                ITile dummyTile = new Tile(game);
+
+                // initialize tileLayout to dummy values;
+                for (int i = 0; i < 10; i++)
+                {
+                    for (int j = 0; j < 10; j++)
+                    {
+                        tileLayout[i, j] = dummyTile;
+                    }
+                }
+
+                // the top-most y position of our tiles being sorted - -1 indicates no tiles yet
+                int currY = -1;
+
+                // start y index at -1 so the first y gets set properly
+                int yIndex = -1;
+                int xIndex = 0;
+
+                // put the tiles into their appropriate row based on y value (smaller y is the top of the screen)
+                foreach (ITile t in tiles)
+                {
+                    // set the width of a single tile
+                    singleWidth = t.getPosition().Width;
+                    singleHeight = t.getPosition().Height;
+
+                    // new row, so insert the tile (deal with shifting the layout later) 
+                    if (currY < 0 || currY < t.getPosition().Top)
+                    {
+                        xIndex = 0;
+                        yIndex += 1;
+
+                        tileLayout[yIndex, xIndex] = t;
+                        currY = t.getPosition().Top;
+                    }
+                    // otherwise that tile belongs to this row, so it is the next tile in the row
+                    else
+                    {
+                        xIndex += 1;
+
+                        tileLayout[yIndex, xIndex] = t;
+                    }
+                }
+
+                // adjust the tile layout to fix things being always pushed to the left i.e...
+                // (0,0) (x,x)  ----> (0,0)(x,x)(x,x)
+                // (1,1) (1,2)  ----> (x,x)(1,1)(1,2)
+                for (int j = 0; j < 10; j++)
+                {
+                    int xMin = -1;
+                    // get the min x in the current column
+                    for (int i = 0; i < 10; i++)
+                    {
+                        if (xMin == -1 || (tileLayout[i, j].getPosition().X != -1 && xMin > tileLayout[i, j].getPosition().X))
+                        {
+                            xMin = tileLayout[i, j].getPosition().X;
+                        }
+                    }
+
+                    // we only care about shifts when there was a valid minimum
+                    if (xMin != -1)
+                    {
+                        // perform any shifts to the layout
+                        for (int i = 0; i < 10; i++)
+                        {
+                            // this row needs to shift to the right
+                            if (xMin < tileLayout[i, j].getPosition().X)
+                            {
+                                for (int k = 9; k > j; k--)
+                                {
+                                    tileLayout[i, k] = tileLayout[i, k - 1];
+                                }
+
+                                // set the start column of the row that just shifted to the dummy tile
+                                tileLayout[i, j] = dummyTile;
+                            }
+                        }
+                    }
+                }
+
+                ITile combined = new Tile(game);
+
+                // do not merge platforms with any other tile-type -> these rectangles are not for foot collisions
+                // combine tiles into taller tiles when they are touching each other
+                for (int j = 0; j < 10; j++)
+                {
+                    // for each row until the end of the rows is hit
+                    for (int i = 0; i < 10; i++)
+                    {
+                        // if the current tile is a valid tile
+                        if (tileLayout[i, j].getPosition().X != -1)
+                        {
+                            // start a new tile
+                            if (i == 0 || combined.getPosition().Bottom != tileLayout[i, j].getPosition().Top
+                                       || !compatibleTypes(tileLayout[i, j].getCollisionBehaviour(), combined.getCollisionBehaviour()))
+                            {
+                                // add the merged tile to the result list
+                                if (combined.getPosition().X != -1 && combined.getPosition().Height > singleHeight)
+                                {
+                                    result.Add(combined);
+                                }
+
+                                // build the next tile
+                                combined = new Tile(game);
+                                combined.setPosition(tileLayout[i, j].getPosition());
+                                combined.changeType(tileLayout[i, j].getCollisionBehaviour());
+                            }
+                            else
+                            {
+                                //extend the rectangle's height
+                                Rectangle r = combined.getPosition();
+                                r.Height += tileLayout[i, j].getPosition().Height;
+
+                                combined.setPosition(r);
+                            }
+
+                        }
+                    }
+                }
+
+                // add the last combined tile to the result if there were any
+                if (combined.getPosition().X != -1 && combined.getPosition().Height > singleHeight)
+                {
+                    result.Add(combined);
+                }
+
+                // clear out the merged tile
+                combined = new Tile(game);
+                // combine columns into rectangles when they are beside each other
+                for (int i = 0; i < 10; i++)
+                {
+                    // for each row until the end of the rows is hit
+                    for (int j = 0; j < 10; j++)
+                    {
+                        // if the current tile is a valid tile
+                        if (tileLayout[i, j].getPosition().X != -1)
+                        {
+                            // start a new tile
+                            if (j == 0 || combined.getPosition().Right != tileLayout[i, j].getPosition().Left
+                                       || !compatibleTypes(tileLayout[i, j].getCollisionBehaviour(), combined.getCollisionBehaviour()))
+                            {
+                                // add the merged tile to the result list
+                                if (combined.getPosition().X != -1 && combined.getPosition().Width > singleWidth)
+                                {
+                                    result.Add(combined);
+                                }
+
+                                // build the next tile
+                                combined = new Tile(game);
+                                combined.setPosition(tileLayout[i, j].getPosition());
+                                combined.changeType(tileLayout[i, j].getCollisionBehaviour());
+                            }
+                            else
+                            {
+                                //extend the rectangle's height
+                                Rectangle r = combined.getPosition();
+                                r.Width += tileLayout[i, j].getPosition().Width;
+
+                                combined.setPosition(r);
+                            }
+
+                        }
+                    }
+                }
+
+                // add the last merged tile to the result set
+                if (combined.getPosition().X != -1 && combined.getPosition().Width > singleWidth)
+                {
+                    result.Add(combined);
+                }
+
+                /*
+                System.Console.WriteLine("------------merged-----------");
+                foreach (ITile t in result)
+                {
+                    System.Console.WriteLine("(" + t.getPosition().X + ", "
+                                                 + t.getPosition().Y + ", "
+                                                 + t.getPosition().Width + ", "
+                                                 + t.getPosition().Height + ") -> "
+                                                 + t.getCollisionBehaviour().ToString());
+                }
+                */
+                
+            }
+            
+            return result;
+
+        }
+
+        protected bool compatibleTypes(CollisionType t1, CollisionType t2)
+        {
+            if (CollisionType.platform == t1 && CollisionType.platform == t2)
+            {
+                return true;
+            }
+            else if (CollisionType.hideable == t1 && CollisionType.hideable == t2)
+            {
+                return true;
+            }
+            else if (CollisionType.platform == t1 || CollisionType.platform == t2)
+            {
+                return false;
+            }
+            else if (CollisionType.hideable == t1 || CollisionType.hideable == t2)
+            {
+                return false;
+            }
+            else if (CollisionType.goal == t1 && CollisionType.goal == t2)
+            {
+                return true;
+            }
+            else if (CollisionType.goal == t1 || CollisionType.goal == t2)
+            {
+                return false;
+            }
+            else
+            {
+                // to get here neither t1 or t2 are hideable or platforms (i.e they are impassable on the left/right/top)
+                return true;
+            }
         }
 
         protected void TakeDamage()
@@ -249,7 +483,7 @@ namespace WindowsGame4
                 switch (direction)
                 {
                     case Direction.top:
-                        if (t.getCollisionBehaviour() != CollisionType.platform)
+                        if (t.getCollisionBehaviour() != CollisionType.platform && t.getCollisionBehaviour() != CollisionType.hideable)
                         {
                             position.Y = t.getPosition().Bottom;
                             if (isJumping && startFalling < jumpMeter.JumpPower)
@@ -259,7 +493,8 @@ namespace WindowsGame4
                         }
                         break;
                     case Direction.left:
-                        if (t.getCollisionBehaviour() == CollisionType.impassable || t.getCollisionBehaviour() == CollisionType.invisible)
+                        if (t.getCollisionBehaviour() == CollisionType.impassable || t.getCollisionBehaviour() == CollisionType.invisible  
+                            || t.getCollisionBehaviour() == CollisionType.magnet || t.getCollisionBehaviour() == CollisionType.spike)
                         {
                             position.X = t.getPosition().Right;
                             deltaX = 0;

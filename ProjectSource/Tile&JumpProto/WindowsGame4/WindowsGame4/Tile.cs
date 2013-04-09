@@ -31,6 +31,12 @@ namespace WindowsGame4
             position.Y = yIndex * position.Height;
         }
 
+        // set up a dummy tile
+        public Tile(Game game) : base(game)
+        {
+            position = new Rectangle(-1, -1, 0, 0);
+        }
+
         /* change the type of this tile */
         public void changeType(CollisionType newType)
         {
@@ -53,6 +59,11 @@ namespace WindowsGame4
         public Rectangle getPosition()
         {
             return new Rectangle(position.X, position.Y, position.Width, position.Height);
+        }
+
+        public void setPosition(Rectangle r)
+        {
+            position = r;
         }
 
         /* get the collision behaviour property for this tile */
