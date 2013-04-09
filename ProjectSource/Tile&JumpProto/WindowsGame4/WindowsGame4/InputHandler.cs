@@ -58,7 +58,7 @@ namespace WindowsGame4
                 System.Console.Write(k);
             }
             System.Console.WriteLine("");
-            if (keyboardState.IsKeyDown(Keys.G) && keyboardState.IsKeyDown(Keys.O) && keyboardState.IsKeyDown(Keys.E) && keyboardState.IsKeyDown(Keys.T))
+            if (keyboardState.IsKeyDown(Keys.G)  && keyboardState.IsKeyDown(Keys.T))
             {
                 return true;
             }

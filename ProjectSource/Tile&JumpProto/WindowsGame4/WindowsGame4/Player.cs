@@ -207,7 +207,7 @@ namespace WindowsGame4
                 Rectangle tilePos = t.getPosition();
                 Direction direction = determineCollisionType(tilePos);
 
-                if (direction == Direction.bottom)
+                if (direction == Direction.bottom && t.getCollisionBehaviour() != CollisionType.hideable)
                 {
                     if ((tilePos.Right <= position.Right && tilePos.Left >= position.Left) || (tilePos.Right == position.Right) || (tilePos.Left == position.Left))
                     {
@@ -221,7 +221,7 @@ namespace WindowsGame4
                 Rectangle tilePos = t.getPosition();
                 Direction direction = determineCollisionType(tilePos);
 
-                if (direction == Direction.bottom)
+                if (direction == Direction.bottom && t.getCollisionBehaviour() != CollisionType.hideable)
                 {
                     if ((tilePos.Right <= position.Right && tilePos.Left >= position.Left) || (tilePos.Right == position.Right) || (tilePos.Left == position.Left))
                     {
