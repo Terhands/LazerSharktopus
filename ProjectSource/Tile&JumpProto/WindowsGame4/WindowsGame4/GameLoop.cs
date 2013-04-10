@@ -97,7 +97,7 @@ namespace WindowsGame4
             //initializing virtual screen resolution to be mapped to the actual screen
             Resolution.Init(ref graphics);
             Resolution.SetVirtualResolution(screenWidth, screenHeight);
-            Resolution.SetResolution(800, 600, false);
+            Resolution.SetResolution(800, 600, true);
         }
 
         /// <summary>
