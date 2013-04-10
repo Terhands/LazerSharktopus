@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -471,7 +472,7 @@ namespace WindowsGame4
                 switch (direction)
                 {
                     case Direction.left:
-                        if (t.getCollisionBehaviour() == CollisionType.impassable)
+                        if (t.getCollisionBehaviour() == CollisionType.impassable || t.getCollisionBehaviour() == CollisionType.invisible)
                         {
                             // for some weird reason with only 1 pixel of padding this breaks guards fall
                             position.X = t.getPosition().Right;
@@ -489,7 +490,7 @@ namespace WindowsGame4
                         break;
 
                     case Direction.right:
-                        if (t.getCollisionBehaviour() == CollisionType.impassable)
+                        if (t.getCollisionBehaviour() == CollisionType.impassable || t.getCollisionBehaviour() == CollisionType.invisible)
                         {
                             position.X = t.getPosition().Left - position.Width;
                             deltaX = 0;
