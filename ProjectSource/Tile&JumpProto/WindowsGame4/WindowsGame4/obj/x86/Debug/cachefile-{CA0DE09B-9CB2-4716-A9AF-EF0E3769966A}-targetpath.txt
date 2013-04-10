@@ -75,3 +75,5 @@ Content\Tutorial5.txt
 Content\Goats.txt
 Content\Level4.txt
 Content\Level5.txt
+Content\leveljjjUMP.txt
+Content\LeapofFaith.txt
