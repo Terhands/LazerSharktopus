@@ -30,7 +30,6 @@ Content\storylineScreen2.xnb
 Content\T5background.xnb
 Content\trollGoat.xnb
 Content\T6background.xnb
-Content\groundSpriteFileStone.xnb
 Content\creditsHeaderFont.xnb
 Content\creditsFont.xnb
 Content\timerFont.xnb
@@ -65,7 +64,8 @@ Content\DST-ConFuze.xnb
 Content\DST-ConFuze.wma
 Content\DST-Pariah.xnb
 Content\DST-Pariah.wma
-Content\T7background.xnb
+Content\groundSpriteFileStone.xnb
+Content\castleBackgroundWall.xnb
 Content\T6background.png
 Content\lathraia.config
 Content\Level1.txt
