@@ -49,7 +49,18 @@ namespace WindowsGame4
                                             " ",
                                             " ",
                                             " ",
-                                            "A Sharktopus Production",
+                                            "Special Thanks To",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            "Kevin Stanley",
+                                            "Faham Negini",
+                                            "GScott",
+                                            "Bobby Lee",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            "A Lazer Sharktopus Production",
                                           };
 
         private static int[] creditFonts = { 3, 4, 
@@ -57,7 +68,9 @@ namespace WindowsGame4
                                              3, 4, 4, 4, 4, 4, 4, 4, 4, 
                                              3, 4, 4, 4, 4, 
                                              3, 4, 4, 4, 4, 4, 4, 4, 
-                                             3, 4, 4, 4, 4, 4, 4, 4, 4 };
+                                             3, 4, 4, 4, 4, 4, 4, 4,
+                                             3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+                                             4 };
 
         protected const string thankYou = "Thank You For Playing!";
 

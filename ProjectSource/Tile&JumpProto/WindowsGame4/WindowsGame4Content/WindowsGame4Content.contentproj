@@ -475,9 +475,11 @@
       <Name>T6background</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <None Include="Tutorial6.txt">
       <Name>Tutorial6</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="leveljjjUMP.txt">
       <Name>leveljjjUMP</Name>

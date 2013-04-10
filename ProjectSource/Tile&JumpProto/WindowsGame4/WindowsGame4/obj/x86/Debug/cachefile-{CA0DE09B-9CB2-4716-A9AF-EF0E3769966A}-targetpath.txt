@@ -64,6 +64,7 @@ Content\DST-ConFuze.xnb
 Content\DST-ConFuze.wma
 Content\DST-Pariah.xnb
 Content\DST-Pariah.wma
+Content\T6background.png
 Content\lathraia.config
 Content\Level1.txt
 Content\Level2.txt
@@ -77,5 +78,6 @@ Content\Goats.txt
 Content\Level4.txt
 Content\Level5.txt
 Content\Tutorial7.txt
+Content\Tutorial6.txt
 Content\leveljjjUMP.txt
 Content\LeapofFaith.txt
