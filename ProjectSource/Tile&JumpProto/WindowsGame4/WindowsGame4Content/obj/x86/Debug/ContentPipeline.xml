@@ -44,7 +44,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\groundSpriteFile.xnb</Output>
-      <Time>2013-04-09T21:09:43.9231304-06:00</Time>
+      <Time>2013-04-10T12:02:03.9511566-06:00</Time>
     </Item>
     <Item>
       <Source>gameOver.png</Source>
@@ -290,6 +290,15 @@
       <Time>2013-04-10T11:44:25.4426133-06:00</Time>
     </Item>
     <Item>
+      <Source>groundSpriteFileStone.png</Source>
+      <Name>groundSpriteFileStone</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\groundSpriteFileStone.xnb</Output>
+      <Time>2013-04-10T12:02:03.9521566-06:00</Time>
+    </Item>
+    <Item>
       <Source>creditsHeaderFont.spritefont</Source>
       <Name>creditsHeaderFont</Name>
       <Importer>FontDescriptionImporter</Importer>
@@ -522,7 +531,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T7background.xnb</Output>
-      <Time>2013-04-10T12:00:35.0990745-06:00</Time>
+      <Time>2013-04-10T12:01:22.9798131-06:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
