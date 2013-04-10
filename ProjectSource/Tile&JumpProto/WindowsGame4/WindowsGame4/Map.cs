@@ -21,16 +21,19 @@ namespace WindowsGame4
         protected int screenWidth;
         protected int screenHeight;
 
+        protected int outsideIndex = 1;
+        protected int castleIndex = 28;
+
         protected const int rowsPerScreen = 32;
         protected const int colsPerScreen = 64;
 
-        public Map(Game game, int[,] mapLayout, ArrayList tileTextures, int bgIndex) : base(game)
+        public Map(Game game, int[,] mapLayout, ArrayList tileTextures, int bgIndex, int levelNum) : base(game)
         {
-            Initialize(mapLayout, tileTextures, bgIndex);
+            Initialize(mapLayout, tileTextures, bgIndex, levelNum);
         }
 
         /* load the level map from file - for now just load a dummy level with random tile types */
-        protected void Initialize(int[,] mapLayout, ArrayList tileTextures, int bgIndex)
+        protected void Initialize(int[,] mapLayout, ArrayList tileTextures, int bgIndex, int levelNum)
         {
             tiles = new Tile[mapLayout.GetLength(0), mapLayout.GetLength(1)];
 
@@ -48,11 +51,18 @@ namespace WindowsGame4
             maxPixelOffset = (mapLayout.GetLength(1) * (screenWidth / colsPerScreen)) - screenWidth;
             minPixelOffset = 0;
 
+            int spriteIndex = outsideIndex;
+
+            if (levelNum >= 3)
+            {
+                spriteIndex = castleIndex;
+            }
+
             for (int j = 0; j < mapLayout.GetLength(1); j++)
             {
                 for (int i = 0; i < mapLayout.GetLength(0); i++)
                 {
-                    tiles[i, j] = new Tile(Game, (Texture2D)tileTextures[1], (CollisionType)mapLayout[i,j], j, i, screenWidth, screenHeight, rowsPerScreen, colsPerScreen);
+                    tiles[i, j] = new Tile(Game, (Texture2D)tileTextures[spriteIndex], (CollisionType)mapLayout[i,j], j, i, screenWidth, screenHeight, rowsPerScreen, colsPerScreen);
                 }
             }
         }

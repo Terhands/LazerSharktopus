@@ -109,7 +109,7 @@ namespace WindowsGame4
                 game.SetGameState(GameLoop.GameState.victory);
                 return;
             }
-            levelMap = new Map(Game, levelLoader.Map, textures, levelLoader.LevelBackground);
+            levelMap = new Map(Game, levelLoader.Map, textures, levelLoader.LevelBackground, currentLevel);
 
             int screenWidth = Game.GraphicsDevice.Viewport.Width;
             int screenHeight = Game.GraphicsDevice.Viewport.Height;
