@@ -13,7 +13,7 @@ namespace WindowsGame4
         SpriteFont menuFont;
         Texture2D background;
 
-        int selectedIndex;
+        public int selectedIndex;
 
         GameLoop gameLoop;
 

@@ -28,7 +28,7 @@ namespace WindowsGame4
 
         GameLoader config;
         
-        public enum GameState { titleMenu, titleScreen, level, tutorial, gameOver, victory, levelIntro, credits, plotScreen };
+        public enum GameState { titleMenu, titleScreen, level, tutorial, gameOver, victory, levelIntro, credits, plotScreen, goats };
         GameState gameState;
         GameState prevGameState;
 
@@ -54,6 +54,7 @@ namespace WindowsGame4
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
 
             //graphics.PreferredBackBufferHeight = 480;
             //graphics.PreferredBackBufferWidth = 800;
@@ -184,6 +185,7 @@ namespace WindowsGame4
                 if (prevGameState == GameState.tutorial)
                 {
                     SetGameState(GameState.titleMenu);
+                    tutorial.CurrentLevel = 0;
                 }
                 else
                 {
@@ -309,6 +311,12 @@ namespace WindowsGame4
         // when level state is set the new map needs to be built
         public void SetGameState(GameState _gameState)
         {
+            if (gameState == GameState.gameOver && _gameState == GameState.titleMenu)
+            {
+                level.CurrentLevel = 0;
+                tutorial.CurrentLevel = 0;
+                gameOver.selectedIndex = 0;
+            }
             // need to know if the user is running actual levels or the tutorials
             if (gameState == GameState.level || gameState == GameState.tutorial)
             {
@@ -341,4 +349,5 @@ namespace WindowsGame4
             }
         }
     }
+
 }
