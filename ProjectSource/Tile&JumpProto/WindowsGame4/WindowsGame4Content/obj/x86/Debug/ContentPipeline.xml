@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\blank.xnb</Output>
-      <Time>2013-04-09T23:13:57.4000179-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\blank.xnb</Output>
+      <Time>2013-04-09T21:09:43.7191187-06:00</Time>
     </Item>
     <Item>
       <Source>Logo.png</Source>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\Logo.xnb</Output>
-      <Time>2013-04-09T23:13:57.3810169-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\Logo.xnb</Output>
+      <Time>2013-04-09T21:09:43.6661157-06:00</Time>
     </Item>
     <Item>
       <Source>Robro1.1.png</Source>
@@ -25,8 +25,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\Robro1.1.xnb</Output>
-      <Time>2013-04-09T23:13:57.3850171-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\Robro1.1.xnb</Output>
+      <Time>2013-04-09T21:09:43.6791164-06:00</Time>
     </Item>
     <Item>
       <Source>Lazersharktopus.png</Source>
@@ -34,8 +34,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\Lazersharktopus.xnb</Output>
-      <Time>2013-04-09T23:13:57.3720163-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\Lazersharktopus.xnb</Output>
+      <Time>2013-04-09T21:09:43.5941116-06:00</Time>
     </Item>
     <Item>
       <Source>groundSpriteFile.png</Source>
@@ -43,8 +43,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\groundSpriteFile.xnb</Output>
-      <Time>2013-04-09T23:13:57.4150188-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\groundSpriteFile.xnb</Output>
+      <Time>2013-04-09T21:09:43.9231304-06:00</Time>
     </Item>
     <Item>
       <Source>gameOver.png</Source>
@@ -52,8 +52,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\gameOver.xnb</Output>
-      <Time>2013-04-09T23:13:57.4150188-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\gameOver.xnb</Output>
+      <Time>2013-04-09T21:09:43.9191302-06:00</Time>
     </Item>
     <Item>
       <Source>tempGuard.png</Source>
@@ -61,8 +61,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\tempGuard.xnb</Output>
-      <Time>2013-04-09T23:13:57.4390202-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\tempGuard.xnb</Output>
+      <Time>2013-04-09T21:09:43.9921344-06:00</Time>
     </Item>
     <Item>
       <Source>torchSprites.png</Source>
@@ -70,8 +70,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\torchSprites.xnb</Output>
-      <Time>2013-04-09T23:13:57.4410203-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\torchSprites.xnb</Output>
+      <Time>2013-04-09T21:09:43.9961346-06:00</Time>
     </Item>
     <Item>
       <Source>RoBro.png</Source>
@@ -79,8 +79,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\RoBro.xnb</Output>
-      <Time>2013-04-09T23:13:57.383017-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\RoBro.xnb</Output>
+      <Time>2013-04-09T21:09:43.672116-06:00</Time>
     </Item>
     <Item>
       <Source>bolt.png</Source>
@@ -88,8 +88,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\bolt.xnb</Output>
-      <Time>2013-04-09T23:13:57.4000179-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\bolt.xnb</Output>
+      <Time>2013-04-09T21:09:43.7191187-06:00</Time>
     </Item>
     <Item>
       <Source>TitleScreen.png</Source>
@@ -97,8 +97,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\TitleScreen.xnb</Output>
-      <Time>2013-04-09T23:13:57.3980178-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\TitleScreen.xnb</Output>
+      <Time>2013-04-09T21:09:43.7121183-06:00</Time>
     </Item>
     <Item>
       <Source>castleBackground.png</Source>
@@ -106,8 +106,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\castleBackground.xnb</Output>
-      <Time>2013-04-09T23:13:57.401018-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\castleBackground.xnb</Output>
+      <Time>2013-04-09T21:09:43.724119-06:00</Time>
     </Item>
     <Item>
       <Source>lever.png</Source>
@@ -115,8 +115,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\lever.xnb</Output>
-      <Time>2013-04-09T23:13:57.4160189-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\lever.xnb</Output>
+      <Time>2013-04-09T21:09:43.9291307-06:00</Time>
     </Item>
     <Item>
       <Source>torchNimbus.png</Source>
@@ -124,8 +124,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\torchNimbus.xnb</Output>
-      <Time>2013-04-09T23:13:57.4410203-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\torchNimbus.xnb</Output>
+      <Time>2013-04-09T21:09:43.9961346-06:00</Time>
     </Item>
     <Item>
       <Source>gate.png</Source>
@@ -133,8 +133,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\gate.xnb</Output>
-      <Time>2013-04-09T23:13:57.4150188-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\gate.xnb</Output>
+      <Time>2013-04-09T21:09:43.9211303-06:00</Time>
     </Item>
     <Item>
       <Source>T1background.png</Source>
@@ -142,8 +142,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T1background.xnb</Output>
-      <Time>2013-04-09T23:13:57.3960177-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T1background.xnb</Output>
+      <Time>2013-04-09T21:09:43.7011177-06:00</Time>
     </Item>
     <Item>
       <Source>T2background.png</Source>
@@ -151,8 +151,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T2background.xnb</Output>
-      <Time>2013-04-09T23:13:57.3960177-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T2background.xnb</Output>
+      <Time>2013-04-09T21:09:43.7011177-06:00</Time>
     </Item>
     <Item>
       <Source>T3background.png</Source>
@@ -160,8 +160,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T3background.xnb</Output>
-      <Time>2013-04-09T23:13:57.3970178-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T3background.xnb</Output>
+      <Time>2013-04-09T21:09:43.7091182-06:00</Time>
     </Item>
     <Item>
       <Source>wizard.png</Source>
@@ -169,8 +169,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\wizard.xnb</Output>
-      <Time>2013-04-09T23:13:57.4450205-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\wizard.xnb</Output>
+      <Time>2013-04-09T21:09:44.003135-06:00</Time>
     </Item>
     <Item>
       <Source>soldier.png</Source>
@@ -178,8 +178,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\soldier.xnb</Output>
-      <Time>2013-04-09T23:13:57.4370201-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\soldier.xnb</Output>
+      <Time>2013-04-09T21:09:43.986134-06:00</Time>
     </Item>
     <Item>
       <Source>credits.png</Source>
@@ -187,8 +187,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\credits.xnb</Output>
-      <Time>2013-04-09T23:13:57.4020181-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\credits.xnb</Output>
+      <Time>2013-04-09T21:09:43.7281193-06:00</Time>
     </Item>
     <Item>
       <Source>dashedLine.png</Source>
@@ -196,8 +196,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\dashedLine.xnb</Output>
-      <Time>2013-04-09T23:13:57.4030181-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\dashedLine.xnb</Output>
+      <Time>2013-04-09T21:09:43.7301194-06:00</Time>
     </Item>
     <Item>
       <Source>T4background.png</Source>
@@ -205,8 +205,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T4background.xnb</Output>
-      <Time>2013-04-09T23:13:57.3970178-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T4background.xnb</Output>
+      <Time>2013-04-09T21:09:43.7101182-06:00</Time>
     </Item>
     <Item>
       <Source>RoBro2.0.png</Source>
@@ -214,8 +214,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\RoBro2.0.xnb</Output>
-      <Time>2013-04-09T23:13:57.384017-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\RoBro2.0.xnb</Output>
+      <Time>2013-04-09T21:09:43.6771163-06:00</Time>
     </Item>
     <Item>
       <Source>boxParts.png</Source>
@@ -223,8 +223,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\boxParts.xnb</Output>
-      <Time>2013-04-09T23:13:57.401018-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\boxParts.xnb</Output>
+      <Time>2013-04-09T21:09:43.723119-06:00</Time>
     </Item>
     <Item>
       <Source>button.png</Source>
@@ -232,8 +232,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\button.xnb</Output>
-      <Time>2013-04-09T23:13:57.401018-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\button.xnb</Output>
+      <Time>2013-04-09T21:09:43.724119-06:00</Time>
     </Item>
     <Item>
       <Source>spout.png</Source>
@@ -241,8 +241,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\spout.xnb</Output>
-      <Time>2013-04-09T23:13:57.4370201-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\spout.xnb</Output>
+      <Time>2013-04-09T21:09:43.9871341-06:00</Time>
     </Item>
     <Item>
       <Source>storylineScreen1.png</Source>
@@ -250,8 +250,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\storylineScreen1.xnb</Output>
-      <Time>2013-04-09T23:13:57.4380201-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\storylineScreen1.xnb</Output>
+      <Time>2013-04-09T21:09:43.9901342-06:00</Time>
     </Item>
     <Item>
       <Source>storylineScreen2.png</Source>
@@ -259,8 +259,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\storylineScreen2.xnb</Output>
-      <Time>2013-04-09T23:13:57.4390202-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\storylineScreen2.xnb</Output>
+      <Time>2013-04-09T21:09:43.9921344-06:00</Time>
     </Item>
     <Item>
       <Source>T5background.png</Source>
@@ -268,8 +268,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T5background.xnb</Output>
-      <Time>2013-04-09T23:13:57.3970178-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T5background.xnb</Output>
+      <Time>2013-04-09T21:09:43.7111183-06:00</Time>
     </Item>
     <Item>
       <Source>trollGoat.png</Source>
@@ -277,8 +277,17 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\trollGoat.xnb</Output>
-      <Time>2013-04-09T23:13:57.4450205-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\trollGoat.xnb</Output>
+      <Time>2013-04-09T21:09:44.0021349-06:00</Time>
+    </Item>
+    <Item>
+      <Source>T6background.png</Source>
+      <Name>T6background</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T6background.xnb</Output>
+      <Time>2013-04-09T23:06:40.1444353-06:00</Time>
     </Item>
     <Item>
       <Source>creditsHeaderFont.spritefont</Source>
@@ -286,8 +295,8 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\creditsHeaderFont.xnb</Output>
-      <Time>2013-04-09T23:13:57.4030181-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\creditsHeaderFont.xnb</Output>
+      <Time>2013-04-09T21:09:43.7291193-06:00</Time>
     </Item>
     <Item>
       <Source>creditsFont.spritefont</Source>
@@ -295,8 +304,8 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\creditsFont.xnb</Output>
-      <Time>2013-04-09T23:13:57.4030181-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\creditsFont.xnb</Output>
+      <Time>2013-04-09T21:09:43.7281193-06:00</Time>
     </Item>
     <Item>
       <Source>timerFont.spritefont</Source>
@@ -304,8 +313,8 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\timerFont.xnb</Output>
-      <Time>2013-04-09T23:13:57.4400202-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\timerFont.xnb</Output>
+      <Time>2013-04-09T21:09:43.9931344-06:00</Time>
     </Item>
     <Item>
       <Source>levelNameFont.spritefont</Source>
@@ -313,8 +322,8 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\levelNameFont.xnb</Output>
-      <Time>2013-04-09T23:13:57.4160189-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\levelNameFont.xnb</Output>
+      <Time>2013-04-09T21:09:43.9271306-06:00</Time>
     </Item>
     <Item>
       <Source>menuFont.spritefont</Source>
@@ -322,8 +331,8 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\menuFont.xnb</Output>
-      <Time>2013-04-09T23:13:57.4160189-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\menuFont.xnb</Output>
+      <Time>2013-04-09T21:09:43.9311309-06:00</Time>
     </Item>
     <Item>
       <Source>storyFont.spritefont</Source>
@@ -331,8 +340,8 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\storyFont.xnb</Output>
-      <Time>2013-04-09T23:13:57.4370201-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\storyFont.xnb</Output>
+      <Time>2013-04-09T21:09:43.9871341-06:00</Time>
     </Item>
     <Item>
       <Source>SumoHit.wav</Source>
@@ -340,8 +349,8 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\SumoHit.xnb</Output>
-      <Time>2013-04-09T23:13:57.3940176-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\SumoHit.xnb</Output>
+      <Time>2013-04-09T21:09:43.6981175-06:00</Time>
     </Item>
     <Item>
       <Source>scream.wav</Source>
@@ -349,8 +358,8 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\scream.xnb</Output>
-      <Time>2013-04-09T23:13:57.4370201-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\scream.xnb</Output>
+      <Time>2013-04-09T21:09:43.985134-06:00</Time>
     </Item>
     <Item>
       <Source>clunk.wav</Source>
@@ -358,8 +367,8 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\clunk.xnb</Output>
-      <Time>2013-04-09T23:13:57.4020181-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\clunk.xnb</Output>
+      <Time>2013-04-09T21:09:43.7251191-06:00</Time>
     </Item>
     <Item>
       <Source>tink.wav</Source>
@@ -367,8 +376,8 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\tink.xnb</Output>
-      <Time>2013-04-09T23:13:57.4410203-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\tink.xnb</Output>
+      <Time>2013-04-09T21:09:43.9951345-06:00</Time>
     </Item>
     <Item>
       <Source>Swords_Collide.wav</Source>
@@ -376,8 +385,8 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\Swords_Collide.xnb</Output>
-      <Time>2013-04-09T23:13:57.3960177-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\Swords_Collide.xnb</Output>
+      <Time>2013-04-09T21:09:43.7001177-06:00</Time>
     </Item>
     <Item>
       <Source>robot-death2.wav</Source>
@@ -385,8 +394,8 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\robot-death2.xnb</Output>
-      <Time>2013-04-09T23:13:57.4260194-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\robot-death2.xnb</Output>
+      <Time>2013-04-09T21:09:43.9721332-06:00</Time>
     </Item>
     <Item>
       <Source>Sad_Trombone.wav</Source>
@@ -394,8 +403,8 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\Sad_Trombone.xnb</Output>
-      <Time>2013-04-09T23:13:57.3930175-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\Sad_Trombone.xnb</Output>
+      <Time>2013-04-09T21:09:43.6941173-06:00</Time>
     </Item>
     <Item>
       <Source>total-malfunct.wav</Source>
@@ -403,8 +412,8 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\total-malfunct.xnb</Output>
-      <Time>2013-04-09T23:13:57.4440205-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\total-malfunct.xnb</Output>
+      <Time>2013-04-09T21:09:43.9991348-06:00</Time>
     </Item>
     <Item>
       <Source>DST-Aronara.mp3</Source>
@@ -412,9 +421,9 @@
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Aronara.xnb</Output>
-      <Extra>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Aronara.wma</Extra>
-      <Time>2013-04-09T23:13:57.1360028-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Aronara.xnb</Output>
+      <Extra>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Aronara.wma</Extra>
+      <Time>2013-04-09T21:09:42.7760648-06:00</Time>
     </Item>
     <Item>
       <Source>DST-AngryRobotIII.mp3</Source>
@@ -422,9 +431,9 @@
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-AngryRobotIII.xnb</Output>
-      <Extra>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-AngryRobotIII.wma</Extra>
-      <Time>2013-04-09T23:13:57.1030009-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-AngryRobotIII.xnb</Output>
+      <Extra>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-AngryRobotIII.wma</Extra>
+      <Time>2013-04-09T21:09:42.7490633-06:00</Time>
     </Item>
     <Item>
       <Source>DST-MechaNoir.mp3</Source>
@@ -432,9 +441,9 @@
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-MechaNoir.xnb</Output>
-      <Extra>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-MechaNoir.wma</Extra>
-      <Time>2013-04-09T23:13:57.2770109-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-MechaNoir.xnb</Output>
+      <Extra>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-MechaNoir.wma</Extra>
+      <Time>2013-04-09T21:09:43.4531035-06:00</Time>
     </Item>
     <Item>
       <Source>DST-Beneathere.mp3</Source>
@@ -442,9 +451,9 @@
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Beneathere.xnb</Output>
-      <Extra>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Beneathere.wma</Extra>
-      <Time>2013-04-09T23:13:57.1750051-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Beneathere.xnb</Output>
+      <Extra>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Beneathere.wma</Extra>
+      <Time>2013-04-09T21:09:43.0580809-06:00</Time>
     </Item>
     <Item>
       <Source>DST-BlueMist.mp3</Source>
@@ -452,9 +461,9 @@
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-BlueMist.xnb</Output>
-      <Extra>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-BlueMist.wma</Extra>
-      <Time>2013-04-09T23:13:57.2320083-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-BlueMist.xnb</Output>
+      <Extra>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-BlueMist.wma</Extra>
+      <Time>2013-04-09T21:09:43.4161014-06:00</Time>
     </Item>
     <Item>
       <Source>DST-StarryBook.mp3</Source>
@@ -462,9 +471,9 @@
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-StarryBook.xnb</Output>
-      <Extra>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-StarryBook.wma</Extra>
-      <Time>2013-04-09T23:13:57.3700162-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-StarryBook.xnb</Output>
+      <Extra>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-StarryBook.wma</Extra>
+      <Time>2013-04-09T21:09:43.5431087-06:00</Time>
     </Item>
     <Item>
       <Source>DST-Muses.mp3</Source>
@@ -472,9 +481,9 @@
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Muses.xnb</Output>
-      <Extra>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Muses.wma</Extra>
-      <Time>2013-04-09T23:13:57.3070126-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Muses.xnb</Output>
+      <Extra>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Muses.wma</Extra>
+      <Time>2013-04-09T21:09:43.4991062-06:00</Time>
     </Item>
     <Item>
       <Source>DST-Birge.mp3</Source>
@@ -482,9 +491,9 @@
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Birge.xnb</Output>
-      <Extra>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Birge.wma</Extra>
-      <Time>2013-04-09T23:13:57.2020066-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Birge.xnb</Output>
+      <Extra>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Birge.wma</Extra>
+      <Time>2013-04-09T21:09:43.3600982-06:00</Time>
     </Item>
     <Item>
       <Source>DST-ConFuze.mp3</Source>
@@ -492,9 +501,9 @@
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-ConFuze.xnb</Output>
-      <Extra>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-ConFuze.wma</Extra>
-      <Time>2013-04-09T23:13:57.2580098-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-ConFuze.xnb</Output>
+      <Extra>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-ConFuze.wma</Extra>
+      <Time>2013-04-09T21:09:43.4371026-06:00</Time>
     </Item>
     <Item>
       <Source>DST-Pariah.mp3</Source>
@@ -502,9 +511,9 @@
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Pariah.xnb</Output>
-      <Extra>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Pariah.wma</Extra>
-      <Time>2013-04-09T23:13:57.3460148-06:00</Time>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Pariah.xnb</Output>
+      <Extra>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Pariah.wma</Extra>
+      <Time>2013-04-09T21:09:43.5261077-06:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -512,10 +521,10 @@
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4Content\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4Content\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4Content\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4Content\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
@@ -544,7 +553,7 @@
       </Assembly>
       <Assembly>
         <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2013-02-03T22:53:36.2394419-06:00</Value>
+        <Value>2013-01-28T16:09:46.5612719-06:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>

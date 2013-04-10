@@ -97,7 +97,7 @@ namespace WindowsGame4
             //initializing virtual screen resolution to be mapped to the actual screen
             Resolution.Init(ref graphics);
             Resolution.SetVirtualResolution(screenWidth, screenHeight);
-            Resolution.SetResolution(800, 600, true);
+            Resolution.SetResolution(800, 600, false);
         }
 
         /// <summary>
@@ -185,6 +185,7 @@ namespace WindowsGame4
                 if (prevGameState == GameState.tutorial)
                 {
                     SetGameState(GameState.titleMenu);
+                    tutorial.CurrentLevel = 0;
                 }
                 else
                 {
@@ -310,6 +311,12 @@ namespace WindowsGame4
         // when level state is set the new map needs to be built
         public void SetGameState(GameState _gameState)
         {
+            if (gameState == GameState.gameOver && _gameState == GameState.titleMenu)
+            {
+                level.CurrentLevel = 0;
+                tutorial.CurrentLevel = 0;
+                gameOver.selectedIndex = 0;
+            }
             // need to know if the user is running actual levels or the tutorials
             if (gameState == GameState.level || gameState == GameState.tutorial)
             {
