@@ -506,15 +506,6 @@
       <Extra>C:\Users\Alexa\Documents\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Pariah.wma</Extra>
       <Time>2013-04-03T12:15:11.066803-06:00</Time>
     </Item>
-    <Item>
-      <Source>trollGoat.png</Source>
-      <Name>trollGoat</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\mf\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\trollGoat.xnb</Output>
-      <Time>2013-04-09T12:55:43.9258741-06:00</Time>
-    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
