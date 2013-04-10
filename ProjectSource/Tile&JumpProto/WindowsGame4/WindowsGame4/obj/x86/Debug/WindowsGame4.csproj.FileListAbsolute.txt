@@ -88,3 +88,10 @@ C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\Wi
 C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T6background.png
 C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\Tutorial6.txt
 C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T7background.xnb
+C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\Lazersharktopus.png
+C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T1background.png
+C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T2background.png
+C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T3background.png
+C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T4background.png
+C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T5background.png
+C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T7background.png
