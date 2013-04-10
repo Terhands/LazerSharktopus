@@ -65,6 +65,7 @@ Content\DST-ConFuze.wma
 Content\DST-Pariah.xnb
 Content\DST-Pariah.wma
 Content\groundSpriteFileStone.xnb
+Content\castleBackgroundWall.xnb
 Content\T6background.png
 Content\lathraia.config
 Content\Level1.txt

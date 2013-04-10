@@ -524,6 +524,15 @@
       <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\groundSpriteFileStone.xnb</Output>
       <Time>2013-04-10T11:36:56.9651861-06:00</Time>
     </Item>
+    <Item>
+      <Source>castleBackgroundWall.png</Source>
+      <Name>castleBackgroundWall</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Michael\Desktop\cmp306Rep\LazerSharktopusGood\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\castleBackgroundWall.xnb</Output>
+      <Time>2013-04-10T11:57:15.0911376-06:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
