@@ -240,3 +240,5 @@ C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\Wi
 C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\obj\x86\Debug\WindowsGame4.pdb
 C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\Level4.txt
 C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\Level5.txt
+C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\Tutorial7.txt
+C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&JumpProto\WindowsGame4\WindowsGame4\obj\x86\Debug\WindowsGame4.csprojResolveAssemblyReference.cache
