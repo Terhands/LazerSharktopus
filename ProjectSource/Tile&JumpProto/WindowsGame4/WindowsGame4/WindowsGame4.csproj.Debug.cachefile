@@ -29,6 +29,7 @@ Content\storylineScreen1.xnb
 Content\storylineScreen2.xnb
 Content\T5background.xnb
 Content\trollGoat.xnb
+Content\T6background.xnb
 Content\creditsHeaderFont.xnb
 Content\creditsFont.xnb
 Content\timerFont.xnb
@@ -53,7 +54,6 @@ Content\DST-Muses.xnb
 Content\DST-Birge.xnb
 Content\DST-ConFuze.xnb
 Content\DST-Pariah.xnb
-Content\T6background.xnb
 Content\DST-Aronara.wma
 Content\DST-AngryRobotIII.wma
 Content\DST-MechaNoir.wma
@@ -77,4 +77,5 @@ Content\Goats.txt
 Content\Level4.txt
 Content\Level5.txt
 Content\Tutorial7.txt
-Content\Tutorial6.txt
+Content\leveljjjUMP.txt
+Content\LeapofFaith.txt

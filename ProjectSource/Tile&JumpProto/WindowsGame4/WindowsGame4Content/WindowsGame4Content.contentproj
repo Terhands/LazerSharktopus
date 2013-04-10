@@ -471,8 +471,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>Tutorial7</Name>
     </None>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="T6background.png">
       <Name>T6background</Name>
       <Importer>TextureImporter</Importer>
@@ -480,6 +478,15 @@
     </Compile>
     <None Include="Tutorial6.txt">
       <Name>Tutorial6</Name>
+    </None>
+    <None Include="leveljjjUMP.txt">
+      <Name>leveljjjUMP</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LeapofFaith.txt">
+      <Name>LeapofFaith</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

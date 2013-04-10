@@ -281,6 +281,15 @@
       <Time>2013-04-09T21:09:44.0021349-06:00</Time>
     </Item>
     <Item>
+      <Source>T6background.png</Source>
+      <Name>T6background</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T6background.xnb</Output>
+      <Time>2013-04-09T23:06:40.1444353-06:00</Time>
+    </Item>
+    <Item>
       <Source>creditsHeaderFont.spritefont</Source>
       <Name>creditsHeaderFont</Name>
       <Importer>FontDescriptionImporter</Importer>
@@ -505,15 +514,6 @@
       <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Pariah.xnb</Output>
       <Extra>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Pariah.wma</Extra>
       <Time>2013-04-09T21:09:43.5261077-06:00</Time>
-    </Item>
-    <Item>
-      <Source>T6background.png</Source>
-      <Name>T6background</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T6background.xnb</Output>
-      <Time>2013-04-09T23:06:40.1444353-06:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
