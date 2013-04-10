@@ -515,6 +515,15 @@
       <Extra>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\DST-Pariah.wma</Extra>
       <Time>2013-04-09T21:09:43.5261077-06:00</Time>
     </Item>
+    <Item>
+      <Source>T7background.png</Source>
+      <Name>T7background</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\mf\Landing\LazerSharktopus\ProjectSource\Tile&amp;JumpProto\WindowsGame4\WindowsGame4\bin\x86\Debug\Content\T7background.xnb</Output>
+      <Time>2013-04-09T23:06:40.1444353-06:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
