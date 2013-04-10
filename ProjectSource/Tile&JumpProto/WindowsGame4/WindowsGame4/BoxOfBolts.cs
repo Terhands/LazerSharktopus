@@ -46,7 +46,7 @@ namespace WindowsGame4
 
             if (collided)
             {
-                gatherBox();
+                //gatherBox();
             }
         }
 

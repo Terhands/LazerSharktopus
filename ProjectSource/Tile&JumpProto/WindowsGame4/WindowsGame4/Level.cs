@@ -335,8 +335,9 @@ namespace WindowsGame4
                     foreach (BoxOfBolts box in boxBolts)
                     {
                         box.HandleCollision(levelMap.GetNearbyTiles(player.GetPosition()));
-                        if (box.getGathered())
+                        if (!box.getGathered())
                         {
+                            box.gatherBox();
                             player.healDamage();
                         }
                     }

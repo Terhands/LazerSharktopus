@@ -47,7 +47,7 @@ namespace WindowsGame4
         {
             if (inputHandler.goat())
             {
-                gameLoop.SetGameState(GameLoop.GameState.goats);
+               // gameLoop.SetGameState(GameLoop.GameState.goats);
             }
             else
             {

@@ -26,8 +26,6 @@ namespace WindowsGame4
         ArrayList sounds;
         ArrayList songs;
 
-        string[] goatLevels = { "Goats.txt" };
-
         GameLoader config;
         
         public enum GameState { titleMenu, titleScreen, level, tutorial, gameOver, victory, levelIntro, credits, plotScreen, goats };
@@ -46,7 +44,6 @@ namespace WindowsGame4
 
         Level level;
         Level tutorial;
-        Level secret;
 
         int mainMenuIndex = 2;
         int creditsIndex = 17;
@@ -58,6 +55,9 @@ namespace WindowsGame4
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
+
+            //graphics.PreferredBackBufferHeight = 480;
+            //graphics.PreferredBackBufferWidth = 800;
             if (!graphics.IsFullScreen)
             {
                 //graphics.ToggleFullScreen();
@@ -78,11 +78,8 @@ namespace WindowsGame4
             inputHandler = new InputHandler();
 
             plotScreen = new PlotScreen(this, musicPlayer, textures, fonts);
-
             level = new Level(this, textures, fonts, sounds, musicPlayer, plotScreen, new LevelLoader(config.LevelFiles), inputHandler);
             tutorial = new Level(this, textures, fonts, sounds, musicPlayer, null, new LevelLoader(config.TutorialFiles), inputHandler);
-            secret = new Level(this, textures, fonts, sounds, musicPlayer, null, new LevelLoader(goatLevels), inputHandler);
-
             gameOver = new GameOver(this, (Texture2D)textures[3], (SpriteFont)fonts[2], inputHandler);
             titleScreen = new TitleScreen(this, (Texture2D)textures[7], (Texture2D)textures[16], (SpriteFont)fonts[2], musicPlayer, inputHandler);
             titleMenu = new TitleMenu(this, (Texture2D)textures[7], (SpriteFont)fonts[2], inputHandler);
@@ -165,10 +162,6 @@ namespace WindowsGame4
             else if (gameState == GameState.tutorial)
             {
                 tutorial.Update(gameTime);
-            }
-            else if (gameState == GameState.goats)
-            {
-                secret.Update(gameTime);
             }
             else if (gameState == GameState.levelIntro)
             {
@@ -264,10 +257,6 @@ namespace WindowsGame4
             {
                 tutorial.Draw(spriteBatch);
             }
-            else if (gameState == GameState.goats)
-            {
-                secret.Draw(spriteBatch);
-            }
             else if (gameState == GameState.levelIntro)
             {
                 levelIntroScreen.Draw(spriteBatch);
@@ -336,10 +325,6 @@ namespace WindowsGame4
             {
                 tutorial.InitLevel();
             }
-            else if (GameState.goats == gameState)
-            {
-                secret.InitLevel();
-            }
             else if (GameState.levelIntro == gameState)
             {
                 if (prevGameState == GameState.level)
@@ -357,4 +342,5 @@ namespace WindowsGame4
             }
         }
     }
+
 }
